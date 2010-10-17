@@ -1,4 +1,4 @@
-<?php echo $this->Session->read('username');?>
+<?php echo $javascript->link('mapstuff.js');?>
 <div class="eventGroups form">
 <?php echo $form->create('EventGroup');?>
 	<fieldset>
@@ -18,23 +18,30 @@
 	Category List (1 per row)
 		<textarea name="data[Other][category_list]" id="OtherCategoryList">Food
 Fun</textarea>
+
+	<?php echo $form->input('location', array('label' => 'Location Name', 'type' => 'text'));?>
 	<?php }?>
+	 <div>
+      <div style="margin-bottom: 5px;">
+        Search Map:<div>
+          <input type="text" id="queryInput" style="width: 250px;"/>
+          <input type="button" value="Find" onclick="doSearch()"/>
+        </div>
+      </div>
+      <div style="float:right">
+        <div id="searchwell"></div>
+      </div>
+      <div id="map" style="height: 350px; border: 1px solid #979797;"></div>
+      
+
+    </div>
+      <input name="data[EventGroup][latitude]" type="text" id="EventLatitude" />
+      <input name="data[EventGroup][longitude]" type="text" id="EventLongitude" />
 	<input type="hidden" name="data[EventGroup][parent_id]" id="EventGroupParentId" value="<?=$parentId?>">
 	<input type="hidden" name="pathstart" value="<?=$currenteventGroup['EventGroup']['path']?>">
 	</fieldset>
 <?php 
 echo $form->end('Submit');?>
+
 </div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('List EventGroups', true), array('action' => 'index'));?></li>
-		<li><?php echo $html->link(__('List Event Groups', true), array('controller' => 'event_groups', 'action' => 'index')); ?> </li>
-		<li><?php echo $html->link(__('New Parent Event Group', true), array('controller' => 'event_groups', 'action' => 'add')); ?> </li>
-		<li><?php echo $html->link(__('List Category Choices', true), array('controller' => 'category_choices', 'action' => 'index')); ?> </li>
-		<li><?php echo $html->link(__('New Category Choice', true), array('controller' => 'category_choices', 'action' => 'add')); ?> </li>
-		<li><?php echo $html->link(__('List Events', true), array('controller' => 'events', 'action' => 'index')); ?> </li>
-		<li><?php echo $html->link(__('New Event', true), array('controller' => 'events', 'action' => 'add')); ?> </li>
-		<li><?php echo $html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+

@@ -29,24 +29,24 @@
 
      // Set up the map and the local searcher.
     function OnLoad() {
-
+    	var latLng = new google.maps.LatLng(37.4419, -122.1419);
+      if ($('#EventLatitude').val().length != '') {
+    	  latLng = new google.maps.LatLng($('#EventLatitude').val(), $('#EventLongitude').val());
+      }
+    	  
       // Initialize the map with default UI.
       gMap = new google.maps.Map(document.getElementById("map"), {
-        center: new google.maps.LatLng(37.4419, -122.1419),
+        center: latLng,
         zoom: 13,
         mapTypeId: 'roadmap'
       });
-      if ($('#placeMarkers').length != 0) {
-    	  var markers = jQuery.parseJSON($('#placeMarkers').html());
-    	  for (var i = 0; i < markers.length; i++) {
-    		  placeMarker(new google.maps.LatLng(markers[i][0], markers[i][1]));
-    	  }
+      if ($('#EventLatitude').val().length != '') {
+    	  placeMarker(latLng);
       }
-      google.maps.event.addListener(gMap, 'rightclick', function(event) {
-    	  if (singleMarker) singleMarker.setVisible(false);
+      google.maps.event.addListener(gMap, 'click', function(event) {
+    	  
     	  placeMarker(event.latLng);
-    	  document.getElementById('EventLatitude').value = event.latLng.lat();
-    	  document.getElementById('EventLongitude').value = event.latLng.lng();
+    	  
        });
       
       // Create one InfoWindow to open when a marker is clicked.
@@ -58,22 +58,25 @@
       // Initialize the local searcher
       gLocalSearch = new GlocalSearch();
       gLocalSearch.setSearchCompleteCallback(null, OnLocalSearch);
+      
+      //Do stuff when enter is pressed on the search thing
+      $('#queryInput').keypress(function(event) {
+    	  if (event.keyCode == '13') {
+    	     event.preventDefault();
+    	     doSearch();
+    	   }
+    	});
+
     }
     function placeMarker(location) {
-    	var infoWindow = new google.maps.InfoWindow({
-            position: location,
-            content: 'content in here'
-     		});
-      var marker = new google.maps.Marker({
+    	if (singleMarker) singleMarker.setVisible(false);
+      singleMarker = new google.maps.Marker({
           position: location, 
           map: gMap,
-          title: 'something',
-          draggable: true,
+          draggable: true
    		});
-      google.maps.event.addListener(marker, 'click', function() {
-    	  infoWindow.open(gMap,marker);
-        });
-
+      document.getElementById('EventLatitude').value = location.lat();
+	  document.getElementById('EventLongitude').value = location.lng();
     }
     function unselectMarkers() {
       for (var i = 0; i < gCurrentResults.length; i++) {

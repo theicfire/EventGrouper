@@ -62,9 +62,9 @@ class EventsController extends AppController {
 		
 		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$eventGroupId)));
 		$users = $this->Event->User->find('list');
-		$eventGroups = $this->Event->EventGroup->find('list');
 		$users = $this->Event->User->find('list');
-		$this->set(compact('categoryChoices', 'users', 'eventGroups', 'users', 'eventGroupId'));
+		$eventGroup = $this->EventGroup->findById($eventGroupId);
+		$this->set(compact('categoryChoices', 'users', 'eventGroup', 'users', 'eventGroupId'));
 	}
 
 	function edit($id = null) {

@@ -23,7 +23,7 @@ Time End: <input type="text" name="date_end" value="<?=$timeEnd?>">
 <input type="submit" value="search">
 </form>
 
-<?php if (!array_key_exists('map', $this->params['url'])) {
+<?php if (!array_key_exists('page', $this->params['url'])) {
 ?>
 <?php 
 $actions = array('create','delete','read','update');
@@ -226,7 +226,7 @@ $(document).ready(function() {
 	  
 });
 </script>
-<?php } else {
+<?php } elseif ($this->params['url']['page'] == 'map') {
 echo $javascript->link('mapstuff.js');
 ?>
 <div id="placeMarkers">
@@ -258,4 +258,16 @@ echo json_encode($latlngs);
 
     </div>
 <?php 
+} else {
+//	print_r($eventsUnderGroup);
+	$overviewArr = array();
+	foreach ($eventsUnderGroup as $event) {
+		$timestamp = strtotime($event['Event']['time_start']);
+//		Y-m-d H:i:s"
+		if (array_key_exists(date('Y-m-d', $timestamp),$overviewArr) && array_key_exists(date('H', $timestamp),$overviewArr[date('Y-m-d', $timestamp)]))
+			$overviewArr[date('Y-m-d', $timestamp)][date('H', $timestamp)]++;
+		else
+			$overviewArr[date('Y-m-d', $timestamp)][date('H', $timestamp)] = 1;
+	}
+	print_r($overviewArr);
 }?>

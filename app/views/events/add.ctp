@@ -17,7 +17,7 @@
 		echo $form->input('CategoryChoice');
 //		echo $form->input('User');
 	?>
-	 <div style="width: 500px; ">
+	 <div>
       <div style="margin-bottom: 5px;">
 
         <div>
@@ -25,15 +25,15 @@
           <input type="button" value="Find" onclick="doSearch()"/>
         </div>
       </div>
-      <div style="position: absolute; left: 540px;">
+      <div style="float:right">
         <div id="searchwell"></div>
       </div>
       <div id="map" style="height: 350px; border: 1px solid #979797;"></div>
       
 
     </div>
-      <input name="data[Event][latitude]" type="text" id="EventLatitude" />
-      <input name="data[Event][longitude]" type="text" id="EventLongitude" />
+      <input name="data[Event][latitude]" type="text" id="EventLatitude" value="<?php echo $eventGroup['EventGroup']['latitude']?$eventGroup['EventGroup']['latitude']:"";?>" />
+      <input name="data[Event][longitude]" type="text" id="EventLongitude" value="<?php echo $eventGroup['EventGroup']['longitude']?$eventGroup['EventGroup']['longitude']:"";?>" />
 	<input type="hidden" name="data[Event][event_group_id]" id="EventEventGroupId" value="<?=$eventGroupId?>">
 	</fieldset>
 <?php echo $form->end('Submit');?>
