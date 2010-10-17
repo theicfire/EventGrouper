@@ -21,7 +21,6 @@ class EventGroupsController extends AppController {
 	}
 
 	function view() {
-		print_r($this->params);
 		$userStuff = null;
 		if ($this->Session->check('username')) {
 			$userStuff = $this->User->find('first', array('conditions' => array('email' => $this->Session->read('username'))));

@@ -144,10 +144,10 @@ echo implode($linksArr," > ");
 			}
 			?>
 			<?php echo $html->link(__('View', true), array('controller' => 'events', 'action' => 'view', $event['Event']['id'])); ?>
-			<?php if ($access->check('Event',$event['Event']['id'], 'delete')) {
+			<?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
 				echo $html->link(__('Edit', true), array('controller' => 'events', 'action' => 'edit', $event['Event']['id'])); 
 			}?>
-			<?php if ($access->check('Event',$event['Event']['id'], 'delete')) {
+			<?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
 				echo $html->link(__('Delete', true), array('controller' => 'events', 'action' => 'delete', $event['Event']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $event['Event']['id'])); 
 			}?>
 		</td>
