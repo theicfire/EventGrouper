@@ -35,8 +35,8 @@ Fun</textarea>
       
 
     </div>
-      <input name="data[EventGroup][latitude]" type="text" id="EventLatitude" />
-      <input name="data[EventGroup][longitude]" type="text" id="EventLongitude" />
+      <input name="data[EventGroup][latitude]" type="text" id="EventLatitude" value="<?php echo $currenteventGroup['EventGroup']['latitude']?$currenteventGroup['EventGroup']['latitude']:"";?>"/>
+      <input name="data[EventGroup][longitude]" type="text" id="EventLongitude" value="<?php echo $currenteventGroup['EventGroup']['longitude']?$currenteventGroup['EventGroup']['longitude']:"";?>"/>
 	<input type="hidden" name="data[EventGroup][parent_id]" id="EventGroupParentId" value="<?=$parentId?>">
 	<input type="hidden" name="pathstart" value="<?=$currenteventGroup['EventGroup']['path']?>">
 	</fieldset>
