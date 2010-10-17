@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC. Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
 
 The Cake Software Foundation - promoting development related to CakePHP
@@ -32,3 +33,8 @@ http://www.cafepress.com/cakefoundation
 
 Recommended Reading
 http://astore.amazon.com/cakesoftwaref-20/
+=======
+hey
+test
+some stuff
+>>>>>>> 2f51bb736feafbac2d646070c30f5f783a011ed7
