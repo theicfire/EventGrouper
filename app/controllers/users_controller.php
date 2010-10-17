@@ -2,7 +2,8 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $helpers = array('Html', 'Form');
+	var $uses = array('User', 'UserAlias');
+	var $helpers = array('Html', 'Form', 'Javascript');
 	var $components = array('Acl');
 
 	function index() {
@@ -45,6 +46,7 @@ class UsersController extends AppController {
 //	}
 
 	function add($unregisteredId = null, $hasAccount = null) {
+		$this->Session->destroy();
 		$unregisteredData = null;
 		if ($unregisteredId != null) {
 			$unregisteredData = $this->User->findById($unregisteredId);
@@ -53,6 +55,7 @@ class UsersController extends AppController {
 		if (!empty($this->data)) {
 			if (!empty($unregisteredId) && $hasAccount == "newaccount") {
 				$this->User->findById($unregisteredId);
+				$this->data['User']['id'] = $unregisteredId;
 				$this->data['User']['pass'] = sha1($this->data['User']['pass']);
 				if ($oldData['User']['confirm password'] == $oldData['User']['pass'] && $this->User->save($this->data)) {
 					$this->Session->write('username', $this->data['User']['email']);//todo is this secure?
@@ -63,6 +66,24 @@ class UsersController extends AppController {
 				} else {
 					$this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
 				}
+			} elseif (!empty($unregisteredId) && $hasAccount == "makealias") {
+				//todo it's bad to assume that the user/pass is correct (because js checks it)
+				$realUser = $this->User->findByEmail($this->data['User']['email']);
+				$aliasUser = $this->User->findById($unregisteredId);
+				$realAro = $this->Acl->Aro->findByForeignKey($realUser['User']['id']);
+				$aliasAro = $this->Acl->Aro->findByForeignKey($aliasUser['User']['id']);
+				$this->Acl->Aro->query("UPDATE aros_acos SET aro_id = ".$realAro['Aro']['id']." WHERE aro_id = ".$aliasAro['Aro']['id']);
+				print_r($aliasUser);
+				$aliasData = array('UserAlias' => array('alias' => $aliasUser['User']['email'],
+				'user_id' => $realUser['User']['id']));
+				$this->UserAlias->save($aliasData);
+				$this->User->delete($unregisteredId);
+				$this->Acl->Aro->delete($aliasAro['Aro']['id']);
+				
+				$this->Session->write('username', $this->data['User']['email']);//todo is this secure?
+				$this->Session->write('userid', $realUser['User']['id']);//todo is this secure?
+				$this->Session->setFlash(sprintf("You're account %s now has the alias %s", $this->data['User']['email'], $aliasUser['User']['email']));
+				$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));//todo change this
 			}
 			else {
 				$emailData = $this->User->findByEmail($this->data['User']['email']);
