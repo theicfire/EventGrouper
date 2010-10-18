@@ -4,7 +4,7 @@ class PermissionsController extends AppController {
 	var $name = 'Permissions';
 	var $uses = array('EventGroup', 'User', 'UserAlias', 'Event');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
-	var $components = array('Acl', 'MyAcl');
+	var $components = array('Acl', 'MyAcl', 'Email');
 
 	function index() {
 		//this is effectively the view
@@ -16,44 +16,74 @@ class PermissionsController extends AppController {
 		//check permissions
 		//from now on, assume userid is set
 		$this->MyAcl->runcheck('EventGroup',$groupId,'editperms');
+		$currentGroup = $this->EventGroup->findById($groupId);
 		$hasAlias = false;
 		$unregistered = false;
 		if (!empty($this->data)) {//adding a user
 			$userRow = $this->User->findByEmail($this->data['email']);
-			if (empty($userRow)) {
-				$aliasRow = $this->UserAlias->findByAlias($this->data['email']);
-				if (!empty($aliasRow)) {
-					$userRow['User'] = $aliasRow['User'];
-					$hasAlias = true;
-				} else {
-					
-					//add this user to the database and email the user about it
-					$this->User->create();
-					$userData = array('email' => $this->data['email'], 'pass' => 'unregistered');
-					$this->User->set($userData);
-					$this->User->save();
-					$userRow = $this->User->findById($this->User->getLastInsertId());
-					$unregistered = true;
-					
-					$aroArr = array(
-						'model' => 'User',
-						'foreign_key' => $userRow['User']['id'],
-						'parent_id' => 1//This is the designated guest id in aros
-					);
-					$this->Acl->Aro->create();
-					$this->Acl->Aro->save($aroArr);
+			if (!empty($userRow)) {
+				$permissionRow = $this->User->query("SELECT count(*) from aros_acos LEFT JOIN (aros, acos) ON (aros.id = aros_acos.aro_id AND 
+				acos.id = aros_acos.aco_id) WHERE aros.foreign_key = ".$userRow['User']['id']." AND acos.foreign_key = ".$groupId);
+				$hasPermissions = $permissionRow[0][0]['count(*)'] != 0;
+			} else {
+				$hasPermissions = false;
+			}
+			if ($hasPermissions)
+				$this->Session->setFlash("This user already has permissions to this group");
+			else {
+				if (empty($userRow)) {
+					$aliasRow = $this->UserAlias->findByAlias($this->data['email']);
+					if (!empty($aliasRow)) {
+						$userRow['User'] = $aliasRow['User'];
+						$hasAlias = true;
+					} else {
+						echo "in here";
+						//add this user to the database and email the user about it
+						$this->User->create();
+						$userData = array('email' => $this->data['email'], 'pass' => 'unregistered');
+						$this->User->set($userData);
+						$this->User->save();
+						$userRow = $this->User->findById($this->User->getLastInsertId());
+						$unregistered = true;
+						
+						$aroArr = array(
+							'model' => 'User',
+							'foreign_key' => $userRow['User']['id'],
+							'parent_id' => 1//This is the designated guest id in aros
+						);
+						$this->Acl->Aro->create();
+						$this->Acl->Aro->save($aroArr);
+					}
+				} 
+				
+				//add permissions
+				$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userRow['User']['id']), array('model' => 'EventGroup', 'foreign_key' => $groupId), 'create');
+				if ($unregistered) {
+					$alertText = "This user has not registered yet. He/she will be sent an email to sign up.";
+					$emailText = sprintf("You have been granted permissions to %s. Go here to sign up: <a href='%s'>%s</a>",
+					FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path'],
+					FULL_BASE_URL.$this->webroot."users/add/".$userRow['User']['id'],
+					FULL_BASE_URL.$this->webroot."users/add/".$userRow['User']['id']);
 				}
-			} 
-			
-			//add permissions
-			$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userRow['User']['id']), array('model' => 'EventGroup', 'foreign_key' => $groupId), 'create');
-			if ($unregistered)
-				$alertText = "This user has not registered yet. He/she will be sent an email to sign up.";
-			if ($hasAlias)
-				$alertText = $userRow['User']['email']."(".$this->data['email'].") added";
-			else
-				$alertText = $userRow['User']['email']." added";
-			$this->Session->setFlash($alertText);
+				elseif ($hasAlias) {
+					$alertText = $userRow['User']['email']."(".$this->data['email'].") added";
+					$emailText = sprintf("You have been granted permissions to %s.",
+					FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path']);
+				}
+				else {
+					$alertText = $userRow['User']['email']." added";
+					$emailText = sprintf("You have been granted permissions to %s.",
+					FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path']);
+				}
+				$this->Session->setFlash($alertText);
+				
+				echo $emailText;
+				$this->Email->from    = 'from <noreply@rushrabbit.com>';
+				$this->Email->to      = sprintf('%s <%s>', $userRow['User']['email'], $userRow['User']['email']);
+				$this->Email->subject = 'You\'ve been granted permissions on RushRabbit';
+				$this->Email->send($emailText);
+			}
+						
 			
 		
 		}

@@ -16,8 +16,10 @@ class MyAclComponent extends Object {
     	$userid = 5;//guest
     	if ($this->Session->check('userid'))
   			$userid = $this->Session->read('userid');
-    	if (!$acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $id), $action))
-    		$this->controller->render('/errors/nopermissions');
+    	if (!$acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $id), $action)) {
+    		$this->Session->setFlash('You do not have permissions to go there');
+    		$this->controller->redirect('/');
+    	}
     }
 }
 ?>

@@ -6,7 +6,7 @@ if (array_key_exists('search', $this->params['url']))
 $timeStart = date("Y-m-d H:i:s");
 if (array_key_exists('date_start', $this->params['url']))
 	$timeStart = $this->params['url']['date_start'];
-$timeEnd = date("Y-m-d H:i:s") + 86400;
+$timeEnd = date("Y-m-d H:i:s", time()+86400);
 if (array_key_exists('date_end', $this->params['url']))
 	$timeEnd = $this->params['url']['date_end'];
 ?>
