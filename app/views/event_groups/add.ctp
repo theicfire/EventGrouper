@@ -7,6 +7,7 @@
 		echo $form->input('name', array('type' => 'text'));
 		echo $form->input('description');
 		echo $form->input('photo_url', array('type' => 'text'));
+		echo $form->input('location', array('type' => 'text'));
 		if (empty($currenteventGroup['EventGroup']['path']))
 			$path = "/";
 		else

@@ -7,7 +7,7 @@
 		echo $form->input('title', array('type' => 'text'));
 		echo $form->input('description');
 		echo $form->input('photo_url', array('type' => 'text'));
-		echo $form->input('location', array('label' => 'Location Name', 'type' => 'text'));
+		echo $form->input('location', array('label' => 'Location Name', 'type' => 'text', 'value' => $eventGroup['EventGroup']['location']));
 //		echo $form->input('time_start', array('value' => '2010-10-25 20:54:00'));
 		echo $form->input('time_start', array('value' => '2010-10-25 20:54:00', 'type' => 'text'));
 		echo $form->input('duration', array('value' => '60', 'type' => 'text'));
@@ -21,7 +21,7 @@
       <div style="margin-bottom: 5px;">
 
         <div>
-          <input type="text" id="queryInput" value="pizza" style="width: 250px;"/>
+          <input type="text" id="queryInput" value="" style="width: 250px;"/>
           <input type="button" value="Find" onclick="doSearch()"/>
         </div>
       </div>
