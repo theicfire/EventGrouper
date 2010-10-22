@@ -14,7 +14,7 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
-		'password' => '111111',
+		'password' => '',
 		'database' => 'eventgrouper',
 	);
 }
