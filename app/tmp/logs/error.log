@@ -1,6 +1,0 @@
-2010-10-21 16:43:54 Warning: Warning (512): /home/sashko/www/EventGrouper/app/tmp/cache/ is not writable in [/home/sashko/www/EventGrouper/cake/libs/cache/file.php, line 267]
-2010-10-21 16:43:54 Warning: Warning (512): /persistent/ is not writable in [/home/sashko/www/EventGrouper/cake/libs/cache/file.php, line 267]
-2010-10-21 16:43:54 Warning: Warning (512): /models/ is not writable in [/home/sashko/www/EventGrouper/cake/libs/cache/file.php, line 267]
-2010-10-21 16:46:33 Warning: Warning (512): /home/sashko/www/EventGrouper/app/tmp/cache/ is not writable in [/home/sashko/www/EventGrouper/cake/libs/cache/file.php, line 267]
-2010-10-21 16:46:33 Warning: Warning (512): /home/sashko/www/EventGrouper/app/tmp/cache/persistent/ is not writable in [/home/sashko/www/EventGrouper/cake/libs/cache/file.php, line 267]
-2010-10-21 16:46:33 Warning: Warning (512): /home/sashko/www/EventGrouper/app/tmp/cache/models/ is not writable in [/home/sashko/www/EventGrouper/cake/libs/cache/file.php, line 267]
