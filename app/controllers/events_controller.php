@@ -3,7 +3,7 @@ class EventsController extends AppController {
 
 	var $name = 'Events';
 	var $uses = array('Event', 'User', 'EventGroup', 'CategoryChoice');
-	var $helpers = array('Html', 'Form', 'Javascript');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Configuration');
 	var $components = array('Acl', 'MyAcl');
 
 	function index() {

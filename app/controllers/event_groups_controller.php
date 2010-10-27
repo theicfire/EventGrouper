@@ -4,7 +4,7 @@ class EventGroupsController extends AppController {
 	var $name = 'EventGroups';
 	var $uses = array('EventGroup', 'User', 'CategoryChoice');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
-	var $components = array('Acl', 'MyAcl');
+	var $components = array('Acl', 'MyAcl', 'Facebook');
 
 	function index() {
 		$this->Session->write('testses', 'stuffinhere');
@@ -17,6 +17,12 @@ class EventGroupsController extends AppController {
 			'conditions' => array("EventGroup.parent_id" => 0),
 			'fields' => array("EventGroup.*")
 		));
+		
+		
+		
+		
+
+
 		$this->set('eventGroups', $eventGroups);
 	}
 

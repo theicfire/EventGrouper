@@ -33,4 +33,9 @@
  * @link http://book.cakephp.org/view/957/The-App-Controller
  */
 class AppController extends Controller {
+	var $components = array('Facebook', 'Session', 'Acl');
+	function beforeFilter() {
+		$this->Facebook->login();
+	}
 }
+?>

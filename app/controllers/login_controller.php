@@ -2,7 +2,7 @@
 class LoginController extends AppController {
 
 	var $name = 'Login';
-	var $uses = array('User');//don't use a model
+	var $uses = array();//inherit User from appcontroller
 	var $helpers = array('Html', 'Form', 'Javascript');
 
 	function index() {
@@ -38,7 +38,7 @@ class LoginController extends AppController {
 	
 	function logout() {
 		$this->Session->destroy();
-		$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));
+//		$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));
 	}
 	
 	

@@ -18,7 +18,8 @@
  */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -32,6 +33,8 @@
 
     <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;key=ABQIAAAAjU0EJWnWPMv7oQ-jjS7dYxQ82LsCgTSsdpNEnBsExtoeJv4cdBSUkiLH6ntmAr_5O4EfjDwOa0oZBQ" type="text/javascript"></script>
     
+    
+    
 	<?php
 		echo $this->Html->meta('icon');
 
@@ -42,16 +45,21 @@
 			echo $javascript->link('jquery-1.4.2.min.js');
 	?>
 	
+	
+	
 </head>
 <body>
-<?php 
+<?php
 echo $html->link("Home", "/", array("style" => "color:red"))." ";
 if ($this->Session->read('username') == null) {
+	?>
+	<fb:login-button perms="email"></fb:login-button>
+	<?php 
 	echo $html->link("Log In", "/login", array("style" => "color:red"))." ";
 	echo $html->link("Register", "/users/add", array("style" => "color:red"));
 } else {
 	echo "You are logged in as: ".$this->Session->read('username');
-	echo $html->link("Log Out", "/logout", array("style" => "color:red"));
+	echo $html->link("Log Out", "/logout", array("style" => "color:red", "id" => "logoutlink"));
 }?>
 	<div id="container">
 		<div id="content">
@@ -62,6 +70,33 @@ if ($this->Session->read('username') == null) {
 
 		</div>
 	</div>
+<!--	facebook stuff-->
+	<div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script>
+      FB.init({appId: '123876877669639', status: true,
+               cookie: true, xfbml: true});
+      FB.Event.subscribe('auth.login', function(response) {
+        window.location.reload();
+      });
+    </script>
+    <!--	end facebook stuff-->
+    <script language="javascript">
+    $('#logoutlink').click(function() {
+    	$.post('<?php echo $html->url(array("controller" => 'login', 'action' => 'logout'));?>', function() {
+    		FB.getLoginStatus(function(response) {
+    		  if (response.session) {
+	    		  FB.logout(function () {
+	        		window.location.reload();
+    	        });
+    		  } else {
+    			window.location.reload();
+    		  }
+    		});
+    	});
+    	return false;
+    });
+    </script>
 	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
