@@ -1,0 +1,952 @@
+2010-10-21 23:52:40 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:40 Warning: Warning (512): /persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:40 Warning: Warning (512): /models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:40 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:40 Warning: Warning (512): /persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:40 Warning: Warning (512): /models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:40 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /home/chase/public_html/eventgrouper/cake/libs/debugger.php:673) in [/home/chase/public_html/eventgrouper/cake/libs/controller/controller.php, line 746]
+2010-10-21 23:52:47 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:47 Warning: Warning (512): /persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:47 Warning: Warning (512): /models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:47 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:47 Warning: Warning (512): /persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:47 Warning: Warning (512): /models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:52:47 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /home/chase/public_html/eventgrouper/cake/libs/debugger.php:673) in [/home/chase/public_html/eventgrouper/cake/libs/controller/controller.php, line 746]
+2010-10-21 23:53:11 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:11 Warning: Warning (512): /persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:11 Warning: Warning (512): /models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:11 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:11 Warning: Warning (512): /persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:11 Warning: Warning (512): /models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:11 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /home/chase/public_html/eventgrouper/cake/libs/debugger.php:673) in [/home/chase/public_html/eventgrouper/cake/libs/controller/controller.php, line 746]
+2010-10-21 23:53:41 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:41 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:41 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:41 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:41 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:41 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:57 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:57 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:58 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:58 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:58 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/persistent/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-21 23:53:58 Warning: Warning (512): /home/chase/public_html/eventgrouper/app/tmp/cache/models/ is not writable in [/home/chase/public_html/eventgrouper/cake/libs/cache/file.php, line 267]
+2010-10-26 18:43:18 Warning: Warning (2): file_get_contents(https://graph.facebook.com/me?access_token=123876877669639|2.ISeuKDxAopLbm4oF9WVq_g__.3600.1288137600-611086214|Oh-Svro-9nMFF2DFHBBMXE7MUd8) [http://php.net/function.file-get-contents]: failed to open stream: HTTP request failed! HTTP/1.0 400 Bad Request
+ in [/home/chase/public_html/eventgrouper/app/controllers/components/facebook.php, line 27]
+2010-10-26 18:43:20 Warning: Warning (2): file_get_contents(https://graph.facebook.com/me?access_token=123876877669639|2.ISeuKDxAopLbm4oF9WVq_g__.3600.1288137600-611086214|Oh-Svro-9nMFF2DFHBBMXE7MUd8) [http://php.net/function.file-get-contents]: failed to open stream: HTTP request failed! HTTP/1.0 400 Bad Request
+ in [/home/chase/public_html/eventgrouper/app/controllers/components/facebook.php, line 27]
+2010-10-26 18:43:20 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /home/chase/public_html/eventgrouper/cake/libs/debugger.php:673) in [/home/chase/public_html/eventgrouper/cake/libs/controller/controller.php, line 746]
+2010-10-26 21:33:15 Warning: Warning (2): file_get_contents(https://graph.facebook.com/me?access_token=123876877669639|2.zCKuajPaw_K1QwOSbsJI6w__.3600.1288148400-611086214|h0U28q6wU858fHlJefBCDLh6UBo) [http://php.net/function.file-get-contents]: failed to open stream: HTTP request failed! HTTP/1.0 400 Bad Request
+ in [/home/chase/public_html/eventgrouper/app/controllers/components/facebook.php, line 27]
+2010-10-26 21:33:15 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /home/chase/public_html/eventgrouper/cake/libs/debugger.php:673) in [/home/chase/public_html/eventgrouper/cake/libs/controller/controller.php, line 746]
+2010-10-26 21:36:18 Warning: Warning (2): file_get_contents(https://graph.facebook.com/me?access_token=123876877669639|2.EvZtlp7tDaZsHWSXWyH0Nw__.3600.1288148400-611086214|ITkAMGZppoabxSmQhul5vF0r2Zs) [http://php.net/function.file-get-contents]: failed to open stream: HTTP request failed! HTTP/1.0 400 Bad Request
+ in [/home/chase/public_html/eventgrouper/app/controllers/components/facebook.php, line 29]
+2010-10-26 21:36:18 Warning: Warning (2): file_get_contents(https://graph.facebook.com/me?access_token=123876877669639|2.EvZtlp7tDaZsHWSXWyH0Nw__.3600.1288148400-611086214|ITkAMGZppoabxSmQhul5vF0r2Zs) [http://php.net/function.file-get-contents]: failed to open stream: HTTP request failed! HTTP/1.0 400 Bad Request
+ in [/home/chase/public_html/eventgrouper/app/controllers/components/facebook.php, line 29]
+2010-10-26 22:41:24 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:41:24 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:41:24 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:41:25 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:41:25 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:41:25 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:41:55 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:41:55 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:41:55 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:41:58 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:41:58 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:41:58 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:41:59 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:41:59 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:41:59 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:42:11 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:42:11 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:42:11 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:44:08 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:44:08 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:44:08 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:44:11 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:44:11 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:44:11 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:44:11 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:44:11 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:44:11 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:44:37 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:44:37 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:44:37 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:45:57 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:45:57 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:45:57 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:46:40 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:46:40 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:46:40 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:47:03 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:47:03 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:47:03 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:47:45 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:47:45 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:47:45 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:47:57 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:47:57 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:47:57 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:07 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:48:07 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:07 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:15 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:48:15 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:15 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:21 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:48:21 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:21 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:48 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:48:48 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:48 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:52 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:48:52 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:48:52 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:49:20 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:49:20 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:49:20 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:49:32 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:49:32 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:49:32 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:49:47 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:49:47 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:49:47 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:53:51 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:53:51 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:53:51 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:58:05 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:58:05 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:58:05 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:58:17 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:58:17 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:58:17 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:58:18 Warning: Warning (512): AclNode::node() - Couldn't find Aro node identified by "Array
+(
+    [Aro0.model] => User
+    [Aro0.foreign_key] => 26
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-26 22:58:18 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 22
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-26 22:58:18 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 26
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 24
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-28 18:12:15 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/chase/public_html/eventgrouper/app/views/event_groups/ajax_list_events.ctp, line 5]
+2010-10-28 18:12:21 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/chase/public_html/eventgrouper/app/views/event_groups/ajax_list_events.ctp, line 5]
+2010-10-28 18:15:12 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND events_users.user_id = 27' at line 2</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-28 18:15:12 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/chase/public_html/eventgrouper/app/models/event_group.php, line 90]
+2010-10-28 18:15:33 Warning: Warning (2): Missing argument 1 for EventGroupsController::ajaxListEvents() in [/home/chase/public_html/eventgrouper/app/controllers/event_groups_controller.php, line 201]
+2010-10-28 18:15:33 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND events_users.user_id = 27' at line 2</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-28 18:15:33 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/chase/public_html/eventgrouper/app/models/event_group.php, line 90]
+2010-10-28 18:56:01 Warning: Warning (2): Missing argument 1 for EventGroupsController::ajaxListEvents() in [/home/chase/public_html/eventgrouper/app/controllers/event_groups_controller.php, line 201]
+2010-10-28 18:56:01 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND events_users.user_id = 27' at line 2</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-28 18:56:01 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/chase/public_html/eventgrouper/app/models/event_group.php, line 90]
+2010-10-28 19:02:54 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'places.css' in 'where clause'</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-28 19:02:54 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/chase/public_html/eventgrouper/app/models/event_group.php, line 90]
+2010-10-29 01:30:07 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'undefined' in 'field list'</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-29 01:30:22 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'undefined' in 'field list'</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-29 01:31:37 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'undefined' in 'field list'</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-29 01:33:28 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'undefined' in 'field list'</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-29 01:33:59 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'undefined' in 'field list'</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-29 01:34:08 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'undefined' in 'field list'</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-29 01:34:45 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'undefined' in 'field list'</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-29 01:36:03 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'undefined' in 'field list'</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-29 12:31:15 Warning: Warning (2): Missing argument 1 for EventGroupsController::ajaxListEvents() in [/home/chase/public_html/eventgrouper/app/controllers/event_groups_controller.php, line 180]
+2010-10-29 12:31:15 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND events_users.user_id = 6' at line 2</span> in [/home/chase/public_html/eventgrouper/cake/libs/model/datasources/dbo_source.php, line 681]
+2010-10-29 12:31:15 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/chase/public_html/eventgrouper/app/models/event_group.php, line 91]
+2010-10-29 12:31:23 Warning: Warning (512): AclNode::node() - Couldn't find Aco node identified by "Array
+(
+    [Aco0.model] => EventGroup
+    [Aco0.foreign_key] => 25
+)
+" in [/home/chase/public_html/eventgrouper/cake/libs/model/db_acl.php, line 191]
+2010-10-29 12:31:23 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [model] => User
+    [foreign_key] => 6
+)
+
+Aco: Array
+(
+    [model] => EventGroup
+    [foreign_key] => 25
+)
+ in [/home/chase/public_html/eventgrouper/cake/libs/controller/components/acl.php, line 273]
+2010-10-29 12:31:23 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /home/chase/public_html/eventgrouper/cake/libs/debugger.php:673) in [/home/chase/public_html/eventgrouper/cake/libs/controller/controller.php, line 746]
