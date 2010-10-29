@@ -28,6 +28,10 @@
 	</title>
 	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
     <link href="./places.css" rel="stylesheet" type="text/css"/>
+<!--    todo make local-->
+	<?php echo $html->css(array('main_style.css','timeline.css','smoothness/jquery-ui-1.8.5.custom.css')); ?>
+	
+<!--    todo put locally^^-->
 
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
@@ -38,29 +42,36 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.custom');
-
-		echo $scripts_for_layout;
+//		echo $this->Html->css('cake.custom');
 		if (!empty($javascript))
 			echo $javascript->link('jquery-1.4.2.min.js');
+		echo $scripts_for_layout;
+		
 	?>
 	
 	
 	
 </head>
 <body>
+<div id="help_modal"></div>
+
+    <div id="universal_header">
+        <div id="uh_left"><?php echo $html->link("RushRabbit", "/")?></div>
+        
 <?php
-echo $html->link("Home", "/", array("style" => "color:red"))." ";
 if ($this->Session->read('username') == null) {
 	?>
 	<fb:login-button perms="email"></fb:login-button>
+	<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Log In", "/login");?> | <?php echo $html->link("Register", "/users/add");?></div>
 	<?php 
-	echo $html->link("Log In", "/login", array("style" => "color:red"))." ";
-	echo $html->link("Register", "/users/add", array("style" => "color:red"));
+	
+	
 } else {
-	echo "You are logged in as: ".$this->Session->read('username');
-	echo $html->link("Log Out", "/logout", array("style" => "color:red", "id" => "logoutlink"));
-}?>
+	?>
+	<div id="uh_right">what is RushRabbit? | <?php echo "You are logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/logout", array("id" => "logoutlink"));?></div>
+<?php }?>
+	<div class="clear"></div>
+    </div>
 	<div id="container">
 		<div id="content">
 

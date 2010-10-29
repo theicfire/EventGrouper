@@ -5,7 +5,7 @@ class UsersController extends AppController {
 	var $uses = array('User', 'UserAlias');
 	var $helpers = array('Html', 'Form', 'Javascript');
 	var $components = array('Acl');
-
+	//testing git
 	function index() {
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());

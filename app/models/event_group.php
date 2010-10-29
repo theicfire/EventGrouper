@@ -79,7 +79,8 @@ class EventGroup extends AppModel {
 		$this->Event->bindModel(array('hasOne' => array('CategoryChoicesEvent')));
 				
 		$events = $this->Event->find('all',array('conditions' => $params,
-		'group' => 'Event.id'
+		'group' => 'Event.id',
+		'order' => 'Event.time_start ASC'
 		));
 		
 		if ($userId != null) {	
@@ -91,7 +92,6 @@ class EventGroup extends AppModel {
 				for ($i = 0; $i < count($events); $i++) {
 					if ($userEvent['events']['id'] == $events[$i]['Event']['id']) {
 						$events[$i]['Event']['onUsersCalendar'] = 1;
-						echo "Add to ".$userEvent['events']['id'];
 					}
 				}
 			}

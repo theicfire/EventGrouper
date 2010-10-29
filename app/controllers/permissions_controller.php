@@ -1222,10 +1222,10 @@ EOT;
 					'title' => $matches[3][$i],
 					'location' => $matches[4][$i],
 					'description' => $matches[5][$i],
-					'event_group_id' => 9,
+					'event_group_id' => 7,
 					'time_start' => $timeStart,
 					'duration' => $duration,
-					'user_id' => 12
+					'user_id' => 6
 				)
 			);
 			print_r($insertArr);

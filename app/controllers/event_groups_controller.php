@@ -27,13 +27,6 @@ class EventGroupsController extends AppController {
 	}
 
 	function view() {
-		$userStuff = null;
-		if ($this->Session->check('username')) {
-			$userStuff = $this->User->find('first', array('conditions' => array('email' => $this->Session->read('username'))));
-			$eventsOnCalendar = $userStuff['EventsOnCalendar'];
-			//print_r($eventsOnCalendar);
-			$this->set(compact('eventsOnCalendar'));
-		}
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'path' => $this->params['url']['url'])));
 		$id = $currenteventGroup['EventGroup']['id'];
@@ -50,23 +43,9 @@ class EventGroupsController extends AppController {
 		); 
 		
 		$eventGroups = $this->EventGroup->children($id);
-		$params = array();
-		if (array_key_exists('search', $this->params['url'])) {//has been searched
-			if (!empty($this->params['url']['search'])){
-				$params= array(
-				sprintf('MATCH(`Event.description`, `Event.title`)
-				AGAINST("%s")', $this->params['url']['search']));
-			}
-			if (!empty($this->params['url']['categories'])){
-				$params['CategoryChoicesEvent.category_choice_id'] = $this->params['url']['categories'];
-			}
-			$params[] = sprintf('time_start BETWEEN \'%s\' AND \'%s\'', $this->params['url']['date_start'], $this->params['url']['date_end']); 
-		}
-		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params);
 		$groupPath = $this->EventGroup->getPath($id);
-		$treeList = $this->EventGroup->generateTreeList();
 		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'categoryChoices'));
+		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices'));
 		
 	}
 
@@ -196,6 +175,46 @@ class EventGroupsController extends AppController {
 			echo "has permissions";
 			
 //		$this->autoRender = false;
+	}
+	
+	function ajaxListEvents($id) {
+		$userStuff = null;
+		if ($this->Session->check('username')) {
+			$userStuff = $this->User->find('first', array('conditions' => array('email' => $this->Session->read('username'))));
+			$eventsOnCalendar = $userStuff['EventsOnCalendar'];
+			//print_r($eventsOnCalendar);
+			$this->set(compact('eventsOnCalendar'));
+		}
+		$this->MyAcl->runcheck('EventGroup',$id,'read');
+		
+		$this->EventGroup->unbindModel(
+			array('hasMany' => array('CategoryChoice', 'Event'),
+			'hasAndBelongsToMany' => array('User')	
+			)
+		); 
+		
+		$eventGroups = $this->EventGroup->children($id);
+		$params = array();
+		if (array_key_exists('search', $this->params['url'])) {//has been searched
+			if (!empty($this->params['url']['search'])){
+				$params= array(
+				sprintf('MATCH(`Event.description`, `Event.title`)
+				AGAINST("%s" IN BOOLEAN MODE)', $this->params['url']['search']));
+			}
+			if (!empty($this->params['url']['categories'])){
+				$params['CategoryChoicesEvent.category_choice_id'] = $this->params['url']['categories'];
+			}
+			$timeStart = date("Y-m-d H:i:s", strtotime($this->params['url']['date_start']) + $this->params['url']['time_start']*3600);
+			$params[] = sprintf('time_start >= \'%s\'', $timeStart); 
+		}
+		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params);
+		$groupPath = $this->EventGroup->getPath($id);
+		$treeList = $this->EventGroup->generateTreeList();
+		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
+		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'categoryChoices'));
+		
+		
+		$this->render('ajax_list_events', 'ajax');
 	}
 
 }

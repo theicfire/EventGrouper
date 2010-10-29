@@ -1,0 +1,345 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* RESET */
+table { border-collapse: collapse; border-spacing: 0; }
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input { margin: 0; padding: 0; }
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,strong,th { font-size: 1em; font-weight: normal; font-style: normal; }
+ul { list-style: none; }
+fieldset,img { border: none; }
+caption,th { text-align: left; }
+
+body
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	min-width: 960px;
+}
+
+small
+{
+	font-size: 16px;
+}
+
+a
+{
+	color: #069;
+}
+
+.clear
+{
+	clear: both;
+}
+
+#universal_header
+{
+	background: url(grad_shadow/top_header.png) repeat-x top center;
+	color: #fff;
+	padding: 5px;
+	height: 35px;
+}
+
+#uh_left
+{
+	float: left;
+}
+
+#uh_right
+{
+	float: right;
+}
+
+#conference_header
+{
+}
+
+#ch_left
+{
+	float: left;
+	padding: 10px;
+}
+
+#chl_organization
+{
+	font-size: 1.2em;
+}
+
+#chl_title
+{
+	font-size: 2em;
+}
+
+#chl_location
+{
+}
+
+#ch_right
+{
+	float: right;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+
+.curr_time_large
+{
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	font-size: 1.2em;
+}
+
+.mini_event_stream_horizontal
+{
+	background: #999;
+	overflow: hidden;	
+}
+
+#mes_header
+{
+	float: left;
+}
+
+.mes_item
+{
+	float: left;
+}
+
+#main_tabs
+{
+	border-bottom: #666 1px solid;
+	padding-left: 30px;
+	padding-top: 10px;
+	background: url(grad_shadow/tab_bg.png) repeat-x bottom;
+}
+
+.mt_tab
+{
+	
+}
+
+.mt_tab a
+{
+	display: block;
+	color: #000;
+	text-decoration: none;
+	font-size: 1.2em;
+	float: left;
+	padding: 5px 8px;
+	border: 1px solid #aaa;
+	border-bottom: none;
+	background: #fff;
+	margin-right: 7px;
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	position: relative;
+	bottom: -1px;
+}
+
+.mt_tab a.active
+{
+	display: block;
+	color: #000;
+	text-decoration: none;
+	font-size: 1.2em;
+	float: left;
+	padding: 5px 8px;
+	border-color: #666;
+	position: relative;
+	border-bottom: #fff 1px solid;
+}
+
+
+
+/*event blocks*/
+.event_block
+{
+	width: 260px;
+	height: 160px;
+	background: #fff;
+	border: 1px solid #777;
+	position: relative;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0 5px 5px 0;
+	float: left;
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius:  5px 5px 0 0;
+	overflow: hidden;
+	font-size: 1em;
+	overflow: hidden;
+}
+
+.event_block a
+{
+}
+
+.event_block .inside
+{
+	padding: 8px;
+	font-size: .9em;
+}
+
+.event_block .event_title
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.4em;
+	background-color: #FFF;
+	padding-bottom: 2px;
+	border-radius: 5px 5px 0 0;
+}
+
+.event_block .event_title a
+{
+}
+
+.event_block .event_title small
+{
+	font-size: 16px;
+}
+
+.event_block .event_location
+{
+	font-size: 1.1em;
+}
+.event_block .event_time
+{
+	font-weight:bold;
+	font-size: 1.1em;
+}
+
+.event_block .event_group
+{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background: #060;
+	font-size: 1.3em;
+	text-align: right;
+	padding: 5px;
+}
+
+.event_block .event_description
+{
+	border-left: 2px #ccc solid;
+	margin: 8px 5px 8px 0;
+	padding-left: 5px;
+}
+
+.event_block .event_group a
+{
+	color: #FFF;
+	
+}
+
+.event_block .event_footer
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: url(grad_shadow/bottom_white.png);
+	height: 50px;
+	font-size: .9em;
+}
+
+.event_block .event_footer .padding
+{
+	padding: 5px;
+	position: absolute;
+	bottom: 0px;
+}
+
+.event_block .event_titlebar
+{
+	height: 20px;
+	background: #ccc;
+}
+
+.event_block .titlebar_text
+{
+	font-size: 12px;
+	color:#333;
+	padding: 3px;
+}
+
+.event_block .event_titlebar a
+{
+	color: #222;
+}
+
+.event_block .titlebar_text img
+{
+	vertical-align: middle;
+	position: relative;
+	bottom: 2px;
+	padding-right: 10px;
+	cursor: move;
+}
+
+/*mini ongoing*/
+.event_block_ongoing
+{
+	width: 127px;
+	height: 77px;
+	font-size: .7em;
+	border-color: #ccc;
+}
+
+.event_block_ongoing .event_titlebar
+{
+	height: 14px;
+	background: none;
+}
+
+.event_block_ongoing .titlebar_text
+{
+	font-size: .9em;
+	padding: 1px 3px;
+}
+
+.event_block_ongoing .inside
+{
+	padding: 4px;
+}
+
+.event_block_ongoing .event_title
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.4em;
+	background-color: #FFF;
+	padding-bottom: 2px;
+	border-radius: 5px 5px 0 0;
+}
+
+.hiddenid
+{
+	display: none;
+}
+
+.small_icon_inline_button
+{
+	height: 1.2em;
+	width: 1.2em;
+	vertical-align: middle;
+	position: relative;
+	bottom: 2px;
+	padding-right: 5px;
+}
+
+.td .tdi_text
+{
+	font-size: 1.3em;
+	width: 40px;
+}
+
+.make_button
+{
+	display: inline-block;
+	text-decoration: none;
+	padding: 5px;
+	border: #999 1px solid;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	margin: 3px;
+}

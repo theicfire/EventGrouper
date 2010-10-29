@@ -1,0 +1,265 @@
+/* timeline */
+
+#tl_navigation
+{
+	padding: 10px;
+}
+
+#tl_navigation #breadcrumb
+{
+	float: left;
+	padding: 10px;
+}
+
+#tl_navigation #subgroups
+{
+	float: left;
+	padding: 10px;
+}
+
+#tl_navigation .nav_title
+{
+	font-size: .8em;
+	padding-bottom: 3px;
+}
+
+#tl_navigation .nav_links
+{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+#s_left
+{
+	margin-right: 320px;
+}
+
+#s_right
+{
+	float: right;
+	width: 320px;
+}
+
+#split
+{
+	border-top: #ccc solid 1px;
+	margin: 0 10px;
+}
+
+#my_schedule
+{
+	border-left: #ccc solid 1px;
+}
+
+.tl_head
+{
+	padding: 3px;
+}
+
+.tl_head_title
+{
+	font-size: 1.3em;
+}
+
+.tl_head_subt
+{
+	font-size: .8em;
+	color: #333;
+}
+
+
+
+.padded_grid td
+{
+	padding: 10px 10px 0 0px;
+}
+
+.head_float_group
+{
+	float: left;
+	margin: 0 10px 5px 0;
+	padding: 5px;
+}
+
+.head_float_group_box
+{
+	float: left;
+	margin: 0 10px 5px 0;
+	padding: 5px 10px;
+}
+
+input.textinput
+{
+	background: #fff;
+	padding: 3px;
+	border: #999 1px solid;
+	width: 70px;
+	margin-right: 10px;
+}
+
+select
+{
+background: #fff;
+	border: #999 1px solid;
+}
+
+.checkbox_container
+{
+	background: #fff;
+	border: #999 1px solid;
+	padding: 3px;
+	font-size: .8em;
+}
+
+.mys_cell
+{
+	width: 300px;
+	border-left: #ccc 1px solid;
+}
+
+#main_view_table
+{
+	width: 100%;
+}
+
+#main_view_table td
+{
+	vertical-align: top;
+}
+
+.timeslot_title
+{
+	width: 90px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.mys_timeslot
+{
+	padding: 0 10px;
+}
+
+.previous_events_button
+{
+	display: block;
+	padding: 4px;
+	border: #ccc 1px solid;
+	float: left;
+	margin-bottom: 10px;
+}
+
+#filters_box
+{
+	border: #ccc 1px solid;
+	margin: 5px;
+}
+
+#mys_head
+{
+	padding: 10px;
+}
+
+.event_block_empty
+{
+	height: auto;
+	width: 260px;
+	background: #fff;
+	border: 1px solid #777;
+	position: relative;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0 5px 5px 0;
+	float: left;
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius:  5px 5px 0 0;
+	overflow: hidden;
+	font-size: 1em;
+	overflow: hidden;
+}
+
+.event_block_empty h1
+{
+	padding: 5px;
+	font-size: 1.6em;
+}
+
+.event_block_empty p
+{
+	padding: 5px;
+}
+
+.mys_acceptor #help_box
+{
+	display: none;
+}
+
+#drop_here
+{
+	display: none;
+	padding: 10px;
+}
+
+#drop_here h1
+{
+	font-size: 1.6em;
+}
+
+.mys_acceptor #drop_here
+{
+	display: block;
+}
+
+.mys_hover
+{
+	background: #6FF;
+}
+
+.floating_box
+{
+	position: fixed;
+	top: 10px;
+}
+
+#time_dialog
+{
+	display: none;
+}
+
+#which_day_is_it
+{
+	font-size: 1.5em;
+	padding-right: 10px;
+	position: relative;
+	top: 5px;
+}
+
+.day_floating_box
+{
+	position: fixed;
+	top: 9px;
+	background: #fff;
+	border: 1px #aaa solid;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	z-index: 1000;
+	height: auto;
+	padding: 5px;
+}
+
+#which_day_container
+{
+	height: 37px;
+	
+}
+
+.which_day_spacer
+{
+	height: 37px;
+}
+
+/*
+Chase's additions
+*/
+.onCalendar
+{
+	opacity:.5;
+}
