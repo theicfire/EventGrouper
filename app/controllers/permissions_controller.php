@@ -6,12 +6,6 @@ class PermissionsController extends AppController {
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
 	var $components = array('Acl', 'MyAcl', 'Email');
 
-	function index() {
-		//this is effectively the view
-		//want to see all people that have privileges under the group I'm in, given that I am allowed to
-		
-	}
-
 	function view($groupId) {
 		//check permissions
 		//from now on, assume userid is set
@@ -88,16 +82,23 @@ class PermissionsController extends AppController {
 		
 		}
 		$userPerms = $this->EventGroup->getAllPermissions($groupId, $this->Session->read('userid'));
-		$this->set(compact('userPerms', 'groupId'));
+		$groupPath = $this->EventGroup->getPath($groupId);
+		$this->set(compact('userPerms', 'groupId', 'groupPath'));
 	}
 
-	function delete($groupId, $permId = null) {
+	function delete($groupId, $aroId = null) {
 		$this->autoRender = false;
-		if (!$permId) {
+		if (!$aroId) {
 			$this->Session->setFlash(__('Invalid id for Permissions', true));
 			$this->redirect(array('action'=>'index'));
 		} else {
-			$this->Acl->Aco->query("DELETE FROM aros_acos WHERE id=".$permId);
+			$children = $this->EventGroup->getAllEventGroupsUnderThis($groupId);
+			$query = "SELECT aros_acos.id FROM aros_acos LEFT JOIN (acos, event_groups) ON (aros_acos.aco_id = acos.id AND acos.foreign_key = event_groups.id) 
+			WHERE acos.model = 'EventGroup' AND aros_acos.aro_id = ".$aroId." AND event_groups.id IN (".implode(",",$children).")";
+			$idsToDelete = $this->Acl->Aco->query($query);
+			foreach ($idsToDelete as $id) {
+				$this->Acl->Aco->query("DELETE FROM aros_acos WHERE id = ".$id['aros_acos']['id']);
+			}
 			
 			
 			$this->Session->setFlash(__('Permission deleted', true));

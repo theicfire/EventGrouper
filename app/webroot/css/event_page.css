@@ -1,0 +1,84 @@
+/* event page */
+
+#event_page_content
+{
+	padding: 10px;
+}
+
+.event_name
+{
+	font-size: 2.5em;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.nav_title
+{
+	font-size: .8em;
+	padding-bottom: 3px;
+	padding-top: 10px;
+}
+
+.nav_links
+{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.event_time
+{
+	font-size: 1.6em;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.event_location_box
+{
+	float:right;
+	width: 400px;
+	height: 350px;
+	border: #ccc 1px solid;
+	margin: 10px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+.event_location_box h2
+{
+	padding: 10px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.event_location_box .event_loc_name
+{
+	padding: 0 10px;
+	font-weight: bold;
+}
+
+.event_location_box .event_address
+{
+	padding: 0 10px;
+	color: #444;
+	padding-bottom: 10px;
+}
+
+.event_location_box .map_links
+{
+	padding: 10px;
+	font-size: .9em;
+}
+
+.hr
+{
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	margin: 10px 0;
+}
+
+h3
+{
+	font-size: 1.2em;
+	padding: 10px 0;
+	font-weight: bold;
+}

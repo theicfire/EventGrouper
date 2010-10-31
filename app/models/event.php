@@ -4,25 +4,25 @@ class Event extends AppModel {
 	var $name = 'Event';
 	var $actsAs = 'ExtendAssociations';
 	var $validate = array(
-//		'title' => array(
-//			'valid' => array ('rule' => '/^[a-z0-9 ]+$/i','message' => 'Required. Letters, numbers, and spaces only!'),
-//			'isUnique' => array('rule' => 'isUnique', 'message' => 'This event name has been taken')
-//			
-//		),
-//		'photo_url' => array(
-//			'rule' => 'url',
-//			'message' => "That's not a valid url",
-//			'allowEmpty' => true
-//		),
-//		'time_start' => array(
-//			'rule' => '/^[0-9: -]+$/i',
-//			'message' => "Fix this..."
-//		),
-//		'location' => array(
-//			'rule' => '/^[a-z0-9 ]+$/i',
-//			'message' => 'Letters, numbers, and spaces only!',
-//			'allowEmpty' => true
-//		),
+		'title' => array(
+			'valid' => array ('rule' => '/^[a-z0-9 ]+$/i','message' => 'Required. Letters, numbers, and spaces only!'),
+			'isUnique' => array('rule' => 'isUnique', 'message' => 'This event name has been taken')
+			
+		),
+		'photo_url' => array(
+			'rule' => 'url',
+			'message' => "That's not a valid url",
+			'allowEmpty' => true
+		),
+		'time_start' => array(
+			'rule' => '/^[0-9: -]+$/i',
+			'message' => "Fix this..."
+		),
+		'location' => array(
+			'rule' => '/^[a-z0-9 ]+$/i',
+			'message' => 'Letters, numbers, and spaces only!',
+			'allowEmpty' => true
+		),
 	); 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

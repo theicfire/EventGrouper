@@ -2,7 +2,7 @@
 class LoginController extends AppController {
 
 	var $name = 'Login';
-	var $uses = array();//inherit User from appcontroller
+	var $uses = array('User');//inherit User from appcontroller
 	var $helpers = array('Html', 'Form', 'Javascript');
 
 	function index() {
