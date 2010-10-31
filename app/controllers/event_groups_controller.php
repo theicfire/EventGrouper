@@ -17,12 +17,6 @@ class EventGroupsController extends AppController {
 			'conditions' => array("EventGroup.parent_id" => 0),
 			'fields' => array("EventGroup.*")
 		));
-		
-		
-		
-		
-
-
 		$this->set('eventGroups', $eventGroups);
 	}
 
@@ -99,9 +93,8 @@ class EventGroupsController extends AppController {
 				$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
 			}
 		}
-		$users = $this->User->find('list');
-		$this->set('parentId', $parentId);
-		$this->set('currenteventGroup', $currenteventGroup);
+		$groupPath = $this->EventGroup->getPath($parentId);
+		$this->set(compact('parentId', 'currenteventGroup', 'groupPath'));
 	}
 
 	function edit($id = null) {
@@ -136,19 +129,21 @@ class EventGroupsController extends AppController {
 		}
 //		$this->set('parentEventGroup',$this->EventGroup->findById(0));
 		$this->set('parentEventGroup',$this->EventGroup->findById($parentId));
-		$categoryChoices = $this->CategoryChoices->findAllByEventGroupId($id);
+		$categoryChoices = $this->CategoryChoice->findAllByEventGroupId($id);
 		$categoryArr = array();
 		foreach ($categoryChoices as $category) {
-			$categoryArr[] = $category['CategoryChoices']['name'];
+			$categoryArr[] = $category['CategoryChoice']['name'];
 		}
-		$categoryStr = implode("\n", $categoryArr);
-		$this->set(compact('categoryStr'));
+		$categoryStr = implode(",", $categoryArr);
+		$groupPath = $this->EventGroup->getPath($parentId);
+		$this->set(compact('categoryStr', 'groupPath', 'parentId'));
 //		$users = $this->EventGroup->User->find('list');
 //		$this->set(compact('users'));
 	}
 
 	function delete($id = null) {
 		//todo permission check (for all delete methods as well)
+		$this->MyAcl->runcheck('EventGroup',$id,'delete');
 		$this->autoRender = false;
 		$eventStuff = $this->EventGroup->findById($id);
 		$eventParent = $this->EventGroup->findById($eventStuff['EventGroup']['parent_id']);
@@ -169,14 +164,6 @@ class EventGroupsController extends AppController {
 		}
 		
 	}
-	function aclTest() {
-		//$this->Acl->allow(array('model' => 'User', 'foreign_key' => 1), array('model' => 'EventGroup', 'foreign_key' => 21));
-		if ($this->Acl->check(array('model' => 'User', 'foreign_key' => 1), array('model' => 'EventGroup', 'foreign_key' => 21)))
-			echo "has permissions";
-			
-//		$this->autoRender = false;
-	}
-	
 	function ajaxListEvents($id) {
 		$userStuff = null;
 		if ($this->Session->check('username')) {

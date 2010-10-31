@@ -3,41 +3,47 @@ class EventsController extends AppController {
 
 	var $name = 'Events';
 	var $uses = array('Event', 'User', 'EventGroup', 'CategoryChoice');
-	var $helpers = array('Html', 'Form', 'Javascript', 'Configuration');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Configuration', 'Access');
 	var $components = array('Acl', 'MyAcl');
 
-	function index() {
-		$this->Event->recursive = 0;
-		$this->set('events', $this->paginate());
-		$this->set('eventtemp', $this->Event->find('all'));
-	}
 
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Event.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->set('event', $this->Event->read(null, $id));
+		$this->MyAcl->runcheck('Event',$id,'read');
+		$event = $this->Event->read(null, $id);
+		$groupPath = $this->EventGroup->getPath($event['EventGroup']['id']);
+		
+		$this->set(compact('event', 'groupPath'));
 	}
 
 	function add($eventGroupId = null) {
+		if (!$eventGroupId) {
+			$this->Session->setFlash(__('Invalid EventGroup.', true));
+			$this->redirect(array('action'=>'index'));
+		}
+		$this->MyAcl->runcheck('EventGroup',$eventGroupId,'create');
 		if (!empty($this->data)) {
-			$eventGroupId = $this->data['Event']['event_group_id'];
 			$this->Event->create();
+			$this->data['Event']['event_group_id'] = $eventGroupId;
+			$this->data['Event']['time_start'] = $this->data['Other']['date_start']." ".$this->data['Other']['time_start'];
+			$this->data['Event']['duration'] = (strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']))/60; 
 			if ($this->Event->save($this->data)) {
 				
 				
 				
-				$acoParent = $this->Event->query("SELECT id FROM acos WHERE foreign_key = ".$this->data['Event']['event_group_id']);
+				$acoParent = $this->Event->query("SELECT id FROM acos WHERE foreign_key = ".$eventGroupId);
 				if (!empty($acoParent))
 					$acoParentId = $acoParent[0]['acos']['id'];
 				else
 					echo "Not supposed to happen";
-				$eventGroupId = $this->Event->getLastInsertId();
+				$eventId = $this->Event->getLastInsertId();
 				$acoArr = array(
 					'model' => 'Event',
 					'parent_id' => $acoParentId,
-					'foreign_key' => $eventGroupId
+					'foreign_key' => $eventId
 				);
 				$this->Acl->Aco->create();
 				$this->Acl->Aco->save($acoArr);
@@ -45,38 +51,40 @@ class EventsController extends AppController {
 				//NOTE: we assume that the user is logged in to get to this page (and has a session)
 				//NOTE: we are giving the users who make the event groups full permissions
 				$userid = $this->Session->read('userid');
-				$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'Event', 'foreign_key' => $eventGroupId));
+				$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'Event', 'foreign_key' => $eventId));
 			
 			
 			
 			
-				$pathRes = $this->EventGroup->findById($this->data['Event']['event_group_id']);
-				$this->Session->setFlash(__('The Event has been saved', true));
+				$pathRes = $this->EventGroup->findById($eventGroupId);
+				$this->Session->setFlash('The Event has been saved');
 				$this->redirect("/".$pathRes['EventGroup']['path']);
 			} else {
 				$this->Session->setFlash(__('The Event could not be saved. Please, try again.', true));
 			}
 		}
-		if ($eventGroupId == null)
-			echo "Something's wrong";
 		
 		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$eventGroupId)));
 		$users = $this->Event->User->find('list');
 		$users = $this->Event->User->find('list');
 		$eventGroup = $this->EventGroup->findById($eventGroupId);
-		$this->set(compact('categoryChoices', 'users', 'eventGroup', 'users', 'eventGroupId'));
+		$groupPath = $this->EventGroup->getPath($eventGroupId);
+		$this->set(compact('categoryChoices', 'users', 'eventGroup', 'users', 'eventGroupId', 'groupPath'));
 	}
 
 	function edit($id = null) {
-		if (!$id && empty($this->data)) {
+		if (!empty($this->data))
+			$id = $this->data['Event']['id'];
+		if (!$id) {
 			$this->Session->setFlash(__('Invalid Event', true));
 			$this->redirect(array('action'=>'index'));
 		}
+		$this->MyAcl->runcheck('Event',$id,'update');
 		if (!empty($this->data)) {
 			if ($this->Event->save($this->data)) {
-				$pathRes = $this->Event->findById($this->data['Event']['id']);
+				$pathRes = $this->Event->findById($id);
 				$this->Session->setFlash(__('The Event has been saved', true));
-				$this->redirect("/".$pathRes['EventGroup']['path']);
+				$this->redirect("/events/view/".$id);
 			} else {
 				$this->Session->setFlash(__('The Event could not be saved. Please, try again.', true));
 			}
@@ -90,15 +98,18 @@ class EventsController extends AppController {
 		$users = $this->Event->User->find('list');
 		$eventGroups = $this->Event->EventGroup->find('list');
 		$users = $this->Event->User->find('list');
-		$this->set(compact('categoryChoices','users','eventGroups','users', 'eventGroupId'));
+		$groupPath = $this->EventGroup->getPath($groupId);
+		$eventGroupId = $groupId;
+		$this->set(compact('categoryChoices','users','eventGroups', 'eventGroupId', 'groupPath'));
 	}
 
 	function delete($id = null) {
-		$pathRes = $this->Event->findById($id);
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Event', true));
 			$this->redirect(array('action'=>'index'));
 		}
+		$this->MyAcl->runcheck('Event',$eventGroupId,'delete');
+		$pathRes = $this->Event->findById($id);
 		if ($this->Event->delete($id)) {
 			$this->Session->setFlash(__('Event deleted', true));
 			$this->redirect("/".$pathRes['EventGroup']['path']);
@@ -113,7 +124,7 @@ class EventsController extends AppController {
 			//print_r($eventsOnCalendar);
 			$this->set(compact('eventsOnCalendar'));
 		} else {
-			echo "false (not logged in)";
+			$this->redirect("/login");
 		}
 		//$this->render(false);
 	}

@@ -68,13 +68,17 @@ class EventGroup extends AppModel {
 //			'insertQuery' => ''
 //		)
 //	);
-	function getAllEventsUnderThis($id = null, $userId = null, $params = null) {
+	function getAllEventGroupsUnderThis($id) {
 		$children = $this->children($id);
 		$childrenArr = array();
 		foreach ($children as $child)
 			$childrenArr[] = $child['EventGroup']['id'];
 		$childrenArr[] = $id;
-//		$conditions = array("Event.event_group_id" => $childrenArr);//array('`Event`.`event_group_id` IN (1,2,3)');
+		return $childrenArr;
+		
+	}
+	function getAllEventsUnderThis($id, $userId = null, $params = null) {
+		$childrenArr = $this->getAllEventGroupsUnderThis($id);
 		$params['Event.event_group_id'] = $childrenArr;
 		$this->Event->bindModel(array('hasOne' => array('CategoryChoicesEvent')));
 				
@@ -142,14 +146,14 @@ class EventGroup extends AppModel {
     } 
     //get all permissions for a specific group (but not subgroups)
     function getAllPermissions($id, $userId) {
-    	$aco = $this->query("select users.id, aros_acos.id, email, aros_acos._create, aros_acos._read, aros_acos._update, aros_acos._delete, aros_acos._editperms from acos 
+    	$aco = $this->query("select users.id, aros_acos.id, aros_acos.aro_id, email, aros_acos._create, aros_acos._read, aros_acos._update, aros_acos._delete, aros_acos._editperms from acos 
     	LEFT JOIN (aros_acos, aros, users) ON (acos.id = aros_acos.aco_id AND aros_acos.aro_id = aros.id AND aros.foreign_key = users.id) 
     	WHERE acos.foreign_key = ".$id." AND email != 'Guest' AND users.id != ".$userId);
     	return $aco;
     }
     
     function saveCategories($categoryList, $parentId) {
-    	$categoryList = explode("\n", $categoryList);
+    	$categoryList = explode(",", $categoryList);
     	//todo inefficient code
     	$this->query("DELETE FROM category_choices WHERE event_group_id = ".$parentId);
     	$valuesArr = array();

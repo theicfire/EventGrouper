@@ -150,7 +150,46 @@ function refreshEvents() {
 	});
 	
 	getEvents($("#datestart").val(), $("#searchBox").val(), categoryChoices, $("#time_start").val());
+	setHashFromPage();
 }
+function setHashFromPage(){
+	var paramArr = [];
+//	paramArr['id'] = $("#quizletId").val();
+//	paramArr['transferSpeed'] = $("#moveToStackSpeed").val();
+	$(".putInHash").each(function(){
+		console.log('go');
+		if(this.type!="checkbox"){
+			paramArr[this.id]=$(this).val();
+		}
+		else{
+			paramArr[this.id]=this.checked;
+		}
+	});
+	var urlStrArr = [];
+	console.log(paramArr);
+	for (var key in paramArr) {
+		urlStrArr.push(key+"="+paramArr[key]);
+	}	
+	location.hash = urlStrArr.join("&");
+	console.log('done');
+	
+}
+function setPageFromHash(){
+	if (location.hash){
+		hash =location.hash.substring(1);
+		urlStrArr = hash.split("&");
+		for (var key in urlStrArr) {
+			var params = urlStrArr[key].split("=");
+			if($("#"+params[0]).attr('type')!="checkbox"){
+				$("#"+params[0]).val(params[1]);
+			}
+			else{
+				$("#"+params[0]).attr('checked',params[1]=="true");
+			}
+		}
+	}
+}
+
 $(document).ready( function(){
 	
 	$("#datestart").datepicker();
@@ -173,6 +212,7 @@ $(document).ready( function(){
 	
 	setInterval( "update_time()", 1000 );
 
+	setPageFromHash();
 	$("#filterForm").trigger('submit');
 
 	
@@ -196,6 +236,15 @@ $(document).ready( function(){
 			<li><?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
 				echo $html->link(__('Add Event Under This', true), array('controller' => 'events', 'action' => 'add', $currenteventGroup['EventGroup']['id'])); 
 			}?> </li>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {
+				echo $html->link(__('Edit', true), array('action' => 'edit', $currenteventGroup['EventGroup']['id'])); 
+			}?>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {
+				echo $html->link(__('Delete', true), array('action' => 'delete', $currenteventGroup['EventGroup']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id'])); 
+			}?>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {
+				echo $html->link(__('Edit Permissions', true), array('controller' => 'permissions', 'action' => 'view', $currenteventGroup['EventGroup']['id']));
+			}?>
 		</ul>
         	<div id="chl_organization"><a href="#">REX (Residence Exploration)</a></div>
             <div id="chl_title"><?php echo $currenteventGroup['EventGroup']['name']; ?></div>
@@ -282,7 +331,7 @@ $(document).ready( function(){
                         <table class="padded_grid">
                         <tr><td>from:</td><td>
                         
-                        <select name="time_start" id="time_start">
+                        <select name="time_start" id="time_start" class="putInHash">
                         	<option value="0">midnight</option>
                             <option value="1">1:00 am</option>
                             <option value="2">2:00 am</option>
@@ -314,7 +363,7 @@ $(document).ready( function(){
                             <option value="23">11:00 pm</option>
                         </select>
                         
-                        <input name="date_start" id="datestart" class="textinput" type="text" value="08/27/2010" ></td></tr>
+                        <input name="date_start" id="datestart" class="textinput putInHash" type="text" value="01/27/2010"></td></tr>
                         
                         </table>
                     </div>
@@ -327,7 +376,7 @@ $(document).ready( function(){
                         $i = 0;
                         foreach (array_keys($categoryChoices) as $key) {
 	                        ?>
-	                        <td><div class="checkbox_container"><input class="categorycheckbox" name="categories[]" value="<?=$key?>" type="checkbox"> <?=$categoryChoices[$key]?></div></td>
+	                        <td><div class="checkbox_container"><input class="categorycheckbox putInHash" name="categories[]" value="<?=$key?>" id="categorycheckbox-<?=$key?>" type="checkbox"> <?=$categoryChoices[$key]?></div></td>
 	                        <?php 
 	                        if ($i == 2) {
 	                        	echo "</tr><tr>";
@@ -340,7 +389,7 @@ $(document).ready( function(){
                     <div class="head_float_group_box">
                         <div class="tl_head_title">Search</div>
                         <div class="tl_head_subt">look for something</div>
-                       	<input name="search" type="text" id="searchBox">
+                       	<input name="search" type="text" id="searchBox" class="putInHash">
                     </div> 
                     
                     <input type="submit" value="Save options and refresh" id="filter_submit" />

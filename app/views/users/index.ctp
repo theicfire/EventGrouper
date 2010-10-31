@@ -1,60 +1,70 @@
+<?php echo $this->element('admin/top');?>
 
-<pre>
-<?php print_r($usertemp);?>
-</pre>
-<div class="users index">
-<h2><?php __('Users');?></h2>
-<p>
-<?php
-echo $paginator->counter(array(
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-));
-?></p>
-<table cellpadding="0" cellspacing="0">
-<tr>
-	<th><?php echo $paginator->sort('id');?></th>
-	<th><?php echo $paginator->sort('email');?></th>
-	<th><?php echo $paginator->sort('pass');?></th>
-	<th class="actions"><?php __('Actions');?></th>
-</tr>
-<?php
-$i = 0;
-foreach ($users as $user):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
+
+
+<div id="admin_groups" class="info_box">
+
+<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
+	class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" /> Groups</h1>
+
+<table class="full_width">
+	<tr>
+		<th>Group</th>
+		<th>Subgroups</th>
+		<th>Events</th>
+		<th>Actions</th>
+	</tr>
+<?php 
+	foreach($userEventGroups as $group) {
+?>
+	<tr>
+		<td><?= $this->element('grouppath', array('groupPath' => $group['EventGroup']['groupPath']));?></td>
+		<td><?= $group['EventGroup']['eventgroupcount']?></td>
+		<td><?= $group['EventGroup']['eventcount']?></td>
+		<td><a href="#" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
+			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> View details</a> <a href="<?php echo $html->url("/event_groups/edit/".$group['EventGroup']['id']); ?>"
+			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
+			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> Edit info</a> <a href="<?php echo $html->url("/event_groups/add/".$group['EventGroup']['id']); ?>"
+			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
+			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> Add subgroups</a> <a href="<?php echo $html->url("/events/add/".$group['EventGroup']['id']); ?>"
+			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
+			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> Add events</a></td>
+	</tr>
+
+<?php 
 	}
 ?>
-	<tr<?php echo $class;?>>
-		<td>
-			<?php echo $user['User']['id']; ?>
-		</td>
-		<td>
-			<?php echo $user['User']['email']; ?>
-		</td>
-		<td>
-			<?php echo $user['User']['pass']; ?>
-		</td>
-		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action' => 'view', $user['User']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action' => 'edit', $user['User']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $user['User']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
+
 </table>
+
 </div>
-<div class="paging">
-	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
- | 	<?php echo $paginator->numbers();?>
-	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
+
+<div id="admin_notifications" class="info_box">
+
+
+<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" />
+Notifications + Requests</h1>
+
+<table class="full_width">
+	<tr>
+		<th>From</th>
+		<th>Group</th>
+		<th>Contents</th>
+		<th>Actions</th>
+	</tr>
+	<tr>
+		<td>Saif Hakim</td>
+		<td>Phi Kappa Theta</td>
+		<td>Event created: <a href="#">Carribean Party</a> at 8:00 pm
+		3/14/2010</td>
+		<td><a href="#" class="make_button"><img
+			src="<?php echo $html->url('/'); ?>css/rinoa/check.png" class="<?php echo $html->url('/'); ?>css/rinoa_small" /></a> <a href="#"
+			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/cancel.png"
+			class="<?php echo $html->url('/'); ?>css/rinoa_small" /></a> <a href="#" class="make_button"><img
+			src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png" class="<?php echo $html->url('/'); ?>css/rinoa_small" /></a></td>
+	</tr>
+
+</table>
+
 </div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('New User', true), array('action' => 'add')); ?></li>
-		<li><?php echo $html->link(__('List Events', true), array('controller' => 'events', 'action' => 'index')); ?> </li>
-		<li><?php echo $html->link(__('New Event', true), array('controller' => 'events', 'action' => 'add')); ?> </li>
-		<li><?php echo $html->link(__('List Event Groups', true), array('controller' => 'event_groups', 'action' => 'index')); ?> </li>
-		<li><?php echo $html->link(__('New Event Group', true), array('controller' => 'event_groups', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+

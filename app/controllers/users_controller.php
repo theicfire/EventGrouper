@@ -2,39 +2,57 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $uses = array('User', 'UserAlias');
+	var $uses = array('User', 'UserAlias', 'EventGroup');
 	var $helpers = array('Html', 'Form', 'Javascript');
 	var $components = array('Acl');
-	//testing git
 	function index() {
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
-		$options['joins'] = array(
-		    array('table' => 'events',
-		        'alias' => 'EventsUserOwns',
-		        'type' => 'LEFT',
-		        'conditions' => array(
-		            'User.id = EventsUserOwns.user_id',
-		        )
-		    ),
-		    array('table' => 'events_users',
-		        'alias' => 'EventsLinker',
-		        'type' => 'LEFT',
-		        'conditions' => array(
-		            'User.id = EventsLinker.user_id',
-		        )
-		    ),
-		    array('table' => 'events',
-		        'alias' => 'EventsOnCalendar',
-		        'type' => 'LEFT',
-		        'conditions' => array(
-		            'EventsLinker.event_id = EventsOnCalendar.id',
-		        )
-		    )
-		);
-		$options['fields'] = array('EventsUserOwns.*', 'User.*');
-				
-		$this->set('usertemp', $this->User->find('all', $options));
+		$userEventGroups = $this->User->query("SELECT EventGroup.* FROM `aros` 
+		LEFT JOIN (aros_acos, acos, event_groups AS EventGroup) 
+		ON (aros.id = aros_acos.aro_id AND aros_acos.aco_id = acos.id AND acos.foreign_key = EventGroup.id) 
+		WHERE aros.foreign_key = ".$this->Session->read('userid')." AND acos.model = 'EventGroup';");
+		$ids = array();
+		foreach ($userEventGroups as $single) {
+			$ids[] = $single['EventGroup']['id'];
+		}
+		foreach ($userEventGroups as $key=>$value) {
+			if (in_array($value['EventGroup']['parent_id'], $ids))
+				unset($userEventGroups[$key]);
+		}
+		foreach ($userEventGroups as $key=>$value) {
+			$userEventGroups[$key]['EventGroup']['eventcount'] = count($this->EventGroup->getAllEventsUnderThis($value['EventGroup']['id']));
+			$userEventGroups[$key]['EventGroup']['eventgroupcount'] = count($this->EventGroup->getAllEventGroupsUnderThis($value['EventGroup']['id']))-1;
+			$userEventGroups[$key]['EventGroup']['groupPath'] = $this->EventGroup->getPath($value['EventGroup']['id']);
+		}
+		$this->set(compact('userEventGroups'));
+		
+//		$this->User->recursive = 0;
+//		$this->set('users', $this->paginate());
+//		$options['joins'] = array(
+//		    array('table' => 'events',
+//		        'alias' => 'EventsUserOwns',
+//		        'type' => 'LEFT',
+//		        'conditions' => array(
+//		            'User.id = EventsUserOwns.user_id',
+//		        )
+//		    ),
+//		    array('table' => 'events_users',
+//		        'alias' => 'EventsLinker',
+//		        'type' => 'LEFT',
+//		        'conditions' => array(
+//		            'User.id = EventsLinker.user_id',
+//		        )
+//		    ),
+//		    array('table' => 'events',
+//		        'alias' => 'EventsOnCalendar',
+//		        'type' => 'LEFT',
+//		        'conditions' => array(
+//		            'EventsLinker.event_id = EventsOnCalendar.id',
+//		        )
+//		    )
+//		);
+//		$options['fields'] = array('EventsUserOwns.*', 'User.*');
+//				
+//		$this->set('usertemp', $this->User->find('all', $options));
 	}
 
 //	function view($id = null) {

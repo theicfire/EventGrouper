@@ -1,0 +1,140 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* RESET */
+table { border-collapse: collapse; border-spacing: 0; }
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input { margin: 0; padding: 0; }
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,strong,th { font-size: 1em; font-weight: normal; font-style: normal; }
+ul { list-style: none; }
+fieldset,img { border: none; }
+caption,th { text-align: left; }
+
+body
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	min-width: 960px;
+	background: #fff;
+}
+
+#universal_header
+{
+	background: url(grad_shadow/top_header.png) repeat-x top center;
+	color: #fff;
+	padding: 5px;
+	height: 35px;
+}
+
+small
+{
+	font-size: 14px;
+}
+
+a
+{
+	color: #069;
+}
+
+.clear
+{
+	clear: both;
+}
+
+#universal_header
+{
+	color: #fff;
+	padding: 5px;
+	height: 35px;
+}
+
+#uh_left
+{
+	float: left;
+}
+
+#uh_right
+{
+	float: right;
+}
+
+.info_box
+{
+	background: #eee;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 10px;
+	margin: 10px;
+}
+
+.rinoa_small_inline
+{
+	width: 18px;
+	height: 18px;
+	position: relative;
+	bottom: -4px;
+}
+
+.rinoa_small
+{
+	width: 18px;
+	height: 18px;
+}
+
+#main_email
+{
+	font-weight: bold;
+}
+
+h1
+{
+	font-size: 1.5em;
+}
+
+.rinoa_large_inline
+{
+	position:relative;
+	bottom: -3px;
+}
+
+.hr
+{
+	border-bottom: #aaa 1px solid;
+	padding: 8px 0;
+}
+
+table
+{
+	margin: 10px 0;
+	background: #fff;
+}
+
+.full_width
+{
+	width: 100%;
+}
+
+td
+{
+}
+
+th
+{
+	font-weight: bold;
+}
+
+td, th
+{
+	border: #aaa 1px solid;
+	padding: 5px;
+}
+
+.left
+{
+	float: left;
+}
+
+.right
+{
+	float: right;
+}
