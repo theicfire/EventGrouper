@@ -1,11 +1,14 @@
 <?php
 class FacebookComponent extends Object {
 	var $components = array('Session', 'Acl');
+		
+
 	//called before Controller::beforeFilter()
 	function initialize(&$controller, $settings = array()) {
 		// saving the controller reference for later use
 		$this->controller =& $controller;
 		$this->User= ClassRegistry::init('User');
+		$this->controller->set('FACEBOOK_APP_ID', Configure::read('FACEBOOK_APP_ID'));
 	}
 	function get_facebook_cookie($app_id, $application_secret) {
 	  $args = array();
@@ -26,7 +29,7 @@ class FacebookComponent extends Object {
 	}
 	
 	function getEmail() {
-		$cookie = $this->get_facebook_cookie('123876877669639', '354b198fe792508dc25ce876f0156adf');
+		$cookie = $this->get_facebook_cookie(Configure::read('FACEBOOK_APP_ID'), Configure::read('FACEBOOK_SECRET'));
 		if ($cookie)
 			$user = json_decode(file_get_contents('https://graph.facebook.com/me?access_token='.$cookie['access_token']));
 		else
