@@ -38,7 +38,6 @@ class LoginController extends AppController {
 	
 	function logout() {
 		$this->Session->destroy();
-//		$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));
 	}
 	
 	

@@ -70,7 +70,7 @@
 	    	<div class="left"><p><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</p></div>
 	        <div class="right"><p>
 	        
-	        <a href="#" class="make_button">Exit admin panel</a> <a href="#" class="make_button">Edit account</a> <a href="#" class="make_button">Log out</a> 
+	        <a href="<?php echo $html->url('/'); ?>" class="make_button">Exit admin panel</a> <a href="#" class="make_button">Edit account</a> <a href="<?php echo $html->url("/");?>" class="make_button logoutlink">Log out</a> 
 	        
 	        </p>
 	        
@@ -91,7 +91,7 @@
 				<?php 
 			} else {
 				?>
-				<div id="uh_right">what is RushRabbit? | <?php echo "You are logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/logout", array("id" => "logoutlink"));?></div>
+				<div id="uh_right">what is RushRabbit? | <?php echo "You are logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
 			<?php }?>
 			<div class="clear"></div>
 	    </div>
@@ -119,15 +119,15 @@
     </script>
     <!--	end facebook stuff-->
     <script language="javascript">
-    $('#logoutlink').click(function() {
+    $('.logoutlink').click(function() {
     	$.post('<?php echo $html->url(array("controller" => 'login', 'action' => 'logout'));?>', function() {
     		FB.getLoginStatus(function(response) {
     		  if (response.session) {
 	    		  FB.logout(function () {
-	        		window.location.reload();
+	        		window.location = <?php echo $html->url("/");?>
     	        });
     		  } else {
-    			window.location.reload();
+    			  window.location = <?php echo $html->url("/");?>
     		  }
     		});
     	});

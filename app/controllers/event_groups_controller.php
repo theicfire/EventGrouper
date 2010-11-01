@@ -42,6 +42,29 @@ class EventGroupsController extends AppController {
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));		
 	}
+	function view_admin($id) {
+		$currenteventGroup = $this->EventGroup->findById($id);
+		if (empty($currenteventGroup)) {
+			$this->Session->setFlash(__('Invalid EventGroupss.', true));
+			$this->redirect(array('action'=>'index'));
+		}
+		$this->MyAcl->runcheck('EventGroup',$id,'read');
+		
+		$this->EventGroup->unbindModel(
+			array('hasMany' => array('CategoryChoice', 'Event'),
+			'hasAndBelongsToMany' => array('User')	
+			)
+		); 
+		
+		$eventGroups = $this->EventGroup->children($id);
+		$groupPath = $this->EventGroup->getPath($id);
+		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array());
+		$treeList = $this->EventGroup->generateTreeList();
+		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
+		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices', 'treeList', 'eventsUnderGroup'));
+		$this->set('phpVars', array('currentEventGroupId'=> $id));	
+		$this->set('isAdmin', true);	
+	}
 
 	function add($parentId = null) {
 		if (!empty($this->data)) {

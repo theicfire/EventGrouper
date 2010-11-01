@@ -1,6 +1,3 @@
-<?php echo $this->element('admin/top');?>
-
-
 
 <div id="admin_groups" class="info_box">
 
@@ -21,7 +18,7 @@
 		<td><?= $this->element('grouppath', array('groupPath' => $group['EventGroup']['groupPath']));?></td>
 		<td><?= $group['EventGroup']['eventgroupcount']?></td>
 		<td><?= $group['EventGroup']['eventcount']?></td>
-		<td><a href="#" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
+		<td><a href="<?php echo $html->url("/event_groups/view_admin/".$group['EventGroup']['id']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
 			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> View details</a> <a href="<?php echo $html->url("/event_groups/edit/".$group['EventGroup']['id']); ?>"
 			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
 			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> Edit info</a> <a href="<?php echo $html->url("/event_groups/add/".$group['EventGroup']['id']); ?>"

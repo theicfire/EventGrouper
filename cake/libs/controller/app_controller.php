@@ -34,6 +34,7 @@
  */
 class AppController extends Controller {
 	var $components = array('Facebook', 'Session', 'Acl');
+	var $helpers = array('Javascript', 'Html', 'Session');
 	function beforeFilter() {
 		$this->Facebook->login();
 	}
