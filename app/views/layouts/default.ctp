@@ -29,7 +29,7 @@
 	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
     <link href="./places.css" rel="stylesheet" type="text/css"/>
 <!--    todo make local-->
-	<?php echo $html->css(array('main_style.css','smoothness/jquery-ui-1.8.5.custom.css')); ?>
+	<?php echo $html->css(array('main_style.css','smoothness/jquery-ui-1.8.5.custom.css', 'popup.css')); ?>
 	
 	
 <!--    todo put locally^^-->
@@ -47,15 +47,13 @@
 		$phpVars['root'] = $this->base;
 		echo $this->Html->scriptBlock('var phpVars = '.$javascript->object($phpVars).';');
 //		echo $this->Html->css('cake.custom');
-		if (!empty($javascript))
-			echo $javascript->link('jquery-1.4.2.min.js');
+		echo $javascript->link(array('jquery-1.4.2.min.js', 'popup.js'));
 		echo $scripts_for_layout;
 		
 	?>
 	<?php if (isset($isAdmin)) {
 		echo $html->css(array('forms.css', 'admin_style.css'));
-		if (!empty($javascript))
-			echo $javascript->link(array('jqueryui/jquery-ui-1.8.5.custom.min.js', 'admin.js'));
+		echo $javascript->link(array('jqueryui/jquery-ui-1.8.5.custom.min.js', 'admin.js'));
 	}?>
 	
 	
@@ -107,6 +105,24 @@
 
 		</div>
 	</div>
+	<a href="#" class="popupopen">open popup</a>
+	<div id="popupContact">
+		<a id="popupContactClose">x</a>
+		<h1>Title of our cool popup, yay!</h1>
+
+		<p id="contactArea">
+			Here we have a simple but interesting sample of our new stuning and smooth popup. As you can see jQuery and CSS does it easy...
+			<br/><br/>
+			We can use it for popup-forms and more... just experiment!
+			<br/><br/>
+			Press ESCAPE, Click on X (right-top) or Click Out from the popup to close the popup!
+			<br/><br/>
+			<a href="http://www.yensdesign.com"><img src="logo.jpg" alt="Go to yensdesign.com"/></a>
+		</p>
+	</div>
+
+	<div id="backgroundPopup"></div>
+	
 <!--	facebook stuff-->
 	<div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>

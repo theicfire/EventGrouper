@@ -1,7 +1,3 @@
-
-            
-            
-            
 <?php
 for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 	$event = $eventsUnderGroup[$i];
@@ -11,15 +7,26 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
             <?php while (true) {
             	$event = $eventsUnderGroup[$i];
             	$onUserCalendar = false;
-            	if (!$session->check('userid') || ($session->check('userid') && array_key_exists('onUsersCalendar',$event['Event'])))
+            	if ($session->check('userid') && array_key_exists('onUsersCalendar',$event['Event']))
 					$onUserCalendar = true;
             ?>
             	
             	<div class="event_block<?php if ($onUserCalendar) echo " onCalendar"; ?>" id="event-<?=$event['Event']['id']?>">
                 	<div class="hiddenid"><?=$event['Event']['id']?></div>
-                    <div class="event_titlebar"><div class="titlebar_text"><a href="#" class="scheduletoggle">
-					<?php echo $onUserCalendar?"remove from schedule":"add to schedule"; ?>
-</a> | <a href="#">share</a> | <a href="#">view on map</a></div></div>
+                    <div class="event_titlebar"><div class="titlebar_text">
+                    <?php 
+					if (!$session->check('userid'))
+						echo "Log in for Calendar";
+					else {
+						?><a href="#" class="scheduletoggle">
+						<?php 
+						if ($onUserCalendar) echo "remove from schedule"; 
+						else echo "add to schedule"; 
+						?>
+						</a>
+						
+					<?php }?>
+					 | <a href="#">share</a> | <a href="#">view on map</a></div></div>
                     
                     <div class="inside">
                     	<h1 class="event_title">
