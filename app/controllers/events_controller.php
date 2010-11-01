@@ -69,7 +69,7 @@ class EventsController extends AppController {
 		$users = $this->Event->User->find('list');
 		$eventGroup = $this->EventGroup->findById($eventGroupId);
 		$groupPath = $this->EventGroup->getPath($eventGroupId);
-		$this->set(compact('categoryChoices', 'users', 'eventGroup', 'users', 'eventGroupId', 'groupPath'));
+		$this->set(compact('categoryChoices', 'eventGroup', 'users', 'eventGroupId', 'groupPath'));
 	}
 
 	function edit($id = null) {
@@ -114,7 +114,6 @@ class EventsController extends AppController {
 			$this->Session->setFlash(__('Event deleted', true));
 			$this->redirect("/".$pathRes['EventGroup']['path']);
 		}
-		echo "hey";
 	}
 	
 	function viewCalendar() {

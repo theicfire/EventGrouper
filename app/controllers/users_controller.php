@@ -71,39 +71,40 @@ class UsersController extends AppController {
 		}
 		$oldData = $this->data;
 		if (!empty($this->data)) {
-			if (!empty($unregisteredId) && $hasAccount == "newaccount") {
-				$this->User->findById($unregisteredId);
-				$this->data['User']['id'] = $unregisteredId;
-				$this->data['User']['pass'] = sha1($this->data['User']['pass']);
-				if ($oldData['User']['confirm password'] == $oldData['User']['pass'] && $this->User->save($this->data)) {
-					$this->Session->write('username', $this->data['User']['email']);//todo is this secure?
-					$this->Session->write('userid', $unregisteredId);//todo is this secure?
+			if (!empty($unregisteredId)) {
+				if ($hasAccount == "newaccount") {
+					$this->User->findById($unregisteredId);
+					$this->data['User']['id'] = $unregisteredId;
+					$this->data['User']['pass'] = sha1($this->data['User']['pass']);
+					if ($oldData['User']['confirm password'] == $oldData['User']['pass'] && $this->User->save($this->data)) {
+						$this->Session->write('username', $this->data['User']['email']);//todo is this secure?
+						$this->Session->write('userid', $unregisteredId);//todo is this secure?
+						
+						$this->Session->setFlash(__('You are now registered!', true));
+						$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));//todo change this
+					} else {
+						$this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
+					}
+				} else { //make alias
+					//todo it's bad to assume that the user/pass is correct (because js checks it)
+					$realUser = $this->User->findByEmail($this->data['User']['email']);
+					$aliasUser = $this->User->findById($unregisteredId);
+					$realAro = $this->Acl->Aro->findByForeignKey($realUser['User']['id']);
+					$aliasAro = $this->Acl->Aro->findByForeignKey($aliasUser['User']['id']);
+					$this->Acl->Aro->query("UPDATE aros_acos SET aro_id = ".$realAro['Aro']['id']." WHERE aro_id = ".$aliasAro['Aro']['id']);
+					print_r($aliasUser);
+					$aliasData = array('UserAlias' => array('alias' => $aliasUser['User']['email'],
+					'user_id' => $realUser['User']['id']));
+					$this->UserAlias->save($aliasData);
+					$this->User->delete($unregisteredId);
+					$this->Acl->Aro->delete($aliasAro['Aro']['id']);
 					
-					$this->Session->setFlash(__('You are now registered!', true));
+					$this->Session->write('username', $this->data['User']['email']);//todo is this secure?
+					$this->Session->write('userid', $realUser['User']['id']);//todo is this secure?
+					$this->Session->setFlash(sprintf("You're account %s now has the alias %s", $this->data['User']['email'], $aliasUser['User']['email']));
 					$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));//todo change this
-				} else {
-					$this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
 				}
-			} elseif (!empty($unregisteredId) && $hasAccount == "makealias") {
-				//todo it's bad to assume that the user/pass is correct (because js checks it)
-				$realUser = $this->User->findByEmail($this->data['User']['email']);
-				$aliasUser = $this->User->findById($unregisteredId);
-				$realAro = $this->Acl->Aro->findByForeignKey($realUser['User']['id']);
-				$aliasAro = $this->Acl->Aro->findByForeignKey($aliasUser['User']['id']);
-				$this->Acl->Aro->query("UPDATE aros_acos SET aro_id = ".$realAro['Aro']['id']." WHERE aro_id = ".$aliasAro['Aro']['id']);
-				print_r($aliasUser);
-				$aliasData = array('UserAlias' => array('alias' => $aliasUser['User']['email'],
-				'user_id' => $realUser['User']['id']));
-				$this->UserAlias->save($aliasData);
-				$this->User->delete($unregisteredId);
-				$this->Acl->Aro->delete($aliasAro['Aro']['id']);
-				
-				$this->Session->write('username', $this->data['User']['email']);//todo is this secure?
-				$this->Session->write('userid', $realUser['User']['id']);//todo is this secure?
-				$this->Session->setFlash(sprintf("You're account %s now has the alias %s", $this->data['User']['email'], $aliasUser['User']['email']));
-				$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));//todo change this
-			}
-			else {
+			} else {
 				$emailData = $this->User->findByEmail($this->data['User']['email']);
 				if (empty($emailData)) {
 					$this->User->create();
@@ -118,13 +119,15 @@ class UsersController extends AppController {
 						);
 						$this->Acl->Aro->create();
 						$this->Acl->Aro->save($aroArr);
-						$this->Session->setFlash(__('You are now registered!', true));
+						$this->Session->write('username', $this->data['User']['email']);//todo is this secure?
+						$this->Session->write('userid', $userId);//todo is this secure?
+						$this->Session->setFlash('You are now registered!');
 						$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));
 					} else {
-						$this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
+						$this->Session->setFlash('The User could not be saved. Please, try again.');
 					}
 				} else {
-					$this->Session->setFlash(__('That username has already been taken.', true));
+					$this->Session->setFlash('That username has already been taken.');
 				}
 			}
 		}

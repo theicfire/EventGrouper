@@ -1,4 +1,4 @@
-blasdfdsadfsdffh<h2><?php __('EventGroups');?></h2>
+<h2><?php __('EventGroups');?></h2>
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td>id</td><td>name</td><td>description</td><td>photo_url</td><td>parent_id</td><td>Actions</td>

@@ -29,7 +29,7 @@
 	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
     <link href="./places.css" rel="stylesheet" type="text/css"/>
 <!--    todo make local-->
-	<?php echo $html->css(array('main_style.css','timeline.css','smoothness/jquery-ui-1.8.5.custom.css')); ?>
+	<?php echo $html->css(array('main_style.css','smoothness/jquery-ui-1.8.5.custom.css')); ?>
 	
 <!--    todo put locally^^-->
 
@@ -41,7 +41,10 @@
     
 	<?php
 		echo $this->Html->meta('icon');
-
+		if (!$phpVars)
+			$phpVars = array();
+		$phpVars['root'] = $this->base;
+		echo $this->Html->scriptBlock('var phpVars = '.$javascript->object($phpVars).';');
 //		echo $this->Html->css('cake.custom');
 		if (!empty($javascript))
 			echo $javascript->link('jquery-1.4.2.min.js');

@@ -7,15 +7,7 @@
 	else echo "Edit group";
 	?>
 	</h1>
-    <p>in <?php 
-				$linksArr = array($html->link(__('Home', true), array('action' => 'index')));
-				if ($groupPath != null) {
-					foreach ($groupPath as $single) {
-						$linksArr[] = $html->link($single['EventGroup']['name'], "/".$single['EventGroup']['path']);
-					}
-				}
-				echo implode($linksArr," > ");
-				?></p>
+    <p>in <?= $this->element('grouppath', array('groupPath' => $groupPath))?></p>
     
         <div class="form_section">
         <h2>Basic Information</h2>

@@ -40,6 +40,7 @@ class EventGroupsController extends AppController {
 		$groupPath = $this->EventGroup->getPath($id);
 		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices'));
+		$this->set('phpVars', array('currentEventGroupId'=> $id));
 		
 	}
 

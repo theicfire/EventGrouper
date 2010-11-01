@@ -1,4 +1,3 @@
-<?php print_r($userPerms);?>
 <?php echo $this->element('admin/top');?>
 
 
@@ -6,15 +5,7 @@
 <div id="edit_account" class="info_box">
     
 	<h1>Edit Permissions</h1>
-	<p>in <?php 
-				$linksArr = array($html->link(__('Home', true), array('action' => 'index')));
-				if ($groupPath != null) {
-					foreach ($groupPath as $single) {
-						$linksArr[] = $html->link($single['EventGroup']['name'], "/".$single['EventGroup']['path']);
-					}
-				}
-				echo implode($linksArr," > ");
-				?></p>	        
+	<p>in <?= $this->element('grouppath', array('groupPath' => $groupPath))?></p>	        
 	<div class="form_section">
 		<h2>Email Addresses</h2>
 		<form name="loginForm" id="loginForm" method="post" action="<?php echo $html->url(array('controller' => 'permissions', 'action' => 'view', $groupId));?>">
