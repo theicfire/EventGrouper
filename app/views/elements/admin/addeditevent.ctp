@@ -18,12 +18,14 @@ else echo $this->Form->create('Event', array('action' => "edit/".$this->data['Ev
 <?php echo $form->input('description', array('type' => 'text', 'class' => 'textfield'));?>
 <label>Start Time</label> Time: <input type="text"
 	name="data[Other][time_start]" class="time_input textfield"
-	value="20:54:00" /> Date: <input type="text"
+	value="" /> Date: <input type="text"
 	name="data[Other][date_start]" class="date_input textfield"
-	value="<?php echo date('Y-m-d');?>" /> 
+	value="" /> 
+<p class="form_tip">for example: 8:05 pm</p>
+
 <label>End Time</label> Time: <input
 	type="text" name="data[Other][time_end]" class="time_input textfield"
-	value="22:54:00" /> Date: <input type="text"
+	value="22:54" /> Date: <input type="text"
 	name="data[Other][date_end]" class="date_input textfield"
 	value="<?php echo date('Y-m-d');?>" /> 
 <?php echo $form->input('CategoryChoice', array('type' => 'select', 'multiple' => 'checkbox', 'label' => 'Tags'));?>
