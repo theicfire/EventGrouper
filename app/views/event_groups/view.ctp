@@ -1,6 +1,3 @@
-
-
-
 <?php $javascript->link('jqueryui/jquery-ui-1.8.5.custom.min.js', false); ?>
 <?php $javascript->link('jqueryui/jquery.ui.timeselector.js', false); ?>
 <?php $javascript->link('timeline.js', false); ?>
