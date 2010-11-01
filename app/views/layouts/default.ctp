@@ -41,7 +41,7 @@
     
 	<?php
 		echo $this->Html->meta('icon');
-		if (!$phpVars)
+		if (!isset($phpVars))
 			$phpVars = array();
 		$phpVars['root'] = $this->base;
 		echo $this->Html->scriptBlock('var phpVars = '.$javascript->object($phpVars).';');

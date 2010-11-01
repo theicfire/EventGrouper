@@ -23,7 +23,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
                     
                     <div class="inside">
                     	<h1 class="event_title">
-                    	<?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => 'group1')); ?>
+                    	<?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?>
                     	</h1>
                         <div class="event_time"><?php echo date('g:i a', strtotime($event['Event']['time_start']))." to ".date('g:i a', strtotime($event['Event']['time_start'])+$event['Event']['duration']*60)?></div>
                         <?php if (!empty($event['Event']['location'])) {?><span class="event_location">at <a class="group_1" href="#location"><?=$event['Event']['location']?></a></span><?php }?>
@@ -41,7 +41,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 	                    } 
 	                    echo " in ".implode(", ",$categoryLinks);
                     }?> 
-                    by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_1"><?php echo $event['EventGroup']['name']; ?></a></div></div>
+                    by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a></div></div>
                 </div> 
                 
                 <?php 
