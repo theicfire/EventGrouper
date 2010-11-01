@@ -1,15 +1,5 @@
 
-<?php 
-//goes in style tags
-//$colorList = array('C00', '360', '606', '009', '630', '033', 'f60', 'C09');
-//$i = 0;
-//foreach ($eventGroups as $eventGroup) {
-//	echo "a.group_".$eventGroup['EventGroup']['id']." { color: #".$colorList[$i]."; }\n";
-//	echo "group_".$eventGroup['EventGroup']['id']." a { color: #".$colorList[$i]."; }\n";
-//	$i++;
-//	if ($i == count($colorList)) $i = 0;
-//}
-?>
+
 
 <?php $javascript->link('jqueryui/jquery-ui-1.8.5.custom.min.js', false); ?>
 <?php $javascript->link('jqueryui/jquery.ui.timeselector.js', false); ?>
@@ -21,6 +11,22 @@
 
 
 </script>
+
+<style type="text/css" >
+
+<?php 
+//goes in style tags
+$colorList = array('C00', '360', '606', '009', '630', '033', 'f60', 'C09');
+$i = 0;
+foreach ($eventGroups as $eventGroup) {
+	echo "a.group_".$eventGroup['EventGroup']['id']." { color: #".$colorList[$i]."; }\n";
+	echo "group_".$eventGroup['EventGroup']['id']." a { color: #".$colorList[$i]."; }\n";
+	$i++;
+	if ($i == count($colorList)) $i = 0;
+}
+?>
+
+</style>
 
     <div id="conference_header">
     	
