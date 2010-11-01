@@ -5,28 +5,21 @@
 <?php $javascript->link('jqueryui/jquery.ui.timeselector.js', false); ?>
 <?php $javascript->link('timeline.js', false); ?>
 <?php echo $html->css('timeline', 'stylesheet', array('media'=>'all' ), false); ?>
-<script>
-
-
-
-
-</script>
-
-<style type="text/css" >
 
 <?php 
+//goes in style tags
+echo "<style type='type/css'>";
 //goes in style tags
 $colorList = array('C00', '360', '606', '009', '630', '033', 'f60', 'C09');
 $i = 0;
 foreach ($eventGroups as $eventGroup) {
-	echo "a.group_".$eventGroup['EventGroup']['id']." { color: #".$colorList[$i]."; }\n";
-	echo "group_".$eventGroup['EventGroup']['id']." a { color: #".$colorList[$i]."; }\n";
-	$i++;
-	if ($i == count($colorList)) $i = 0;
+echo "a.group_".$eventGroup['EventGroup']['id']." { color: #".$colorList[$i]."; }\n";
+echo "group_".$eventGroup['EventGroup']['id']." a { color: #".$colorList[$i]."; }\n";
+$i++;
+if ($i == count($colorList)) $i = 0;
 }
+echo "</style>";
 ?>
-
-</style>
 
     <div id="conference_header">
     	

@@ -25,5 +25,5 @@
 	            
 		</table>
 	</div>      
-	<!--<a href="#" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/add.png" class="rinoa_small_inline" /> Add another email address</a>-->
+	<!--<a href="#" class="make_button"><img src="rinoa/add.png" class="rinoa_small_inline" /> Add another email address</a>-->
 </div>

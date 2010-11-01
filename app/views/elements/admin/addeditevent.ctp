@@ -4,7 +4,7 @@ else echo $this->Form->create('Event', array('action' => "edit/".$this->data['Ev
 <div id="new_event" class="info_box">
 
 <h1><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
-	class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" /> <?php 
+	class="rinoa_large_inline" /> <?php 
 	if ($type == 'add') echo "New event";
 	else echo "Edit event";
 	?></h1>

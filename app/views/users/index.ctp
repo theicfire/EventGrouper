@@ -19,13 +19,13 @@
 		<td><?= $group['EventGroup']['eventgroupcount']?></td>
 		<td><?= $group['EventGroup']['eventcount']?></td>
 		<td><a href="<?php echo $html->url("/event_groups/view_admin/".$group['EventGroup']['id']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
-			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> View details</a> <a href="<?php echo $html->url("/event_groups/edit/".$group['EventGroup']['id']); ?>"
+			class="rinoa_small_inline" /> View details</a> <a href="<?php echo $html->url("/event_groups/edit/".$group['EventGroup']['id']); ?>"
 			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
-			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> Edit info</a> <a href="<?php echo $html->url("/event_groups/add/".$group['EventGroup']['id']); ?>"
+			class="rinoa_small_inline" /> Edit info</a> <a href="<?php echo $html->url("/event_groups/add/".$group['EventGroup']['id']); ?>"
 			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
-			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> Add subgroups</a> <a href="<?php echo $html->url("/events/add/".$group['EventGroup']['id']); ?>"
+			class="rinoa_small_inline" /> Add subgroups</a> <a href="<?php echo $html->url("/events/add/".$group['EventGroup']['id']); ?>"
 			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
-			class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> Add events</a></td>
+			class="rinoa_small_inline" /> Add events</a></td>
 	</tr>
 
 <?php 
@@ -39,7 +39,7 @@
 <div id="admin_notifications" class="info_box">
 
 
-<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" />
+<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" />
 Notifications + Requests</h1>
 
 <table class="full_width">
@@ -55,10 +55,10 @@ Notifications + Requests</h1>
 		<td>Event created: <a href="#">Carribean Party</a> at 8:00 pm
 		3/14/2010</td>
 		<td><a href="#" class="make_button"><img
-			src="<?php echo $html->url('/'); ?>css/rinoa/check.png" class="<?php echo $html->url('/'); ?>css/rinoa_small" /></a> <a href="#"
+			src="<?php echo $html->url('/'); ?>css/rinoa/check.png" class="rinoa_small" /></a> <a href="#"
 			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/cancel.png"
-			class="<?php echo $html->url('/'); ?>css/rinoa_small" /></a> <a href="#" class="make_button"><img
-			src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png" class="<?php echo $html->url('/'); ?>css/rinoa_small" /></a></td>
+			class="rinoa_small" /></a> <a href="#" class="make_button"><img
+			src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png" class="rinoa_small" /></a></td>
 	</tr>
 
 </table>

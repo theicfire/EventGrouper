@@ -1,7 +1,7 @@
 <?php echo $this->Form->create('EventGroup'); ?>
 <div id="new_group" class="info_box">
     
-    <h1><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png" class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" /> 
+    <h1><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png" class="rinoa_large_inline" /> 
 	<?php 
 	if ($type == 'add') echo "New group";
 	else echo "Edit group";
