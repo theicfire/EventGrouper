@@ -40,8 +40,7 @@ class EventGroupsController extends AppController {
 		$groupPath = $this->EventGroup->getPath($id);
 		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices'));
-		$this->set('phpVars', array('currentEventGroupId'=> $id));
-		
+		$this->set('phpVars', array('currentEventGroupId'=> $id));		
 	}
 
 	function add($parentId = null) {
@@ -96,6 +95,7 @@ class EventGroupsController extends AppController {
 		}
 		$groupPath = $this->EventGroup->getPath($parentId);
 		$this->set(compact('parentId', 'currenteventGroup', 'groupPath'));
+		$this->set('isAdmin', true);
 	}
 
 	function edit($id = null) {
@@ -138,6 +138,7 @@ class EventGroupsController extends AppController {
 		$categoryStr = implode(",", $categoryArr);
 		$groupPath = $this->EventGroup->getPath($parentId);
 		$this->set(compact('categoryStr', 'groupPath', 'parentId'));
+		$this->set('isAdmin', true);
 //		$users = $this->EventGroup->User->find('list');
 //		$this->set(compact('users'));
 	}

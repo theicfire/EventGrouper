@@ -31,6 +31,7 @@
 <!--    todo make local-->
 	<?php echo $html->css(array('main_style.css','smoothness/jquery-ui-1.8.5.custom.css')); ?>
 	
+	
 <!--    todo put locally^^-->
 
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -51,30 +52,52 @@
 		echo $scripts_for_layout;
 		
 	?>
-	
+	<?php if (isset($isAdmin)) {
+		echo $html->css(array('forms.css', 'admin_style.css'));
+		if (!empty($javascript))
+			echo $javascript->link(array('jqueryui/jquery-ui-1.8.5.custom.min.js', 'admin.js'));
+	}?>
 	
 	
 </head>
 <body>
 <div id="help_modal"></div>
 
-    <div id="universal_header">
-        <div id="uh_left"><?php echo $html->link("RushRabbit", "/")?></div>
-        
-<?php
-if ($this->Session->read('username') == null) {
-	?>
-	<fb:login-button perms="email"></fb:login-button>
-	<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Log In", "/login");?> | <?php echo $html->link("Register", "/users/add");?></div>
-	<?php 
+    <?php if (isset($isAdmin)) {?>
 	
-	
-} else {
-	?>
-	<div id="uh_right">what is RushRabbit? | <?php echo "You are logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/logout", array("id" => "logoutlink"));?></div>
-<?php }?>
-	<div class="clear"></div>
-    </div>
+	    <div id="personal_id" class="info_box">
+	    
+	    	<div class="left"><p><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</p></div>
+	        <div class="right"><p>
+	        
+	        <a href="#" class="make_button">Exit admin panel</a> <a href="#" class="make_button">Edit account</a> <a href="#" class="make_button">Log out</a> 
+	        
+	        </p>
+	        
+	        
+	        </div>
+	        <div class="clear"></div>
+	    </div>
+    <?php } else {?>
+    
+	    <div id="universal_header">
+			<div id="uh_left"><?php echo $html->link("RushRabbit", "/")?></div>
+		        
+			<?php
+			if ($this->Session->read('username') == null) {
+				?>
+				<fb:login-button perms="email"></fb:login-button>
+				<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Log In", "/login");?> | <?php echo $html->link("Register", "/users/add");?></div>
+				<?php 
+			} else {
+				?>
+				<div id="uh_right">what is RushRabbit? | <?php echo "You are logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/logout", array("id" => "logoutlink"));?></div>
+			<?php }?>
+			<div class="clear"></div>
+	    </div>
+    <?php }?>
+    
+    
 	<div id="container">
 		<div id="content">
 

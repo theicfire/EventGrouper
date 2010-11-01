@@ -24,6 +24,7 @@ class UsersController extends AppController {
 			$userEventGroups[$key]['EventGroup']['groupPath'] = $this->EventGroup->getPath($value['EventGroup']['id']);
 		}
 		$this->set(compact('userEventGroups'));
+		$this->set('isAdmin', true);
 		
 //		$this->User->recursive = 0;
 //		$this->set('users', $this->paginate());
@@ -92,7 +93,6 @@ class UsersController extends AppController {
 					$realAro = $this->Acl->Aro->findByForeignKey($realUser['User']['id']);
 					$aliasAro = $this->Acl->Aro->findByForeignKey($aliasUser['User']['id']);
 					$this->Acl->Aro->query("UPDATE aros_acos SET aro_id = ".$realAro['Aro']['id']." WHERE aro_id = ".$aliasAro['Aro']['id']);
-					print_r($aliasUser);
 					$aliasData = array('UserAlias' => array('alias' => $aliasUser['User']['email'],
 					'user_id' => $realUser['User']['id']));
 					$this->UserAlias->save($aliasData);
@@ -133,6 +133,7 @@ class UsersController extends AppController {
 		}
 		$this->data = $oldData;
 		$this->set(compact('unregisteredData', 'hasAccount'));
+		$this->set('isAdmin', true);
 	}
 	
 //	function edit($id = null) {

@@ -1,7 +1,3 @@
-<?php echo $this->element('admin/top');?>
-
-
-
 <div id="edit_account" class="info_box">
     
 	<h1>Edit Permissions</h1>

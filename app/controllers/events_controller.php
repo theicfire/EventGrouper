@@ -70,6 +70,7 @@ class EventsController extends AppController {
 		$eventGroup = $this->EventGroup->findById($eventGroupId);
 		$groupPath = $this->EventGroup->getPath($eventGroupId);
 		$this->set(compact('categoryChoices', 'eventGroup', 'users', 'eventGroupId', 'groupPath'));
+		$this->set('isAdmin', true);
 	}
 
 	function edit($id = null) {
@@ -101,6 +102,7 @@ class EventsController extends AppController {
 		$groupPath = $this->EventGroup->getPath($groupId);
 		$eventGroupId = $groupId;
 		$this->set(compact('categoryChoices','users','eventGroups', 'eventGroupId', 'groupPath'));
+		$this->set('isAdmin', true);
 	}
 
 	function delete($id = null) {
