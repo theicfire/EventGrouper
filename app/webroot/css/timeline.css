@@ -31,13 +31,11 @@
 
 #s_left
 {
-	margin-right: 320px;
 }
 
 #s_right
 {
-	float: right;
-	width: 320px;
+	display: none;
 }
 
 #split
@@ -113,8 +111,7 @@ background: #fff;
 
 .mys_cell
 {
-	width: 300px;
-	border-left: #ccc 1px solid;
+	display: none;
 }
 
 #main_view_table
@@ -132,6 +129,7 @@ background: #fff;
 	width: 90px;
 	font-size: 1.2em;
 	font-weight: bold;
+	vertical-align: top;
 }
 
 .mys_timeslot

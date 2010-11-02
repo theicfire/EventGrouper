@@ -12,43 +12,69 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
             ?>
             	
             	<div class="event_block<?php if ($onUserCalendar) echo " onCalendar"; ?>" id="event-<?=$event['Event']['id']?>">
-                	<div class="hiddenid"><?=$event['Event']['id']?></div>
-                    <div class="event_titlebar"><div class="titlebar_text">
-                    <?php 
-					if (!$session->check('userid'))
-						echo "Log in for Calendar";
-					else {
-						?><a href="#" class="scheduletoggle">
-						<?php 
-						if ($onUserCalendar) echo "remove from schedule"; 
-						else echo "add to schedule"; 
-						?>
-						</a>
+            	
+            	<div class="hiddenid"><?=$event['Event']['id']?></div>
+            	
+            	<div class="event_top_row">
+                	
+                	<!--
+                    <td class="event_titlebar" rowspan="2">
+						<div class="titlebar_text">
 						
-					<?php }?>
-					 | <a href="#">share</a> | <a href="#">view on map</a></div></div>
-                    
-                    <div class="inside">
-                    	<h1 class="event_title">
-                    	<?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?>
-                    	</h1>
-                        <div class="event_time"><?php echo date('g:i a', strtotime($event['Event']['time_start']))." to ".date('g:i a', strtotime($event['Event']['time_start'])+$event['Event']['duration']*60)?></div>
-                        <?php if (!empty($event['Event']['location'])) {?><span class="event_location">at <a class="group_1" href="#location"><?=$event['Event']['location']?></a></span><?php }?>
+						<ul class="event_block_actions">
+						
+						<li>
+							<?php 
+							if (!$session->check('userid'))
+								echo "add to my schedule";
+							else {
+								?><a href="#" class="scheduletoggle">
+								<?php 
+								if ($onUserCalendar) echo "remove from my schedule"; 
+								else echo "add to my schedule"; 
+								?>
+								</a>
+								
+							<?php }?>
+						</li>
+						 <li><a href="#">share</a></li>
+						 <li><a href="#">view on map</a></li>
+						 </div>
+					 </td>-->
+
+							<span class="event_title">
+								<?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?>
+							</span>
+							
+							<span class="event_time">
+								<?php echo date('g:i a', strtotime($event['Event']['time_start']))." to ".date('g:i a', strtotime($event['Event']['time_start'])+$event['Event']['duration']*60)?>
+							</span>
+							
+							<?php if (!empty($event['Event']['location'])) {?>
+							<span class="event_location">
+								at <a class="group_1" href="#location"><?=$event['Event']['location']?></a>
+							</span>
+							<?php }?>
+
+							<span class="event_tags">
+									posted <?php if (count($event['CategoryChoice'])>0) {
+									$categoryLinks = array();
+									foreach ($event['CategoryChoice'] as $category) { 
+										$categoryLinks[] = "<a class=\"group_1 categoryLink\" hiddenclass='categoryLink-".$category['id']."' href=\"#\">".$category['name']."</a>";
+									} 
+									echo " in ".implode(", ",$categoryLinks);
+								}?> 
+								by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a>
+							</span>
+                </div>
+                <div>
                         
                         <div class="event_description"><?=$event['Event']['description']?></div>
                         
-                        
-                    </div>
+                </div>        
+
                     
-                    <div class="event_footer"><div class="padding">posted
-                    <?php if (count($event['CategoryChoice'])>0) {
-                    	$categoryLinks = array();
-	                    foreach ($event['CategoryChoice'] as $category) { 
-	                    	$categoryLinks[] = "<a class=\"group_1 categoryLink\" hiddenclass='categoryLink-".$category['id']."' href=\"#\">".$category['name']."</a>";
-	                    } 
-	                    echo " in ".implode(", ",$categoryLinks);
-                    }?> 
-                    by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a></div></div>
+
                 </div> 
                 
                 <?php 

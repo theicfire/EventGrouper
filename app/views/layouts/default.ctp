@@ -105,23 +105,6 @@
 
 		</div>
 	</div>
-	<a href="#" class="popupopen">open popup</a>
-	<div id="popupContact">
-		<a id="popupContactClose">x</a>
-		<h1>Title of our cool popup, yay!</h1>
-
-		<p id="contactArea">
-			Here we have a simple but interesting sample of our new stuning and smooth popup. As you can see jQuery and CSS does it easy...
-			<br/><br/>
-			We can use it for popup-forms and more... just experiment!
-			<br/><br/>
-			Press ESCAPE, Click on X (right-top) or Click Out from the popup to close the popup!
-			<br/><br/>
-			<a href="http://www.yensdesign.com"><img src="logo.jpg" alt="Go to yensdesign.com"/></a>
-		</p>
-	</div>
-
-	<div id="backgroundPopup"></div>
 	
 <!--	facebook stuff-->
 	<div id="fb-root"></div>
@@ -150,6 +133,10 @@
     	return false;
     });
     </script>
-	<?php echo $this->element('sql_dump'); ?>
+    
+    
+    <div class="sql_dump">
+		<?php echo $this->element('sql_dump'); ?>
+	</div>
 </body>
 </html>

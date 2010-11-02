@@ -233,7 +233,7 @@ echo "</style>";
         
         
         
-        <tr><td class="timeslot_title"></td><td class="timeline_cell"><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/down.png" class="small_icon_inline_button" />Show events from the next 3 hours</a>
+        <tr><td class="timeslot_title"></td><td class="timeline_cell"><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/down.png" class="small_icon_inline_button" />Show more events</a>
             
             <div class="clear"></div>
             </td><td class="mys_cell"></td></tr>

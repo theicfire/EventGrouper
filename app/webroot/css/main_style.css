@@ -21,9 +21,16 @@ small
 	font-size: 16px;
 }
 
+.sql_dump
+{
+	margin-top: 100px;
+	color: #777;
+}
+
 a
 {
 	color: #069;
+	text-decoration: underline;
 }
 
 .clear
@@ -154,162 +161,29 @@ a
 /*event blocks*/
 .event_block
 {
-	width: 260px;
-	height: 160px;
 	background: #fff;
-	border: 1px solid #777;
+	border: 1px solid #ccc;
 	position: relative;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0 5px 5px 0;
-	float: left;
-	border-radius: 5px 5px 0 0;
-	-moz-border-radius:  5px 5px 0 0;
+	border-radius: 5px;
+	-moz-border-radius:  5px;
 	overflow: hidden;
 	font-size: 1em;
 	overflow: hidden;
-}
-
-.event_block a
-{
-}
-
-.event_block .inside
-{
-	padding: 8px;
-	font-size: .9em;
+	padding: 7px;
 }
 
 .event_block .event_title
 {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1.4em;
-	background-color: #FFF;
-	padding-bottom: 2px;
-	border-radius: 5px 5px 0 0;
-}
-
-.event_block .event_title a
-{
-}
-
-.event_block .event_title small
-{
-	font-size: 16px;
-}
-
-.event_block .event_location
-{
-	font-size: 1.1em;
-}
-.event_block .event_time
-{
-	font-weight:bold;
-	font-size: 1.1em;
-}
-
-.event_block .event_group
-{
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	background: #060;
 	font-size: 1.3em;
-	text-align: right;
-	padding: 5px;
 }
 
-.event_block .event_description
+.event_block .event_top_row
 {
-	border-left: 2px #ccc solid;
-	margin: 8px 5px 8px 0;
-	padding-left: 5px;
-}
-
-.event_block .event_group a
-{
-	color: #FFF;
-	
-}
-
-.event_block .event_footer
-{
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	background: url(grad_shadow/bottom_white.png);
-	height: 50px;
-	font-size: .9em;
-}
-
-.event_block .event_footer .padding
-{
-	padding: 5px;
-	position: absolute;
-	bottom: 0px;
-}
-
-.event_block .event_titlebar
-{
-	height: 20px;
-	background: #ccc;
-}
-
-.event_block .titlebar_text
-{
-	font-size: 12px;
-	color:#333;
-	padding: 3px;
-}
-
-.event_block .event_titlebar a
-{
-	color: #222;
-}
-
-.event_block .titlebar_text img
-{
-	vertical-align: middle;
-	position: relative;
-	bottom: 2px;
-	padding-right: 10px;
-	cursor: move;
-}
-
-/*mini ongoing*/
-.event_block_ongoing
-{
-	width: 127px;
-	height: 77px;
-	font-size: .7em;
-	border-color: #ccc;
-}
-
-.event_block_ongoing .event_titlebar
-{
-	height: 14px;
-	background: none;
-}
-
-.event_block_ongoing .titlebar_text
-{
-	font-size: .9em;
-	padding: 1px 3px;
-}
-
-.event_block_ongoing .inside
-{
-	padding: 4px;
-}
-
-.event_block_ongoing .event_title
-{
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1.4em;
-	background-color: #FFF;
-	padding-bottom: 2px;
-	border-radius: 5px 5px 0 0;
+	border-bottom: #ccc 1px solid;
+	padding-bottom: 3px;
+	margin-bottom: 3px;
 }
 
 .hiddenid
