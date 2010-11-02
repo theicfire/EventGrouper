@@ -8,7 +8,7 @@
 
 <?php 
 //goes in style tags
-echo "<style type='type/css'>";
+echo "<style type='text/css'>";
 //goes in style tags
 $colorList = array('C00', '360', '606', '009', '630', '033', 'f60', 'C09');
 $i = 0;
@@ -20,6 +20,7 @@ if ($i == count($colorList)) $i = 0;
 }
 echo "</style>";
 ?>
+
 
     <div id="conference_header">
     	

@@ -27,7 +27,6 @@
 		<?php echo $title_for_layout; ?>
 	</title>
 	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
-    <link href="./places.css" rel="stylesheet" type="text/css"/>
 <!--    todo make local-->
 	<?php echo $html->css(array('main_style.css','smoothness/jquery-ui-1.8.5.custom.css')); ?>
 	

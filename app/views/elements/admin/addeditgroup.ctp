@@ -10,7 +10,7 @@
     jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, and spaces.");
     
     function init_validation(){
-		$("#EventGroupAddForm").validate({
+		$("#EventGroup<?=$type=='add'?'Add':'Edit'?>Form").validate({
 			rules: {
 				'data[EventGroup][name]': {
 					required: true,
