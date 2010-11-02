@@ -134,7 +134,7 @@
     });
     </script>
 <!--login stuff    -->
-<div id="dialog-form" title="Login">
+<div id="dialog-form" class="popup" title="Login">
 	<p class="validateTips">All form fields are required.</p>
 
 	<form>

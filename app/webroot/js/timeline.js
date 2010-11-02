@@ -34,6 +34,8 @@ var floating = false;
 
 function scroll_handler(event)
 {
+		if ($("#top_locator").length == 0)
+			return false;
 		/*console.log($(document).height()-($(document).scrollTop()+$(window).height()));*/
 		if($("#top_locator").offset().top - $(document).scrollTop() < 10 )
 		{
