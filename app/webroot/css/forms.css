@@ -49,6 +49,24 @@
 	margin: 2px;
 }
 
+.form_section .textfield_long
+{
+	width: 500px;
+	font-size: 1.3em;
+	font-family: "Times New Roman", Times, serif;
+	padding: 3px;
+	margin: 2px;
+}
+
+.form_section .description_textarea
+{
+	width: 500px;
+	height: 200px;
+	padding: 3px;
+	margin: 2px;
+	font-family: "Times New Roman", Times, serif;
+}
+
 .form_section p
 {
 	padding: 5px;
