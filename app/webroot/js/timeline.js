@@ -117,6 +117,7 @@ function giveEventsJs() {
 		refreshEvents();
 		return false;
 	});
+	$(".make_button").button();
 }
 function getEvents(date, search, categoryChoices, time_start) {
 	$.get(phpVars.root+"/event_groups/ajaxListEvents/"+phpVars.currentEventGroupId, { date_start: date, search: search, 'categories[]': categoryChoices, time_start:time_start},
