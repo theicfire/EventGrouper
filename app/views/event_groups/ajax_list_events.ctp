@@ -1,8 +1,25 @@
+
 <?php
+$oldDay = "";
 for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 	$event = $eventsUnderGroup[$i];
-	$currentHour = date('H', strtotime($event['Event']['time_start']));	?>
+	$currentHour = date('H', strtotime($event['Event']['time_start']));
+	$currentDay = date('Y-m-d', strtotime($event['Event']['time_start']));	
+	if ($oldDay != $currentDay) {
+		$oldDay = $currentDay;?>
 	
+		 <tr><td class="timeslot_title"></td><td class="timeline_cell">
+			<div id="which_day_container_locator"></div>
+			<div id="which_day_container">
+				<span id="which_day_is_it"><?php echo date('l, F j', strtotime($event['Event']['time_start'])); ?></span>            
+				<a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/back.png" class="small_icon_inline_button" />Previous day</a><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/go.png" class="small_icon_inline_button" />Next day</a>
+			</div>    
+			</td><td class="mys_cell">
+			<div class="mys_timeslot">
+			<div id="top_locator"></div>
+			</div>
+		</td></tr>
+	<?php }?>
 	<tr><td class="timeslot_title"><?php echo date('g:00 a', strtotime($event['Event']['time_start'])); ?></td><td class="timeline_cell">
             <?php while (true) {
             	$event = $eventsUnderGroup[$i];

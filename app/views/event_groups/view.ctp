@@ -209,18 +209,7 @@ echo "</style>";
             <div class="clear"></div>
             </td><td class="mys_cell"></td></tr>
             
-            <tr><td class="timeslot_title"></td><td class="timeline_cell">
-            <div id="which_day_container_locator"></div>
-            <div id="which_day_container">
-                <span id="which_day_is_it">Thursday, August 28</span>
-                
-                <a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/back.png" class="small_icon_inline_button" />Previous day</a><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/go.png" class="small_icon_inline_button" />Next day</a>
-            </div>
-                
-            </td><td class="mys_cell"><div class="mys_timeslot">
-            <div id="top_locator"></div>
-            
-            </div></td></tr>
+           
             
 <!--            Now the events go here-->
             
