@@ -28,22 +28,31 @@
 				$path = "/";
 			else
 				$path = "/".$currenteventGroup['EventGroup']['path']."/";
-			echo $form->input('path', array('type' => 'text', 'label' => "http://www.oursite.com".$path));
+			echo $form->input('path', array('type' => 'text', 'label' => 'Group URL', 'class' => 'textfield'));
+			
+			echo '<p class="form_tip">Your group will be found at <span id="group_url_update">';
+			
+			if($path == "/")
+			{ echo "http://www.oursite.com".$path . "[Group URL]"; }
+			else
+			{ echo "http://www.oursite.com".$path;	}
+			
+			echo '</span></p>';
 		}
 ?>
-	<label>Category List (1 per row)</label>
-	<input name="data[Other][category_list]" id="OtherCategoryList" value="<?php 
-	if ($type == 'add') echo "Food, Fun";
-	else echo $categoryStr;
-	?>">
+		<label>Category List</label>
+		<input name="data[Other][category_list]" id="OtherCategoryList" class="textfield" value="<?php 
+		if ($type == 'add') echo "Food, Tours, Information";
+		else echo $categoryStr;
+		?>">
+		<p class="form_tip">Input possible categories for events, separated by commas.</p>
 
 <?php 
 	}
 ?>
 	
         <label>Description</label>
-		<?php echo $form->textarea('description');?>
-        <p class="form_tip">The full description will be displayed on the event page, but only the first few words will show up on the timeline.  A preview of this event's timeline block is shown in the top right.</p>        
+		<?php echo $form->textarea('description', array('class' => 'description_textarea'));?>      
         </div>
         
         <?php echo $this->element('admin/map');?>
