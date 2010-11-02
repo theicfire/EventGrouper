@@ -1,6 +1,33 @@
 <?php echo $this->Form->create('EventGroup'); ?>
 <div id="new_group" class="info_box">
     
+    <script type="text/javascript" >
+    
+    $(document).ready( init_validation );
+    
+    function nospecial( value, element ){ return this.optional(element) || value.match("^[0-9a-zA-Z]*$");  }
+    
+    jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, and spaces.");
+    
+    function init_validation(){
+		$("#EventGroupAddForm").validate({
+			rules: {
+				'data[EventGroup][name]': {
+					required: true,
+					minlength: 2,
+					nospecial: true
+				}
+			},
+			
+			debug: true
+		
+		
+		});
+	}
+    
+    </script>
+    
+    
     <h1><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png" class="rinoa_large_inline" /> 
 	<?php 
 	if ($type == 'add') echo "New group";
