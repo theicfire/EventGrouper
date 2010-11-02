@@ -89,7 +89,7 @@
 				<?php 
 			} else {
 				?>
-				<div id="uh_right">what is RushRabbit? | <?php echo "You are logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
+				<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Admin Panel", "/users/index");?> | <?php echo "You are logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
 			<?php }?>
 			<div class="clear"></div>
 	    </div>

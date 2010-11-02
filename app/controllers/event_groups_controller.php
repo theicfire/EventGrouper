@@ -158,7 +158,7 @@ class EventGroupsController extends AppController {
 		foreach ($categoryChoices as $category) {
 			$categoryArr[] = $category['CategoryChoice']['name'];
 		}
-		$categoryStr = implode(",", $categoryArr);
+		$categoryStr = implode(", ", $categoryArr);
 		$groupPath = $this->EventGroup->getPath($parentId);
 		$this->set(compact('categoryStr', 'groupPath', 'parentId'));
 		$this->set('isAdmin', true);

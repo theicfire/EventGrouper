@@ -158,7 +158,7 @@ class EventGroup extends AppModel {
     	$this->query("DELETE FROM category_choices WHERE event_group_id = ".$parentId);
     	$valuesArr = array();
     	foreach ($categoryList as $category) {
-    		$valuesArr[] = sprintf("('%s', %d)", $category, $parentId);
+    		$valuesArr[] = trim(sprintf("('%s', %d)", $category, $parentId));
     	}
     	$valuesStr = implode(",",$valuesArr);
     	$this->query("INSERT INTO category_choices (name, event_group_id) VALUES".$valuesStr);

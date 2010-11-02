@@ -6,6 +6,10 @@ class UsersController extends AppController {
 	var $helpers = array('Html', 'Form', 'Javascript');
 	var $components = array('Acl');
 	function index() {
+		if (!$this->Session->check('userid')) {
+			$this->Session->setFlash('Log in first');
+			$this->redirect('/');
+		}
 		$userEventGroups = $this->User->query("SELECT EventGroup.* FROM `aros` 
 		LEFT JOIN (aros_acos, acos, event_groups AS EventGroup) 
 		ON (aros.id = aros_acos.aro_id AND aros_acos.aco_id = acos.id AND acos.foreign_key = EventGroup.id) 
