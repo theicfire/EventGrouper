@@ -43,7 +43,6 @@
 		</td>
 </tr>
 </table>
-
 <div id="edit_account" class="info_box">
     
 	<h1>Group Info</h1>
@@ -75,7 +74,7 @@
 		</table>
 		<h2>Events Contained</h2>  
 		<table class="full_width">
-			<tr><th>title</th><th>description</th><th>event group</th><th>actions</th></tr>
+			<tr><th>title</th><th>description</th><th>Time</th><th>Categories</th><th>event group</th><th>actions</th></tr>
 			<?php foreach ($eventsUnderGroup as $event) {
 				if (!$session->check('userid') || ($session->check('userid') && !array_key_exists('onUsersCalendar',$event['Event']))) {?>
 			<tr id="event-<?=$event['Event']['id']?>">
@@ -84,6 +83,15 @@
 					</td>
 					<td>
 						<?php echo $event['Event']['description']; ?>
+					</td>
+					<td>
+						<?php echo date('m/d/y g:i a', strtotime($event['Event']['time_start']))." to ".
+						date('m/d/y g:i a', strtotime($event['Event']['time_start']) + $event['Event']['duration']*60); ?>
+					</td>
+					<td>
+						<?php $categories = array();
+						foreach ($event['CategoryChoice'] as $category) $categories[] = $category['name'];
+						echo implode(", ",$categories); ?>
 					</td>
 					<td>
 						<?php echo $event['EventGroup']['name']; ?>

@@ -1,5 +1,7 @@
 
 <?php
+if (count($eventsUnderGroup) == 0)
+	echo "There are no events in those search parameters";
 $oldDay = "";
 for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 	$event = $eventsUnderGroup[$i];

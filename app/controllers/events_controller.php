@@ -84,16 +84,13 @@ class EventsController extends AppController {
 		if (!empty($this->data)) {
 			
 			// add code here to change form input
-			print_r($this->data);
-			
-			/*
 			if ($this->Event->save($this->data)) {
 				$pathRes = $this->Event->findById($id);
 				$this->Session->setFlash(__('The Event has been saved', true));
 				$this->redirect("/events/view/".$id);
 			} else {
 				$this->Session->setFlash(__('The Event could not be saved. Please, try again.', true));
-			}*/
+			}
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Event->read(null, $id);

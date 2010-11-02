@@ -1,5 +1,5 @@
 <?php if ($type == 'add') echo $this->Form->create('Event', array('action' => "add/".$eventGroupId));
-else echo $this->Form->create('Event', array('action' => "edit/".$this->data['Event']['id'])); ?>
+else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 
 <div id="new_event" class="info_box">
 
