@@ -133,7 +133,6 @@ class UsersController extends AppController {
 		}
 		$this->data = $oldData;
 		$this->set(compact('unregisteredData', 'hasAccount'));
-		$this->set('isAdmin', true);
 	}
 	
 //	function edit($id = null) {
