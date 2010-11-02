@@ -29,7 +29,7 @@
 	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
     <link href="./places.css" rel="stylesheet" type="text/css"/>
 <!--    todo make local-->
-	<?php echo $html->css(array('main_style.css','smoothness/jquery-ui-1.8.5.custom.css', 'popup.css')); ?>
+	<?php echo $html->css(array('main_style.css','smoothness/jquery-ui-1.8.5.custom.css')); ?>
 	
 	
 <!--    todo put locally^^-->
@@ -47,13 +47,13 @@
 		$phpVars['root'] = $this->base;
 		echo $this->Html->scriptBlock('var phpVars = '.$javascript->object($phpVars).';');
 //		echo $this->Html->css('cake.custom');
-		echo $javascript->link(array('jquery-1.4.2.min.js', 'popup.js'));
+		echo $javascript->link(array('jquery-1.4.2.min.js', 'login.js', 'jqueryui/jquery-ui-1.8.5.custom.min.js'));
 		echo $scripts_for_layout;
 		
 	?>
 	<?php if (isset($isAdmin)) {
 		echo $html->css(array('forms.css', 'admin_style.css'));
-		echo $javascript->link(array('jqueryui/jquery-ui-1.8.5.custom.min.js', 'admin.js'));
+		echo $javascript->link(array('admin.js'));
 	}?>
 	
 	
@@ -85,7 +85,7 @@
 			if ($this->Session->read('username') == null) {
 				?>
 				<fb:login-button perms="email"></fb:login-button>
-				<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Log In", "/login");?> | <?php echo $html->link("Register", "/users/add");?></div>
+				<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Log In", "/login", array('id' => 'login'));?> | <?php echo $html->link("Register", "/users/add");?></div>
 				<?php 
 			} else {
 				?>
@@ -133,6 +133,38 @@
     	return false;
     });
     </script>
+<!--login stuff    -->
+<div id="dialog-form" title="Login">
+	<p class="validateTips">All form fields are required.</p>
+
+	<form>
+	<fieldset>
+		<label for="email">Email</label>
+		<input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+		<a href="#">Forgot Password?</a><br>
+		<?php echo $html->link("Register", "/users/add");?>
+	</fieldset>
+	</form>
+
+
+</div>
+<!--end login stuff-->
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     <div class="sql_dump">

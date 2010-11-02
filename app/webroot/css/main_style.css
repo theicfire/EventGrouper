@@ -217,3 +217,7 @@ a
 	-moz-border-radius: 5px;
 	margin: 3px;
 }
+/*logging in*/
+.ui-dialog .ui-state-error { padding: .3em; }
+.validateTips { border: 1px solid transparent; padding: 0.3em; }label, input { display:block; }
+label, input { display:block; }
