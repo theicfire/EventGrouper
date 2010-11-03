@@ -11,8 +11,6 @@
     jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, spaces, and . , ! & + _");
     jQuery.validator.addMethod("validurl", validurl, "Only use letters, numbers, and dashes. (no spaces)");
     
-    jQuery.validator.addMethod("updateurl", updateurl, "Error, this should never show up.");
-    
     function init_validation(){
 		$("input[name='data[EventGroup][name]']").blur( function(){
 			
@@ -23,7 +21,7 @@
 			
 		});
 		
-		$("#EventGroupAddForm").validate({
+		$("#EventGroup<?=$type=='add'?'Add':'Edit'?>Form").validate({
 			rules: {
 				'data[EventGroup][name]': {
 					required: true,
