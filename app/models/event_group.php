@@ -5,7 +5,7 @@ class EventGroup extends AppModel {
 	var $actsAs = array('Tree');
 	var $validate = array(
 		'name' => array(
-			'rule' => '/^[a-z0-9 ]*$/i',
+			'rule' => '/^[-0-9a-zA-Z_+&.!, ]*$/',
 			'message' => 'Required. Letters, numbers, and spaces only!',
 			'allowEmpty' => false
 		),
@@ -15,7 +15,7 @@ class EventGroup extends AppModel {
 			'allowEmpty' => true
 		),
 		'path' => array(
-			'valid' => array ('rule' => '/^[a-z0-9]*$/i', 'message' => 'Required. Letters and numbers only'),
+			'valid' => array ('rule' => '/^[-0-9a-zA-Z]*$/i', 'message' => 'Required. Letters numbers, and dashes only'),
 			'isUnique' => array('rule' => 'isUnique', 'message' => 'This url has already been taken'),
 			'allowEmpty' => true
 			
