@@ -7,36 +7,117 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
     $(document).ready( init_validation );
     
     function nospecial( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z_+&.!, ]*$");  }
-    function validurl( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z]*$");  }
+    function isdate( value, element ){ return this.optional(element) || value.match("^[0-9][0-9]?/[0-9][0-9]?/(19|20|21)?[0-9][0-9]$");  }
+    function istime( value, element ){
+		if(value.match( /^[0-9][0-9]?(:[0-9][0-9](:[0-9][0-9])?)?(( )*)?(am|pm|a|p)?$/i ))
+		validformat = true;
+		else
+		return this.optional(element);
+		
+		if(gettime(value))		
+		return true;
+		else
+		return this.optional(element);
+	}
+	
+	function gettime( value )
+	{
+		if(value.match( /(am|pm|a|p)/i ))
+		{timeformat = "12 hour";}
+		else
+		{timeformat = "24 hour";}
+		
+		if(timeformat=="12 hour")	{
+			if(value.match( /(am|a)/i )) time_offset = 0;
+			else time_offset = 12;
+			value = value.replace( /( )*(am|pm|a|p)$/i, "");
+		}
+		else
+		{ time_offset = 0; }
+		
+		timearray = value.split(":");
+		
+		hours=minutes=seconds=0;
+		
+		hours = parseInt(timearray[0]) + time_offset;
+		if(timearray[1])
+		minutes = parseInt(timearray[1]);
+		if(timearray[2])
+		seconds = parseInt(timearray[2]);
+		if(hours<24 && minutes<60 && seconds<60)
+		{
+			return hours.toString() + ":" + (minutes<10?'0':'') + minutes.toString() + ":" + (seconds<10?'0':'') + seconds.toString();
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function comparestartandend( value, element ){
+		
+		date_start = new Date( $("[name='data[Other][date_start]']").val() );
+		date_end = new Date( $("[name='data[Other][date_end]']").val() );
+		
+		time_start = gettime( $("[name='data[Other][time_start]']").val() ).split(":");
+		time_end = gettime( $("[name='data[Other][time_end]']").val() ).split(":");
+		
+		date_start.setHours( time_start[0] );
+		date_start.setMinutes( time_start[1] );
+		date_start.setSeconds( time_start[2] );
+		
+		date_end.setHours( time_end[0] );
+		date_end.setMinutes( time_end[1] );
+		date_end.setSeconds( time_end[2] );
+		
+		return this.optional(element) || (date_start < date_end);
+	}
     
     jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, spaces, and . , ! & + _");
-    jQuery.validator.addMethod("validurl", validurl, "Only use letters, numbers, and dashes. (no spaces)");
-    
-    jQuery.validator.addMethod("updateurl", updateurl, "Error, this should never show up.");
+    jQuery.validator.addMethod("istime", istime, "Please enter a valid time.");
+    jQuery.validator.addMethod("isdate", isdate, "Please enter a valid date.");
+    jQuery.validator.addMethod("comparedates", comparestartandend, "Make sure your end time is after your start time.");
     
     function init_validation(){
-		$("input[name='data[EventGroup][name]']").blur( function(){
+		
+		$("input[name='data[Other][date_start]']").blur( function(){
 			
-			if( $("input[name='data[EventGroup][path]']").val() == "" )
+			if( $("input[name='data[Other][date_end]']").val() == "" )
 			{
-				$("input[name='data[EventGroup][path]']").val( $("input[name='data[EventGroup][name]']").val().replace( /[^A-Za-z0-9]/g, "-" ).toLowerCase() );
+				$("input[name='data[Other][date_end]']").val( $("input[name='data[Other][date_start]']").val() );
 			}
 			
 		});
 		
-		$("#EventGroupAddForm").validate({
+		$("form").validate({
 			rules: {
-				'data[EventGroup][name]': {
+				'data[Event][title]': {
 					required: true,
 					minlength: 2,
 					nospecial: true
 				},
-				'data[EventGroup][path]': {
+				'data[Other][time_start]': {
 					required: true,
-					minlength: 2,
-					validurl: true
+					istime: true
 				},
-			},
+				'data[Other][time_end]': {
+					required: true,
+					istime: true
+				},
+				'data[Other][date_start]': {
+					required: true,
+					isdate: true
+				},
+				'data[Other][date_end]': {
+					required: true,
+					isdate: true
+				},
+				'data[Other][date_end]': {
+					required: true,
+					isdate: true,
+					comparedates: true
+				},
+			}
 		});
 	}
     
@@ -60,18 +141,23 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 <label>Description</label>
 <?php echo $form->textarea('description', array('class' => 'description_textarea'));?>
 
-<label>Start Time</label> Time: <input type="text"
+<label>Start Time</label><input type="text"
 	name="data[Other][time_start]" class="time_input textfield"
-	value="" /> Date: <input type="text"
+	value="" />
+<p class="form_tip">For example: 8:05 pm or 17:47</p>	
+	<label>Start Date</label><input type="text"
 	name="data[Other][date_start]" class="date_input textfield"
 	value="" /> 
-<p class="form_tip">for example: 8:05 pm</p>
+<p class="form_tip">Click inside the field for a date picker.</p>
 
-<label>End Time</label> Time: <input
+<div id="debug_time"></div>
+
+<label>End Time</label><input
 	type="text" name="data[Other][time_end]" class="time_input textfield"
-	value="22:54" /> Date: <input type="text"
+	value="" />
+	<label>End Date</label><input type="text"
 	name="data[Other][date_end]" class="date_input textfield"
-	value="<?php echo date('Y-m-d');?>" /> 
+	value="" /> 
 <?php echo $form->input('CategoryChoice', array('type' => 'select', 'multiple' => 'checkbox', 'label' => 'Tags'));?>
 
 <?php echo $this->element('admin/map');?>
