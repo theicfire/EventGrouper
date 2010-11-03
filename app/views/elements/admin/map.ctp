@@ -3,6 +3,8 @@
 
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA7y3UIBfi1OwkPnNUDew4MhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTdgodaUd_SdFl6FS-YLDeZ4gdhpA&sensor=false"
             type="text/javascript"></script>
+            <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAA7y3UIBfi1OwkPnNUDew4MhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTdgodaUd_SdFl6FS-YLDeZ4gdhpA" type="text/javascript"></script>
+
             <script src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" type="text/javascript"></script>
 
 <style type="text/css">
@@ -13,29 +15,96 @@
             
     <script type="text/javascript">
 
-var myGoogleBar;
+var mySearchControl;
 var map;
+var default_zoom_level = 16;
+
     function map_init() {
       if (GBrowserIsCompatible()) {
-        map = new GMap2(document.getElementById("map_container"));
+		  
+		var myMapOptions = {
+			googleBarOptions: {
+				onGenerateMarkerHtmlCallback: html_rewriter,
+				
+			}
+		};
+		  
+		  
+        map = new GMap2(document.getElementById("map_container"), myMapOptions);
         map.setCenter(new GLatLng(37.4419, -122.1419), 13);
         map.setUIToDefault();
         
-        mySearchControl = new google.maps.LocalSearch();
+        /*mySearchControl = new google.maps.LocalSearch();
         map.addControl( mySearchControl );
+
+        mySearchControl.execute("Massachusetts Institute of Technology");*/
         
+        map.enableGoogleBar();
         
-        mySearchControl.execute("Massachusetts Institute of Technology");
+        map.setZoom(  default_zoom_level );
         
         GEvent.addListener(map, 'click', map_click_handler);
+        
+        map.enableContinuousZoom();
+
       }
     }
 
 	var click_location = "no location";
 
+	function html_rewriter( marker, prev_html, search_result)
+	{
+		latlng = marker.getLatLng();
+		
+		message = generate_info_window( search_result.title, latlng.lat(), latlng.lng() );
+		
+		map.setZoom(  default_zoom_level );
+		
+		return message;
+		
+	}
+	
+	function generate_info_window( title, lat, lng )
+	{
+		message = "<div class='gmaps_popup_message'><strong>You have selected the following location:</strong>";
+		
+		if( title != "" )
+		{
+			message += "<br />"+ title;
+		}
+		message += "<br />" + lat + ", " + lng;
+		
+		message += "<div class='gpm_buttons'><a href='javascript:save_lat_lng(" + lat +", " + lng + ")' class='make_button'>Save this location</a> <a href='javascript:close_info_window()' class='make_button'>Close popup</a></div></div>";
+		
+		return message;
+	}
+	
+	function save_lat_lng( lat, lng )
+	{
+		$("#location_not_entered_block").hide();
+			
+		$("#map_lat_long").show();
+		
+		$("[name=lat]").val(lat);
+		$("[name=long]").val(lng);
+		
+		close_map();
+	}
+	
+	function close_info_window()
+	{
+		map.getInfoWindow().hide();
+	}
+
 	function map_click_handler( overlay, latlng )
 	{
-		map.openInfoWindow(latlng, "hello!");
+		message = generate_info_window( "", latlng.lat(), latlng.lng() );
+		
+		map.openInfoWindow(latlng, message);
+		
+		click_location = latlng;
+		
+		$("make_button").button();
 	}
 	
 	$(document).ready( page_stuff );
@@ -106,7 +175,12 @@ var map;
 	  -moz-opacity : 1;
 	  filter:alpha(opacity=100);
 	}
-
+	
+	.gmls {
+   width: 350px;
+   display: block;
+   padding-left: 100px;
+ }
     
     </style>
     
@@ -141,7 +215,7 @@ var map;
             </tr>
             </table>
             
-             <p class="form_tip">Click the button below to select a different location:</p>
+             <p class="form_tip">Click the button below to re-open the map:</p>
             
             <a href="#" class="make_button" id="map_reopen_button"><img src="rinoa/zoom.png" class="rinoa_small_inline" /> Change location</a>
         	
@@ -168,7 +242,7 @@ var map;
 				</div>
 				
 				<div id="bm_left">
-					<p>Click a location to place the location marker. Drag the map to move it.</p>
+					<p>Use the search bar above, or simply click a location on the map.</p>
 				
 				</div>
 			

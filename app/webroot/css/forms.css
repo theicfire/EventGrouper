@@ -156,3 +156,21 @@ form .error
 	float: left;
 	padding: 5px;
 }
+
+.gmaps_popup_message
+{
+	padding: 5px;
+	padding-right: 15px;
+}
+
+.gmaps_popup_message strong
+{
+	font-weight: bold;
+}
+
+.gpm_buttons
+{
+	padding-top: 5px;
+	margin-top: 5px;
+	border-top: 1px solid #ccc;
+}
