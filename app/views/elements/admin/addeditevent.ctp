@@ -110,10 +110,6 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 				},
 				'data[Other][date_end]': {
 					required: true,
-					isdate: true
-				},
-				'data[Other][date_end]': {
-					required: true,
 					isdate: true,
 					comparedates: true
 				},
@@ -159,6 +155,8 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 	name="data[Other][date_end]" class="date_input textfield"
 	value="" /> 
 <?php echo $form->input('CategoryChoice', array('type' => 'select', 'multiple' => 'checkbox', 'label' => 'Tags'));?>
+
+</div>
 
 <?php echo $this->element('admin/map');?>
 

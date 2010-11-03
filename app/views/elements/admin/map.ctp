@@ -1,5 +1,5 @@
 <div class="form_section">
-<h2>Default Location</h2>
+<h2>Location</h2>
 
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA7y3UIBfi1OwkPnNUDew4MhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTdgodaUd_SdFl6FS-YLDeZ4gdhpA&sensor=false"
             type="text/javascript"></script>
@@ -31,7 +31,7 @@ var default_zoom_level = 16;
 		  
 		  
         map = new GMap2(document.getElementById("map_container"), myMapOptions);
-        map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+        map.setCenter(new GLatLng(42.359051, -71.093623), 13);
         map.setUIToDefault();
         
         /*mySearchControl = new google.maps.LocalSearch();
@@ -121,6 +121,7 @@ var default_zoom_level = 16;
 		event.preventDefault();
 		
 		$("#map_overlay").show();
+		$("#overlay").fadeIn("slow");
 		
 		map_init();
 	}
@@ -130,11 +131,13 @@ var default_zoom_level = 16;
 		event.preventDefault();
 		
 		$("#map_overlay").show();
+		$("#overlay").fadeIn("slow");
 	}
 
 	function close_map()
 	{
 		$("#map_overlay").hide();
+		$("#overlay").fadeOut();
 	}
 
 	function save_location( event )
@@ -158,7 +161,7 @@ var default_zoom_level = 16;
 		}
 	}
 
-	function map_cancel()
+	function map_cancel( event )
 	{
 		event.preventDefault();
 		
@@ -183,47 +186,42 @@ var default_zoom_level = 16;
  }
     
     </style>
-    
-    <div class="form_section">
-        <h2>Location</h2>
+
         
         <label>Location Name</label>
         <input class="textfield" name="loc_name" type="text" />
         <p class="form_tip">Enter the name of the location as it should appear in the schedule.</p>
         
-        <label>Location</label>
+        <label>Location on Map</label>
         
         <div id="location_not_entered_block">
             <p class="form_tip">Click the button below to select the location from a map:</p>
             
-            <a href="#" class="make_button" id="map_open_button"><img src="rinoa/zoom.png" class="rinoa_small_inline" /> Find location on map</a>
+            <a href="#" class="make_button" id="map_open_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="rinoa_small_inline" /> Find location on map</a>
             
+            <!--
             <p class="form_tip">or enter the exact address below:</p>
             
             <table><tr><td>Street Address</td><td>City</td><td>State</td></tr>
             <tr><td><input class="textfield" name="street_address" type="text" /></td><td><input class="textfield" name="city" type="text" value="Cambridge" /></td><td><input class="textfield" name="state" type="text" value="MA" style="width: 50px" /></td>
             </tr>
-            </table>
+            </table>-->
         </div>
         
         <div id="map_lat_long" style="display: none;">
-        	
-           <p class="form_tip">Data from map:</p>
             
             <table><tr><td>Latitude</td><td>Longitude</td></tr>
             <tr><td><input class="textfield" name="lat" type="text" /></td><td><input class="textfield" name="long" type="text" /></td>
             </tr>
             </table>
             
-             <p class="form_tip">Click the button below to re-open the map:</p>
-            
-            <a href="#" class="make_button" id="map_reopen_button"><img src="rinoa/zoom.png" class="rinoa_small_inline" /> Change location</a>
+            <a href="#" class="make_button" id="map_reopen_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="rinoa_small_inline" /> Change location</a>
         	
         </div>
         
-        <p class="form_tip">Please provide an accurate location so that potential atendees can easily find your event.</p>
-        
     </div>
+    
+    <div class="ui-widget-overlay" id="overlay" style="width: 100%; height: 100%; z-index: 500; display: none; position: fixed;"></div>
 
 	<div id="map_overlay">
 		<div class="form_section">
@@ -236,8 +234,7 @@ var default_zoom_level = 16;
 			
 			<div id="below_map">
 				<div id="bm_right">
-					<a href="#" class="make_button" onclick="save_location(event)">Save location</a>
-					<a href="#" class="make_button" onclick="map_cancel(event)">Cancel</a>
+					<a href="javascript:close_map()" class="make_button">Cancel</a>
 				
 				</div>
 				
@@ -250,8 +247,7 @@ var default_zoom_level = 16;
 			</div>
 		
 		</div>
-    
-    </div>
+
 <!--
 
 <?php echo $form->input('location', array('type' => 'text', 'class' => 'textfield'));?> <a href="#" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="rinoa_small_inline" /> Search within MIT</a> <a href="#" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="<?php echo $html->url('/'); ?>css/rinoa_small_inline" /> Search Google Maps</a>
