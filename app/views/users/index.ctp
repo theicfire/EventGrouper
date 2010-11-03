@@ -1,4 +1,3 @@
-
 <div id="admin_groups" class="info_box">
 
 <h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
@@ -19,13 +18,23 @@
 		<td><?= $group['EventGroup']['eventgroupcount']?></td>
 		<td><?= $group['EventGroup']['eventcount']?></td>
 		<td><a href="<?php echo $html->url("/event_groups/view_admin/".$group['EventGroup']['id']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
-			class="rinoa_small_inline" /> View details</a> <a href="<?php echo $html->url("/event_groups/edit/".$group['EventGroup']['id']); ?>"
-			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
-			class="rinoa_small_inline" /> Edit info</a> <a href="<?php echo $html->url("/event_groups/add/".$group['EventGroup']['id']); ?>"
-			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
-			class="rinoa_small_inline" /> Add subgroups</a> <a href="<?php echo $html->url("/events/add/".$group['EventGroup']['id']); ?>"
-			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
-			class="rinoa_small_inline" /> Add events</a></td>
+			class="rinoa_small_inline" /> View details</a> 
+			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'update')) {?>
+				<a href="<?php echo $html->url("/event_groups/edit/".$group['EventGroup']['id']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
+				class="rinoa_small_inline" /> Edit info</a>
+			<?php }?>
+			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'create')) {?> 
+				<a href="<?php echo $html->url("/event_groups/add/".$group['EventGroup']['id']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
+				class="rinoa_small_inline" /> Add subgroups</a>
+			<?php }?>
+			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'create')) {?> 
+				<a href="<?php echo $html->url("/events/add/".$group['EventGroup']['id']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
+				class="rinoa_small_inline" /> Add events</a>
+			<?php }?>
+			</td>
 	</tr>
 
 <?php 

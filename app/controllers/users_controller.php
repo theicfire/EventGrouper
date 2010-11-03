@@ -3,7 +3,7 @@ class UsersController extends AppController {
 
 	var $name = 'Users';
 	var $uses = array('User', 'UserAlias', 'EventGroup');
-	var $helpers = array('Html', 'Form', 'Javascript');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Access');
 	var $components = array('Acl');
 	function index() {
 		if (!$this->Session->check('userid')) {

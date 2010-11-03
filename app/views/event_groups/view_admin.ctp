@@ -1,48 +1,29 @@
-<div class="actions">
-	<ul>
-		<li><?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
-			echo $html->link(__('Add EventGroup Under This', true), array('action' => 'add', $currenteventGroup['EventGroup']['id'])); 
-		}?> </li>
-		<li><?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
-			echo $html->link(__('Add Event Under This', true), array('controller' => 'events', 'action' => 'add', $currenteventGroup['EventGroup']['id'])); 
-		}?> </li>
-	</ul>
+<div id="edit_account" class="info_box">
+    
+	<h1>Current Group</h1>
+	<div class="form_section">
+		<h2>Current Group</h2>
+				<div>Name: <?php echo $currenteventGroup['EventGroup']['name']; ?></div>
+				<div>Description: <?php echo $currenteventGroup['EventGroup']['description']; ?></div>
+			<div>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {?>
+				<a href="<?php echo $html->url("/event_groups/edit/".$currenteventGroup['EventGroup']['id']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
+				class="rinoa_small_inline" /> Edit info</a>
+			<?php }?>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
+				<a href="<?php echo $html->url("/event_groups/add/".$currenteventGroup['EventGroup']['id']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
+				class="rinoa_small_inline" /> Add subgroups</a>
+			<?php }?>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
+				<a href="<?php echo $html->url("/events/add/".$currenteventGroup['EventGroup']['id']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
+				class="rinoa_small_inline" /> Add events</a>
+			<?php }?>
+			</div>
+	</div>
 </div>
-<br>
---Group Info--
-<table cellpadding="0" cellspacing="0">
-<tr>
-<td>id</td><td>name</td><td>description</td><td>photo_url</td><td>parent_id</td><td>Actions</td>
-</tr>
-<tr>
-		<td>
-			<?php echo $currenteventGroup['EventGroup']['id']; ?>
-		</td>
-		<td>
-			<?php echo $currenteventGroup['EventGroup']['name']; ?>
-		</td>
-		<td>
-			<?php echo $currenteventGroup['EventGroup']['description']; ?>
-		</td>
-		<td>
-			<?php echo $currenteventGroup['EventGroup']['photo_url']; ?>
-		</td>
-		<td>
-			<?php echo $currenteventGroup['EventGroup']['parent_id']; ?>
-		</td>
-		<td class="actions">
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {
-				echo $html->link(__('Edit', true), array('action' => 'edit', $currenteventGroup['EventGroup']['id'])); 
-			}?>
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {
-				echo $html->link(__('Delete', true), array('action' => 'delete', $currenteventGroup['EventGroup']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id'])); 
-			}?>
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {
-				echo $html->link(__('Edit Permissions', true), array('controller' => 'permissions', 'action' => 'view', $currenteventGroup['EventGroup']['id']));
-			}?>
-		</td>
-</tr>
-</table>
 <div id="edit_account" class="info_box">
     
 	<h1>Group Info</h1>
@@ -50,23 +31,32 @@
 	<div class="form_section">
 		<h2>Groups Contained</h2>  
 		<table class="full_width">
-			<tr><th>name</th><th>description</th><th>Actions</th></tr>  
+			<tr><th>Path</th><th>description</th><th>Actions</th></tr>  
 		    <?php foreach ($eventGroups as $eventGroup) {?>
 				<tr>
 						<td>
-							<?php echo $eventGroup['EventGroup']['name']; ?>
+							<?= $this->element('grouppath', array('groupPath' => $eventGroup['EventGroup']['groupPath']));?>
 						</td>
 						<td>
 							<?php echo $eventGroup['EventGroup']['description']; ?>
 						</td>
-						<td class="actions">
-							<a href="<?=$this->base."/".$eventGroup['EventGroup']['path']?>">View</a>
-							<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'update')) {
-								echo $html->link(__('Edit', true), array('action' => 'edit', $eventGroup['EventGroup']['id'])); 
-							}?>
-							<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'delete')) {
-								echo $html->link(__('Delete', true), array('action' => 'delete', $eventGroup['EventGroup']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $eventGroup['EventGroup']['id']));
-							}?>
+						<td><a href="<?php echo $html->url("/event_groups/view_admin/".$eventGroup['EventGroup']['id']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
+						class="rinoa_small_inline" /> View details</a> 
+						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'update')) {?>
+							<a href="<?php echo $html->url("/event_groups/edit/".$eventGroup['EventGroup']['id']); ?>"
+							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
+							class="rinoa_small_inline" /> Edit info</a>
+						<?php }?>
+						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'create')) {?> 
+							<a href="<?php echo $html->url("/event_groups/add/".$eventGroup['EventGroup']['id']); ?>"
+							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
+							class="rinoa_small_inline" /> Add subgroups</a>
+						<?php }?>
+						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'create')) {?> 
+							<a href="<?php echo $html->url("/events/add/".$eventGroup['EventGroup']['id']); ?>"
+							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
+							class="rinoa_small_inline" /> Add events</a>
+						<?php }?>
 						</td>
 				</tr>
 			<?php }?>      

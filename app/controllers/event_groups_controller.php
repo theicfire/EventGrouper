@@ -57,6 +57,11 @@ class EventGroupsController extends AppController {
 		); 
 		
 		$eventGroups = $this->EventGroup->children($id);
+		foreach ($eventGroups as $key=>$value) {
+//			$eventGroups[$key]['EventGroup']['eventcount'] = count($this->EventGroup->getAllEventsUnderThis($value['EventGroup']['id']));
+//			$eventGroups[$key]['EventGroup']['eventgroupcount'] = count($this->EventGroup->getAllEventGroupsUnderThis($value['EventGroup']['id']))-1;
+			$eventGroups[$key]['EventGroup']['groupPath'] = $this->EventGroup->getPath($value['EventGroup']['id']);
+		}
 		$groupPath = $this->EventGroup->getPath($id);
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array());
 		$treeList = $this->EventGroup->generateTreeList();
@@ -109,8 +114,7 @@ class EventGroupsController extends AppController {
 				$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
 				
 				$this->Session->setFlash(__('The EventGroup has been saved', true));
-				$eventStuff = $this->EventGroup->findById($eventGroupId);
-				$this->redirect("/".$eventStuff['EventGroup']['path']);
+				$this->redirect("/event_groups/view_admin/".$eventGroupId);
 			} else {
 				$this->data = $oldData;
 				$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
@@ -124,6 +128,7 @@ class EventGroupsController extends AppController {
 	function edit($id = null) {
 //		if (!empty($this->data['EventGroup']) && array_key_exists('parent_id', $this->data['EventGroup']))
 //			$parentId = $this->data['EventGroup']['parent_id'];
+
 		if ($id != null){
 			$parentId = $this->EventGroup->findById($id);
 			$parentId = $parentId['EventGroup']['parent_id'];
@@ -143,7 +148,7 @@ class EventGroupsController extends AppController {
 			if ($this->EventGroup->save($this->data)) {
 				$this->Session->setFlash(__('The EventGroup has been saved', true));
 				$eventStuff = $this->EventGroup->findById($id);
-				$this->redirect("/".$eventStuff['EventGroup']['path']);
+				$this->redirect("/event_groups/view_admin/".$id);
 			} else {
 				$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
 			}
@@ -185,7 +190,7 @@ class EventGroupsController extends AppController {
 			
 			$this->Session->setFlash(__('EventGroup deleted', true));
 			
-			$this->redirect("/".$eventParent['EventGroup']['path']);
+			$this->redirect("/event_groups/view_admin/".$eventStuff['EventGroup']['parent_id']);
 		}
 		
 	}
