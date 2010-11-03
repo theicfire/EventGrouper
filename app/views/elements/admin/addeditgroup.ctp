@@ -5,23 +5,37 @@
     
     $(document).ready( init_validation );
     
-    function nospecial( value, element ){ return this.optional(element) || value.match("^[0-9a-zA-Z]*$");  }
+    function nospecial( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z_+&.!, ]*$");  }
+    function validurl( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z]*$");  }
     
-    jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, and spaces.");
+    jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, spaces, and . , ! & + _");
+    jQuery.validator.addMethod("validurl", validurl, "Only use letters, numbers, and dashes. (no spaces)");
+    
+    jQuery.validator.addMethod("updateurl", updateurl, "Error, this should never show up.");
     
     function init_validation(){
+		$("input[name='data[EventGroup][name]']").blur( function(){
+			
+			if( $("input[name='data[EventGroup][path]']").val() == "" )
+			{
+				$("input[name='data[EventGroup][path]']").val( $("input[name='data[EventGroup][name]']").val().replace( /[^A-Za-z0-9]/g, "-" ).toLowerCase() );
+			}
+			
+		});
+		
 		$("#EventGroupAddForm").validate({
 			rules: {
 				'data[EventGroup][name]': {
 					required: true,
 					minlength: 2,
 					nospecial: true
-				}
+				},
+				'data[EventGroup][path]': {
+					required: true,
+					minlength: 2,
+					validurl: true
+				},
 			},
-			
-			debug: true
-		
-		
 		});
 	}
     
