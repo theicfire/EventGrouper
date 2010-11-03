@@ -34,7 +34,7 @@
 	else echo "Edit group";
 	?>
 	</h1>
-    <p>in <?= $this->element('grouppath', array('groupPath' => $groupPath))?></p>
+    <p><?php if (count($groupPath) > 0) echo "in ".$this->element('grouppath', array('groupPath' => $groupPath))?></p>
     
         <div class="form_section">
 			<h2>Basic Information</h2>

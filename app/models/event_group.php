@@ -103,7 +103,15 @@ class EventGroup extends AppModel {
 		return $events;
 		
 	}
-	
+	function getDirectChildren($id) {
+		$children = $this->children($id);
+		$directs = array();
+		foreach ($children as $child) {
+			if ($child['EventGroup']['parent_id'] == $id)
+				$directs[] = $child;
+		}
+		return $directs;
+	}
 	function delete($id) {
 		//$this->query("DELETE FROM events_users WHERE ")
 		//$this->unbindModel(array('hasMany' => array('Event')));
