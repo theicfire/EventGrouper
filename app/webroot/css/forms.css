@@ -94,3 +94,65 @@ form .error
 {
 	padding: 5px;
 }
+
+/* map stuff */
+
+#map_overlay
+{
+	display: none;
+	position: fixed;
+	background: #fff;
+	border: 1px solid #aaa;
+	border-radius: 10px;
+	top: 50px;
+	left: 50px;
+	bottom: 50px;
+	right: 50px;
+	z-index: 1000;
+}
+
+#map_overlay .form_section
+{
+	position: fixed;
+	top: 60px;
+	left: 60px;
+	bottom: 60px;
+	right: 60px;
+	margin: 0;
+}
+
+#map_overlay #map_wrapper
+{
+	position: fixed;
+	top: 110px;
+	left: 66px;
+	right: 66px;
+	bottom: 120px;
+}
+
+#map_overlay #map_container
+{
+	width: 100%;
+	height: 100%;
+}
+
+#below_map
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 57px;
+}
+
+#bm_right
+{
+	float: right;
+	padding: 5px;
+}
+
+#bm_left
+{
+	float: left;
+	padding: 5px;
+}

@@ -33,9 +33,6 @@
 	
 <!--    todo put locally^^-->
 
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-
-    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;key=ABQIAAAAjU0EJWnWPMv7oQ-jjS7dYxQ82LsCgTSsdpNEnBsExtoeJv4cdBSUkiLH6ntmAr_5O4EfjDwOa0oZBQ" type="text/javascript"></script>
     
     
     
