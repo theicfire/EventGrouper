@@ -203,9 +203,7 @@ var hasBeenInit = false;
         <label>Location on Map</label>
         
 
-        <div id="location_not_entered_block" <?php if ($hasDefault) echo "style='display:none;'";?>>
-            <p class="form_tip">Click the button below to select the location from a map:</p>
-            
+        <div id="location_not_entered_block" <?php if ($hasDefault) echo "style='display:none;'";?>>            
             <a href="#" class="make_button" id="map_open_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="rinoa_small_inline" /> Find location on map</a>
             
             <p class="form_tip">Click the button above to place the location on a map.</p>
