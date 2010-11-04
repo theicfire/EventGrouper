@@ -1,5 +1,4 @@
 <?php echo $html->css('event_page', 'stylesheet', array('media'=>'all' ), false); ?>
-<?php $javascript->link('jqueryui/jquery-ui-1.8.5.custom.min.js', false); ?>
 <?php $javascript->link('jqueryui/jquery.ui.timeselector.js', false); ?>
 
 <script>
