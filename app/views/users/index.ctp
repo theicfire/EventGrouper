@@ -49,6 +49,9 @@ $(document).ready(function() {
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/check.png"
 				class="rinoa_small_inline" /> Check Requests</a>
 			<?php }?>
+			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'editperms')) {
+				echo $html->link(__('Edit Permissions', true), array('controller' => 'permissions', 'action' => 'view', $group['EventGroup']['id']));
+			}?>
 			</td>
 	</tr>
 
