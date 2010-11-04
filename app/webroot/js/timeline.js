@@ -180,6 +180,20 @@ $(document).ready( function(){
 		refreshEvents();
 		return false;
 	});
+	$("#gotoall").click(function() {
+		$("#gotoall").addClass('active');
+		$("#gotoschedule").removeClass('active');
+		$("#isCalendar").attr('checked', false);
+		refreshEvents();
+		return false;
+	});
+	$("#gotoschedule").click(function() {
+		$("#gotoschedule").addClass('active');
+		$("#gotoall").removeClass('active');
+		$("#isCalendar").attr('checked', true);
+		refreshEvents();
+		return false;
+	});
 	
 	$(".previous_events_button").button();
 	$("#filter_submit").button();

@@ -74,8 +74,8 @@ echo "</style>";
     
     <div id="main_tabs">
     <ul id="mt_list">
-        <li class="mt_tab"><a class="active" href="#">Timeline</a></li>
-        <li class="mt_tab"><a href="#">My Schedule</a></li>
+        <li class="mt_tab"><a class="active" href="#" id="gotoall">Timeline</a></li>
+        <li class="mt_tab"><a href="#" id="gotoschedule">My Schedule</a></li>
     </ul>
     <div class="clear"></div>
     </div>
