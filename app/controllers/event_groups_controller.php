@@ -18,6 +18,7 @@ class EventGroupsController extends AppController {
 			'fields' => array("EventGroup.*")
 		));
 		$this->set('eventGroups', $eventGroups);
+		$this->set('isAdmin', true);
 	}
 
 	function view() {
