@@ -77,12 +77,12 @@ class EventGroup extends AppModel {
 		return $childrenArr;
 		
 	}
-	function getAllEventsUnderThis($id, $userId = null, $params = null) {
+	function getAllEventsUnderThis($id, $userId = null, $params = null, $limit = null) {
 		$childrenArr = $this->getAllEventGroupsUnderThis($id);
 		$params['Event.event_group_id'] = $childrenArr;
 		$this->Event->bindModel(array('hasOne' => array('CategoryChoicesEvent')));
 				
-		$events = $this->Event->find('all',array('conditions' => $params,
+		$events = $this->Event->find('all',array('limit' => $limit, 'conditions' => $params,
 		'group' => 'Event.id',
 		'order' => 'Event.time_start ASC'
 		));

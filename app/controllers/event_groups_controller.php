@@ -239,6 +239,14 @@ class EventGroupsController extends AppController {
 		
 		$this->render('ajax_list_events', 'ajax');
 	}
+	
+	function map_view($id) {
+		$params = array();
+		$params['status'] = array('confirmed', 'hidden');
+		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, 10);
+		$this->set(compact('eventsUnderGroup'));
+		
+	}
 
 }
 ?>
