@@ -3,6 +3,7 @@ $(document).ready(function() {
 	$('.hideEvent').click(function() {
 		$.get("<?php echo $html->url('/');?>admin/changeEventStatus/"+$(this).parent().parent().attr('id').split('-')[1]+"/hidden");
 		$(this).parent().parent().hide();
+		return false
 	});
 	
 });
@@ -50,6 +51,9 @@ $(document).ready(function() {
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/check.png"
 				class="small_icon_inline_button" /> Check Requests</a>
 			<?php }?>
+			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'editperms')) {
+				echo $html->link(__('Edit Permissions', true), array('controller' => 'permissions', 'action' => 'view', $group['EventGroup']['id']));
+			}?>
 			</td>
 	</tr>
 

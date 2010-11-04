@@ -39,7 +39,7 @@ class EventGroupsController extends AppController {
 		
 		$eventGroups = $this->EventGroup->children($id);
 		$groupPath = $this->EventGroup->getPath($id);
-		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
+		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$groupPath[0]['EventGroup']['id'])));
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));		
 	}
@@ -233,12 +233,19 @@ class EventGroupsController extends AppController {
 		$groupPath = $this->EventGroup->getPath($id);
 		$treeList = $this->EventGroup->generateTreeList();
 		$viewCalendar = false;
-		if ($this->params['url']['isCalendar'] == 'true') $viewCalendar = true;
-		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
+		if ($this->params['url']['hasCalendar'] == 'true') $viewCalendar = true;
 		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'categoryChoices', 'viewCalendar'));
 		
 		
 		$this->render('ajax_list_events', 'ajax');
+	}
+	
+	function map_view($id) {
+		$params = array();
+		$params['status'] = array('confirmed', 'hidden');
+		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, 10);
+		$this->set(compact('eventsUnderGroup'));
+		
 	}
 
 }

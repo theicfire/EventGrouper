@@ -218,9 +218,7 @@ echo $this->element('admin/map', array('type'=>'Event', 'centerLat' => $centerLa
 <h2>Submit for Approval</h2>
 <?php if ($type == 'edit') echo $form->input('id', array('type'=>'hidden'));?>
 <?=$this->Form->button('Submit', array('type' => 'submit', 'class' => 'make_button'));?>
-<p class="form_tip">This group will be approved by the REX coordinators.
-Check here: <input type="checkbox" name="should_email" /> if you want to
-receive an email when it is approved.</p>
+<p class="form_tip">This group will be approved by the group coordinators.</p>
 </div>
 
 </div>
