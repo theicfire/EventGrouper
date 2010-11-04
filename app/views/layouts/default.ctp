@@ -139,20 +139,21 @@
     </script>
 <!--login stuff    -->
 <div id="dialog-form" class="popup" title="Login">
-	<p class="validateTips">All form fields are required.</p>
+<div class="form_section" style="padding: 0; margin: 0; border: none">
+
+<?php // echo $html->link("Register", "/users/add");?>
 
 	<form>
 	<fieldset>
 		<label for="email">Email</label>
-		<input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="email" id="email" value="" class="textfield" />
 		<label for="password">Password</label>
-		<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
-		<a href="#">Forgot Password?</a><br>
-		<?php echo $html->link("Register", "/users/add");?>
+		<input type="password" name="password" id="password" value="" class="textfield" />
+<p><a href="#">Forgot Password?</a> </p>
 	</fieldset>
 	</form>
 
-
+</div>
 </div>
 <!--end login stuff-->
 
