@@ -206,7 +206,7 @@ class EventGroupsController extends AppController {
 			//print_r($eventsOnCalendar);
 			$this->set(compact('eventsOnCalendar'));
 		}
-		$this->MyAcl->runcheck('EventGroup',$id,'read');
+//		$this->MyAcl->runcheck('EventGroup',$id,'read');
 		
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('CategoryChoice', 'Event'),
@@ -232,8 +232,10 @@ class EventGroupsController extends AppController {
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params);
 		$groupPath = $this->EventGroup->getPath($id);
 		$treeList = $this->EventGroup->generateTreeList();
+		$viewCalendar = false;
+		if ($this->params['url']['isCalendar'] == 'true') $viewCalendar = true;
 		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'categoryChoices'));
+		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'categoryChoices', 'viewCalendar'));
 		
 		
 		$this->render('ajax_list_events', 'ajax');

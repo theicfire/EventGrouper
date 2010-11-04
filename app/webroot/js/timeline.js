@@ -83,7 +83,7 @@ function giveEventsJs() {
 //		
 //	});
 	$(".scheduletoggle").click(function() {
-		var eventBlock = $(this).parent().parent().parent(); 
+		var eventBlock = $(this).parent().parent(); 
 		var id = eventBlock.attr('id').split("-")[1];
 		var textEl = $(this);
 		if (eventBlock.hasClass('onCalendar')) {
@@ -121,8 +121,8 @@ function giveEventsJs() {
 	});
 	$(".make_button").button();
 }
-function getEvents(date, search, categoryChoices, time_start) {
-	$.get(phpVars.root+"/event_groups/ajaxListEvents/"+phpVars.currentEventGroupId, { date_start: date, search: search, 'categories[]': categoryChoices, time_start:time_start},
+function getEvents(date, search, categoryChoices, time_start, isCalendar) {
+	$.get(phpVars.root+"/event_groups/ajaxListEvents/"+phpVars.currentEventGroupId, { date_start: date, search: search, 'categories[]': categoryChoices, time_start:time_start, isCalendar:isCalendar},
    function(data){
      $("#eventHolder").html(data);
      giveEventsJs();
@@ -135,7 +135,7 @@ function refreshEvents() {
 		categoryChoices.push($(this).val());
 	});
 	
-	getEvents($("#datestart").val(), $("#searchBox").val(), categoryChoices, $("#time_start").val());
+	getEvents($("#datestart").val(), $("#searchBox").val(), categoryChoices, $("#time_start").val(), $("#isCalendar").is(':checked'));
 	setHashFromPage();
 }
 function setHashFromPage(){
@@ -176,7 +176,7 @@ function setPageFromHash(){
 $(document).ready( function(){
 	
 	$("#datestart").datepicker();
-	$("#filterForm").submit(function() {
+	$("#filter_submit").click(function() {
 		refreshEvents();
 		return false;
 	});
@@ -196,7 +196,7 @@ $(document).ready( function(){
 	setInterval( "update_time()", 1000 );
 
 	setPageFromHash();
-	$("#filterForm").trigger('submit');
+	$("#filter_submit").trigger('click');
 
 	
 	
