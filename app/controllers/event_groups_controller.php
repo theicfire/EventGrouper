@@ -43,6 +43,8 @@ class EventGroupsController extends AppController {
 		$this->set('phpVars', array('currentEventGroupId'=> $id));		
 	}
 	function view_admin($id) {
+		if ($id == 0)
+			$this->redirect("/users/index");
 		$currenteventGroup = $this->EventGroup->findById($id);
 		if (empty($currenteventGroup)) {
 			$this->Session->setFlash(__('Invalid EventGroupss.', true));
@@ -63,7 +65,7 @@ class EventGroupsController extends AppController {
 			$eventGroups[$key]['EventGroup']['groupPath'] = $this->EventGroup->getPath($value['EventGroup']['id']);
 		}
 		$groupPath = $this->EventGroup->getPath($id);
-		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array());
+		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => 'confirmed'));
 		$treeList = $this->EventGroup->generateTreeList();
 		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices', 'treeList', 'eventsUnderGroup'));
@@ -224,6 +226,7 @@ class EventGroupsController extends AppController {
 			$timeStart = date("Y-m-d H:i:s", strtotime($this->params['url']['date_start']) + $this->params['url']['time_start']*3600);
 			$params[] = sprintf('time_start >= \'%s\'', $timeStart); 
 		}
+		$params['status'] = 'confirmed';
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params);
 		$groupPath = $this->EventGroup->getPath($id);
 		$treeList = $this->EventGroup->generateTreeList();

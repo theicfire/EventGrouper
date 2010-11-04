@@ -18,9 +18,9 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 <?php echo $form->input('description', array('type' => 'text', 'class' => 'textfield'));?>
 <label>Start Time</label> Time: <input type="text"
 	name="data[Other][time_start]" class="time_input textfield"
-	value="" /> Date: <input type="text"
+	value="22:54" /> Date: <input type="text"
 	name="data[Other][date_start]" class="date_input textfield"
-	value="" /> 
+	value="<?php echo date('Y-m-d');?>" /> 
 <p class="form_tip">for example: 8:05 pm</p>
 
 <label>End Time</label> Time: <input

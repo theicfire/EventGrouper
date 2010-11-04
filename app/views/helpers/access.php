@@ -9,12 +9,12 @@ class AccessHelper extends AppHelper {
 	 * action can be *, create, delete, update, r
 	 */
     function check($type, $id, $action = '*') {
-    	App::import('Component', 'Acl');
-    	$Acl = new AclComponent();
+    	App::import('Component', 'MyAcl');
+    	$Acl = new MyAclComponent();
     	$userid = 5;//guest
     	if ($this->Session->read('userid'))
   			$userid = $this->Session->read('userid');
-    	return $Acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $id), $action);
+    	return $Acl->check($type, $id, $action);
     }
 }
 ?>

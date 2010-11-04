@@ -21,6 +21,9 @@
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 				class="rinoa_small_inline" /> Add events</a>
 			<?php }?>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {
+				echo $html->link(__('Delete', true), array('action' => 'delete', $currenteventGroup['EventGroup']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id']));
+			}?>
 			</div>
 	</div>
 </div>
@@ -57,6 +60,9 @@
 							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 							class="rinoa_small_inline" /> Add events</a>
 						<?php }?>
+						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'delete')) {
+							echo $html->link(__('Delete', true), array('action' => 'delete', $eventGroup['EventGroup']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id']));
+						}?>
 						</td>
 				</tr>
 			<?php }?>      
