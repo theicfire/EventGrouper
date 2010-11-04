@@ -195,10 +195,11 @@ var default_zoom_level = 16;
         <label>Location on Map</label>
         
         <div id="location_not_entered_block">
-            <p class="form_tip">Click the button below to select the location from a map:</p>
+            
             
             <a href="#" class="make_button" id="map_open_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="rinoa_small_inline" /> Find location on map</a>
             
+            <p class="form_tip">Click the button above to place the location on a map.</p>
             <!--
             <p class="form_tip">or enter the exact address below:</p>
             

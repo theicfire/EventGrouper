@@ -33,6 +33,8 @@ a
 	text-decoration: underline;
 }
 
+
+
 .clear
 {
 	clear: both;
@@ -63,11 +65,20 @@ a
 	font-style: italic;
 	font-size: 1.1em;
 	text-decoration: none;
+	padding-left: 20px;
 }
 
 #universal_header a
 {
 	color: #fff;
+}
+
+.general_link
+{
+	font-size: .9em;
+	color: #444;
+	padding-left: 5px;
+	text-decoration: none;
 }
 
 #conference_header

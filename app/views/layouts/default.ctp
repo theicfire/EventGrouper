@@ -66,12 +66,13 @@
 
     <?php if (isset($isAdmin)) {?>
 	
-	    <div id="personal_id" class="info_box">
+	    <div id="personal_id" class="admin_header">
 	    
-	    	<div class="left"><p><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</p></div>
+	    	<div class="left"><div class="admin_panel_logo"><strong>RushRabbit</strong> Administration Panel</div>
+	    	<p><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</p></div>
 	        <div class="right"><p>
 	        
-	        <a href="<?php echo $html->url('/users/index'); ?>" class="make_button">Home</a> <a href="<?php echo $html->url('/'); ?>" class="make_button">Exit admin panel</a> <a href="#" class="make_button">Edit account</a> <a href="<?php echo $html->url("/");?>" class="make_button logoutlink">Log out</a> 
+	        <a href="<?php echo $html->url('/users/index'); ?>" class="make_button">Admin panel home</a> <a href="<?php echo $html->url('/'); ?>" class="make_button">Exit admin panel</a> <a href="#" class="make_button">Edit account</a> <a href="<?php echo $html->url("/");?>" class="make_button logoutlink">Log out</a> 
 	        
 	        </p>
 	        
@@ -82,17 +83,17 @@
     <?php } else {?>
     
 	    <div id="universal_header">
-			<div id="uh_left"><?php echo $html->link("RushRabbit", "/", array('class'=>'uh_logo'))?></div>
+			<div id="uh_left"><?php echo $html->link("RushRabbit", "/", array('class'=>'uh_logo'))?> <span><a href="#" class="general_link">About Us</a> <a href="#" class="general_link">Feedback</a></span></div>
 		        
 			<?php
 			if ($this->Session->read('username') == null) {
 				?>
 				
-				<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Log In", "/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?> | <fb:login-button perms="email"></fb:login-button></div>
+				<div id="uh_right"><?php echo $html->link("Log In", "/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?> | <fb:login-button perms="email"></fb:login-button></div>
 				<?php 
 			} else {
 				?>
-				<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Admin Panel", "/users/index");?> | <?php echo "You are logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
+				<div id="uh_right"><?php echo "Logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Admin Panel", "/users/index");?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
 			<?php }?>
 			<div class="clear"></div>
 	    </div>

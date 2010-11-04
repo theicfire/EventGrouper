@@ -11,7 +11,7 @@ $(document).ready(function() {
 <div id="admin_groups" class="info_box">
 
 <h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
-	class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" /> Groups</h1>
+	class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" /> My Groups</h1>
 
 <table class="full_width">
 	<tr>
@@ -46,8 +46,8 @@ $(document).ready(function() {
 			<?php }?>
 			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'bigOwner')) {?> 
 				<a href="<?php echo $html->url("/admin/requests/".$group['EventGroup']['id']); ?>"
-				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
-				class="rinoa_small_inline" />Check Requests</a>
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/check.png"
+				class="rinoa_small_inline" /> Check Requests</a>
 			<?php }?>
 			</td>
 	</tr>

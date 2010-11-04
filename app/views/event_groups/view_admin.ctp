@@ -1,10 +1,22 @@
-<div id="edit_account" class="info_box">
+
+<?php if(isset($notification))
+{ ?>
+	
+	<div class="cake_notification">
+		<img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png" class="rinoa_small_inline" />
+		<?php echo $notification; ?>
+	</div>
+	
+<?php } ?>
+
+<div class="info_box">
     
 	<h1>Current Group</h1>
+	<p><?= $this->element('grouppath', array('groupPath' => $groupPath))?></p>
 	<div class="form_section">
-		<h2>Current Group</h2>
-				<div>Name: <?php echo $currenteventGroup['EventGroup']['name']; ?></div>
-				<div>Description: <?php echo $currenteventGroup['EventGroup']['description']; ?></div>
+		<h2><?php echo $currenteventGroup['EventGroup']['name']; ?></h2>
+				<div><p>Description:</p><p><?php echo $currenteventGroup['EventGroup']['description']; ?></p></div>
+				<div style="height: 10px;"> </div>
 			<div>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {?>
 				<a href="<?php echo $html->url("/event_groups/edit/".$currenteventGroup['EventGroup']['id']); ?>"
@@ -27,14 +39,13 @@
 			</div>
 	</div>
 </div>
-<div id="edit_account" class="info_box">
+<div class="info_box">
     
-	<h1>Group Info</h1>
-	<p>in <?= $this->element('grouppath', array('groupPath' => $groupPath))?></p>	        
+	<h1>Contents of "<?php echo $currenteventGroup['EventGroup']['name']; ?>"</h1>      
 	<div class="form_section">
 		<h2>Groups Contained</h2>  
 		<table class="full_width">
-			<tr><th>Path</th><th>description</th><th>Actions</th></tr>  
+			<tr><th>Path</th><th>Description</th><th>Actions</th></tr>  
 		    <?php foreach ($eventGroups as $eventGroup) {?>
 				<tr>
 						<td>
@@ -68,9 +79,12 @@
 			<?php }?>      
 	            
 		</table>
+		</div>
+		
+		<div class="form_section">
 		<h2>Events Contained</h2>  
 		<table class="full_width">
-			<tr><th>title</th><th>description</th><th>Time</th><th>Categories</th><th>event group</th><th>actions</th></tr>
+			<tr><th>Title</th><th>Description</th><th>Time</th><th>Categories</th><th>Event Group</th><th>Actions</th></tr>
 			<?php foreach ($eventsUnderGroup as $event) {
 				if (!$session->check('userid') || ($session->check('userid') && !array_key_exists('onUsersCalendar',$event['Event']))) {?>
 			<tr id="event-<?=$event['Event']['id']?>">
