@@ -134,7 +134,7 @@ class UsersController extends AppController {
 						$this->Session->setFlash('The User could not be saved. Please, try again.');
 					}
 				} else {
-					$this->Session->setFlash('That username has already been taken.');
+					$this->set('error', 'email_taken');
 				}
 			}
 		}
