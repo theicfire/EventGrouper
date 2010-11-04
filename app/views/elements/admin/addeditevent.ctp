@@ -93,6 +93,9 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 		in_an_hour = next_hour + an_hour;
 		in_an_hour_date = new Date( in_an_hour );
 		
+		$("[name='data[Other][time_end]']").val( in_an_hour_date.getHours() + ":00" );
+		$("[name='data[Other][date_end]']").val( (in_an_hour_date.getMonth()+1) + "/" + in_an_hour_date.getDate() + "/"  + in_an_hour_date.getFullYear() );
+		
 		$("input[name='data[Other][date_start]']").blur( function(){
 			
 			if( $("input[name='data[Other][date_end]']").val() == "" )
