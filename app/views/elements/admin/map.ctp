@@ -18,6 +18,7 @@
 var mySearchControl;
 var map;
 var default_zoom_level = 16;
+var hasBeenInit = false;
 
     function map_init() {
       if (GBrowserIsCompatible()) {
@@ -46,6 +47,7 @@ var default_zoom_level = 16;
         GEvent.addListener(map, 'click', map_click_handler);
         
         map.enableContinuousZoom();
+        hasBeenInit = true;
 
       }
     }
@@ -132,6 +134,12 @@ var default_zoom_level = 16;
 		
 		$("#map_overlay").show();
 		$("#overlay").fadeIn("slow");
+		if (!hasBeenInit) {
+			map_init();
+			var tmplatlng = new GLatLng('<?php echo $centerLat?>', '<?php echo $centerLong; ?>');
+			message = generate_info_window( "", tmplatlng.lat(), tmplatlng.lng() );
+			map.openInfoWindow(tmplatlng, message);
+		}
 	}
 
 	function close_map()

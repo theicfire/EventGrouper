@@ -103,7 +103,8 @@ class EventsController extends AppController {
 		$users = $this->Event->User->find('list');
 		$groupPath = $this->EventGroup->getPath($groupId);
 		$eventGroupId = $groupId;
-		$this->set(compact('categoryChoices','users','eventGroups', 'eventGroupId', 'groupPath'));
+		$eventGroup = $this->EventGroup->findById($eventGroupId);
+		$this->set(compact('categoryChoices','users','eventGroups', 'eventGroupId', 'groupPath', 'eventGroup'));
 		$this->set('isAdmin', true);
 	}
 
