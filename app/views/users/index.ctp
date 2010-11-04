@@ -3,6 +3,7 @@ $(document).ready(function() {
 	$('.hideEvent').click(function() {
 		$.get("<?php echo $html->url('/');?>admin/changeEventStatus/"+$(this).parent().parent().attr('id').split('-')[1]+"/hidden");
 		$(this).parent().parent().hide();
+		return false
 	});
 	
 });
