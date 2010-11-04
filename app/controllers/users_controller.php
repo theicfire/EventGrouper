@@ -70,6 +70,8 @@ class UsersController extends AppController {
 //	}
 
 	function add($unregisteredId = null, $hasAccount = null) {
+		if ($this->Session->check('userid'))
+			$this->redirect("/");
 		$this->Session->destroy();
 		$unregisteredData = null;
 		if ($unregisteredId != null) {
