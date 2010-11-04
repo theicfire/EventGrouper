@@ -13,9 +13,9 @@
     
     function init_validation(){
 
-		$("input[name='data[EventGroup][name]']").blur( function(){
+		$("input[name='data[EventGroup][name]']").keydown( function(){
 			
-			if( $("input[name='data[EventGroup][path]']").val() == "" )
+			if( $("input[name='data[EventGroup][path]']").val() == "" || true )
 			{
 				$("input[name='data[EventGroup][path]']").val( $("input[name='data[EventGroup][name]']").val().replace( /[^A-Za-z0-9]/g, "-" ).toLowerCase() );
 			}

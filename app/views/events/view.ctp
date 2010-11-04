@@ -160,7 +160,9 @@ $(document).ready( function(){
     <!--<a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/group.png" />Share on Facebook</a>
     <a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/email.png" />Invite friends by email</a>-->
     
-    <div class="event_time"><?=date('g a', strtotime($event['Event']['time_start']))?> to <?=date('g a', strtotime($event['Event']['time_start'])+$event['Event']['duration']*60)?>, <?=date('F j, Y', strtotime($event['Event']['time_start']))?><br /><small><a href="#">view other events at this time</a></small></div>
+    <div class="event_time"><?=date('g a', strtotime($event['Event']['time_start']))?> to <?=date('g a', strtotime($event['Event']['time_start'])+$event['Event']['duration']*60)?>, <?=date('F j, Y', strtotime($event['Event']['time_start']))?>
+    
+    <!--<br /><small><a href="#">view other events at this time</a></small> --></div>
   
         
     <h3>Description</h3>

@@ -12,7 +12,8 @@ $(document).ready(function() {
 
 <h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
 	class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" /> My Groups</h1>
-<?php echo $html->link('Add your own group', '/event_groups/add/0'); ?>
+<a href="<?php echo $html->url('/'); ?>event_groups/add/0" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/add.png"
+			class="small_icon_inline_button" /> Create a new group</a>
 <table class="full_width">
 	<tr>
 		<th>Group</th>
@@ -28,26 +29,26 @@ $(document).ready(function() {
 		<td><?= $group['EventGroup']['eventgroupcount']?></td>
 		<td><?= $group['EventGroup']['eventcount']?></td>
 		<td><a href="<?php echo $html->url("/".$group['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
-			class="rinoa_small_inline" /> View group</a> 
+			class="small_icon_inline_button" /> View group</a> 
 			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'update')) {?>
 				<a href="<?php echo $html->url("/event_groups/edit/".$group['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
-				class="rinoa_small_inline" /> Edit info</a>
+				class="small_icon_inline_button" /> Edit info</a>
 			<?php }?>
 			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'create')) {?> 
 				<a href="<?php echo $html->url("/event_groups/add/".$group['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
-				class="rinoa_small_inline" /> Add subgroups</a>
+				class="small_icon_inline_button" /> Add subgroups</a>
 			<?php }?>
 			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'create')) {?> 
 				<a href="<?php echo $html->url("/events/add/".$group['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
-				class="rinoa_small_inline" /> Add events</a>
+				class="small_icon_inline_button" /> Add events</a>
 			<?php }?>
 			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'bigOwner')) {?> 
 				<a href="<?php echo $html->url("/admin/requests/".$group['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/check.png"
-				class="rinoa_small_inline" /> Check Requests</a>
+				class="small_icon_inline_button" /> Check Requests</a>
 			<?php }?>
 			</td>
 	</tr>

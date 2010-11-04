@@ -199,7 +199,7 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 
 <div class="clear"></div>
 	
-<?php echo $form->input('CategoryChoice', array('type' => 'select', 'multiple' => 'checkbox', 'label' => 'Tags'));?>
+<?php echo $form->input('CategoryChoice', array('type' => 'select', 'multiple' => 'checkbox', 'label' => 'Categories'));?>
 
 </div>
 

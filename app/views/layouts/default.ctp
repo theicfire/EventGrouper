@@ -72,7 +72,7 @@
 	    	<p><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</p></div>
 	        <div class="right"><p>
 	        
-	        <a href="<?php echo $html->url('/users/index'); ?>" class="make_button">Admin panel home</a> <a href="<?php echo $html->url('/'); ?>" class="make_button">Exit admin panel</a> <a href="#" class="make_button">Edit account</a> <a href="<?php echo $html->url("/");?>" class="make_button logoutlink">Log out</a> 
+	        <a href="<?php echo $html->url('/users/index'); ?>" class="make_button">Admin panel home</a> <a href="<?php echo $html->url('/'); ?>" class="make_button">Exit admin panel</a> <!-- <a href="#" class="make_button">Edit account</a> --> <a href="<?php echo $html->url("/");?>" class="make_button logoutlink">Log out</a> 
 	        
 	        </p>
 	        

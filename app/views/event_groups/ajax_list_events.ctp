@@ -19,7 +19,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 			<div id="which_day_container_locator"></div>
 			<div id="which_day_container">
 				<span id="which_day_is_it"><?php echo date('l, F j', strtotime($event['Event']['time_start'])); ?></span>            
-				<a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/back.png" class="small_icon_inline_button" />Previous day</a><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/go.png" class="small_icon_inline_button" />Next day</a>
+				<!-- <a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/back.png" class="small_icon_inline_button" />Previous day</a><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/go.png" class="small_icon_inline_button" />Next day</a> -->
 			</div>    
 			</td><td class="mys_cell">
 			<div class="mys_timeslot">
@@ -77,7 +77,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 							
 							<?php if (!empty($event['Event']['location'])) {?>
 							<span class="event_location">
-								at <a class="group_1" href="#location"><?=$event['Event']['location']?></a>
+								at <a  class="group_<?=$event['EventGroup']['id']?>" href="#location"><?=$event['Event']['location']?></a>
 							</span>
 							<?php }?>
 
@@ -95,10 +95,10 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 							if (!$session->check('userid'))
 								echo "add to my schedule";
 							else {
-								?><a href="#" class="scheduletoggle">
+								?><a class="make_button" href="#" class="scheduletoggle">
 								<?php 
-								if ($onUserCalendar) echo "remove from my schedule"; 
-								else echo "add to my schedule"; 
+								if ($onUserCalendar) { ?> <img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Remove from schedule<?php }
+								else { ?>  <img src="<?php echo $html->url('/'); ?>css/rinoa/add.png" class="small_icon_inline_button" /> Add to schedule   <?php } 
 								?>
 								</a>
 								

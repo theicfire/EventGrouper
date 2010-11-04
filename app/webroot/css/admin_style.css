@@ -38,6 +38,7 @@ body
 .admin_panel_logo strong
 {
 	font-weight: bold;
+	font-style: italic;
 }
 
 small

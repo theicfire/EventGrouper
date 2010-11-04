@@ -20,30 +20,30 @@
 			<div>
 				<a href="<?php echo $html->url("/".$currenteventGroup['EventGroup']['path']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
-				class="rinoa_small_inline" /> View group</a>
+				class="small_icon_inline_button" /> View group</a>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {?>
 				<a href="<?php echo $html->url("/event_groups/edit/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
-				class="rinoa_small_inline" /> Edit info</a>
+				class="small_icon_inline_button" /> Edit info</a>
 			<?php }?>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
 				<a href="<?php echo $html->url("/event_groups/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
-				class="rinoa_small_inline" /> Add subgroups</a>
+				class="small_icon_inline_button" /> Add subgroups</a>
 			<?php }?>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
 				<a href="<?php echo $html->url("/events/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
-				class="rinoa_small_inline" /> Add events</a>
+				class="small_icon_inline_button" /> Add events</a>
 			<?php }?>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {?>
 				
-				<a class="make_button" href="/EventGrouper/event_groups/delete/<?php echo $currenteventGroup['EventGroup']['id']; ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $currenteventGroup['EventGroup']['name']; ?>?&#039;);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="rinoa_small_inline" /> Delete</a>
+				<a class="make_button" href="<?php echo $html->url("/event_groups/delete/" . $currenteventGroup['EventGroup']['id']); ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $currenteventGroup['EventGroup']['name']; ?>?&#039;);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Delete</a>
 
 			<?php }?>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {?>
 				
-				<a class="make_button" href="/EventGrouper/permissions/view/<?php echo $currenteventGroup['EventGroup']['id']; ?>"><img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" class="rinoa_small_inline" /> Give someone permission to edit <?php echo $currenteventGroup['EventGroup']['name']; ?></a>
+				<a class="make_button" href="<?php echo $html->url("/permissions/view/" . $currenteventGroup['EventGroup']['id']); ?>"><img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" class="small_icon_inline_button" /> Give someone permission to edit <?php echo $currenteventGroup['EventGroup']['name']; ?></a>
 			<?php }?>
 			</div>
 	</div>
@@ -64,24 +64,24 @@
 							<?php echo $eventGroup['EventGroup']['description']; ?>
 						</td>
 						<td><a href="<?php echo $html->url("/event_groups/view_admin/".$eventGroup['EventGroup']['id']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
-						class="rinoa_small_inline" /> View details</a> 
+						class="small_icon_inline_button" /> View details</a> 
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'update')) {?>
 							<a href="<?php echo $html->url("/event_groups/edit/".$eventGroup['EventGroup']['id']); ?>"
 							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
-							class="rinoa_small_inline" /> Edit info</a>
+							class="small_icon_inline_button" /> Edit info</a>
 						<?php }?>
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'create')) {?> 
 							<a href="<?php echo $html->url("/event_groups/add/".$eventGroup['EventGroup']['id']); ?>"
 							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
-							class="rinoa_small_inline" /> Add subgroups</a>
+							class="small_icon_inline_button" /> Add subgroups</a>
 						<?php }?>
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'create')) {?> 
 							<a href="<?php echo $html->url("/events/add/".$eventGroup['EventGroup']['id']); ?>"
 							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
-							class="rinoa_small_inline" /> Add events</a>
+							class="small_icon_inline_button" /> Add events</a>
 						<?php }?>
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'delete')) {?>
-						<a class="make_button" href="/EventGrouper/event_groups/delete/<?php echo $eventGroup['EventGroup']['id']; ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $eventGroup['EventGroup']['name']; ?>?&#039;);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="rinoa_small_inline" /> Delete</a>
+						<a class="make_button" href="/EventGrouper/event_groups/delete/<?php echo $eventGroup['EventGroup']['id']; ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $eventGroup['EventGroup']['name']; ?>?&#039;);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Delete</a>
 						<?php 
 							//echo $html->link(__('Delete', true), array('action' => 'delete', $eventGroup['EventGroup']['id']), array('class'=>'make_button'), sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id']));
 						}?>

@@ -87,7 +87,6 @@ a
 
 #ch_left
 {
-	float: left;
 	padding: 10px;
 }
 
@@ -218,11 +217,11 @@ a
 
 .small_icon_inline_button
 {
-	height: 1.2em;
-	width: 1.2em;
+	height: 1.4em;
+	width: 1.4em;
 	vertical-align: middle;
 	position: relative;
-	bottom: 2px;
+	bottom: 1px;
 	padding-right: 5px;
 }
 

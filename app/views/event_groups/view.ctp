@@ -29,7 +29,7 @@ echo "</style>";
         <div id="ch_right">
         	<div class="curr_time_large">It's currently <span id="curr_time">7:55 pm</span> on <span id="curr_date">August 27, 2010</span></div>
         </div>
-		<ul>
+		<!--<ul>
 			<li><?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
 				echo $html->link(__('Add EventGroup Under This', true), array('action' => 'add', $currenteventGroup['EventGroup']['id'])); 
 			}?> </li>
@@ -45,10 +45,17 @@ echo "</style>";
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {
 				echo $html->link(__('Edit Permissions', true), array('controller' => 'permissions', 'action' => 'view', $currenteventGroup['EventGroup']['id']));
 			}?>
-		</ul>
-        	<div id="chl_organization"><a href="#">REX (Residence Exploration)</a></div>
+		</ul>-->
+        	<!--<div id="chl_organization"><a href="#">REX (Residence Exploration)</a></div>-->
             <div id="chl_title"><?php echo $currenteventGroup['EventGroup']['name']; ?></div>
-            <div id="chl_address">At the core of the MIT housing experience is a powerful sense of community. Every undergraduate and graduate residence offers its own rich social network, a distinct culture, lifestyle, and perspective. The goal of the MIT Housing Office is to keep those residences functioning and the communities and within them thriving. And to give students the freedom and flexibility to decide where they would most like to put down roots.</div>
+            
+            <div id="chl_address"><?php echo $currenteventGroup['EventGroup']['description']; ?></div>
+            
+            <?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {
+				//echo $html->link(__('Edit in admin panel', true), array('action' => 'edit', $currenteventGroup['EventGroup']['id'])); 
+				
+				?> <a class="make_button" href="<?php echo $html->url("/event_groups/view_admin/" . $currenteventGroup['EventGroup']['id']); ?>"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png" class="small_icon_inline_button" /> Edit in admin panel</a> <?php
+			}?>
         </div>
         
         
@@ -185,6 +192,8 @@ echo "</style>";
                        	<input name="search" type="text" id="searchBox" class="putInHash">
                     </div> 
                     <input type="checkbox" class="putInHash" name="isCalendar" id="isCalendar" style="display:none">
+                    
+                    <div class="clear"></div>
                     <a id="filter_submit"><img src="<?php echo $html->url('/css/'); ?>rinoa/refresh.png" class="small_icon_inline_button" /> Save options and refresh</a>
                     
                     </form>
@@ -204,10 +213,10 @@ echo "</style>";
                 </div>
             </td></tr>
             
-            <tr><td class="timeslot_title"></td><td class="timeline_cell"><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/up.png" class="small_icon_inline_button" />Show previous events</a>
+            <!--<tr><td class="timeslot_title"></td><td class="timeline_cell"><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/up.png" class="small_icon_inline_button" />Show previous events</a>
             
             <div class="clear"></div>
-            </td><td class="mys_cell"></td></tr>
+            </td><td class="mys_cell"></td></tr>-->
             
            
             
@@ -215,17 +224,17 @@ echo "</style>";
             
             
             </table>
-            <table style="width:100%" id="eventHolder">
+            <table class="ajax_events" id="eventHolder">
             
         	</table>
         <table width="100%">
         
         
         
-        <tr><td class="timeslot_title"></td><td class="timeline_cell"><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/down.png" class="small_icon_inline_button" />Show more events</a>
+        <!--<tr><td class="timeslot_title"></td><td class="timeline_cell"><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/down.png" class="small_icon_inline_button" />Show more events</a>
             
             <div class="clear"></div>
-            </td><td class="mys_cell"></td></tr>
+            </td><td class="mys_cell"></td></tr> -->
         
         </table> <!-- end main view table -->
         </div>
