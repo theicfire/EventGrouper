@@ -27,8 +27,8 @@ $(document).ready(function() {
 		<td><?= $this->element('grouppath', array('groupPath' => $group['EventGroup']['groupPath']));?></td>
 		<td><?= $group['EventGroup']['eventgroupcount']?></td>
 		<td><?= $group['EventGroup']['eventcount']?></td>
-		<td><a href="<?php echo $html->url("/event_groups/view_admin/".$group['EventGroup']['id']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
-			class="rinoa_small_inline" /> View details</a> 
+		<td><a href="<?php echo $html->url("/".$group['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
+			class="rinoa_small_inline" /> View group</a> 
 			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'update')) {?>
 				<a href="<?php echo $html->url("/event_groups/edit/".$group['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"

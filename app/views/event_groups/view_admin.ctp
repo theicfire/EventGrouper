@@ -18,6 +18,9 @@
 				<div><p>Description:</p><p><?php echo $currenteventGroup['EventGroup']['description']; ?></p></div>
 				<div style="height: 10px;"> </div>
 			<div>
+				<a href="<?php echo $html->url("/".$currenteventGroup['EventGroup']['path']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
+				class="rinoa_small_inline" /> View Group</a>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {?>
 				<a href="<?php echo $html->url("/event_groups/edit/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
@@ -35,6 +38,9 @@
 			<?php }?>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {
 				echo $html->link(__('Delete', true), array('action' => 'delete', $currenteventGroup['EventGroup']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id']));
+			}?>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {
+				echo $html->link(__('Edit Permissions', true), array('controller' => 'permissions', 'action' => 'view', $currenteventGroup['EventGroup']['id']));
 			}?>
 			</div>
 	</div>

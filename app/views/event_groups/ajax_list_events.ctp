@@ -33,6 +33,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
             	$onUserCalendar = false;
             	if ($session->check('userid') && array_key_exists('onUsersCalendar',$event['Event']))
 					$onUserCalendar = true;
+				if (!$viewCalendar || $onUserCalendar) {
             ?>
             	
             	<div class="event_block<?php if ($onUserCalendar) echo " onCalendar"; ?>" id="event-<?=$event['Event']['id']?>">
@@ -90,6 +91,18 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 								}?> 
 								by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a>
 							</span>
+							<?php 
+							if (!$session->check('userid'))
+								echo "add to my schedule";
+							else {
+								?><a href="#" class="scheduletoggle">
+								<?php 
+								if ($onUserCalendar) echo "remove from my schedule"; 
+								else echo "add to my schedule"; 
+								?>
+								</a>
+								
+							<?php }?>
                 </div>
                 <div>
                         
@@ -100,6 +113,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
                     
 
                 </div> 
+                <?php }?>
                 
                 <?php 
             	$i++;

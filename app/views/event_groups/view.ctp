@@ -185,7 +185,7 @@ echo "</style>";
                         <div class="tl_head_subt">look for something</div>
                        	<input name="search" type="text" id="searchBox" class="putInHash">
                     </div> 
-                    
+                    <input type="checkbox" class="putInHash" name="isCalendar" id="isCalendar" style="display:none">
                     <a id="filter_submit"><img src="<?php echo $html->url('/css/'); ?>rinoa/refresh.png" class="small_icon_inline_button" /> Save options and refresh</a>
                     
                     </form>
