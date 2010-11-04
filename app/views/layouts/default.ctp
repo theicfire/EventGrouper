@@ -51,7 +51,7 @@
 	<?php if (isset($isAdmin)) {
 		
 		echo $javascript->link(array('admin.js'));
-		echo $html->css(array('admin.css'));
+		echo $html->css(array('admin_style.css'));
 	}?>
 	
 	
