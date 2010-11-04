@@ -27,7 +27,7 @@ class MyAclComponent extends Object {
     	$userid = 5;//guest
     	if ($session->check('userid'))
   			$userid = $session->read('userid');
-		if ($action == 'confirm') {
+		if ($action == 'bigOwner') {
 			//check if this user has permissions for the highest level group
 			App::import('Model', 'EventGroup');
 			$eventGroup = new EventGroup();

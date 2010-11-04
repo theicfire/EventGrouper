@@ -23,11 +23,11 @@ class UsersController extends AppController {
 				unset($userEventGroups[$key]);
 		}
 		foreach ($userEventGroups as $key=>$value) {
-			$userEventGroups[$key]['EventGroup']['eventcount'] = count($this->EventGroup->getAllEventsUnderThis($value['EventGroup']['id'], null, array('status' => 'confirmed')));
+			$userEventGroups[$key]['EventGroup']['eventcount'] = count($this->EventGroup->getAllEventsUnderThis($value['EventGroup']['id'], null, array('status' => array('confirmed', 'hidden'))));
 			$userEventGroups[$key]['EventGroup']['eventgroupcount'] = count($this->EventGroup->getAllEventGroupsUnderThis($value['EventGroup']['id']))-1;
 			$userEventGroups[$key]['EventGroup']['groupPath'] = $this->EventGroup->getPath($value['EventGroup']['id']);
 		}
-		$sentEvents = $this->Event->find('all', array('conditions' => array('user_id' => $this->Session->read('userid'), 'status !=' => 'hidden')));
+		$sentEvents = $this->Event->find('all', array('conditions' => array('user_id' => $this->Session->read('userid'), array('NOT' => array('status' => array('hidden', 'unconfirmed'))))));
 		$this->set(compact('userEventGroups','sentEvents'));
 		$this->set('isAdmin', true);
 		

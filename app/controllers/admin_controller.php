@@ -7,7 +7,7 @@ class AdminController extends AppController {
 	var $components = array('Acl', 'MyAcl', 'Facebook');
 
 	function requests($groupId) {
-		$this->MyAcl->runcheck('EventGroup',$groupId,'confirm');
+		$this->MyAcl->runcheck('EventGroup',$groupId,'bigOwner');
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($groupId, null, array('status' => 'unconfirmed'));
 		
 		$this->set(compact('eventsUnderGroup'));
@@ -16,7 +16,7 @@ class AdminController extends AppController {
 	}
 	
 	function changeEventStatus($eventId, $status) {
-		$this->MyAcl->runcheck('EventGroup',$groupId,'confirm');
+		$this->MyAcl->runcheck('EventGroup',$groupId,'bigOwner');
 		$this->render(false);
 		$data = array('Event' => array(
 		'id' => $eventId,

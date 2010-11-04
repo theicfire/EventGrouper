@@ -44,7 +44,7 @@ $(document).ready(function() {
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 				class="rinoa_small_inline" /> Add events</a>
 			<?php }?>
-			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'confirm')) {?> 
+			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'bigOwner')) {?> 
 				<a href="<?php echo $html->url("/admin/requests/".$group['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 				class="rinoa_small_inline" />Check Requests</a>

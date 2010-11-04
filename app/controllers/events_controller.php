@@ -31,11 +31,10 @@ class EventsController extends AppController {
 			$this->data['Event']['user_id'] = $userid;
 			$this->data['Event']['event_group_id'] = $eventGroupId;
 			$this->data['Event']['time_start'] = date('Y-m-d H:i:s', strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']));
-			$this->data['Event']['duration'] = strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start'])/60; 
+			$this->data['Event']['duration'] = strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start'])/60;
+			if ($this->MyAcl->check('EventGroup',$eventGroupId,'bigOwner'))
+				$this->data['Event']['status'] = 'hidden'; 
 			if ($this->Event->save($this->data)) {
-				
-				
-				
 				$acoParent = $this->Event->query("SELECT id FROM acos WHERE foreign_key = ".$eventGroupId);
 				if (!empty($acoParent))
 					$acoParentId = $acoParent[0]['acos']['id'];
