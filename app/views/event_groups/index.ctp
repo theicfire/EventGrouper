@@ -30,6 +30,37 @@
 </p>
 </div>
 
+<?php if ($this->Session->read('username') == null) { ?>
+
+<div class="form_section" style="float:right; width: 430px;">
+<h2>Get Started</h2>
+
+<label>Have an account?</label>
+<a href="javascript:open_dialog()" class="make_button">Login</a>
+
+<script type="text/javascript">
+function open_dialog()
+{ $( '#dialog-form' ).dialog( 'open' ); }
+
+</script>
+
+<label>Need an account?</label>
+<?php echo $html->link("Register", "/users/add", array('class'=>'make_button'));?>
+
+</div>
+
+<?php } else { ?>
+
+<div class="form_section" style="float:right; width: 430px;">
+<h2>Create a Conference</h2>
+
+<?php echo $html->link('Click here to create a conference', '/event_groups/add/0', array('class'=>'make_button')); ?>
+
+</div>
+
+<?php } ?>
+
+<!-- the real thing
 <div class="form_section" style="float:right; width: 430px;">
 <h2>Create a Conference</h2>
 
@@ -48,7 +79,7 @@
 
 <input type="submit" value="Search" class="make_button" />
 
-</div>
+</div> -->
 
 <div class="clear"></div>
 
