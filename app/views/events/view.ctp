@@ -1,5 +1,4 @@
 <?php echo $html->css('event_page', 'stylesheet', array('media'=>'all' ), false); ?>
-<?php $javascript->link('jqueryui/jquery.ui.timeselector.js', false); ?>
 
 <script>
 
@@ -83,18 +82,44 @@ $(document).ready( function(){
     
     <div class="event_location_box">
         <h2>Location</h2>
-        <div class="event_loc_name"><?=$event['Event']['loc_name']?></div>
-        <div class="event_address">362 Memorial Drive, Cambridge, MA 02139</div>
+        <div class="event_loc_name"><?=$event['Event']['location']?></div>
+        <br />
         
+        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo $MAPS_API_KEY;?>&sensor=false"
+            type="text/javascript"></script>
+            <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAA7y3UIBfi1OwkPnNUDew4MhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTdgodaUd_SdFl6FS-YLDeZ4gdhpA" type="text/javascript"></script>
+
+
+<style type="text/css">
+      @import url("http://www.google.com/uds/css/gsearch.css");
+</style>
         
-        <iframe width="100%" height="220" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="
-        <?php 
-        echo "http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=mit+baker+house&amp;".
-        "sll=37.0625,-95.677068&amp;sspn=59.467068,52.822266&amp;ie=UTF8&amp;hq=&amp;".
-        "hnear=Baker+House,+Cambridge,+Middlesex,+Massachusetts+02139&amp;".
-        "ll=42.356763,-71.095785&amp;spn=0.013764,0.012896&amp;z=14&amp;output=embed";
-        ?>
-        "></iframe>
+        <script type="text/javascript">
+        
+		var map;
+		var default_zoom_level = 16;
+
+			function map_init() {
+			  if (GBrowserIsCompatible()) {
+				  
+				  
+				map = new GMap2(document.getElementById("event_map_container"));
+				map.setCenter(new GLatLng(<?php echo $event['Event']['latitude'];?>, <?php echo $event['Event']['longitude']; ?>), default_zoom_level);
+				map.setUIToDefault();
+				
+				map.setZoom(  default_zoom_level );
+				
+				map.enableContinuousZoom();
+				
+				map.addOverlay( new GMarker( new GLatLng(<?php echo $event['Event']['latitude'];?>, <?php echo $event['Event']['longitude']; ?>) ) );
+
+			  }
+			}
+			
+			$(document).ready( map_init );
+        </script>
+        
+        <div id="event_map_container" style="width: 100%; height: 300px;"></div>
         
             <div class="map_links">
             <a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=mit+baker+house&amp;sll=37.0625,-95.677068&amp;sspn=59.467068,52.822266&amp;ie=UTF8&amp;hq=&amp;hnear=Baker+House,+Cambridge,+Middlesex,+Massachusetts+02139&amp;ll=42.356763,-71.095785&amp;spn=0.013764,0.012896&amp;z=14">Directions</a> |
