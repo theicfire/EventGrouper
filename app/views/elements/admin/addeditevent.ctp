@@ -164,24 +164,41 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 <label>Description</label>
 <?php echo $form->textarea('description', array('class' => 'description_textarea'));?>
 
-<label>Start Time</label><input type="text"
-	name="data[Other][time_start]" class="time_input textfield"
-	value="" />
-<p class="form_tip">For example: 8:05 pm or 17:47</p>	
-	<label>Start Date</label><input type="text"
-	name="data[Other][date_start]" class="date_input textfield"
-	value="" /> 
-<p class="form_tip">Click inside the field for a date picker.</p>
+<br /><br/>
+<div class="clear"></div>
 
+<div style="float:left;">
+	<label>Start Time</label><input type="text"
+		name="data[Other][time_start]" class="time_input textfield"
+		value="" />
+	<p class="form_tip">For example: 8:05 pm or 17:47</p>	
+	</div>
+	<div style="float:left; padding-left: 20px;">
+		<label>Start Date</label><input type="text"
+		name="data[Other][date_start]" class="date_input textfield"
+		value="" /> 
+	<p class="form_tip">Click inside the field for a date picker.</p>
+</div>
+
+<div class="clear"></div>
 
 <div id="debug_time"></div>
 
-<label>End Time</label><input
-	type="text" name="data[Other][time_end]" class="time_input textfield"
-	value="" />
-	<label>End Date</label><input type="text"
-	name="data[Other][date_end]" class="date_input textfield"
-	value="" /> 
+<div style="float:left;">
+	<label>End Time</label><input
+		type="text" name="data[Other][time_end]" class="time_input textfield"
+		value="" />
+		<p class="form_tip">&nbsp;</p>
+		</div>
+		<div style="float:left; padding-left: 20px;">
+		
+		<label>End Date</label><input type="text"
+		name="data[Other][date_end]" class="date_input textfield"
+		value="" /> 
+</div>
+
+<div class="clear"></div>
+	
 <?php echo $form->input('CategoryChoice', array('type' => 'select', 'multiple' => 'checkbox', 'label' => 'Tags'));?>
 
 </div>

@@ -83,18 +83,12 @@ $(document).ready( function(){
     
     <div class="hr"></div>
     
-    <h1 class="event_name"><?=$event['Event']['title']?></h1>
+    <?php if(isset($event['Event']['latitude']))
+    { ?>
     
-    <a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" />Add to my schedule</a>
-    <a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/group.png" />Share on Facebook</a>
-    <a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/email.png" />Invite friends by email</a>
-    
-    <div class="event_time"><?=date('g a', strtotime($event['Event']['time_start']))?> to <?=date('g a', strtotime($event['Event']['time_start'])+$event['Event']['duration']*60)?>, <?=date('F j, Y', strtotime($event['Event']['time_start']))?><small><a href="#">view other events at this time</a></small></div>
-
-    
-        <div class="event_location_box">
+    <div class="event_location_box">
         <h2>Location</h2>
-        <div class="event_loc_name"><?=$event['Event']['location']?></div>
+        <div class="event_loc_name"><?=$event['Event']['loc_name']?></div>
         <div class="event_address">362 Memorial Drive, Cambridge, MA 02139</div>
         
         
@@ -118,6 +112,27 @@ $(document).ready( function(){
         
         
         </div>
+        
+        <?php }
+         else
+        { ?>
+        
+        location not specified
+        
+        <?php
+        
+	}
+        
+        ?>
+    
+    <h1 class="event_name"><?=$event['Event']['title']?></h1>
+    
+    <a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" />Add to my schedule</a>
+    <!--<a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/group.png" />Share on Facebook</a>
+    <a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/email.png" />Invite friends by email</a>-->
+    
+    <div class="event_time"><?=date('g a', strtotime($event['Event']['time_start']))?> to <?=date('g a', strtotime($event['Event']['time_start'])+$event['Event']['duration']*60)?>, <?=date('F j, Y', strtotime($event['Event']['time_start']))?><br /><small><a href="#">view other events at this time</a></small></div>
+  
         
     <h3>Description</h3>
     <p><?=$event['Event']['description']?></p>
