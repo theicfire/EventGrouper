@@ -40,7 +40,6 @@
 
 #split
 {
-	border-top: #ccc solid 1px;
 	margin: 0 10px;
 }
 
@@ -86,13 +85,18 @@
 	padding: 5px 10px;
 }
 
-input.textinput
+.textinput
 {
 	background: #fff;
 	padding: 3px;
 	border: #999 1px solid;
-	width: 70px;
-	margin-right: 10px;
+	width: 90px;
+	margin-right: 5px;
+}
+
+#searchBox
+{
+	margin-top: 10px;
 }
 
 select
@@ -103,10 +107,7 @@ background: #fff;
 
 .checkbox_container
 {
-	background: #fff;
-	border: #999 1px solid;
 	padding: 3px;
-	font-size: .8em;
 }
 
 .mys_cell
@@ -149,7 +150,10 @@ background: #fff;
 #filters_box
 {
 	border: #ccc 1px solid;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
 	margin: 5px;
+	background: #eee;
 }
 
 #mys_head
@@ -260,4 +264,13 @@ Chase's additions
 .onCalendar
 {
 	opacity:.5;
+}
+
+.no_results
+{
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+-moz-border-radius: 5px;
+margin: 10px;
 }

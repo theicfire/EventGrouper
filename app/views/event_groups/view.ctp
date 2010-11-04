@@ -125,7 +125,7 @@ echo "</style>";
                         <table class="padded_grid">
                         <tr><td>from:</td><td>
                         
-                        <select name="time_start" id="time_start" class="putInHash">
+                        <select name="time_start" id="time_start" class="putInHash textinput">
                         	<option value="0">midnight</option>
                             <option value="1">1:00 am</option>
                             <option value="2">2:00 am</option>
@@ -186,7 +186,7 @@ echo "</style>";
                        	<input name="search" type="text" id="searchBox" class="putInHash">
                     </div> 
                     
-                    <input type="submit" value="Save options and refresh" id="filter_submit" />
+                    <a id="filter_submit"><img src="<?php echo $html->url('/css/'); ?>rinoa/refresh.png" class="small_icon_inline_button" /> Save options and refresh</a>
                     
                     </form>
                         
@@ -205,7 +205,7 @@ echo "</style>";
                 </div>
             </td></tr>
             
-            <tr><td class="timeslot_title"></td><td class="timeline_cell"><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/up.png" class="small_icon_inline_button" />Show events from the previous 3 hours</a>
+            <tr><td class="timeslot_title"></td><td class="timeline_cell"><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/up.png" class="small_icon_inline_button" />Show previous events</a>
             
             <div class="clear"></div>
             </td><td class="mys_cell"></td></tr>
