@@ -2,14 +2,19 @@
 <div class="users form">
 	<?php echo $form->create('User');?>
 		<fieldset>
-	 		<legend><?php __('Add User');?></legend>
+		
+		<div class="form_section">
+	 		<h2><?php __('Registration Form');?></h2>
+	 		
+	 		
 		<?php
-			echo $form->input('email');
-			echo $form->input('pass', array('type'=>'password'));
-			echo $form->input('confirm password', array('type'=>'password'));//todo js checking
+			echo $form->input('email', array( 'class'=>'textfield' ));
+			echo $form->input('pass', array('type'=>'password', 'class'=>'textfield'));
+			echo $form->input('confirm password', array('type'=>'password', 'class'=>'textfield'));//todo js checking
 		?>
 		</fieldset>
 	<?php echo $form->end('Submit');?>
+			</div>
 	</div>
 <?php } else if ($hasAccount == null) {?>
 	You have been given access to create events and groups in XXX.

@@ -9,7 +9,7 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
     function nospecial( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z_+&.!, ]*$");  }
     function isdate( value, element ){ return this.optional(element) || value.match("^[0-9][0-9]?/[0-9][0-9]?/(19|20|21)?[0-9][0-9]$");  }
     function istime( value, element ){
-		if(value.match( /^[0-9][0-9]?(:[0-9][0-9](:[0-9][0-9])?)?(( )*)?(am|pm|a|p)?$/i ))
+		if(value.match( /^[0-9][0-9]?(:[0-9][0-9](:[0-9][0-9])?)?( )*(am|pm|a|p)?$/i ))
 		validformat = true;
 		else
 		return this.optional(element);
@@ -80,11 +80,35 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
     
     function init_validation(){
 		
+		now = new Date();
+		
+		now_in_mseconds = now.getTime();
+		an_hour = 1000*60*60;
+		next_hour = now_in_mseconds - (now_in_mseconds % an_hour) + an_hour;
+		next_hour_date = new Date( next_hour );
+		
+		$("[name='data[Other][time_start]']").val( next_hour_date.getHours() + ":00" );
+		$("[name='data[Other][date_start]']").val( (next_hour_date.getMonth()+1) + "/" + next_hour_date.getDate() + "/"  + next_hour_date.getFullYear() );
+		
+		in_an_hour = next_hour + an_hour;
+		in_an_hour_date = new Date( in_an_hour );
+		
 		$("input[name='data[Other][date_start]']").blur( function(){
 			
 			if( $("input[name='data[Other][date_end]']").val() == "" )
 			{
-				$("input[name='data[Other][date_end]']").val( $("input[name='data[Other][date_start]']").val() );
+				date_start = new Date( $("[name='data[Other][date_start]']").val() );
+				time_start = gettime( $("[name='data[Other][time_start]']").val() ).split(":");
+				date_start.setHours( time_start[0] );
+				date_start.setMinutes( time_start[1] );
+				date_start.setSeconds( time_start[2] );
+				dt_start = date_start.getTime();
+				
+				dt_end = dt_start + an_hour;
+				dt_end_date = new Date( dt_end );
+				
+				$("[name='data[Other][time_end]']").val( dt_end_date.getHours() + ":00" );
+				$("input[name='data[Other][date_end]']").val( (dt_end_date.getMonth()+1) + "/" + dt_end_date.getDate() + "/"  + dt_end_date.getFullYear() )
 			}
 			
 		});
