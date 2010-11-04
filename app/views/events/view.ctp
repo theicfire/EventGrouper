@@ -43,12 +43,7 @@ $(document).ready( function(){
     
     <div id="conference_header">
     
-		<?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
-			echo $html->link(__('Edit', true), array('controller' => 'events', 'action' => 'edit', $event['Event']['id'])); 
-		}?>
-		<?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
-			echo $html->link(__('Delete', true), array('controller' => 'events', 'action' => 'delete', $event['Event']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $event['Event']['id'])); 
-		}?>
+		
         
         <div id="ch_right">
         	<div class="curr_time_large">It's currently <span id="curr_time">7:55 pm</span> on <span id="curr_date">August 27, 2010</span></div>
@@ -126,6 +121,15 @@ $(document).ready( function(){
         ?>
     
     <h1 class="event_name"><?=$event['Event']['title']?></h1>
+    
+    <?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
+			echo $html->link(__('Edit', true), array('controller' => 'events', 'action' => 'edit', $event['Event']['id'])); 
+		}?>
+		<?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
+			echo $html->link(__('Delete', true), array('controller' => 'events', 'action' => 'delete', $event['Event']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $event['Event']['id'])); 
+		}?>
+		
+		<br />
     
     <a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" />Add to my schedule</a>
     <!--<a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/group.png" />Share on Facebook</a>

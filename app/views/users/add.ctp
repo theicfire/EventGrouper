@@ -51,7 +51,7 @@ function page_init()
 			echo $form->input('confirm password', array('type'=>'password', 'class'=>'textfield', 'label'=>'Confirm Password'));
 		?>
 
-	<div style="padding: 5px"><?php echo $form->end('Submit');?></div>
+	<?php echo $form->end(array('label' => 'Submit', 'class'=>'make_button'));?>
 			</div>
 	</div>
 <?php } else if ($hasAccount == null) {?>
