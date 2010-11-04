@@ -123,7 +123,8 @@ class EventGroupsController extends AppController {
 			}
 		}
 		$groupPath = $this->EventGroup->getPath($parentId);
-		$this->set(compact('parentId', 'currenteventGroup', 'groupPath'));
+		$parentGroup = $this->EventGroup->findById($parentId);
+		$this->set(compact('parentId', 'currenteventGroup', 'groupPath', 'parentGroup'));
 		$this->set('isAdmin', true);
 	}
 
@@ -167,7 +168,8 @@ class EventGroupsController extends AppController {
 		}
 		$categoryStr = implode(", ", $categoryArr);
 		$groupPath = $this->EventGroup->getPath($parentId);
-		$this->set(compact('categoryStr', 'groupPath', 'parentId'));
+		$parentGroup = $this->EventGroup->findById($parentId);
+		$this->set(compact('categoryStr', 'groupPath', 'parentId', 'parentGroup'));
 		$this->set('isAdmin', true);
 //		$users = $this->EventGroup->User->find('list');
 //		$this->set(compact('users'));

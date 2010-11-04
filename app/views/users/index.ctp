@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 <h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
 	class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" /> Groups</h1>
-
+<?php echo $html->link('Add your own group', '/event_groups/add/0'); ?>
 <table class="full_width">
 	<tr>
 		<th>Group</th>
@@ -54,15 +54,16 @@ $(document).ready(function() {
 
 <?php 
 	}
+	
 ?>
 
-</table>
 
+</table>
 </div>
 <div id="admin_notifications" class="info_box">
 
 
-<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" /> Sent Events</h1>
+<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" /> Your Added Events</h1>
 
 <table class="full_width">
 	<tr>
