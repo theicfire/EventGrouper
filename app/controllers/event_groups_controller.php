@@ -123,7 +123,8 @@ class EventGroupsController extends AppController {
 			}
 		}
 		$groupPath = $this->EventGroup->getPath($parentId);
-		$this->set(compact('parentId', 'currenteventGroup', 'groupPath'));
+		$parentGroup = $this->EventGroup->findById($parentId);
+		$this->set(compact('parentId', 'currenteventGroup', 'groupPath', 'parentGroup'));
 		$this->set('isAdmin', true);
 	}
 

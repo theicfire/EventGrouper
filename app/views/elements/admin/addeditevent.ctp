@@ -186,7 +186,16 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 
 </div>
 
-<?php echo $this->element('admin/map');?>
+<?php 
+$centerLat = $eventGroup['EventGroup']['latitude'];
+if (empty($centerLat)) $centerLat = '42.359051';
+$centerLong = $eventGroup['EventGroup']['longitude'];
+if (empty($centerLong)) $centerLong = '-71.093623';
+$hasDefault = false;
+if (!empty($eventGroup['EventGroup']['longitude']))
+	$hasDefault = true;
+echo $this->element('admin/map', array('type'=>'Event', 'centerLat' => $centerLat, 'centerLong' => $centerLong, 'hasDefault' => $hasDefault));
+?>
 
 <div class="form_section">
 <h2>Submit for Approval</h2>

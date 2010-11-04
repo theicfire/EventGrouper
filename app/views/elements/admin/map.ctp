@@ -18,6 +18,7 @@
 var mySearchControl;
 var map;
 var default_zoom_level = 16;
+var hasBeenInit = false;
 
     function map_init() {
       if (GBrowserIsCompatible()) {
@@ -31,7 +32,7 @@ var default_zoom_level = 16;
 		  
 		  
         map = new GMap2(document.getElementById("map_container"), myMapOptions);
-        map.setCenter(new GLatLng(42.359051, -71.093623), 13);
+        map.setCenter(new GLatLng(<?php echo $centerLat;?>, <?php echo $centerLong;?>), 13);
         map.setUIToDefault();
         
         /*mySearchControl = new google.maps.LocalSearch();
@@ -46,6 +47,7 @@ var default_zoom_level = 16;
         GEvent.addListener(map, 'click', map_click_handler);
         
         map.enableContinuousZoom();
+        hasBeenInit = true;
 
       }
     }
@@ -85,8 +87,8 @@ var default_zoom_level = 16;
 			
 		$("#map_lat_long").show();
 		
-		$("[name=lat]").val(lat);
-		$("[name=long]").val(lng);
+		$("#latInput").val(lat);
+		$("#longInput").val(lng);
 		
 		close_map();
 	}
@@ -132,6 +134,12 @@ var default_zoom_level = 16;
 		
 		$("#map_overlay").show();
 		$("#overlay").fadeIn("slow");
+		if (!hasBeenInit) {
+			map_init();
+			var tmplatlng = new GLatLng('<?php echo $centerLat?>', '<?php echo $centerLong; ?>');
+			message = generate_info_window( "", tmplatlng.lat(), tmplatlng.lng() );
+			map.openInfoWindow(tmplatlng, message);
+		}
 	}
 
 	function close_map()
@@ -153,9 +161,9 @@ var default_zoom_level = 16;
 			$("#location_not_entered_block").hide();
 			
 			$("#map_lat_long").show();
-			
-			$("[name=lat]").val(click_location.lat());
-			$("[name=long]").val(click_location.lng());
+
+			$("#latInput").val(click_location.lat());
+			$("#longInput").val(click_location.lng());
 			
 			close_map();
 		}
@@ -194,8 +202,9 @@ var default_zoom_level = 16;
         
         <label>Location on Map</label>
         
-        <div id="location_not_entered_block">
-            
+
+        <div id="location_not_entered_block" <?php if ($hasDefault) echo "style='display:none;'";?>>
+            <p class="form_tip">Click the button below to select the location from a map:</p>
             
             <a href="#" class="make_button" id="map_open_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="rinoa_small_inline" /> Find location on map</a>
             
@@ -209,10 +218,11 @@ var default_zoom_level = 16;
             </table>-->
         </div>
         
-        <div id="map_lat_long" style="display: none;">
+        <div id="map_lat_long"  <?php if (!$hasDefault) echo "style='display:none;'";?>>
             
             <table><tr><td>Latitude</td><td>Longitude</td></tr>
-            <tr><td><input class="textfield" name="lat" type="text" /></td><td><input class="textfield" name="long" type="text" /></td>
+            <tr><td><input class="textfield" name="data[<?=$type?>][latitude]" id="latInput" type="text"  <?php if ($hasDefault) echo "value='".$centerLat."'";?> /></td>
+            <td><input class="textfield" name="data[<?=$type?>][longitude]" id="longInput" type="text" <?php if ($hasDefault) echo "value='".$centerLong."'";?>/></td>
             </tr>
             </table>
             

@@ -96,14 +96,25 @@
 			<?php echo $form->textarea('description', array('class' => 'description_textarea'));?>      
 		</div>
         
-        
+        <?php 
+        if ($type == 'add') $group = $parentGroup;
+        else $group = $this->data;
+		$centerLat = $group['EventGroup']['latitude'];
+		if (empty($centerLat)) $centerLat = '42.359051';
+		$centerLong = $group['EventGroup']['longitude'];
+		if (empty($centerLong)) $centerLong = '-71.093623';
+		$hasDefault = false;
+		if (!empty($group['EventGroup']['longitude']))
+			$hasDefault = true;
+		echo $this->element('admin/map', array('type'=>'EventGroup', 'centerLat' => $centerLat, 'centerLong' => $centerLong, 'hasDefault' => $hasDefault));
+		?>
         <div class="form_section">
         <h2>Submit for Approval</h2>
         <input type="hidden" name="data[EventGroup][parent_id]" id="EventGroupParentId" value="<?=$parentId?>">
 		<?php if ($type == 'add') {?><input type="hidden" name="pathstart" value="<?=$currenteventGroup['EventGroup']['path']?>"><?php }?>
 		<?php if ($type == 'edit') echo $form->input('id', array('type'=>'hidden'));?>
         <?=$this->Form->button('Submit', array('type' => 'submit', 'class' => 'make_button'));?> 
-        <p class="form_tip">This group will be approved by the REX coordinators.  Check here: <input type="checkbox" name="should_email" /> if you want to receive an email when it is approved.</p>
+<!--        <p class="form_tip">This group will be approved by the REX coordinators.</p>-->
         </div>
     
     </div>
