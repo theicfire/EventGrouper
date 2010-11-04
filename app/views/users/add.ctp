@@ -3,6 +3,8 @@
 	<?php echo $form->create('User');?>
 		<fieldset>
 	 		<legend><?php __('Add User');?></legend>
+	 		
+	 		<div class="form_section">
 		<?php
 			echo $form->input('email');
 			echo $form->input('pass', array('type'=>'password'));
@@ -10,6 +12,7 @@
 		?>
 		</fieldset>
 	<?php echo $form->end('Submit');?>
+			</div>
 	</div>
 <?php } else if ($hasAccount == null) {?>
 	You have been given access to create events and groups in XXX.

@@ -27,6 +27,8 @@ class EventsController extends AppController {
 		$this->MyAcl->runcheck('EventGroup',$eventGroupId,'create');
 		if (!empty($this->data)) {
 			$this->Event->create();
+			$userid = $this->Session->read('userid');
+			$this->data['Event']['user_id'] = $userid;
 			$this->data['Event']['event_group_id'] = $eventGroupId;
 			$this->data['Event']['time_start'] = $this->data['Other']['date_start']." ".$this->data['Other']['time_start'];
 			$this->data['Event']['duration'] = (strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']))/60; 
@@ -50,15 +52,14 @@ class EventsController extends AppController {
 				//and now add permissions to the users
 				//NOTE: we assume that the user is logged in to get to this page (and has a session)
 				//NOTE: we are giving the users who make the event groups full permissions
-				$userid = $this->Session->read('userid');
 				$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'Event', 'foreign_key' => $eventId));
 			
 			
 			
 			
-				$pathRes = $this->EventGroup->findById($eventGroupId);
+				
 				$this->Session->setFlash('The Event has been saved');
-				$this->redirect("/".$pathRes['EventGroup']['path']);
+				$this->redirect("/event_groups/view_admin/".$eventGroupId);
 			} else {
 				$this->Session->setFlash(__('The Event could not be saved. Please, try again.', true));
 			}
@@ -80,14 +81,16 @@ class EventsController extends AppController {
 			$this->Session->setFlash(__('Invalid Event', true));
 			$this->redirect(array('action'=>'index'));
 		}
+		
+		$groupId = $this->Event->findById($id);
+		$groupId = $groupId['Event']['event_group_id'];
 		$this->MyAcl->runcheck('Event',$id,'update');
 		if (!empty($this->data)) {
 			
 			// add code here to change form input
 			if ($this->Event->save($this->data)) {
-				$pathRes = $this->Event->findById($id);
 				$this->Session->setFlash(__('The Event has been saved', true));
-				$this->redirect("/events/view/".$id);
+				$this->redirect("/event_groups/view_admin/".$groupId);
 			} else {
 				$this->Session->setFlash(__('The Event could not be saved. Please, try again.', true));
 			}
@@ -95,8 +98,6 @@ class EventsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Event->read(null, $id);
 		}
-		$groupId = $this->Event->findById($id);
-		$groupId = $groupId['Event']['event_group_id'];
 		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$groupId)));
 		$users = $this->Event->User->find('list');
 		$eventGroups = $this->Event->EventGroup->find('list');
@@ -112,11 +113,13 @@ class EventsController extends AppController {
 			$this->Session->setFlash(__('Invalid id for Event', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->MyAcl->runcheck('Event',$eventGroupId,'delete');
+		$groupId = $this->Event->findById($id);
+		$groupId = $groupId['Event']['event_group_id'];
+		$this->MyAcl->runcheck('Event',$groupId,'delete');
 		$pathRes = $this->Event->findById($id);
 		if ($this->Event->delete($id)) {
 			$this->Session->setFlash(__('Event deleted', true));
-			$this->redirect("/".$pathRes['EventGroup']['path']);
+			$this->redirect("/event_groups/view_admin/".$groupId);
 		}
 	}
 	

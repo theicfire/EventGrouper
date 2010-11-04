@@ -146,6 +146,7 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 	value="" /> 
 <p class="form_tip">Click inside the field for a date picker.</p>
 
+
 <div id="debug_time"></div>
 
 <label>End Time</label><input

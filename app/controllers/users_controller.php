@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $uses = array('User', 'UserAlias', 'EventGroup');
+	var $uses = array('User', 'UserAlias', 'EventGroup', 'Event');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Access');
 	var $components = array('Acl');
 	function index() {
@@ -23,11 +23,12 @@ class UsersController extends AppController {
 				unset($userEventGroups[$key]);
 		}
 		foreach ($userEventGroups as $key=>$value) {
-			$userEventGroups[$key]['EventGroup']['eventcount'] = count($this->EventGroup->getAllEventsUnderThis($value['EventGroup']['id']));
+			$userEventGroups[$key]['EventGroup']['eventcount'] = count($this->EventGroup->getAllEventsUnderThis($value['EventGroup']['id'], null, array('status' => 'confirmed')));
 			$userEventGroups[$key]['EventGroup']['eventgroupcount'] = count($this->EventGroup->getAllEventGroupsUnderThis($value['EventGroup']['id']))-1;
 			$userEventGroups[$key]['EventGroup']['groupPath'] = $this->EventGroup->getPath($value['EventGroup']['id']);
 		}
-		$this->set(compact('userEventGroups'));
+		$sentEvents = $this->Event->find('all', array('conditions' => array('user_id' => $this->Session->read('userid'), 'status !=' => 'hidden')));
+		$this->set(compact('userEventGroups','sentEvents'));
 		$this->set('isAdmin', true);
 		
 //		$this->User->recursive = 0;

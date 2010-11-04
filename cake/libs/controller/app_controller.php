@@ -37,6 +37,7 @@ class AppController extends Controller {
 	var $helpers = array('Javascript', 'Html', 'Session');
 	function beforeFilter() {
 		$this->Facebook->login();
+		$this->set('MAPS_API_KEY', Configure::read('MAPS_API_KEY'));
 	}
 }
 ?>
