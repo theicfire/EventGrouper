@@ -234,7 +234,7 @@ class EventGroupsController extends AppController {
 		$groupPath = $this->EventGroup->getPath($id);
 		$treeList = $this->EventGroup->generateTreeList();
 		$viewCalendar = false;
-		if ($this->params['url']['hasCalendar'] == 'true') $viewCalendar = true;
+		if (isset($this->params['url']['hasCalendar']) && $this->params['url']['hasCalendar'] == 'true') $viewCalendar = true;
 		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'categoryChoices', 'viewCalendar'));
 		
 		

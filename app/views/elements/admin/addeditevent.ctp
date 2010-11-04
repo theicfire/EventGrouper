@@ -80,21 +80,21 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
     
     function init_validation(){
 		
-		now = new Date();
-		
-		now_in_mseconds = now.getTime();
-		an_hour = 1000*60*60;
-		next_hour = now_in_mseconds - (now_in_mseconds % an_hour) + an_hour;
-		next_hour_date = new Date( next_hour );
-		
-		$("[name='data[Other][time_start]']").val( next_hour_date.getHours() + ":00" );
-		$("[name='data[Other][date_start]']").val( (next_hour_date.getMonth()+1) + "/" + next_hour_date.getDate() + "/"  + next_hour_date.getFullYear() );
-		
-		in_an_hour = next_hour + an_hour;
-		in_an_hour_date = new Date( in_an_hour );
-		
-		$("[name='data[Other][time_end]']").val( in_an_hour_date.getHours() + ":00" );
-		$("[name='data[Other][date_end]']").val( (in_an_hour_date.getMonth()+1) + "/" + in_an_hour_date.getDate() + "/"  + in_an_hour_date.getFullYear() );
+//		now = new Date();
+//		
+//		now_in_mseconds = now.getTime();
+//		an_hour = 1000*60*60;
+//		next_hour = now_in_mseconds - (now_in_mseconds % an_hour) + an_hour;
+//		next_hour_date = new Date( next_hour );
+//		
+//		$("[name='data[Other][time_start]']").val( next_hour_date.getHours() + ":00" );
+//		$("[name='data[Other][date_start]']").val( (next_hour_date.getMonth()+1) + "/" + next_hour_date.getDate() + "/"  + next_hour_date.getFullYear() );
+//		
+//		in_an_hour = next_hour + an_hour;
+//		in_an_hour_date = new Date( in_an_hour );
+//		
+//		$("[name='data[Other][time_end]']").val( in_an_hour_date.getHours() + ":00" );
+//		$("[name='data[Other][date_end]']").val( (in_an_hour_date.getMonth()+1) + "/" + in_an_hour_date.getDate() + "/"  + in_an_hour_date.getFullYear() );
 		
 		$("input[name='data[Other][date_start]']").blur( function(){
 			
@@ -166,17 +166,31 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 
 <br /><br/>
 <div class="clear"></div>
-
+<?php 
+//default times
+$time_start = date('g:i a');
+$date_start = date('m/d/Y');
+$time_end = date('g:i a', time()+60*60);
+$date_end = date('m/d/Y', time()+60*60);
+if (!empty($this->data['Event']['time_start'])) {
+	$date_start = date('m/d/Y', strtotime($this->data['Event']['time_start']));
+	$time_start = date('g:i a', strtotime($this->data['Event']['time_start']));
+}
+if (!empty($this->data['Event']['duration'])) {
+	$date_end = date('m/d/Y', strtotime($this->data['Event']['time_start'])+$this->data['Event']['duration']*60);
+	$time_end = date('g:i a', strtotime($this->data['Event']['time_start'])+$this->data['Event']['duration']*60);
+}
+?>
 <div style="float:left;">
 	<label>Start Time</label><input type="text"
 		name="data[Other][time_start]" class="time_input textfield"
-		value="" />
+		value="<?=$time_start?>" />
 	<p class="form_tip">For example: 8:05 pm or 17:47</p>	
 	</div>
 	<div style="float:left; padding-left: 20px;">
 		<label>Start Date</label><input type="text"
 		name="data[Other][date_start]" class="date_input textfield"
-		value="" /> 
+		value="<?=$date_start?>" /> 
 	<p class="form_tip">Click inside the field for a date picker.</p>
 </div>
 
@@ -187,14 +201,15 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 <div style="float:left;">
 	<label>End Time</label><input
 		type="text" name="data[Other][time_end]" class="time_input textfield"
-		value="" />
+		value="<?=$time_end?>" />
 		<p class="form_tip">&nbsp;</p>
 		</div>
 		<div style="float:left; padding-left: 20px;">
 		
+		
 		<label>End Date</label><input type="text"
 		name="data[Other][date_end]" class="date_input textfield"
-		value="" /> 
+		value="<?=$date_end?>" /> 
 </div>
 
 <div class="clear"></div>
