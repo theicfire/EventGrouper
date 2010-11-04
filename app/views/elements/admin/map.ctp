@@ -197,7 +197,8 @@ var hasBeenInit = false;
 
         
         <label>Location Name</label>
-        <input class="textfield" name="loc_name" type="text" />
+<!--        <input class="textfield" name="data[<?=$type?>][location]" type="text" />-->
+        <?php echo $form->text('location', array('class' => 'textfield'));?>
         <p class="form_tip">Enter the name of the location as it should appear in the schedule.</p>
         
         <label>Location on Map</label>

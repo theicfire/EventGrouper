@@ -85,7 +85,10 @@ class EventsController extends AppController {
 		$this->MyAcl->runcheck('Event',$id,'update');
 		if (!empty($this->data)) {
 			
+		$this->data['Event']['time_start'] = date('Y-m-d H:i:s', strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']));
+		$this->data['Event']['duration'] = strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start'])/60;
 			// add code here to change form input
+//			print_r($this->data);
 			if ($this->Event->save($this->data)) {
 				$this->Session->setFlash(__('The Event has been saved', true));
 				$this->redirect("/event_groups/view_admin/".$groupId);
