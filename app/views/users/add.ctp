@@ -4,13 +4,13 @@
 		<fieldset>
 		
 		<div class="form_section">
-	 		<h2><?php __('Add User');?></h2>
+	 		<h2><?php __('Registration Form');?></h2>
 	 		
 	 		
 		<?php
-			echo $form->input('email');
-			echo $form->input('pass', array('type'=>'password'));
-			echo $form->input('confirm password', array('type'=>'password'));//todo js checking
+			echo $form->input('email', array( 'class'=>'textfield' ));
+			echo $form->input('pass', array('type'=>'password', 'class'=>'textfield'));
+			echo $form->input('confirm password', array('type'=>'password', 'class'=>'textfield'));//todo js checking
 		?>
 		</fieldset>
 	<?php echo $form->end('Submit');?>
