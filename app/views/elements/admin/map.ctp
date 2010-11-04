@@ -90,6 +90,10 @@ var hasBeenInit = false;
 		$("#latInput").val(lat);
 		$("#longInput").val(lng);
 		
+		$("#staticmap").attr("src", "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=16&size=400x300&maptype=roadmap&markers=color:red|label:A|" + lat + "," + lng + "&sensor=false");
+		$("#staticmap_out").attr("src", "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=12&size=200x300&maptype=roadmap&markers=color:red|label:A|" + lat + "," + lng + "&sensor=false");
+		$("#staticmap_in").attr("src", "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=18&size=200x300&maptype=roadmap&markers=color:red|label:A|" + lat + "," + lng + "&sensor=false");
+		
 		close_map();
 	}
 	
@@ -126,6 +130,18 @@ var hasBeenInit = false;
 		$("#overlay").fadeIn("slow");
 		
 		map_init();
+	}
+	
+	function reopen_no_event()
+	{
+		$("#map_overlay").show();
+		$("#overlay").fadeIn("slow");
+		if (!hasBeenInit) {
+			map_init();
+			var tmplatlng = new GLatLng('<?php echo $centerLat?>', '<?php echo $centerLong; ?>');
+			message = generate_info_window( "", tmplatlng.lat(), tmplatlng.lng() );
+			map.openInfoWindow(tmplatlng, message);
+		}
 	}
 
 	function reopen_map( event )
@@ -219,12 +235,16 @@ var hasBeenInit = false;
         
         <div id="map_lat_long"  <?php if (!$hasDefault) echo "style='display:none;'";?>>
             
-            <table><tr><td>Latitude</td><td>Longitude</td></tr>
+            <a href="javascript:reopen_no_event()"><img id='staticmap' src="http://maps.google.com/maps/api/staticmap?center=<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&zoom=16&size=400x300&maptype=roadmap&markers=color:red|label:A|<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&sensor=false" />
+            <img id='staticmap_out' src="http://maps.google.com/maps/api/staticmap?center=<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&zoom=12&size=200x300&maptype=roadmap&markers=color:red|label:A|<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&sensor=false" />
+            <img id='staticmap_in' src="http://maps.google.com/maps/api/staticmap?center=<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&zoom=18&size=200x300&maptype=roadmap&markers=color:red|label:A|<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&sensor=false" /></a>
+            
+            <table style="display: none;"><tr><td>Latitude</td><td>Longitude</td></tr>
             <tr><td><input class="textfield" name="data[<?=$type?>][latitude]" id="latInput" type="text"  <?php if ($hasDefault) echo "value='".$centerLat."'";?> /></td>
             <td><input class="textfield" name="data[<?=$type?>][longitude]" id="longInput" type="text" <?php if ($hasDefault) echo "value='".$centerLong."'";?>/></td>
             </tr>
             </table>
-            
+            <div></div>
             <a href="#" class="make_button" id="map_reopen_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="rinoa_small_inline" /> Change location</a>
         	
         </div>
