@@ -30,8 +30,8 @@ class EventsController extends AppController {
 			$userid = $this->Session->read('userid');
 			$this->data['Event']['user_id'] = $userid;
 			$this->data['Event']['event_group_id'] = $eventGroupId;
-			$this->data['Event']['time_start'] = $this->data['Other']['date_start']." ".$this->data['Other']['time_start'];
-			$this->data['Event']['duration'] = (strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']))/60; 
+			$this->data['Event']['time_start'] = date('Y-m-d H:i:s', strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']));
+			$this->data['Event']['duration'] = strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start'])/60; 
 			if ($this->Event->save($this->data)) {
 				
 				
