@@ -9,7 +9,7 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
     function nospecial( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z_+&.!, ]*$");  }
     function isdate( value, element ){ return this.optional(element) || value.match("^[0-9][0-9]?/[0-9][0-9]?/(19|20|21)?[0-9][0-9]$");  }
     function istime( value, element ){
-		if(value.match( /^[0-9][0-9]?(:[0-9][0-9](:[0-9][0-9])?)?(( )*)?(am|pm|a|p)?$/i ))
+		if(value.match( /^[0-9][0-9]?(:[0-9][0-9](:[0-9][0-9])?)?( )*(am|pm|a|p)?$/i ))
 		validformat = true;
 		else
 		return this.optional(element);
