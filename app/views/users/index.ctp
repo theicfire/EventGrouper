@@ -1,3 +1,13 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.hideEvent').click(function() {
+		$.get("<?php echo $html->url('/');?>admin/changeEventStatus/"+$(this).parent().parent().attr('id').split('-')[1]+"/hidden");
+		$(this).parent().parent().hide();
+	});
+	
+});
+</script>
+
 <div id="admin_groups" class="info_box">
 
 <h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
@@ -34,6 +44,11 @@
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 				class="rinoa_small_inline" /> Add events</a>
 			<?php }?>
+			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'confirm')) {?> 
+				<a href="<?php echo $html->url("/admin/requests/".$group['EventGroup']['id']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
+				class="rinoa_small_inline" />Check Requests</a>
+			<?php }?>
 			</td>
 	</tr>
 
@@ -44,31 +59,24 @@
 </table>
 
 </div>
-
 <div id="admin_notifications" class="info_box">
 
 
-<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" />
-Notifications + Requests</h1>
+<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" /> Sent Events</h1>
 
 <table class="full_width">
 	<tr>
-		<th>From</th>
-		<th>Group</th>
-		<th>Contents</th>
+		<th>Title</th>
+		<th>Status</th>
 		<th>Actions</th>
 	</tr>
-	<tr>
-		<td>Saif Hakim</td>
-		<td>Phi Kappa Theta</td>
-		<td>Event created: <a href="#">Carribean Party</a> at 8:00 pm
-		3/14/2010</td>
-		<td><a href="#" class="make_button"><img
-			src="<?php echo $html->url('/'); ?>css/rinoa/check.png" class="rinoa_small" /></a> <a href="#"
-			class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/cancel.png"
-			class="rinoa_small" /></a> <a href="#" class="make_button"><img
-			src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png" class="rinoa_small" /></a></td>
+	<?php foreach ($sentEvents as $event) {?>
+	<tr id="event-<?=$event['Event']['id']?>">
+		<td><?=$event['Event']['title']?></td>
+		<td><?=$event['Event']['status']?></td>
+		<td><a href="#" class="hideEvent">Hide</a></td>
 	</tr>
+	<?php }?>
 
 </table>
 
