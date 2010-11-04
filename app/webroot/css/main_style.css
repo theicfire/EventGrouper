@@ -56,6 +56,20 @@ a
 	float: right;
 }
 
+.uh_logo
+{
+	color: #fff;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 1.1em;
+	text-decoration: none;
+}
+
+#universal_header a
+{
+	color: #fff;
+}
+
 #conference_header
 {
 }

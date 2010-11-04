@@ -57,6 +57,11 @@
 	
 </head>
 <body>
+
+<script type="text/javascript">
+	$(document).ready( function () { $(".make_button").button() } );
+</script>
+
 <div id="help_modal"></div>
 
     <?php if (isset($isAdmin)) {?>
@@ -77,13 +82,13 @@
     <?php } else {?>
     
 	    <div id="universal_header">
-			<div id="uh_left"><?php echo $html->link("RushRabbit", "/")?></div>
+			<div id="uh_left"><?php echo $html->link("RushRabbit", "/", array('class'=>'uh_logo'))?></div>
 		        
 			<?php
 			if ($this->Session->read('username') == null) {
 				?>
-				<fb:login-button perms="email"></fb:login-button>
-				<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Log In", "/login", array('id' => 'login'));?> | <?php echo $html->link("Register", "/users/add");?></div>
+				
+				<div id="uh_right">what is RushRabbit? | <?php echo $html->link("Log In", "/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?> | <fb:login-button perms="email"></fb:login-button></div>
 				<?php 
 			} else {
 				?>

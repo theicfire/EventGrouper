@@ -55,24 +55,53 @@ function page_init()
 			</div>
 	</div>
 <?php } else if ($hasAccount == null) {?>
-	You have been given access to create events and groups in XXX.
+	
+	<div class="form_section" style="width: 800px; margin: 10px auto">
+	<h2>Access Granted</h2>
+	<p>
+	You (email@example.com) have been given access to create events and groups in XXX.
 	<br>
-	<?php echo $html->link(__('Go here if you have never registered for this site', true), array('action' => 'add', $unregisteredData['User']['id'], "newaccount")); ?>
-	<br>
-	<?php echo $html->link(__('Go here if you have already registered for this site and are using a different email than this', true), array('action' => 'add', $unregisteredData['User']['id'], "makealias")); ?>
-	<br>
+	Which one describes you best?</p>
+	<?php echo $html->link(__('I do not have a RushRabbit account', true), array('action' => 'add', $unregisteredData['User']['id'], "newaccount"), array('class'=>'make_button')); ?>
+
+	<?php echo $html->link(__('I have a RushRabbit account under a different email address', true), array('action' => 'add', $unregisteredData['User']['id'], "makealias"), array('class'=>'make_button')); ?>
+	</div>
 <?php } else if ($hasAccount == "makealias") {?>
-	<div id="badLogin" style="display:none; background-color:yellow">You're email/password combination was incorrect. Forgot password? Register?</div>
+
+	<div class="form_section" style="width: 800px; margin: 10px auto">
+	
+	<script type="text/javascript">
+	$(document).ready( init_alias_login );
+	
+	function init_alias_login()
+	{
+		$("#loginForm").validate({
+			rules: {
+				'data[User][email]': {
+					required: true,
+					email: true
+				},
+				'data[User][password]': {
+					required: true,
+				},
+			},
+		});
+	}
+	</script>
+	
+	<h2>Access Granted</h2>
+	<div id="badLogin" class="error" style="display:none;">Your email/password combination was incorrect.</div>
 	<form name="loginForm" id="loginForm" method="post">
 		<fieldset>
-	 		<legend>Login</legend>
-		 	Email:
-			<input type="text" name="data[User][email]" id="email">
-			Password:
-			<input type="password" name="data[User][password]" id="password">
+	 		<p class="form_tip">Please log in to your existing account.</p>
+		 	<label>Email</label>
+			<input type="text" name="data[User][email]" id="email" class="textfield">
+			<label>Password</label>
+			<input type="password" name="data[User][password]" id="password"  class="textfield">
 		</fieldset>
-		<input type="submit" value="Login!">
+		<div style="padding: 5px"><input type="submit" value="Submit"></div>
 	</form>
+	</div>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		  // Handler for .ready() called.
@@ -103,16 +132,48 @@ function page_init()
 
 <?php } else {?>
 <div class="users form">
+	
+	<div class="form_section" style="width: 800px; margin: 10px auto">
+	
+	<script type="text/javascript">
+	$(document).ready( init_alias_login );
+	
+	function init_alias_login()
+	{
+	
+	$("form").validate({
+			rules: {
+				'data[User][pass]': {
+					required: true,
+					minlength: 6
+				},
+				'data[User][confirm password]': {
+					required: true,
+					equalTo: "[name='data[User][pass]']"
+				},
+			},
+			messages: {
+				'data[User][confirm password]': {
+					equalTo: "Please enter the same password as before."
+				}
+			},
+		});
+	}
+	</script>
+	
+	<h2>Access Granted</h2>
+	
 	<?php echo $form->create('User', array('action' => sprintf("add/%d/%s", $unregisteredData['User']['id'], $hasAccount)));?>
 		<fieldset>
-	 		<legend><?php __('Add User');?></legend>
 		<?php
-			echo $form->input('email', array('disabled' => 'disabled', 'value' => $unregisteredData['User']['email']));
-			echo $form->input('email', array('type' => 'hidden', 'value' => $unregisteredData['User']['email']));
-			echo $form->input('pass', array('type'=>'password'));
-			echo $form->input('confirm password', array('type'=>'password'));//todo js checking
+			echo $form->input('email', array('disabled' => 'disabled', 'class'=>'textfield', 'label'=>'Email', 'value' => $unregisteredData['User']['email']));
+			echo $form->input('email', array('type' => 'hidden', 'class'=>'textfield', 'value' => $unregisteredData['User']['email']));
+			echo $form->input('pass', array('type'=>'password', 'label'=>'Password', 'class'=>'textfield'));
+			echo $form->input('confirm password', array('type'=>'password', 'label'=>'Confirm Password', 'class'=>'textfield'));//todo js checking
 		?>
 		</fieldset>
-	<?php echo $form->end('Submit');?>
+	<div style="padding: 5px"><?php echo $form->end('Submit');?></div>
+	
 	</div>
+</div>
 <?php }?>

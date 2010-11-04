@@ -6,7 +6,7 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
     
     $(document).ready( init_validation );
     
-    function nospecial( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z_+&.!, ]*$");  }
+    function nospecial( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z_+&.!,'? ]*$");  }
     function isdate( value, element ){ return this.optional(element) || value.match("^[0-9][0-9]?/[0-9][0-9]?/(19|20|21)?[0-9][0-9]$");  }
     function istime( value, element ){
 		if(value.match( /^[0-9][0-9]?(:[0-9][0-9](:[0-9][0-9])?)?( )*(am|pm|a|p)?$/i ))
@@ -73,7 +73,7 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 		return this.optional(element) || (date_start < date_end);
 	}
     
-    jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, spaces, and . , ! & + _");
+    jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, spaces, and . , ! & + _ '");
     jQuery.validator.addMethod("istime", istime, "Please enter a valid time.");
     jQuery.validator.addMethod("isdate", isdate, "Please enter a valid date.");
     jQuery.validator.addMethod("comparedates", comparestartandend, "Make sure your end time is after your start time.");
