@@ -140,6 +140,7 @@
 <!--login stuff    -->
 <div id="dialog-form" class="popup" title="Login">
 <div class="form_section" style="padding: 0; margin: 0; border: none">
+<p class="validateTips">All form fields are required.</p>
 
 <?php // echo $html->link("Register", "/users/add");?>
 

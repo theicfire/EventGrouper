@@ -5,7 +5,7 @@ class Event extends AppModel {
 	var $actsAs = 'ExtendAssociations';
 	var $validate = array(
 		'title' => array(
-			'valid' => array ('rule' => '/^[a-z0-9 ]+$/i','message' => 'Required. Letters, numbers, and spaces only!'),
+			'valid' => array ('rule' => '/^[a-z0-9&.!,\'\? ]+$/i','message' => 'Required. Letters, numbers, and spaces only!'),
 			'isUnique' => array('rule' => 'isUnique', 'message' => 'This event name has been taken')
 			
 		),
