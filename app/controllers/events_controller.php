@@ -63,11 +63,12 @@ class EventsController extends AppController {
 			}
 		}
 		
-		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$eventGroupId)));
+		
 		$users = $this->Event->User->find('list');
 		$users = $this->Event->User->find('list');
 		$eventGroup = $this->EventGroup->findById($eventGroupId);
 		$groupPath = $this->EventGroup->getPath($eventGroupId);
+		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$groupPath[0]['EventGroup']['id'])));
 		$this->set(compact('categoryChoices', 'eventGroup', 'users', 'eventGroupId', 'groupPath'));
 		$this->set('isAdmin', true);
 	}
@@ -87,7 +88,6 @@ class EventsController extends AppController {
 			
 		$this->data['Event']['time_start'] = date('Y-m-d H:i:s', strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']));
 		$this->data['Event']['duration'] = (strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']))/60;
-		echo "<br>".$this->data['Event']['duration'];
 			// add code here to change form input
 //			print_r($this->data);
 			if ($this->Event->save($this->data)) {
@@ -100,11 +100,11 @@ class EventsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Event->read(null, $id);
 		}
-		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$groupId)));
 		$users = $this->Event->User->find('list');
 		$eventGroups = $this->Event->EventGroup->find('list');
 		$users = $this->Event->User->find('list');
 		$groupPath = $this->EventGroup->getPath($groupId);
+		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$groupPath[0]['EventGroup']['id'])));
 		$eventGroupId = $groupId;
 		$eventGroup = $this->EventGroup->findById($eventGroupId);
 		$this->set(compact('categoryChoices','users','eventGroups', 'eventGroupId', 'groupPath', 'eventGroup'));

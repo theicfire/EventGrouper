@@ -37,7 +37,7 @@
 				class="rinoa_small_inline" /> Add events</a>
 			<?php }?>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {
-				echo $html->link(__('Delete', true), array('action' => 'delete', $currenteventGroup['EventGroup']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id']));
+				echo $html->link($html->image('/css/rinoa/delete.png', array('class' => 'rinoa_small_inline'))." Delete", array('action' => 'delete', $currenteventGroup['EventGroup']['id']), array('escape' => false, 'class' => 'make_button'), sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id']));
 			}?>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {
 				echo $html->link(__('Edit Permissions', true), array('controller' => 'permissions', 'action' => 'view', $currenteventGroup['EventGroup']['id']));
