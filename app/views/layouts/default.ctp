@@ -127,10 +127,10 @@
     		FB.getLoginStatus(function(response) {
     		  if (response.session) {
 	    		  FB.logout(function () {
-	        		window.location = <?php echo $html->url("/");?>
+	        		window.location = '<?php echo $html->url("/");?>'
     	        });
     		  } else {
-    			  window.location = <?php echo $html->url("/");?>
+    			  window.location = '<?php echo $html->url("/");?>'
     		  }
     		});
     	});

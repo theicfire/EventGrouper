@@ -83,15 +83,19 @@ function giveEventsJs() {
 //		
 //	});
 	$(".scheduletoggle").click(function() {
+		console.log('hi');
 		var eventBlock = $(this).parent().parent(); 
 		var id = eventBlock.attr('id').split("-")[1];
 		var textEl = $(this);
+		console.log(textEl.siblings());
 		if (eventBlock.hasClass('onCalendar')) {
 			$.ajax({url: phpVars.root+"/events/removeFromCalendar/"+id,
 			success: function() {
 				eventBlock.removeClass('onCalendar');
 				eventBlock.addClass('offCalendar');
-				textEl.html('add to schedule');				
+				
+				textEl.siblings('.addToSchedule').show();
+				textEl.hide();
 			}
 			});
 		} else {
@@ -99,7 +103,8 @@ function giveEventsJs() {
 			success: function() {
 				eventBlock.removeClass('offCalendar');
 				eventBlock.addClass('onCalendar');
-				textEl.html('remove from schedule');				
+				textEl.hide();
+				textEl.siblings('.removeFromSchedule').show();				
 			}
 			});
 
@@ -210,7 +215,8 @@ $(document).ready( function(){
 	setInterval( "update_time()", 1000 );
 
 	setPageFromHash();
-	$("#filter_submit").trigger('click');
+	if ($("#isCalendar").is(':checked')) $("#gotoschedule").trigger('click');
+	else $("#filter_submit").trigger('click');
 
 	
 	

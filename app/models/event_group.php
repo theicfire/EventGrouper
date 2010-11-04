@@ -77,7 +77,7 @@ class EventGroup extends AppModel {
 		return $childrenArr;
 		
 	}
-	function getAllEventsUnderThis($id, $userId = null, $params = null, $limit = null) {
+	function getAllEventsUnderThis($id, $userId = null, $params = null, $limit = null, $justCalendar = false) {
 		$childrenArr = $this->getAllEventGroupsUnderThis($id);
 		$params['Event.event_group_id'] = $childrenArr;
 		$this->Event->bindModel(array('hasOne' => array('CategoryChoicesEvent')));
@@ -99,6 +99,13 @@ class EventGroup extends AppModel {
 					}
 				}
 			}
+		}
+		$eventsOnCal = array();
+		if ($justCalendar) {
+			foreach($events as &$event)
+				if (isset($event['Event']['onUsersCalendar']))
+					$eventsOnCal[] = $event;
+			$events = $eventsOnCal;
 		}
 		return $events;
 		

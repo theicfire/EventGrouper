@@ -230,11 +230,11 @@ class EventGroupsController extends AppController {
 			$params[] = sprintf('time_start >= \'%s\'', $timeStart); 
 		}
 		$params['status'] = array('confirmed', 'hidden');
-		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params);
 		$groupPath = $this->EventGroup->getPath($id);
 		$treeList = $this->EventGroup->generateTreeList();
 		$viewCalendar = false;
-		if (isset($this->params['url']['hasCalendar']) && $this->params['url']['hasCalendar'] == 'true') $viewCalendar = true;
+		if (isset($this->params['url']['isCalendar']) && $this->params['url']['isCalendar'] == 'true') $viewCalendar = true;
+		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, null, $viewCalendar);
 		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'categoryChoices', 'viewCalendar'));
 		
 		
