@@ -1,3 +1,67 @@
+
+
+<div class="info_page">
+<h1>Welcome to RushRabbit.</h1>
+<p class="subtitle">the world's most advanced event and conference organization system.</p>
+<div class="hr"></div>
+
+<div class="form_section" style="float:left; width: 430px;">
+<h2>What is it?</h2>
+<p>RushRabbit allows you to manage large numbers of events.  It offers groundbreaking new features for the administrator and the conference attendee.</p>
+<p>
+	<ul class="front_page_list">
+		<li class="fpl_item">for administrators:
+			<ul class="front_page_sublist">
+			<li>Delegation of event planning</li>
+			<li>Interface for administrator approval of events</li>
+			<li>Rigid structure of groups and subgroups to ensure organization</li>
+			</ul>
+
+		</li>
+		<li class="fpl_item">for attendees:
+			<ul class="front_page_sublist">
+			<li>Filtering, sorting, and searching through events</li>
+			<li>Location-based event searching (even from a GPS-enabled phone)</li>
+			<li>Personal schedule builder</li>
+			</ul>
+
+		</li>
+	</ul>
+</p>
+</div>
+
+<div class="form_section" style="float:right; width: 430px;">
+<h2>Create a Conference</h2>
+
+<label>Name</label>
+<input type="text" class="textfield" />
+<p class="form_tip">for example, MIT Campus Preview Weekend</p>
+
+<input type="submit" value="Get started" class="make_button" />
+
+</div>
+
+<div class="form_section" style="float:right; width: 430px;">
+<h2>Search for a Conference</h2>
+
+<input type="text" class="textfield" />
+
+<input type="submit" value="Search" class="make_button" />
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+
+
+
+
+
+
+
+
 <h2><?php __('EventGroups');?></h2>
 <table cellpadding="0" cellspacing="0">
 <tr>

@@ -17,6 +17,12 @@
 	background: #fff;
 }
 
+.form_section p
+{
+	padding: 5px;
+	color: #333;
+}
+
 .form_section label
 {
 	display: block;
@@ -67,7 +73,7 @@
 	font-family: "Times New Roman", Times, serif;
 }
 
-.form_section p
+.form_section p.form_tip
 {
 	padding: 5px;
 	color: #666;
