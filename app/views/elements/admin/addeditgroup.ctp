@@ -97,11 +97,16 @@
 		</div>
         
         <?php 
-		$centerLat = $parentGroup['EventGroup']['latitude'];
+        if ($type == 'add') $group = $parentGroup;
+        else $group = $this->data;
+		$centerLat = $group['EventGroup']['latitude'];
 		if (empty($centerLat)) $centerLat = '42.359051';
-		$centerLong = $parentGroup['EventGroup']['longitude'];
-		if (empty($centerLong)) $centerLong = '71.093623';
-		echo $this->element('admin/map', array('type'=>'EventGroup', 'centerLat' => $centerLat, 'centerLong' => $centerLong, 'hasDefault' => false));
+		$centerLong = $group['EventGroup']['longitude'];
+		if (empty($centerLong)) $centerLong = '-71.093623';
+		$hasDefault = false;
+		if (!empty($group['EventGroup']['longitude']))
+			$hasDefault = true;
+		echo $this->element('admin/map', array('type'=>'EventGroup', 'centerLat' => $centerLat, 'centerLong' => $centerLong, 'hasDefault' => $hasDefault));
 		?>
         <div class="form_section">
         <h2>Submit for Approval</h2>

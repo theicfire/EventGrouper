@@ -190,7 +190,7 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 $centerLat = $eventGroup['EventGroup']['latitude'];
 if (empty($centerLat)) $centerLat = '42.359051';
 $centerLong = $eventGroup['EventGroup']['longitude'];
-if (empty($centerLong)) $centerLong = '71.093623';
+if (empty($centerLong)) $centerLong = '-71.093623';
 $hasDefault = false;
 if (!empty($eventGroup['EventGroup']['longitude']))
 	$hasDefault = true;

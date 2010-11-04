@@ -168,8 +168,7 @@ class EventGroupsController extends AppController {
 		}
 		$categoryStr = implode(", ", $categoryArr);
 		$groupPath = $this->EventGroup->getPath($parentId);
-		$parentGroup = $this->EventGroup->findById($parentId);
-		$this->set(compact('categoryStr', 'groupPath', 'parentId', 'parentGroup'));
+		$this->set(compact('categoryStr', 'groupPath', 'parentId'));
 		$this->set('isAdmin', true);
 //		$users = $this->EventGroup->User->find('list');
 //		$this->set(compact('users'));
