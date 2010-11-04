@@ -2,9 +2,11 @@
 <div class="users form">
 	<?php echo $form->create('User');?>
 		<fieldset>
-	 		<legend><?php __('Add User');?></legend>
+		
+		<div class="form_section">
+	 		<h2><?php __('Add User');?></h2>
 	 		
-	 		<div class="form_section">
+	 		
 		<?php
 			echo $form->input('email');
 			echo $form->input('pass', array('type'=>'password'));

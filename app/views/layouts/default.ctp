@@ -28,7 +28,8 @@
 	</title>
 	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
 <!--    todo make local-->
-	<?php echo $html->css(array('main_style.css','smoothness/jquery-ui-1.8.5.custom.css')); ?>
+	<?php echo $html->css(array('main_style.css','smoothness/jquery-ui-1.8.5.custom.css')); 
+	echo $html->css(array('forms.css', 'admin_style.css')); ?>
 	
 	
 <!--    todo put locally^^-->
@@ -48,7 +49,7 @@
 		
 	?>
 	<?php if (isset($isAdmin)) {
-		echo $html->css(array('forms.css', 'admin_style.css'));
+		
 		echo $javascript->link(array('admin.js'));
 	}?>
 	
