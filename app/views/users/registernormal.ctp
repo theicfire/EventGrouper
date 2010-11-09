@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
 
 $(document).ready( page_init );

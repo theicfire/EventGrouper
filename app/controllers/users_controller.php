@@ -142,6 +142,16 @@ class UsersController extends AppController {
 		}
 		$this->data = $oldData;
 		$this->set(compact('unregisteredData', 'hasAccount'));
+		if ($unregisteredData == null) {
+			//render /users/add
+		} elseif ($hasAccount == null) {
+			$this->render('/users/choosewithpermissions');
+		} elseif ($hasAccount == "makealias") {
+			$this->render('/users/makealias');
+		} else {
+			$this->render('/users/newuserwithpermissions');
+		}
+		
 	}
 	
 //	function edit($id = null) {
