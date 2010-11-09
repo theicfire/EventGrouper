@@ -1,4 +1,5 @@
-<?php if ($unregisteredData == null) {?>
+<?php
+if ($unregisteredData == null) {?>
 
 <script type="text/javascript">
 
