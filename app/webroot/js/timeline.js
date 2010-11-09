@@ -83,11 +83,9 @@ function giveEventsJs() {
 //		
 //	});
 	$(".scheduletoggle").click(function() {
-		console.log('hi');
 		var eventBlock = $(this).parent().parent(); 
 		var id = eventBlock.attr('id').split("-")[1];
 		var textEl = $(this);
-		console.log(textEl.siblings());
 		if (eventBlock.hasClass('onCalendar')) {
 			$.ajax({url: phpVars.root+"/events/removeFromCalendar/"+id,
 			success: function() {
