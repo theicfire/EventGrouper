@@ -27,7 +27,7 @@ class UsersController extends AppController {
 			$userEventGroups[$key]['EventGroup']['eventgroupcount'] = count($this->EventGroup->getAllEventGroupsUnderThis($value['EventGroup']['id']))-1;
 			$userEventGroups[$key]['EventGroup']['groupPath'] = $this->EventGroup->getPath($value['EventGroup']['id']);
 		}
-		$sentEvents = $this->Event->find('all', array('conditions' => array('user_id' => $this->Session->read('userid'), array('NOT' => array('status' => array('hidden', 'unconfirmed'))))));
+		$sentEvents = $this->Event->find('all', array('conditions' => array('user_id' => $this->Session->read('userid'), array('NOT' => array('status' => array('hidden'))))));
 		$this->set(compact('userEventGroups','sentEvents'));
 		$this->set('isAdmin', true);
 		

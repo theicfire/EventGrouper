@@ -80,7 +80,7 @@ $(document).ready(function() {
 	<tr id="event-<?=$event['Event']['id']?>">
 		<td><?=$event['Event']['title']?></td>
 		<td><?=$event['Event']['status']?></td>
-		<td><a href="#" class="hideEvent">Hide</a></td>
+		<td><?php if ($event['Event']['status'] == 'confirmed'){ ?><a href="#" class="hideEvent">Hide</a><?php }?></td>
 	</tr>
 	<?php }?>
 

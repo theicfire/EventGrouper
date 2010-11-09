@@ -149,7 +149,7 @@ class EventsController extends AppController {
 				echo "event already added"; 
 		}
 		
-		$this->render(false);
+		$this->autoRender = false;
 	}
 	function removeFromCalendar($id = null) {
 		if ($id == null) {
@@ -161,7 +161,7 @@ class EventsController extends AppController {
 				echo "event already deleted"; 
 		}
 		
-		$this->render(false);
+		$this->autoRender = false;
 	}
 	function mapTesting() {
 		

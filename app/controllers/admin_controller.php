@@ -16,13 +16,18 @@ class AdminController extends AppController {
 	}
 	
 	function changeEventStatus($eventId, $status) {
-		$this->MyAcl->runcheck('EventGroup',$groupId,'bigOwner');
-		$this->render(false);
-		$data = array('Event' => array(
-		'id' => $eventId,
-		'status' => $status
-		));
-		$this->Event->save($data);
+		$this->autoRender = false;
+		$curData = $this->Event->findById($eventId);
+		if ($status != 'hidden' || ($status=='hidden' && $curData['Event']['status'] == 'confirmed')) {
+			$data = array('Event' => array(
+			'id' => $eventId,
+			'status' => $status
+			));
+			$this->Event->save($data);
+			echo "Changed";
+		} else {
+			echo "Unchanged";
+		}
 	}
 
 }

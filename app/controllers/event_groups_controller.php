@@ -51,7 +51,7 @@ class EventGroupsController extends AppController {
 			$this->Session->setFlash(__('Invalid EventGroupss.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->MyAcl->runcheck('EventGroup',$id,'read');
+		$this->MyAcl->runcheck('EventGroup',$id,'create');
 		
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('CategoryChoice', 'Event'),

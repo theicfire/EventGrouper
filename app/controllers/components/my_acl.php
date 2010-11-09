@@ -1,6 +1,7 @@
 <?php
 class MyAclComponent extends Object {
 	var $components = array('Session');
+	var $uses = array('EventGroup', 'Event');
     
 	//called before Controller::beforeFilter()
 	function initialize(&$controller, $settings = array()) {
@@ -31,7 +32,11 @@ class MyAclComponent extends Object {
 			//check if this user has permissions for the highest level group
 			App::import('Model', 'EventGroup');
 			$eventGroup = new EventGroup();
-			$groupPath = $eventGroup->getPath($id);
+			App::import('Model', 'Event');
+			$event = new Event();
+			
+			$eventStuff = $event->findById($id);
+			$groupPath = $eventGroup->getPath($eventStuff['Event']['event_group_id']);
 			$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), 
 			array('model' => 'EventGroup', 'foreign_key' => $groupPath[0]['EventGroup']['id']), 'delete');
 		} else {

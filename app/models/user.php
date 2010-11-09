@@ -3,17 +3,17 @@ class User extends AppModel {
 
 	var $name = 'User';
 	var $actsAs = 'ExtendAssociations';
-	var $validate = array(
-		'email' => array(
-			'rule' => '/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i',
-			'message' => 'Required. Must be valid.',
-			'allowEmpty' => false
-		),
-		'pass' => array(
-		),
-		'confirm password' => array(
-		)
-	);
+//	var $validate = array(
+//		'email' => array(
+//			'rule' => '/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i',
+//			'message' => 'Required. Must be valid.',
+//			'allowEmpty' => false
+//		),
+//		'pass' => array(
+//		),
+//		'confirm password' => array(
+//		)
+//	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $hasMany = array(
