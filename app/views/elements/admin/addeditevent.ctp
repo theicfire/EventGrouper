@@ -1,7 +1,3 @@
-<?php if ($type == 'add') echo $this->Form->create('Event', array('action' => "add/".$eventGroupId));
-else echo $this->Form->create('Event', array('action' => "edit/")); ?>
-
-
 <script type="text/javascript" >
     
     $(document).ready( init_validation );
@@ -146,7 +142,8 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
     
     </script>
 
-
+<?php if ($type == 'add') echo $this->Form->create('Event', array('action' => "add/".$eventGroupId));
+else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 <div id="new_event" class="info_box">
 
 <h1><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"

@@ -64,8 +64,8 @@
 						<td>
 							<?php echo $eventGroup['EventGroup']['description']; ?>
 						</td>
-						<td><a href="<?php echo $html->url("/event_groups/view_admin/".$eventGroup['EventGroup']['id']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
-						class="small_icon_inline_button" /> View details</a> 
+						<td><a href="<?php echo $html->url("/".$eventGroup['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
+						class="small_icon_inline_button" /> View in timeline</a> 
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'update')) {?>
 							<a href="<?php echo $html->url("/event_groups/edit/".$eventGroup['EventGroup']['id']); ?>"
 							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
@@ -125,10 +125,10 @@
 					</td>
 					<td class="actions">
 						<?php echo $html->link(__('View', true), array('controller' => 'events', 'action' => 'view', $event['Event']['id'])); ?>
-						<?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
+						<?php if ($access->check('Event',$event['Event']['id'], 'update')) {
 							echo $html->link(__('Edit', true), array('controller' => 'events', 'action' => 'edit', $event['Event']['id'])); 
 						}?>
-						<?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
+						<?php if ($access->check('Event',$event['Event']['id'], 'delete')) {
 							echo $html->link(__('Delete', true), array('controller' => 'events', 'action' => 'delete', $event['Event']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $event['Event']['id'])); 
 						}?>
 					</td>

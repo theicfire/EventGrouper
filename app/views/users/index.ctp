@@ -30,7 +30,7 @@ $(document).ready(function() {
 		<td><?= $group['EventGroup']['eventgroupcount']?></td>
 		<td><?= $group['EventGroup']['eventcount']?></td>
 		<td><a href="<?php echo $html->url("/".$group['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
-			class="small_icon_inline_button" /> View group</a> 
+			class="small_icon_inline_button" /> View in timeline</a> 
 			<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'update')) {?>
 				<a href="<?php echo $html->url("/event_groups/edit/".$group['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"

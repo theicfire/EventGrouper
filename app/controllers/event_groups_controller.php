@@ -109,7 +109,7 @@ class EventGroupsController extends AppController {
 				//and now add permissions to the users
 				//NOTE: we assume that the user is logged in to get to this page (and has a session)
 				//NOTE: we are giving the users who make the event groups full permissions
-				if ($acoParentId == null || !$this->MyAcl->check('EventGroup', $this->data['EventGroup']['parent_id'])) {
+				if ($acoParentId == null) {
 					$userid = $this->Session->read('userid');
 					$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId));
 					//add read priveleges for guests

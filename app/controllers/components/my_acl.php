@@ -43,9 +43,18 @@ class MyAclComponent extends Object {
 			array('model' => 'EventGroup', 'foreign_key' => $groupPath[0]['EventGroup']['id']), 'delete');
 		} else {
 			//if you can create above this group, you can do anything (so we don't care about the action)
-			$parentNode = $eventGroup->getparentnode($id);
+			if ($type == 'EventGroup') {
+				$parentNode = $eventGroup->getparentnode($id);
+				$parentId = $parentNode['EventGroup']['id'];
+			}
+			else {//type = 'Event'
+				App::import('Model', 'Event');
+				$event = new Event();
+				$parentNode = $event->findById($id);
+				$parentId = $parentNode['Event']['event_group_id'];
+			}
 			if ($parentNode != null)
-				$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $parentNode['EventGroup']['id']), 'create');
+				$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'EventGroup', 'foreign_key' => $parentId), 'create');
 			if (!$permission)
     			$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $id), $action);
 		}
