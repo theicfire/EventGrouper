@@ -157,7 +157,7 @@ class EventGroup extends AppModel {
         $returnval = parent::save($data, $validate, $fieldList);
         if ($returnval && $data != null && array_key_exists('pathstart', $data)) {
         	if (empty($data['EventGroup']['path']))
-				$data['EventGroup']['path'] = preg_replace("/ /", "-", $data['EventGroup']['name']);
+				$data['EventGroup']['path'] = urlencodecustom($data['EventGroup']['name']);
         	$path = $data['pathstart']."/".$data['EventGroup']['path'];
         	if (empty($data['pathstart']))
         		$path = $data['EventGroup']['path'];

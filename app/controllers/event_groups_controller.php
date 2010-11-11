@@ -80,7 +80,7 @@ class EventGroupsController extends AppController {
 		//todo add row in event_groups_users
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'id' => $parentId)));
-		
+		$parentGroup = $this->EventGroup->findById($parentId);
 		if (!empty($this->data)) {
 			$oldData = $this->data;
 			$this->data['pathstart'] = $this->params['form']['pathstart']; 
@@ -113,17 +113,18 @@ class EventGroupsController extends AppController {
 					$userid = $this->Session->read('userid');
 					$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId));
 					//add read priveleges for guests
-					$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
+					//I think this is redundant
+//					$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
 				}
 				$this->set('notification', 'The group has been saved. You can now add events or more subgroups.');
-				$this->redirect("/event_groups/view_admin/".$eventGroupId);
+				$this->redirect("/event_groups/view_admin/".$parentGroup['EventGroup']['path']);
 			} else {
 				$this->data = $oldData;
 				$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
 			}
 		}
 		$groupPath = $this->EventGroup->getPath($parentId);
-		$parentGroup = $this->EventGroup->findById($parentId);
+		
 		$this->data['EventGroup']['location'] = $parentGroup['EventGroup']['location'];
 		$this->set(compact('parentId', 'currenteventGroup', 'groupPath', 'parentGroup'));
 		$this->set('isAdmin', true);
@@ -149,10 +150,11 @@ class EventGroupsController extends AppController {
 				$id = $this->data['EventGroup']['id'];
 			if ($parentId == 0)
 				$this->EventGroup->saveCategories($this->data['Other']['category_list'], $id);
+			$this->data['pathstart'] = $this->params['form']['pathstart']; 
 			if ($this->EventGroup->save($this->data)) {
 				$this->Session->setFlash(__('The EventGroup has been saved', true));
 				$eventStuff = $this->EventGroup->findById($id);
-				$this->redirect("/event_groups/view_admin/".$id);
+				$this->redirect("/event_groups/view_admin/".$eventStuff['EventGroup']['path']);
 			} else {
 				$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
 			}
@@ -169,10 +171,9 @@ class EventGroupsController extends AppController {
 		}
 		$categoryStr = implode(", ", $categoryArr);
 		$groupPath = $this->EventGroup->getPath($parentId);
-		$this->set(compact('categoryStr', 'groupPath', 'parentId'));
+		$currenteventGroup = $this->EventGroup->findById($parentId);
+		$this->set(compact('categoryStr', 'groupPath', 'parentId', 'currenteventGroup'));
 		$this->set('isAdmin', true);
-//		$users = $this->EventGroup->User->find('list');
-//		$this->set(compact('users'));
 	}
 
 	function delete($id = null) {
@@ -194,7 +195,7 @@ class EventGroupsController extends AppController {
 			
 			$this->Session->setFlash(__('EventGroup deleted', true));
 			
-			$this->redirect("/event_groups/view_admin/".$eventStuff['EventGroup']['parent_id']);
+			$this->redirect("/event_groups/view_admin/".$eventParent['EventGroup']['path']);
 		}
 		
 	}

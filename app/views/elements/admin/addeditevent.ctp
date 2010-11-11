@@ -154,7 +154,7 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 	if ($type == 'add') echo "New event";
 	else echo "Edit event";
 	?></h1>
-<p>in <?= $this->element('grouppath', array('groupPath' => $groupPath))?></p>
+<p>in <?= $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path']))?></p>
 
 <div class="form_section">
 <h2>Basic Information</h2>

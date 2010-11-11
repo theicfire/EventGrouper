@@ -47,7 +47,7 @@
 	else echo "Edit group";
 	?>
 	</h1>
-    <p><?php if (count($groupPath) > 0) echo "in ".$this->element('grouppath', array('groupPath' => $groupPath))?></p>
+    <p><?php if (count($groupPath) > 0) echo "in ".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?></p>
     
         <div class="form_section">
 			<h2>Basic Information</h2>
@@ -111,7 +111,7 @@
         <div class="form_section">
         <h2>Submit for Approval</h2>
         <input type="hidden" name="data[EventGroup][parent_id]" id="EventGroupParentId" value="<?=$parentId?>">
-		<?php if ($type == 'add') {?><input type="hidden" name="pathstart" value="<?=$currenteventGroup['EventGroup']['path']?>"><?php }?>
+		<input type="hidden" name="pathstart" value="<?=$currenteventGroup['EventGroup']['path']?>">
 		<?php if ($type == 'edit') echo $form->input('id', array('type'=>'hidden'));?>
         <?=$this->Form->button('Submit', array('type' => 'submit', 'class' => 'make_button'));?> 
 <!--        <p class="form_tip">This group will be approved by the REX coordinators.</p>-->

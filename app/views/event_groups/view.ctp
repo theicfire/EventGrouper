@@ -94,7 +94,7 @@ echo "</style>";
             <div id="breadcrumb">
                 <div class="nav_title">currently viewing</div>
                 <div class="nav_links">
-                <?= $this->element('grouppath', array('groupPath' => $groupPath))?>
+                <?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?>
 				</div>
             </div>
         

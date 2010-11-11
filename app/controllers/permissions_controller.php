@@ -75,8 +75,8 @@ class PermissionsController extends AppController {
 		
 		}
 		$userPerms = $this->EventGroup->getAllPermissions($groupId, $this->Session->read('userid'));
-		$groupPath = $this->EventGroup->getPath($groupId);
-		$this->set(compact('userPerms', 'groupId', 'groupPath'));
+		$currentEventGroup = $this->EventGroup->findById($groupId);
+		$this->set(compact('userPerms', 'groupId', 'groupPath', 'currentEventGroup'));
 		$this->set('isAdmin', true);
 	}
 

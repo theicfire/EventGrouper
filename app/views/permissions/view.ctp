@@ -1,7 +1,7 @@
 <div id="edit_account" class="info_box">
     
 	<h1>Edit Permissions</h1>
-	<p>in <?= $this->element('grouppath', array('groupPath' => $groupPath))?></p>	        
+	<p>in <?= $this->element('grouppath', array('groupStr' => $currentEventGroup['EventGroup']['path']))?></p>	        
 	<div class="form_section">
 		<h2>Email Addresses</h2>
 		<form name="loginForm" id="loginForm" method="post" action="<?php echo $html->url(array('controller' => 'permissions', 'action' => 'view', $groupId));?>">
