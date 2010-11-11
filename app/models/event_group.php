@@ -77,6 +77,13 @@ class EventGroup extends AppModel {
 		return $childrenArr;
 		
 	}
+	function getAllEventGroupsAboveThis($id) {
+		$parents = $this->getpath($id);
+		$parentsArr = array();
+		foreach ($parents as $parent)
+			$parentsArr[] = $parent['EventGroup']['id'];
+		return $parentsArr;
+	}
 	function getAllEventsUnderThis($id, $userId = null, $params = null, $limit = null, $justCalendar = false) {
 		$childrenArr = $this->getAllEventGroupsUnderThis($id);
 		$params['Event.event_group_id'] = $childrenArr;
@@ -161,9 +168,29 @@ class EventGroup extends AppModel {
     } 
     //get all permissions for a specific group (but not subgroups)
     function getAllPermissions($id, $userId) {
+    	$parentArr = $this->getAllEventGroupsAboveThis($id);
+    	$childrenArr = $this->getAllEventGroupsUnderThis($id);
     	$aco = $this->query("select users.id, aros_acos.id, aros_acos.aro_id, email, aros_acos._create, aros_acos._read, aros_acos._update, aros_acos._delete, aros_acos._editperms from acos 
     	LEFT JOIN (aros_acos, aros, users) ON (acos.id = aros_acos.aco_id AND aros_acos.aro_id = aros.id AND aros.foreign_key = users.id) 
-    	WHERE acos.foreign_key = ".$id." AND email != 'Guest' AND users.id != ".$userId);
+    	WHERE acos.foreign_key IN(".implode(',',$childrenArr).") AND email != 'Guest' AND users.id != ".$userId." GROUP BY aros.foreign_key");
+    	
+    	foreach($aco as &$user) {
+	    	$userEventGroups = $this->query("SELECT EventGroup.* FROM `aros` 
+			LEFT JOIN (aros_acos, acos, event_groups AS EventGroup) 
+			ON (aros.id = aros_acos.aro_id AND aros_acos.aco_id = acos.id AND acos.foreign_key = EventGroup.id) 
+			WHERE aros.foreign_key = ".$user['users']['id']." AND acos.foreign_key IN(".implode(',',$childrenArr).") AND acos.model = 'EventGroup';");
+			$ids = array();
+			foreach ($userEventGroups as $single) {
+				$ids[] = $single['EventGroup']['id'];
+			}
+			foreach ($userEventGroups as $key=>$value) {
+				if (in_array($value['EventGroup']['parent_id'], $ids))
+					unset($userEventGroups[$key]);
+			}
+			$user['userEventGroups'] = $userEventGroups;
+    	}
+		
+		
     	return $aco;
     }
     

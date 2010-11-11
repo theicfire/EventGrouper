@@ -15,14 +15,7 @@ class PermissionsController extends AppController {
 		$unregistered = false;
 		if (!empty($this->data)) {//adding a user
 			$userRow = $this->User->findByEmail($this->data['email']);
-			if (!empty($userRow)) {
-				$permissionRow = $this->User->query("SELECT count(*) from aros_acos LEFT JOIN (aros, acos) ON (aros.id = aros_acos.aro_id AND 
-				acos.id = aros_acos.aco_id) WHERE aros.foreign_key = ".$userRow['User']['id']." AND acos.foreign_key = ".$groupId);
-				$hasPermissions = $permissionRow[0][0]['count(*)'] != 0;
-			} else {
-				$hasPermissions = false;
-			}
-			if ($hasPermissions)
+			if (!empty($userRow) && $this->MyAcl->checkUser('EventGroup',$groupId,$userRow['User']['id'], 'create'))
 				$this->Session->setFlash("This user already has permissions to this group");
 			else {
 				if (empty($userRow)) {

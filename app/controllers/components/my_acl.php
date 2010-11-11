@@ -19,29 +19,37 @@ class MyAclComponent extends Object {
     
 	function check($type, $id, $action = '*') {
 		$permission = false;
-		if ($id == 0 && $action = 'create' && $this->Session->check('userid'))
-			return true;//todo this is bad programming!
-		App::import('Component', 'Acl');
 		App::import('Component', 'Session');
 		$session = new SessionComponent();
-    	$acl = new AclComponent();
     	$userid = 5;//guest
     	if ($session->check('userid'))
   			$userid = $session->read('userid');
+		$permission = $this->checkUser($type, $id, $userid, $action);
+    	return $permission;
+    }
+    
+	function checkUser($type, $id, $userid, $action = '*') {
+		$permission = false;
+		if ($id == 0 && $action = 'create')
+			return true;//todo this is bad programming!
+		App::import('Component', 'Acl');
+    	$acl = new AclComponent();
+    	App::import('Model', 'EventGroup');
+		$eventGroup = new EventGroup();
 		if ($action == 'bigOwner') {
 			//check if this user has permissions for the highest level group
-			App::import('Model', 'EventGroup');
-			$eventGroup = new EventGroup();
-			App::import('Model', 'Event');
-			$event = new Event();
-			
-			$eventStuff = $event->findById($id);
-			$groupPath = $eventGroup->getPath($eventStuff['Event']['event_group_id']);
+			$groupPath = $eventGroup->getPath($id);
 			$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), 
 			array('model' => 'EventGroup', 'foreign_key' => $groupPath[0]['EventGroup']['id']), 'delete');
 		} else {
-    		$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $id), $action);
+			//if you can create above this group, you can do anything (so we don't care about the action)
+			$parentNode = $eventGroup->getparentnode($id);
+			if ($parentNode != null)
+				$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $parentNode['EventGroup']['id']), 'create');
+			if (!$permission)
+    			$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $id), $action);
 		}
+//		printf('type: %s id: %s userid: %s action: %s => %s', $type, $id, $userid, $action, $permission);
     	return $permission;
     }
 }

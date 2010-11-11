@@ -43,15 +43,19 @@ class EventGroupsController extends AppController {
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));		
 	}
-	function view_admin($id) {
-		if ($id == 0)
-			$this->redirect("/users/index");
-		$currenteventGroup = $this->EventGroup->findById($id);
+	function view_admin() {
+		$pathUrl = explode("/",$this->params['url']['url']);
+		unset($pathUrl[0]);
+		unset($pathUrl[1]);
+		$pathUrl = implode("/", $pathUrl);
+		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
+		'path' => $pathUrl)));
+		$id = $currenteventGroup['EventGroup']['id'];
 		if (empty($currenteventGroup)) {
 			$this->Session->setFlash(__('Invalid EventGroupss.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->MyAcl->runcheck('EventGroup',$id,'create');
+//		$this->MyAcl->runcheck('EventGroup',$id,'create');
 		
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('CategoryChoice', 'Event'),
@@ -60,12 +64,6 @@ class EventGroupsController extends AppController {
 		); 
 		
 		$eventGroups = $this->EventGroup->children($id);
-		foreach ($eventGroups as $key=>$value) {
-//			$eventGroups[$key]['EventGroup']['eventcount'] = count($this->EventGroup->getAllEventsUnderThis($value['EventGroup']['id']));
-//			$eventGroups[$key]['EventGroup']['eventgroupcount'] = count($this->EventGroup->getAllEventGroupsUnderThis($value['EventGroup']['id']))-1;
-			$eventGroups[$key]['EventGroup']['groupPath'] = $this->EventGroup->getPath($value['EventGroup']['id']);
-		}
-		$groupPath = $this->EventGroup->getPath($id);
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
 		$treeList = $this->EventGroup->generateTreeList();
 		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
@@ -94,7 +92,7 @@ class EventGroupsController extends AppController {
 					$acoParentId = null;
 					$this->EventGroup->saveCategories($this->data['Other']['category_list'], $eventGroupId);//add categories
 				} else {
-					$acoParent = $this->EventGroup->query("SELECT id FROM acos WHERE foreign_key = ".$this->data['EventGroup']['parent_id']);
+					$acoParent = $this->EventGroup->query("SELECT id FROM acos WHERE foreign_key = ".$this->data['EventGroup']['parent_id']." AND model = 'EventGroup'");
 					if (!empty($acoParent))
 						$acoParentId = $acoParent[0]['acos']['id'];
 					else
@@ -111,11 +109,12 @@ class EventGroupsController extends AppController {
 				//and now add permissions to the users
 				//NOTE: we assume that the user is logged in to get to this page (and has a session)
 				//NOTE: we are giving the users who make the event groups full permissions
-				$userid = $this->Session->read('userid');
-				$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId));
-				//add read priveleges for guests
-				$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
-				
+				if ($acoParentId == null || !$this->MyAcl->check('EventGroup', $this->data['EventGroup']['parent_id'])) {
+					$userid = $this->Session->read('userid');
+					$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId));
+					//add read priveleges for guests
+					$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
+				}
 				$this->set('notification', 'The group has been saved. You can now add events or more subgroups.');
 				$this->redirect("/event_groups/view_admin/".$eventGroupId);
 			} else {

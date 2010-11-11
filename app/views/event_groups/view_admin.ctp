@@ -12,7 +12,7 @@
 <div class="info_box">
     
 	<h1>Current Group</h1>
-	<p><?= $this->element('grouppath', array('groupPath' => $groupPath))?></p>
+	<p><?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?></p>
 	<div class="form_section">
 		<h2><?php echo $currenteventGroup['EventGroup']['name']; ?></h2>
 				<div><p>Description:</p><p><?php echo $currenteventGroup['EventGroup']['description']; ?></p></div>
@@ -43,7 +43,8 @@
 			<?php }?>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {?>
 				
-				<a class="make_button" href="<?php echo $html->url("/permissions/view/" . $currenteventGroup['EventGroup']['id']); ?>"><img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" class="small_icon_inline_button" /> Give someone permission to edit <?php echo $currenteventGroup['EventGroup']['name']; ?></a>
+				<a class="make_button" href="<?php echo $html->url("/permissions/view/" . $currenteventGroup['EventGroup']['id']); ?>">
+				<img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" class="small_icon_inline_button" /> Edit Permissions</a>
 			<?php }?>
 			</div>
 	</div>
@@ -58,7 +59,7 @@
 		    <?php foreach ($eventGroups as $eventGroup) {?>
 				<tr>
 						<td>
-							<?= $this->element('grouppath', array('groupPath' => $eventGroup['EventGroup']['groupPath']));?>
+							<?= $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path']));?>
 						</td>
 						<td>
 							<?php echo $eventGroup['EventGroup']['description']; ?>
@@ -79,6 +80,11 @@
 							<a href="<?php echo $html->url("/events/add/".$eventGroup['EventGroup']['id']); ?>"
 							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 							class="small_icon_inline_button" /> Add events</a>
+						<?php }?>
+						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'editperms')) {?>
+				
+							<a class="make_button" href="<?php echo $html->url("/permissions/view/" . $eventGroup['EventGroup']['id']); ?>">
+							<img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" class="small_icon_inline_button" /> Edit Permissions</a>
 						<?php }?>
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'delete')) {?>
 						<a class="make_button" href="/EventGrouper/event_groups/delete/<?php echo $eventGroup['EventGroup']['id']; ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $eventGroup['EventGroup']['name']; ?>?&#039;);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Delete</a>

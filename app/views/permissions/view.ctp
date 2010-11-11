@@ -11,11 +11,18 @@
 		<table class="full_width">
 			
 		            
-			<tr><th>Email address</th><th>Actions</th></tr>  
+			<tr><th>Email address</th><th>Permissions</th><th>Actions</th></tr>  
 		     <?php foreach ($userPerms as $userPerm) {?>
 			<tr>
 					<td>
 						<?php echo $userPerm['users']['email']; ?>
+					</td>
+					<td>
+						<?php foreach($userPerm['userEventGroups'] as $eventGroup) {
+							echo $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path']));
+							echo "<br>";
+						}
+						?>
 					</td>
 					<td class="actions">
 						<?php echo $html->link('Remove', array('action' => 'delete', $groupId, $userPerm['aros_acos']['aro_id']), array('class' => 'make_button'), "Are you sure you want to delete this?");?>

@@ -34,7 +34,7 @@ class EventsController extends AppController {
 			if ($this->MyAcl->check('EventGroup',$eventGroupId,'bigOwner'))
 				$this->data['Event']['status'] = 'hidden'; 
 			if ($this->Event->save($this->data)) {
-				$acoParent = $this->Event->query("SELECT id FROM acos WHERE foreign_key = ".$eventGroupId);
+				$acoParent = $this->Event->query("SELECT id FROM acos WHERE foreign_key = ".$eventGroupId." AND model = 'EventGroup'");
 				if (!empty($acoParent))
 					$acoParentId = $acoParent[0]['acos']['id'];
 				else

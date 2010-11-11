@@ -19,7 +19,7 @@
 	}
 	</script>
 	
-	<h2>Access Granted</h2>
+	<h2>Login</h2>
 	<div id="badLogin" class="error" style="display:none;">Your email/password combination was incorrect.</div>
 	<form name="loginForm" id="loginForm" method="post">
 		<fieldset>

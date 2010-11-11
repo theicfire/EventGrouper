@@ -26,7 +26,7 @@ $(document).ready(function() {
 	foreach($userEventGroups as $group) {
 ?>
 	<tr>
-		<td><?= $this->element('grouppath', array('groupPath' => $group['EventGroup']['groupPath']));?></td>
+		<td><?= $this->element('grouppath', array('groupStr' => $group['EventGroup']['path']));?></td>
 		<td><?= $group['EventGroup']['eventgroupcount']?></td>
 		<td><?= $group['EventGroup']['eventcount']?></td>
 		<td><a href="<?php echo $html->url("/".$group['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"

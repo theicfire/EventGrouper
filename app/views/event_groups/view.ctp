@@ -54,7 +54,8 @@ echo "</style>";
             <?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
 				//echo $html->link(__('Edit in admin panel', true), array('action' => 'edit', $currenteventGroup['EventGroup']['id'])); 
 				
-				?> <a class="make_button" href="<?php echo $html->url("/event_groups/view_admin/" . $currenteventGroup['EventGroup']['id']); ?>"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png" class="small_icon_inline_button" /> Edit in admin panel</a> <?php
+				?> <a class="make_button" href="<?php echo $html->url("/event_groups/view_admin/" . $currenteventGroup['EventGroup']['path']); ?>">
+				<img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png" class="small_icon_inline_button" /> Edit in admin panel</a> <?php
 			}?>
         </div>
         

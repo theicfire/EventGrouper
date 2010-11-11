@@ -28,7 +28,7 @@
 	}
 	</script>
 	
-	<h2>Access Granted</h2>
+	<h2>Create Account</h2>
 	
 	<?php echo $form->create('User', array('action' => sprintf("add/%d/%s", $unregisteredData['User']['id'], $hasAccount)));?>
 		<fieldset>
