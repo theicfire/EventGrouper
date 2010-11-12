@@ -12,16 +12,12 @@
     jQuery.validator.addMethod("validurl", validurl, "Only use letters, numbers, and dashes. (no spaces)");
     
     function init_validation(){
-
-		$("input[name='data[EventGroup][name]']").keydown( function(){
-			
-			if( $("input[name='data[EventGroup][path]']").val() == "" || true )
-			{
+		var nameField = $("input[name='data[EventGroup][name]']");
+		if ($("input[name='data[EventGroup][path]']").is(":visible")) {
+			$("input[name='data[EventGroup][name]']").keyup( function(){
 				$("input[name='data[EventGroup][path]']").val( $("input[name='data[EventGroup][name]']").val().replace( /[^A-Za-z0-9]/g, "-" ).toLowerCase() );
-			}
-			
-		});
-		
+			});
+		}
 		$("#EventGroup<?=$type=='add'?'Add':'Edit'?>Form").validate({
 			rules: {
 				'data[EventGroup][name]': {
@@ -78,18 +74,10 @@
 						{ echo "http://www.oursite.com".$path;	}
 						
 						echo '</span></p>';
+					} else {
+						echo $form->input('path', array('type' => 'hidden'));
 					}
-			?>
-		
-			<label>Category List</label>
-			<input name="data[Other][category_list]" id="OtherCategoryList" class="textfield_long" value="<?php 
-			if ($type == 'add') echo "Food, Tours, Information";
-			else echo $categoryStr;
-			?>" />
-			<p class="form_tip">Input possible categories for events, separated by commas.</p>
-
-			<?php 
-				}
+				} 
 			?>
 				
 			<label>Description</label>
@@ -97,7 +85,7 @@
 		</div>
         
         <?php 
-        if ($type == 'add') $group = $parentGroup;
+        if ($type == 'add') $group = $currenteventGroup;
         else $group = $this->data;
 		$centerLat = $group['EventGroup']['latitude'];
 		if (empty($centerLat)) $centerLat = '42.359051';

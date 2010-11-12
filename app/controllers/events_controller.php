@@ -2,7 +2,7 @@
 class EventsController extends AppController {
 
 	var $name = 'Events';
-	var $uses = array('Event', 'User', 'EventGroup', 'CategoryChoice');
+	var $uses = array('Event', 'User', 'EventGroup');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Configuration', 'Access');
 	var $components = array('Acl', 'MyAcl');
 
@@ -75,8 +75,7 @@ class EventsController extends AppController {
 		$users = $this->Event->User->find('list');
 		$this->data['Event']['location'] = $eventGroup['EventGroup']['location'];
 		$groupPath = $this->EventGroup->getPath($eventGroupId);
-		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$groupPath[0]['EventGroup']['id'])));
-		$this->set(compact('categoryChoices', 'eventGroup', 'users', 'eventGroupId', 'groupPath'));
+		$this->set(compact('eventGroup', 'users', 'eventGroupId', 'groupPath'));
 		$this->set('isAdmin', true);
 	}
 
@@ -112,9 +111,8 @@ class EventsController extends AppController {
 		$eventGroups = $this->Event->EventGroup->find('list');
 		$users = $this->Event->User->find('list');
 		$groupPath = $this->EventGroup->getPath($groupId);
-		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$groupPath[0]['EventGroup']['id'])));
 		
-		$this->set(compact('categoryChoices','users','eventGroups', 'eventGroupId', 'groupPath', 'eventGroup'));
+		$this->set(compact('users','eventGroups', 'eventGroupId', 'groupPath', 'eventGroup'));
 		$this->set('isAdmin', true);
 	}
 

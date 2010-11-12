@@ -20,7 +20,7 @@
 			<div>
 				<a href="<?php echo $html->url("/".$currenteventGroup['EventGroup']['path']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
-				class="small_icon_inline_button" /> View group</a>
+				class="small_icon_inline_button" /> View in timeline</a>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {?>
 				<a href="<?php echo $html->url("/event_groups/edit/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
@@ -101,7 +101,7 @@
 		<div class="form_section">
 		<h2>Events Contained</h2>  
 		<table class="full_width">
-			<tr><th>Title</th><th>Description</th><th>Time</th><th>Categories</th><th>Event Group</th><th>Actions</th></tr>
+			<tr><th>Title</th><th>Description</th><th>Time</th><th>Event Group</th><th>Actions</th></tr>
 			<?php foreach ($eventsUnderGroup as $event) {
 				if (!$session->check('userid') || ($session->check('userid') && !array_key_exists('onUsersCalendar',$event['Event']))) {?>
 			<tr id="event-<?=$event['Event']['id']?>">
@@ -114,11 +114,6 @@
 					<td>
 						<?php echo date('m/d/y g:i a', strtotime($event['Event']['time_start']))." to ".
 						date('m/d/y g:i a', strtotime($event['Event']['time_start']) + $event['Event']['duration']*60); ?>
-					</td>
-					<td>
-						<?php $categories = array();
-						foreach ($event['CategoryChoice'] as $category) $categories[] = $category['name'];
-						echo implode(", ",$categories); ?>
 					</td>
 					<td>
 						<?php echo $event['EventGroup']['name']; ?>

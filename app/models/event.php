@@ -44,21 +44,6 @@ class Event extends AppModel {
 	);
 
 	var $hasAndBelongsToMany = array(
-		'CategoryChoice' => array(
-			'className' => 'CategoryChoice',
-			'joinTable' => 'category_choices_events',
-			'foreignKey' => 'event_id',
-			'associationForeignKey' => 'category_choice_id',
-			'unique' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
-		),
 		'User' => array(
 			'className' => 'User',
 			'joinTable' => 'events_users',
@@ -77,22 +62,9 @@ class Event extends AppModel {
 	);
 	
 	function delete($id) {
-		$this->query("DELETE FROM category_choices_events WHERE event_id=".$id);
 		$this->query("DELETE FROM events WHERE id=".$id);
 		$this->query("DELETE FROM events_users WHERE event_id=".$id);//todo you should probably tell ppl that the event is cancelled
 		return true;
-	}
-	
-	function saveCategories($categoryList, $eventId) {
-//		$categoryList = explode("\n", $categoryList);
-//    	//todo inefficient code
-//    	$this->query("DELETE FROM category_choices_events WHERE event_group_id = ".$eventId);
-//    	$valuesArr = array();
-//    	foreach ($categoryList as $category) {
-//    		$valuesArr[] = sprintf("(%d, %d)", $category, $eventId);
-//    	}
-//    	$valuesStr = implode(",",$valuesArr);
-//    	$this->query("INSERT INTO category_choices_events (name, event_group_id) VALUES".$valuesStr);
 	}
 	
 

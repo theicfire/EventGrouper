@@ -147,14 +147,6 @@ $(document).ready( function(){
     
     <h1 class="event_name"><?=$event['Event']['title']?></h1>
     
-    <?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
-			echo $html->link(__('Edit', true), array('controller' => 'events', 'action' => 'edit', $event['Event']['id'])); 
-		}?>
-		<?php if ($access->check('EventGroup',$event['Event']['event_group_id'], 'create')) {
-			echo $html->link(__('Delete', true), array('controller' => 'events', 'action' => 'delete', $event['Event']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $event['Event']['id'])); 
-		}?>
-		
-		<br />
     
     <a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" />Add to my schedule</a>
     <!--<a href="#" class="make_button"><img class="small_icon_inline_button" src="<?php echo $html->url('/'); ?>css/rinoa/group.png" />Share on Facebook</a>
@@ -170,15 +162,7 @@ $(document).ready( function(){
     
     <h3>Tags</h3>
     <p>
-    
-    <?php 
-    if (count($event['CategoryChoice'])>0) {
-		$categoryLinks = array();
-		foreach ($event['CategoryChoice'] as $category) { 
-			$categoryLinks[] = "<a class=\"group_1 categoryLink\" hiddenclass='categoryLink-".$category['id']."' href=\"".$html->url('/').$groupPath[count($groupPath)-1]['EventGroup']['path']."#categorycheckbox-".$category['id']."=true\">".$category['name']."</a>";
-		} 
-		echo implode(", ",$categoryLinks);
-	}?> 
+     
 	</p>
     
     </div>

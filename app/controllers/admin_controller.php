@@ -2,7 +2,7 @@
 class AdminController extends AppController {
 
 	var $name = 'Admin';
-	var $uses = array('EventGroup', 'Event', 'User', 'CategoryChoice');
+	var $uses = array('EventGroup', 'Event', 'User');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
 	var $components = array('Acl', 'MyAcl', 'Facebook');
 

@@ -18,7 +18,7 @@ $(document).ready(function() {
 <h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" />Requests</h1>
 
 <table class="full_width">
-	<tr><th>User</th><th>title</th><th>description</th><th>Time</th><th>Categories</th><th>event group</th><th>actions</th></tr>
+	<tr><th>User</th><th>title</th><th>description</th><th>Time</th><th>event group</th><th>actions</th></tr>
 		<?php foreach ($eventsUnderGroup as $event) {
 			if (!$session->check('userid') || ($session->check('userid') && !array_key_exists('onUsersCalendar',$event['Event']))) {?>
 		<tr id="event-<?=$event['Event']['id']?>">
@@ -34,11 +34,6 @@ $(document).ready(function() {
 				<td>
 					<?php echo date('m/d/y g:i a', strtotime($event['Event']['time_start']))." to ".
 					date('m/d/y g:i a', strtotime($event['Event']['time_start']) + $event['Event']['duration']*60); ?>
-				</td>
-				<td>
-					<?php $categories = array();
-					foreach ($event['CategoryChoice'] as $category) $categories[] = $category['name'];
-					echo implode(", ",$categories); ?>
 				</td>
 				<td>
 					<?php echo $event['EventGroup']['name']; ?>

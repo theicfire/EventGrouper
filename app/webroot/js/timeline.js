@@ -111,21 +111,11 @@ function giveEventsJs() {
 		return false;
 	});
 
-	$(".categoryLink").click(function() {
-		var id = $(this).attr('hiddenclass').split("-")[1];
-		$(".categorycheckbox").each(function() {
-			if ($(this).val() == id)
-				$(this).attr('checked', true);
-			else
-				$(this).attr('checked', false);
-		});
-		refreshEvents();
-		return false;
-	});
 	$(".make_button").button();
 }
-function getEvents(date, search, categoryChoices, time_start, isCalendar) {
-	$.get(phpVars.root+"/event_groups/ajaxListEvents/"+phpVars.currentEventGroupId, { date_start: date, search: search, 'categories[]': categoryChoices, time_start:time_start, isCalendar:isCalendar},
+function getEvents(date, search, time_start, isCalendar) {
+	$("#eventHolder").html('');
+	$.get(phpVars.root+"/event_groups/ajaxListEvents/"+phpVars.currentEventGroupId, { date_start: date, search: search, time_start:time_start, isCalendar:isCalendar},
    function(data){
      $("#eventHolder").html(data);
      giveEventsJs();
@@ -133,12 +123,7 @@ function getEvents(date, search, categoryChoices, time_start, isCalendar) {
    });
 }
 function refreshEvents() {
-	var categoryChoices = new Array();//need this so that if no categories are checked, nothing comes up
-	$(".categorycheckbox:checked").each(function() {
-		categoryChoices.push($(this).val());
-	});
-	
-	getEvents($("#datestart").val(), $("#searchBox").val(), categoryChoices, $("#time_start").val(), $("#isCalendar").is(':checked'));
+	getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#isCalendar").is(':checked'));
 	setHashFromPage();
 }
 function setHashFromPage(){
@@ -203,7 +188,15 @@ $(document).ready( function(){
 	
 	$(".make_button").button();
 	
-	
+	$('#loadingimage')
+    .hide()  // hide it initially
+    .ajaxStart(function() {
+        $(this).show();
+    })
+    .ajaxStop(function() {
+        $(this).hide();
+    });
+
 	
 //	$("#filter_submit").hide();
 	

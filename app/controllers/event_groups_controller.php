@@ -2,14 +2,14 @@
 class EventGroupsController extends AppController {
 
 	var $name = 'EventGroups';
-	var $uses = array('EventGroup', 'User', 'CategoryChoice');
+	var $uses = array('EventGroup', 'User');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
 	var $components = array('Acl', 'MyAcl', 'Facebook');
 
 	function index() {
 		$this->Session->write('testses', 'stuffinhere');
 		$this->EventGroup->unbindModel(
-			array('hasMany' => array('CategoryChoice', 'Event'),
+			array('hasMany' => array('Event'),
 			'hasAndBelongsToMany' => array('User')	
 			)
 		);
@@ -32,15 +32,14 @@ class EventGroupsController extends AppController {
 		$this->MyAcl->runcheck('EventGroup',$id,'read');
 		
 		$this->EventGroup->unbindModel(
-			array('hasMany' => array('CategoryChoice', 'Event'),
+			array('hasMany' => array('Event'),
 			'hasAndBelongsToMany' => array('User')	
 			)
 		); 
 		
 		$eventGroups = $this->EventGroup->children($id);
 		$groupPath = $this->EventGroup->getPath($id);
-		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$groupPath[0]['EventGroup']['id'])));
-		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices'));
+		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));		
 	}
 	function view_admin() {
@@ -58,7 +57,7 @@ class EventGroupsController extends AppController {
 //		$this->MyAcl->runcheck('EventGroup',$id,'create');
 		
 		$this->EventGroup->unbindModel(
-			array('hasMany' => array('CategoryChoice', 'Event'),
+			array('hasMany' => array('Event'),
 			'hasAndBelongsToMany' => array('User')	
 			)
 		); 
@@ -66,8 +65,7 @@ class EventGroupsController extends AppController {
 		$eventGroups = $this->EventGroup->children($id);
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
 		$treeList = $this->EventGroup->generateTreeList();
-		$categoryChoices = $this->CategoryChoice->find('list', array('conditions' => array('event_group_id' =>$id)));
-		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'categoryChoices', 'treeList', 'eventsUnderGroup'));
+		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'treeList', 'eventsUnderGroup'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));	
 		$this->set('isAdmin', true);	
 	}
@@ -80,7 +78,6 @@ class EventGroupsController extends AppController {
 		//todo add row in event_groups_users
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'id' => $parentId)));
-		$parentGroup = $this->EventGroup->findById($parentId);
 		if (!empty($this->data)) {
 			$oldData = $this->data;
 			$this->data['pathstart'] = $this->params['form']['pathstart']; 
@@ -90,7 +87,6 @@ class EventGroupsController extends AppController {
 				//now add an aco
 				if ($this->data['EventGroup']['parent_id'] == 0) {
 					$acoParentId = null;
-					$this->EventGroup->saveCategories($this->data['Other']['category_list'], $eventGroupId);//add categories
 				} else {
 					$acoParent = $this->EventGroup->query("SELECT id FROM acos WHERE foreign_key = ".$this->data['EventGroup']['parent_id']." AND model = 'EventGroup'");
 					if (!empty($acoParent))
@@ -117,7 +113,8 @@ class EventGroupsController extends AppController {
 //					$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
 				}
 				$this->set('notification', 'The group has been saved. You can now add events or more subgroups.');
-				$this->redirect("/event_groups/view_admin/".$parentGroup['EventGroup']['path']);
+				$newGroup = $this->EventGroup->findById($eventGroupId);
+				$this->redirect("/event_groups/view_admin/".$newGroup['EventGroup']['path']);
 			} else {
 				$this->data = $oldData;
 				$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
@@ -125,8 +122,8 @@ class EventGroupsController extends AppController {
 		}
 		$groupPath = $this->EventGroup->getPath($parentId);
 		
-		$this->data['EventGroup']['location'] = $parentGroup['EventGroup']['location'];
-		$this->set(compact('parentId', 'currenteventGroup', 'groupPath', 'parentGroup'));
+		$this->data['EventGroup']['location'] = $currenteventGroup['EventGroup']['location'];
+		$this->set(compact('parentId', 'currenteventGroup', 'groupPath'));
 		$this->set('isAdmin', true);
 	}
 
@@ -148,8 +145,6 @@ class EventGroupsController extends AppController {
 		if (!empty($this->data)) {
 			if (!$id)
 				$id = $this->data['EventGroup']['id'];
-			if ($parentId == 0)
-				$this->EventGroup->saveCategories($this->data['Other']['category_list'], $id);
 			$this->data['pathstart'] = $this->params['form']['pathstart']; 
 			if ($this->EventGroup->save($this->data)) {
 				$this->Session->setFlash(__('The EventGroup has been saved', true));
@@ -164,15 +159,9 @@ class EventGroupsController extends AppController {
 		}
 //		$this->set('parentEventGroup',$this->EventGroup->findById(0));
 		$this->set('parentEventGroup',$this->EventGroup->findById($parentId));
-		$categoryChoices = $this->CategoryChoice->findAllByEventGroupId($id);
-		$categoryArr = array();
-		foreach ($categoryChoices as $category) {
-			$categoryArr[] = $category['CategoryChoice']['name'];
-		}
-		$categoryStr = implode(", ", $categoryArr);
 		$groupPath = $this->EventGroup->getPath($parentId);
 		$currenteventGroup = $this->EventGroup->findById($parentId);
-		$this->set(compact('categoryStr', 'groupPath', 'parentId', 'currenteventGroup'));
+		$this->set(compact('groupPath', 'parentId', 'currenteventGroup'));
 		$this->set('isAdmin', true);
 	}
 
@@ -194,8 +183,10 @@ class EventGroupsController extends AppController {
 			
 			
 			$this->Session->setFlash(__('EventGroup deleted', true));
-			
-			$this->redirect("/event_groups/view_admin/".$eventParent['EventGroup']['path']);
+			$repath = "/event_groups/view_admin/".$eventParent['EventGroup']['path'];
+			if ($eventStuff['EventGroup']['parent_id']==0)
+				$repath = "/users/index";
+			$this->redirect($repath);
 		}
 		
 	}
@@ -210,7 +201,7 @@ class EventGroupsController extends AppController {
 //		$this->MyAcl->runcheck('EventGroup',$id,'read');
 		
 		$this->EventGroup->unbindModel(
-			array('hasMany' => array('CategoryChoice', 'Event'),
+			array('hasMany' => array('Event'),
 			'hasAndBelongsToMany' => array('User')	
 			)
 		); 
@@ -223,9 +214,6 @@ class EventGroupsController extends AppController {
 				sprintf('MATCH(`Event.description`, `Event.title`)
 				AGAINST("%s" IN BOOLEAN MODE)', $this->params['url']['search']));
 			}
-			if (!empty($this->params['url']['categories'])){
-				$params['CategoryChoicesEvent.category_choice_id'] = $this->params['url']['categories'];
-			}
 			$timeStart = date("Y-m-d H:i:s", strtotime($this->params['url']['date_start']) + $this->params['url']['time_start']*3600);
 			$params[] = sprintf('time_start >= \'%s\'', $timeStart); 
 		}
@@ -235,7 +223,7 @@ class EventGroupsController extends AppController {
 		$viewCalendar = false;
 		if (isset($this->params['url']['isCalendar']) && $this->params['url']['isCalendar'] == 'true') $viewCalendar = true;
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, null, $viewCalendar);
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'categoryChoices', 'viewCalendar'));
+		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'viewCalendar'));
 		
 		
 		$this->render('ajax_list_events', 'ajax');

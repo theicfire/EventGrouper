@@ -62,5 +62,4 @@
 	Router::connect('/login/:action/*', array('controller' => 'login'));
 	Router::connect('/events/:action/*', array('controller' => 'events'));
 	Router::connect('/users/:action/*', array('controller' => 'users'));
-	Router::connect('/category_choices/:action/*', array('controller' => 'category_choices'));  
 	Router::connect('/*', array('controller' => 'event_groups', 'action' => 'view')); 

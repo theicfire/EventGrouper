@@ -165,9 +165,11 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 <div class="clear"></div>
 <?php 
 //default times
-$time_start = date('g:i a');
+//$time_start = date('g:i a');
+$time_start = "10:00 am";
 $date_start = date('m/d/Y');
-$time_end = date('g:i a', time()+60*60);
+$time_end = "11:00 am";
+//$time_end = date('g:i a', time()+60*60);
 $date_end = date('m/d/Y', time()+60*60);
 if (!empty($this->data['Event']['time_start'])) {
 	$date_start = date('m/d/Y', strtotime($this->data['Event']['time_start']));
@@ -211,7 +213,7 @@ if (!empty($this->data['Event']['duration'])) {
 
 <div class="clear"></div>
 	
-<?php echo $form->input('CategoryChoice', array('type' => 'select', 'multiple' => 'checkbox', 'label' => 'Categories'));?>
+<?php echo $form->input('tags', array('type' => 'text', 'class' => 'textfield'));?>
 
 </div>
 

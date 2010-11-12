@@ -21,7 +21,6 @@ if ($i == count($colorList)) $i = 0;
 echo "</style>";
 ?>
 
-
     <div id="conference_header">
     	
     
@@ -169,25 +168,6 @@ echo "</style>";
                         </table>
                     </div>
                     <div class="head_float_group_box">
-                        <div class="tl_head_title">Categories</div>
-                        <div class="tl_head_subt">choose which categories to display</div>
-                        <table class="padded_grid">
-                        <tr>
-                        <?php 
-                        $i = 0;
-                        foreach (array_keys($categoryChoices) as $key) {
-	                        ?>
-	                        <td><div class="checkbox_container"><input class="categorycheckbox putInHash" name="categories[]" value="<?=$key?>" id="categorycheckbox-<?=$key?>" type="checkbox"> <?=$categoryChoices[$key]?></div></td>
-	                        <?php 
-	                        if ($i == 2) {
-	                        	echo "</tr><tr>";
-	                        	$i = 0;	
-	                        }
-                        }?>
-                        </tr>
-                        </table>
-                    </div>   
-                    <div class="head_float_group_box">
                         <div class="tl_head_title">Search</div>
                         <div class="tl_head_subt">look for something</div>
                        	<input name="search" type="text" id="searchBox" class="putInHash">
@@ -225,8 +205,9 @@ echo "</style>";
             
             
             </table>
-            <table class="ajax_events" id="eventHolder">
             
+            <table class="ajax_events" id="eventHolder">
+            <?php echo $html->image('loading.gif', array('id' => 'loadingimage'));?>
         	</table>
         <table width="100%">
         

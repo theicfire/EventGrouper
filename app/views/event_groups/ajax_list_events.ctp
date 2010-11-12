@@ -82,14 +82,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 							<?php }?>
 
 							<span class="event_tags">
-									posted <?php if (count($event['CategoryChoice'])>0) {
-									$categoryLinks = array();
-									foreach ($event['CategoryChoice'] as $category) { 
-										$categoryLinks[] = "<a class=\"group_1 categoryLink\" hiddenclass='categoryLink-".$category['id']."' href=\"#\">".$category['name']."</a>";
-									} 
-									echo " in ".implode(", ",$categoryLinks);
-								}?> 
-								by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a>
+									posted by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a>
 							</span>
 							<?php 
 							if (!$session->check('userid'))

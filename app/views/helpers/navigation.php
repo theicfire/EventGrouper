@@ -14,8 +14,6 @@ class NavigationHelper extends AppHelper {
 		<li>".$this->Html->link(__('List EventGroups', true), array('action' => 'index'))."</li>
 		<li>".$this->Html->link(__('New EventGroup', true), array('action' => 'add'))."</li>
 		<li>".$this->Html->link(__('List Event Groups', true), array('controller' => 'event_groups', 'action' => 'index'))."</li>
-		<li>".$this->Html->link(__('List Category Choices', true), array('controller' => 'category_choices', 'action' => 'index'))."</li>
-		<li>".$this->Html->link(__('New Category Choice', true), array('controller' => 'category_choices', 'action' => 'add'))."</li>
 		<li>".$this->Html->link(__('List Events', true), array('controller' => 'events', 'action' => 'index'))."</li>
 		<li>".$this->Html->link(__('New Event', true), array('controller' => 'events', 'action' => 'add'))."</li>
 		<li>".$this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index'))."</li>

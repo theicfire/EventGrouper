@@ -23,19 +23,6 @@ class EventGroup extends AppModel {
 //	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $hasMany = array(
-		'CategoryChoice' => array(
-			'className' => 'CategoryChoice',
-			'foreignKey' => 'event_group_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'Event' => array(
 			'className' => 'Event',
 			'foreignKey' => 'event_group_id',
@@ -87,7 +74,6 @@ class EventGroup extends AppModel {
 	function getAllEventsUnderThis($id, $userId = null, $params = null, $limit = null, $justCalendar = false) {
 		$childrenArr = $this->getAllEventGroupsUnderThis($id);
 		$params['Event.event_group_id'] = $childrenArr;
-		$this->Event->bindModel(array('hasOne' => array('CategoryChoicesEvent')));
 				
 		$events = $this->Event->find('all',array('limit' => $limit, 'conditions' => $params,
 		'group' => 'Event.id',
@@ -144,10 +130,8 @@ class EventGroup extends AppModel {
 		$this->query("DELETE FROM event_groups WHERE id IN (".implode(',',$childrenArr).")");
 		$this->query("DELETE FROM event_groups_users WHERE event_group_id IN (".implode(',',$childrenArr).")");
 		$this->query("DELETE FROM events WHERE event_group_id IN (".implode(',',$childrenArr).")");
-		$this->query("DELETE FROM category_choices WHERE event_group_id IN (".implode(',',$childrenArr).")");
 		if (!empty($eventIds)) {
 			$this->query("DELETE FROM events_users WHERE event_id IN (".implode(',',$eventIds).")");
-			$this->query("DELETE FROM category_choices_events WHERE event_id IN (".implode(',',$eventIds).")");
 		}
 		return true;
 		
@@ -194,18 +178,6 @@ class EventGroup extends AppModel {
     	return $aco;
     }
     
-    function saveCategories($categoryList, $parentId) {
-    	$categoryList = explode(",", $categoryList);
-    	//todo inefficient code
-    	$this->query("DELETE FROM category_choices WHERE event_group_id = ".$parentId);
-    	$valuesArr = array();
-    	foreach ($categoryList as $category) {
-    		$valuesArr[] = sprintf("('%s', %d)", trim($category), $parentId);
-    	}
-    	$valuesStr = implode(",",$valuesArr);
-    	$this->query("INSERT INTO category_choices (name, event_group_id) VALUES".$valuesStr);
-    }
-	
 
 }
 ?>
