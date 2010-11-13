@@ -55,8 +55,8 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 							else {
 								?><a href="#" class="scheduletoggle">
 								<?php 
-								if ($onUserCalendar) echo "remove from my schedule"; 
-								else echo "add to my schedule"; 
+								if ($onUserCalendar) echo "Unfavorite"; 
+								else echo "Favorite"; 
 								?>
 								</a>
 								
@@ -87,14 +87,14 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 							</span>
 							<?php 
 							if (!$session->check('userid'))
-								echo "add to my schedule";
+								echo "Login to Favorite";
 							else {?>
-								<a href="#" class="scheduletoggle make_button addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
-								<img src="<?php echo $html->url('/'); ?>css/rinoa/add.png" class="small_icon_inline_button"  /> Add to schedule
+								<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
+								<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="small_icon_inline_button"  />
 								</a>
 								
-								<a href="#" class="scheduletoggle make_button removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
-								<img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button"  /> Remove from schedule 
+								<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
+								<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="small_icon_inline_button"  /> 
 					
 								</a>
 								

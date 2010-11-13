@@ -38,7 +38,7 @@ class EventGroupsController extends AppController {
 			'hasAndBelongsToMany' => array('User')	
 			)
 		); 
-		if ($currenteventGroup['EventGroup']['parent_id'] == 0)
+		if ($this->Session->check('userid') && $currenteventGroup['EventGroup']['parent_id'] == 0)
 			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
 		$eventGroups = $this->EventGroup->children($id);
 		$groupPath = $this->EventGroup->getPath($id);
@@ -223,8 +223,14 @@ class EventGroupsController extends AppController {
 		$groupPath = $this->EventGroup->getPath($id);
 		$treeList = $this->EventGroup->generateTreeList();
 		$viewCalendar = false;
-		if (isset($this->params['url']['isCalendar']) && $this->params['url']['isCalendar'] == 'true') $viewCalendar = true;
-		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, null, $viewCalendar);
+		if (isset($this->params['url']['isCalendar']) && $this->params['url']['isCalendar'] == 'true') {
+			if ($this->Session->check('userid'))
+				$eventsUnderGroup = $this->EventGroup->getFavorites($this->Session->read('userid'));
+			else
+				$eventsUnderGroup = array();
+		} else {
+			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, null);
+		}
 		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'viewCalendar'));
 		
 		

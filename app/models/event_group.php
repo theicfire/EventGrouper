@@ -71,7 +71,7 @@ class EventGroup extends AppModel {
 			$parentsArr[] = $parent['EventGroup']['id'];
 		return $parentsArr;
 	}
-	function getAllEventsUnderThis($id, $userId = null, $params = null, $limit = null, $justCalendar = false) {
+	function getAllEventsUnderThis($id, $userId = null, $params = null, $limit = null) {
 		$childrenArr = $this->getAllEventGroupsUnderThis($id);
 		$params['Event.event_group_id'] = $childrenArr;
 				
@@ -94,12 +94,6 @@ class EventGroup extends AppModel {
 			}
 		}
 		$eventsOnCal = array();
-		if ($justCalendar) {
-			foreach($events as &$event)
-				if (isset($event['Event']['onUsersCalendar']))
-					$eventsOnCal[] = $event;
-			$events = $eventsOnCal;
-		}
 		return $events;
 		
 	}
@@ -181,6 +175,33 @@ class EventGroup extends AppModel {
     function getWatchlist($userId) {
     	return $this->query(sprintf("SELECT * FROM event_groups LEFT JOIN event_groups_users ON (event_groups_users.event_group_id = event_groups.id)
 			 WHERE event_groups_users.user_id = %d ORDER BY time DESC", $userId));
+    }
+	function getFavorites($userId) {
+		$options = array();
+		$options['order'] = 'Event.time_start ASC';
+		$options['joins'] = array(
+			array('table' => 'events_users',
+				'alias' => 'EventsUsers',
+				'type' => 'inner',
+				'conditions' => array(
+					'Event.id = EventsUsers.event_id'
+				)
+			),
+			array('table' => 'users',
+				'alias' => 'User',
+				'type' => 'inner',
+				'conditions' => array(
+					'EventsUsers.user_id = User.id'
+				)
+			)
+		);
+				
+		$options['conditions']['User.id'] = $userId;
+		$events = $this->Event->find('all',$options);
+		foreach ($events as &$event) {
+			$event['Event']['onUsersCalendar'] = 1;
+		}
+		return $events;
     }
     
 
