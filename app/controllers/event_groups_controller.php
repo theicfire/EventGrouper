@@ -17,6 +17,8 @@ class EventGroupsController extends AppController {
 			'conditions' => array("EventGroup.parent_id" => 0),
 			'fields' => array("EventGroup.*")
 		));
+		if ($this->Session->check('userid'))
+			$this->set('watchlist', $this->EventGroup->getWatchlist($this->Session->read('userid')));
 		$this->set('eventGroups', $eventGroups);
 		
 	}
@@ -36,7 +38,8 @@ class EventGroupsController extends AppController {
 			'hasAndBelongsToMany' => array('User')	
 			)
 		); 
-		
+		if ($currenteventGroup['EventGroup']['parent_id'] == 0)
+			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
 		$eventGroups = $this->EventGroup->children($id);
 		$groupPath = $this->EventGroup->getPath($id);
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup'));
@@ -109,8 +112,7 @@ class EventGroupsController extends AppController {
 					$userid = $this->Session->read('userid');
 					$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId));
 					//add read priveleges for guests
-					//I think this is redundant
-//					$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
+					$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
 				}
 				$this->set('notification', 'The group has been saved. You can now add events or more subgroups.');
 				$newGroup = $this->EventGroup->findById($eventGroupId);

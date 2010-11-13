@@ -1,5 +1,3 @@
-
-
 <div class="info_page">
 <h1>Welcome to RushRabbit.</h1>
 <p class="subtitle">the world's most advanced event and conference organization system.</p>
@@ -88,13 +86,30 @@ function open_dialog()
 
 
 
-
-
+Watchlist:
+<table border="1">
+<tr>
+<td>name</td><td>description</td><td>Last visited</td>
+</tr>
+<?php foreach ($watchlist as $eventGroup) {?>
+<tr>
+		<td>
+			<?php echo $html->link($eventGroup['event_groups']['name'], "/".$eventGroup['event_groups']['path']); ?>
+		</td>
+		<td>
+			<?php echo $eventGroup['event_groups']['description']; ?>
+		</td>
+		<td>
+			<?php echo $eventGroup['event_groups_users']['time']; ?>
+		</td>
+</tr>
+<?php }?>
+</table>
 
 
 
 <h2><?php __('EventGroups');?></h2>
-<table cellpadding="0" cellspacing="0">
+<table border="1">
 <tr>
 <td>id</td><td>name</td><td>description</td><td>photo_url</td><td>parent_id</td><td>Actions</td>
 </tr>
@@ -127,10 +142,3 @@ function open_dialog()
 </tr>
 <?php }?>
 </table>
-<div class="actions">
-	<ul>
-		<li><?php if ($session->check('userid')) {
-			echo $html->link(__('Add a top level EventGroup', true), array('action' => 'add', 0)); 
-		}?> </li>
-	</ul>
-</div>

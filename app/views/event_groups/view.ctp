@@ -56,6 +56,7 @@ echo "</style>";
 			}?>
 		</ul>-->
         	<!--<div id="chl_organization"><a href="#">REX (Residence Exploration)</a></div>-->
+        	
             <div id="chl_title"><?php echo $currenteventGroup['EventGroup']['name']; ?></div>
             
             <div id="chl_address"><?php echo $currenteventGroup['EventGroup']['description']; ?></div>
@@ -217,10 +218,10 @@ echo "</style>";
             
             
             </table>
-            
-            <table class="ajax_events" id="eventHolder">
             <?php echo $html->image('loading.gif', array('id' => 'loadingimage'));?>
+            <table class="ajax_events" id="eventHolder">
         	</table>
+        	
         <table width="100%">
         
         

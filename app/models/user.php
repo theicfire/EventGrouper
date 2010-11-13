@@ -95,9 +95,34 @@ class User extends AppModel {
 		}
 		return false;
 	}
+	function addEventGroupToUser ($userId, $eventId) {
+		$hasEvent = $this->userHasEventGroup($eventId, $userId);
+		if (!$hasEvent) {
+			$this->query("INSERT INTO event_groups_users (user_id, event_group_id) VALUES(".$userId.", ".$eventId.");");
+			return true;
+		}
+		$this->query("UPDATE event_groups_users SET time=current_timestamp WHERE user_id=".$userId." AND event_group_id=".$eventId);
+		return false;
+	}
+	
+	function deleteEventGroupFromUser ($userId, $eventId) {
+		$hasEvent = $this->userHasEventGroup($eventId, $userId);
+		if ($hasEvent) {
+			$this->query(sprintf("DELETE FROM event_groups_users WHERE user_id = %d AND event_group_id = %d",$userId, $eventId));
+			return true;
+		}
+		return false;
+	}
 	
 	function userHasEvent($eventId, $userId) {
 		$num = $this->query(sprintf("SELECT count(*) FROM events_users WHERE event_id = %d AND user_id = %d", $eventId, $userId));
+		if ($num[0][0]['count(*)'] == 1) {
+			return true;
+		}
+		return false;
+	}
+	function userHasEventGroup($eventId, $userId) {
+		$num = $this->query(sprintf("SELECT count(*) FROM event_groups_users WHERE event_group_id = %d AND user_id = %d", $eventId, $userId));
 		if ($num[0][0]['count(*)'] == 1) {
 			return true;
 		}

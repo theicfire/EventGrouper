@@ -110,16 +110,18 @@ function giveEventsJs() {
 		}
 		return false;
 	});
+	
 
 	$(".make_button").button();
 }
 function getEvents(date, search, time_start, isCalendar) {
 	$("#eventHolder").html('');
+	$('#loadingimage').show();
 	$.get(phpVars.root+"/event_groups/ajaxListEvents/"+phpVars.currentEventGroupId, { date_start: date, search: search, time_start:time_start, isCalendar:isCalendar},
    function(data){
      $("#eventHolder").html(data);
+     $('#loadingimage').hide();
      giveEventsJs();
-     
    });
 }
 function refreshEvents() {
@@ -188,14 +190,6 @@ $(document).ready( function(){
 	
 	$(".make_button").button();
 	
-	$('#loadingimage')
-    .hide()  // hide it initially
-    .ajaxStart(function() {
-        $(this).show();
-    })
-    .ajaxStop(function() {
-        $(this).hide();
-    });
 
 	
 //	$("#filter_submit").hide();

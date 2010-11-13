@@ -38,23 +38,23 @@ class EventGroup extends AppModel {
 		)
 	);
 
-//	var $hasAndBelongsToMany = array(
-//		'User' => array(
-//			'className' => 'User',
-//			'joinTable' => 'event_groups_users',
-//			'foreignKey' => 'event_group_id',
-//			'associationForeignKey' => 'user_id',
-//			'unique' => true,
-//			'conditions' => '',
-//			'fields' => '',
-//			'order' => '',
-//			'limit' => '',
-//			'offset' => '',
-//			'finderQuery' => '',
-//			'deleteQuery' => '',
-//			'insertQuery' => ''
-//		)
-//	);
+	var $hasAndBelongsToMany = array(
+		'User' => array(
+			'className' => 'User',
+			'joinTable' => 'event_groups_users',
+			'foreignKey' => 'event_group_id',
+			'associationForeignKey' => 'user_id',
+			'unique' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		)
+	);
 	function getAllEventGroupsUnderThis($id) {
 		$children = $this->children($id);
 		$childrenArr = array();
@@ -176,6 +176,11 @@ class EventGroup extends AppModel {
 		
 		
     	return $aco;
+    }
+    
+    function getWatchlist($userId) {
+    	return $this->query(sprintf("SELECT * FROM event_groups LEFT JOIN event_groups_users ON (event_groups_users.event_group_id = event_groups.id)
+			 WHERE event_groups_users.user_id = %d ORDER BY time DESC", $userId));
     }
     
 
