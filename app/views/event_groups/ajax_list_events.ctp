@@ -81,8 +81,9 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 							</span>
 							<?php }?>
 
-							<span class="event_tags">
-									posted by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a>
+							<span class="event_tags group_<?=$event['EventGroup']['id']?>">
+<!--									posted by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a>-->
+									posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path']))?>
 							</span>
 							<?php 
 							if (!$session->check('userid'))

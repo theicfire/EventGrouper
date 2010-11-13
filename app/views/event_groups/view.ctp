@@ -5,18 +5,28 @@
 <?php $javascript->link('jqueryui/jquery.ui.timeselector.js', false); ?>
 <?php $javascript->link('timeline.js', false); ?>
 <?php echo $html->css('timeline', 'stylesheet', array('media'=>'all' ), false); ?>
-
 <?php 
 //goes in style tags
 echo "<style type='text/css'>";
 //goes in style tags
-$colorList = array('C00', '360', '606', '009', '630', '033', 'f60', 'C09');
-$i = 0;
+$pathLength = array();
 foreach ($eventGroups as $eventGroup) {
-echo "a.group_".$eventGroup['EventGroup']['id']." { color: #".$colorList[$i]."; }\n";
-echo "group_".$eventGroup['EventGroup']['id']." a { color: #".$colorList[$i]."; }\n";
-$i++;
-if ($i == count($colorList)) $i = 0;
+	$pathLength[count(explode('/',$eventGroup['EventGroup']['path']))][] = $eventGroup['EventGroup']['path'];
+}
+$minLength = min(array_keys($pathLength));
+$colorList = array('C00', '360', '606', '009', '630', '033', 'f60', 'C09');
+foreach ($eventGroups as $eventGroup) {
+	$idIndex = array_search($eventGroup['EventGroup']['path'], $pathLength[$minLength]);
+	if ($idIndex ==null) {
+		for ($i = 0; $i < count($pathLength[$minLength]); $i++) {
+			if (preg_match("@".$eventGroup['EventGroup']['path']."@", $pathLength[$minLength][$i])) {//todo make sure the @ symbol is not in the path
+				$idIndex = $i;
+				break;
+			}
+		}
+	}
+	echo "a.group_".$eventGroup['EventGroup']['id']." { color: #".$colorList[$idIndex]."; }\n";
+	echo ".group_".$eventGroup['EventGroup']['id']." a { color: #".$colorList[$idIndex]."; }\n";
 }
 echo "</style>";
 ?>
@@ -107,7 +117,9 @@ echo "</style>";
                     <?php 
 					$linksArr = array();
 					foreach ($eventGroups as $eventGroup) {
-						$linksArr[] = $html->link($eventGroup['EventGroup']['name'], "/".$eventGroup['EventGroup']['path'], array('class' => "group_".$eventGroup['EventGroup']['id']));
+						if(in_array($eventGroup['EventGroup']['path'], $pathLength[$minLength])) {
+							$linksArr[] = $html->link($eventGroup['EventGroup']['name'], "/".$eventGroup['EventGroup']['path'], array('class' => "group_".$eventGroup['EventGroup']['id']));
+						}
 					}
 					echo implode($linksArr," ");
 					?>
