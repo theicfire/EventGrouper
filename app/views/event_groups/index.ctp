@@ -85,26 +85,27 @@ function open_dialog()
 
 
 
-
-Watchlist:
-<table border="1">
-<tr>
-<td>name</td><td>description</td><td>Last visited</td>
-</tr>
-<?php foreach ($watchlist as $eventGroup) {?>
-<tr>
-		<td>
-			<?php echo $html->link($eventGroup['event_groups']['name'], "/".$eventGroup['event_groups']['path']); ?>
-		</td>
-		<td>
-			<?php echo $eventGroup['event_groups']['description']; ?>
-		</td>
-		<td>
-			<?php echo $eventGroup['event_groups_users']['time']; ?>
-		</td>
-</tr>
+<?php if (isset($watchlist)) {?>
+	Watchlist:
+	<table border="1">
+	<tr>
+	<td>name</td><td>description</td><td>Last visited</td>
+	</tr>
+	<?php foreach ($watchlist as $eventGroup) {?>
+	<tr>
+			<td>
+				<?php echo $html->link($eventGroup['event_groups']['name'], "/".$eventGroup['event_groups']['path']); ?>
+			</td>
+			<td>
+				<?php echo $eventGroup['event_groups']['description']; ?>
+			</td>
+			<td>
+				<?php echo $eventGroup['event_groups_users']['time']; ?>
+			</td>
+	</tr>
+	<?php }?>
+	</table>
 <?php }?>
-</table>
 
 
 
