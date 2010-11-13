@@ -67,6 +67,13 @@ class Event extends AppModel {
 		return true;
 	}
 	
+	function save($data = null, $validate = true, $fieldList = array()) {
+		$data['Event']['time_start'] = date('Y-m-d H:i:s', strtotime($data['Other']['date_start']." ".$data['Other']['time_start']));
+		$data['Event']['duration'] = (strtotime($data['Other']['date_end']." ".$data['Other']['time_end']) - strtotime($data['Other']['date_start']." ".$data['Other']['time_start']))/60;
+		$data['Event']['tags'] = strtolower($data['Event']['tags']);
+        return parent::save($data, $validate, $fieldList);
+    } 
+	
 
 }
 ?>

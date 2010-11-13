@@ -84,6 +84,13 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 							<span class="event_tags group_<?=$event['EventGroup']['id']?>">
 <!--									posted by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a>-->
 									posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path']))?>
+									<?php if (!empty($event['Event']['tags'])) { 
+										echo " in ";
+										$tagArr = explode(",", $event['Event']['tags']);
+										foreach ($tagArr as $tag) {
+											echo "<a href='#' class='tagLink'>".trim($tag)."</a> ";
+										}
+									}?>
 							</span>
 							<?php 
 							if (!$session->check('userid'))

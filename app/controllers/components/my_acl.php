@@ -29,6 +29,8 @@ class MyAclComponent extends Object {
     }
     
 	function checkUser($type, $id, $userid, $action = '*') {
+		if (!$id)
+			return false;
 		$permission = false;
 		if ($id == 0 && $action = 'create')
 			return true;//todo this is bad programming!

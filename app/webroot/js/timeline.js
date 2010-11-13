@@ -110,6 +110,11 @@ function giveEventsJs() {
 		}
 		return false;
 	});
+	$('.tagLink').click(function() {
+		$('#searchBox').val($(this).html());
+		refreshEvents();
+		return false;
+	});
 	
 
 	$(".make_button").button();
@@ -184,7 +189,6 @@ $(document).ready( function(){
 		refreshEvents();
 		return false;
 	});
-	
 	$(".previous_events_button").button();
 	$("#filter_submit").button();
 	

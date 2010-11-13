@@ -213,7 +213,7 @@ class EventGroupsController extends AppController {
 		if (array_key_exists('search', $this->params['url'])) {//has been searched
 			if (!empty($this->params['url']['search'])){
 				$params= array(
-				sprintf('MATCH(`Event.description`, `Event.title`)
+				sprintf('MATCH(`Event.description`, `Event.title`, `Event.tags`)
 				AGAINST("%s" IN BOOLEAN MODE)', $this->params['url']['search']));
 			}
 			$timeStart = date("Y-m-d H:i:s", strtotime($this->params['url']['date_start']) + $this->params['url']['time_start']*3600);

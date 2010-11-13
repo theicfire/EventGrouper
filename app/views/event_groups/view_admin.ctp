@@ -1,4 +1,3 @@
-
 <?php if(isset($notification))
 { ?>
 	
@@ -102,8 +101,7 @@
 		<h2>Events Contained</h2>  
 		<table class="full_width">
 			<tr><th>Title</th><th>Description</th><th>Time</th><th>Event Group</th><th>Actions</th></tr>
-			<?php foreach ($eventsUnderGroup as $event) {
-				if (!$session->check('userid') || ($session->check('userid') && !array_key_exists('onUsersCalendar',$event['Event']))) {?>
+			<?php foreach ($eventsUnderGroup as $event) {?>
 			<tr id="event-<?=$event['Event']['id']?>">
 					<td>
 						<?php echo $event['Event']['title']; ?>
@@ -128,7 +126,7 @@
 						}?>
 					</td>
 			</tr>
-			<?php }}?>
+			<?php }?>
 		</table>
 	</div>      
 	<!--<a href="#" class="make_button"><img src="/eventgrouper/css/rinoa/add.png" class="rinoa_small_inline" /> Add another email address</a>-->

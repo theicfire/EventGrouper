@@ -19,10 +19,6 @@ class EventsController extends AppController {
 	}
 
 	function add($eventGroupId = null) {
-		if (!$eventGroupId) {
-			$this->Session->setFlash(__('Invalid EventGroup.', true));
-			$this->redirect(array('action'=>'index'));
-		}
 		$this->MyAcl->runcheck('EventGroup',$eventGroupId,'create');
 		$eventGroup = $this->EventGroup->findById($eventGroupId);
 		if (!empty($this->data)) {
@@ -30,8 +26,7 @@ class EventsController extends AppController {
 			$userid = $this->Session->read('userid');
 			$this->data['Event']['user_id'] = $userid;
 			$this->data['Event']['event_group_id'] = $eventGroupId;
-			$this->data['Event']['time_start'] = date('Y-m-d H:i:s', strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']));
-			$this->data['Event']['duration'] = (strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']))/60;
+			
 			App::import('Helper', 'Html'); // loadHelper('Html'); in CakePHP 1.1.x.x
 	        $html = new HtmlHelper();			
 			$flashMessage = "The Event has been submitted and is being reviewed. To see it's status go to the ".$html->link('Admin Panel Home', '/users/index')." Page."; 
@@ -39,6 +34,7 @@ class EventsController extends AppController {
 				$this->data['Event']['status'] = 'hidden'; 
 				$flashMessage = "This Event has been saved.";
 			}
+			$this->Session->setFlash($flashMessage);
 			if ($this->Event->save($this->data)) {
 				$acoParent = $this->Event->query("SELECT id FROM acos WHERE foreign_key = ".$eventGroupId." AND model = 'EventGroup'");
 				if (!empty($acoParent))
@@ -53,17 +49,9 @@ class EventsController extends AppController {
 				);
 				$this->Acl->Aco->create();
 				$this->Acl->Aco->save($acoArr);
-				//and now add permissions to the users
-				//NOTE: we assume that the user is logged in to get to this page (and has a session)
-				//NOTE: we are giving the users who make the event groups full permissions
-				//permissions should already be given due to group permissions
-//				$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'Event', 'foreign_key' => $eventId));
-			
-			
-			
-			
+				//since this has a parent_id, permissions should already be set
 				
-				$this->Session->setFlash($flashMessage);
+				
 				$this->redirect("/event_groups/view_admin/".$eventGroup['EventGroup']['path']);
 			} else {
 				$this->Session->setFlash(__('The Event could not be saved. Please, try again.', true));
@@ -82,21 +70,12 @@ class EventsController extends AppController {
 	function edit($id = null) {
 		if (!empty($this->data))
 			$id = $this->data['Event']['id'];
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid Event', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		
 		
 		$this->MyAcl->runcheck('Event',$id,'update');
 		$groupId = $this->Event->findById($id);
 		$groupId = $groupId['Event']['event_group_id'];
 		$eventGroup = $this->EventGroup->findById($groupId);
 		if (!empty($this->data)) {
-			$this->data['Event']['time_start'] = date('Y-m-d H:i:s', strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']));
-			$this->data['Event']['duration'] = (strtotime($this->data['Other']['date_end']." ".$this->data['Other']['time_end']) - strtotime($this->data['Other']['date_start']." ".$this->data['Other']['time_start']))/60;
-			// add code here to change form input
-//			print_r($this->data);
 			if ($this->Event->save($this->data)) {
 				$this->Session->setFlash(__('The Event has been saved', true));
 				$this->redirect("/event_groups/view_admin/".$eventGroup['EventGroup']['path']);
