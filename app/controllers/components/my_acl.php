@@ -29,7 +29,7 @@ class MyAclComponent extends Object {
     }
     
 	function checkUser($type, $id, $userid, $action = '*') {
-		if (!$id)
+		if ($id == null)
 			return false;
 		$permission = false;
 		if ($id == 0 && $action = 'create')

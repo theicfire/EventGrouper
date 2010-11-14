@@ -53,9 +53,9 @@
 			<?php echo $form->input('name', array('type' => 'text', 'class' => 'textfield'));?>
 			<p class="form_tip">This name will be displayed on the group's page, and will be used for searching. (for example, "Baker Hall")</p>
 			
-			<label>Picture</label>
-			<input type="file" name="picture" />
-			<p class="form_tip">This image will be displayed alongside the group description on the group's page.</p>
+<!--			<label>Picture</label>-->
+<!--			<input type="file" name="picture" />-->
+<!--			<p class="form_tip">This image will be displayed alongside the group description on the group's page.</p>-->
         
 			<?php	
 				if ($parentId == 0) {
