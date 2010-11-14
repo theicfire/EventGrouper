@@ -31,31 +31,4 @@
 		</fieldset>
 		<div style="padding: 5px"><input type="submit" value="Submit"></div>
 	</form>
-	</div>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		  // Handler for .ready() called.
-	
-		$('#loginForm').submit(function() {
-			var username = $('#email').attr('value');
-			var pass = $('#password').attr('value');
-			var goodLogin = true;
-			$.ajax({
-			   type: "POST",
-			   async: false,
-			   url: "<?=$this->base?>/login/checkLogin",
-			   data: {email: username, pass: pass},
-			   success: function (data) {
-					if (data != "good") {
-						$("#badLogin").show(200);
-					} else {
-						$("#badLogin").css('display', 'none');
-					}
-				}
-			 });
-			if ($("#badLogin").is(':visible'))
-				return false;
-		});
-		  
-	});
-	</script>	
+</div>

@@ -47,9 +47,8 @@ class PermissionsController extends AppController {
 				$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userRow['User']['id']), array('model' => 'EventGroup', 'foreign_key' => $groupId), 'create');
 				if ($unregistered) {
 					$alertText = "This user has not registered yet. He/she will be sent an email to sign up.";
-					$emailText = sprintf("You have been granted permissions to %s. Go here to sign up: <a href='%s'>%s</a>",
+					$emailText = sprintf("You have been granted permissions to %s. Go here to sign up: %s",
 					FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path'],
-					FULL_BASE_URL.$this->webroot."users/add/".$userRow['User']['id'],
 					FULL_BASE_URL.$this->webroot."users/add/".$userRow['User']['id']);
 				}
 				elseif ($hasAlias) {
@@ -65,7 +64,7 @@ class PermissionsController extends AppController {
 				$this->Session->setFlash($alertText);
 				
 				echo $emailText;
-				$this->Email->from    = 'from <noreply@rushrabbit.com>';
+				$this->Email->from    = 'RushRabbit <noreply@rushrabbit.com>';
 				$this->Email->to      = sprintf('%s <%s>', $userRow['User']['email'], $userRow['User']['email']);
 				$this->Email->subject = 'You\'ve been granted permissions on RushRabbit';
 				$this->Email->send($emailText);

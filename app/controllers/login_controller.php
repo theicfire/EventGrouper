@@ -5,19 +5,6 @@ class LoginController extends AppController {
 	var $uses = array('User');//inherit User from appcontroller
 	var $helpers = array('Html', 'Form', 'Javascript');
 
-	function index() {
-		if (!empty($this->data)) {
-			$userData = $this->User->find('first', array('conditions' => array('email' => $this->data['User']['email']), 'recursive' => -1));
-			if (!empty($this->data['User']['pass']) && !empty($userData['User']['pass']) && sha1($this->data['User']['pass']) == $userData['User']['pass']) {
-				$this->Session->write('username', $this->data['User']['email']);//todo is this secure?
-				$this->Session->write('userid', $userData['User']['id']);//todo is this secure?
-			} else {
-				$this->Session->write('username', null);
-				$this->Session->write('userid', null);
-			}
-		}
-	}
-	
 	function checkLogin() {
 		$this->autoRender = false;
 		if (!empty($_POST['email'])) {
@@ -35,8 +22,23 @@ class LoginController extends AppController {
 			echo "post is empty";
 		}
 	}
+	function checkEmailExists() {
+		$this->autoRender = false;
+		if (!empty($_POST['email'])) {
+			$userData = $this->User->find('first', array('conditions' => array('email' => $_POST['email']), 'pass !=' => 'unregistered', 'recursive' => -1));
+			print_r($userData);
+			if (!empty($userData)) {
+				echo "good";
+			} else {
+				echo "bad";
+			}
+		} else {
+			echo "post is empty";
+		}
+	}
 	
 	function logout() {
+		$this->autoRender = false;
 		$this->Session->destroy();
 	}
 	

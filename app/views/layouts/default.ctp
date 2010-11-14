@@ -64,7 +64,7 @@
 
 <div id="help_modal"></div>
 
-    <?php if (isset($isAdmin)) {?>
+    <?php if (isset($isAdmin) && $session->check('userid')) {?>
 	
 	    <div id="personal_id" class="admin_header">
 	    
@@ -72,7 +72,7 @@
 	    	<p><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</p></div>
 	        <div class="right"><p>
 	        
-	        <a href="<?php echo $html->url('/users/index'); ?>" class="make_button">Admin panel home</a> <a href="<?php echo $html->url('/'); ?>" class="make_button">Exit admin panel</a> <!-- <a href="#" class="make_button">Edit account</a> --> <a href="<?php echo $html->url("/");?>" class="make_button logoutlink">Log out</a> 
+	        <a href="<?php echo $html->url('/users/index'); ?>" class="make_button">Admin panel home</a> <a href="<?php echo $html->url('/'); ?>" class="make_button">Exit admin panel</a> <a href="<?php echo $html->url('/users/changepassword'); ?>" class="make_button">Edit Account</a> <a href="<?php echo $html->url("/");?>" class="make_button logoutlink">Log out</a> 
 	        
 	        </p>
 	        
@@ -150,7 +150,7 @@
 		<input type="text" name="email" id="email" value="" class="textfield" />
 		<label for="password">Password</label>
 		<input type="password" name="password" id="password" value="" class="textfield" />
-<p><a href="#">Forgot Password?</a> </p>
+<p><a href="<?=$html->url('/users/forgotpassword')?>">Forgot Password?</a> </p>
 	</fieldset>
 	</form>
 

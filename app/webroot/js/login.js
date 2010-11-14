@@ -2,8 +2,8 @@ $(function() {
 		// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
 		$( "#dialog" ).dialog( "destroy" );
 		
-		var email = $( "#email" ),
-			password = $( "#password" ),
+		var email = $( "#dialog-form #email" ),
+			password = $( "#dialog-form #password" ),
 			allFields = $( [] ).add( name ).add( email ).add( password ),
 			tips = $( ".validateTips" );
 
@@ -45,4 +45,43 @@ $(function() {
 				$( "#dialog-form" ).dialog( "open" );
 				return false;
 			});
+		$('#loginForm').submit(function() {
+			var username = $('#loginForm #email').attr('value');
+			var pass = $('#loginForm #password').attr('value');
+			var goodLogin = true;
+			$.ajax({
+			   type: "POST",
+			   async: false,
+			   url: phpVars.root+"/login/checkLogin",
+			   data: {email: username, pass: pass},
+			   success: function (data) {
+					if (data != "good") {
+						$("#badLogin").show(200);
+					} else {
+						$("#badLogin").css('display', 'none');
+					}
+				}
+			 });
+			if ($("#badLogin").is(':visible'))
+				return false;
+		});
+		$('#forgotPasswordForm').submit(function() {
+			var username = $('#forgotPasswordForm #email').attr('value');
+			$.ajax({
+			   type: "POST",
+			   async: false,
+			   url: phpVars.root+"/login/checkEmailExists",
+			   data: {email: username},
+			   success: function (data) {
+					if (data != "good") {
+						$("#badLogin").show(200);
+					} else {
+						$("#badLogin").css('display', 'none');
+					}
+				}
+			 });
+			if ($("#badLogin").is(':visible'))
+				return false;
+			return false;
+		});
 	});

@@ -73,12 +73,14 @@ $(document).ready(function() {
 <table class="full_width">
 	<tr>
 		<th>Title</th>
+		<th>Group Path</th>
 		<th>Status</th>
 		<th>Actions</th>
 	</tr>
 	<?php foreach ($sentEvents as $event) {?>
 	<tr id="event-<?=$event['Event']['id']?>">
 		<td><?=$event['Event']['title']?></td>
+		<td><?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path']))?></td>
 		<td><?=$event['Event']['status']?></td>
 		<td><?php if ($event['Event']['status'] == 'confirmed'){ ?><a href="#" class="hideEvent">Hide</a><?php }?></td>
 	</tr>

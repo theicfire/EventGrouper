@@ -4,7 +4,7 @@ class UsersController extends AppController {
 	var $name = 'Users';
 	var $uses = array('User', 'UserAlias', 'EventGroup', 'Event');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Access');
-	var $components = array('Acl');
+	var $components = array('Acl', 'Email');
 	function index() {
 		if (!$this->Session->check('userid')) {
 			$this->Session->setFlash('Log in first');
@@ -153,7 +153,44 @@ class UsersController extends AppController {
 		}
 		
 	}
-	
+	function changePassword() {
+		if (!empty($this->data)) {
+			$curUser = $this->User->find('first', array('conditions' => array('email' => $this->data['User']['email'])));
+			$dataToSave = $this->data;
+			$dataToSave['User']['id'] = $curUser['User']['id'];
+			$dataToSave['User']['pass'] = sha1($this->data['User']['newpass']);
+			if ($this->User->save($dataToSave)) {
+				$this->Session->setFlash('Password changed.');
+				$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));
+			} else {
+				$this->Session->setFlash('An error occured. Please try again');
+			}
+		}
+		$this->set('isAdmin', true);
+		
+	}
+	function forgotPassword() {
+		if (!empty($this->data)) {
+			$curUser = $this->User->find('first', array('conditions' => array('email' => $this->data['User']['email'])));
+			$dataToSave = $this->data;
+			$dataToSave['User']['id'] = $curUser['User']['id'];
+			$newpass = 'randompass';
+			$dataToSave['User']['pass'] = sha1($newpass);
+			if ($this->User->save($dataToSave)) {
+				$emailText = "You have requested a new password for your rushrabbit account. Your new password is:".$newpass."\n".
+				"Go here to change this: http://18.245.5.168/eventgrouper/users/changepassword";
+				$this->Email->from    = 'RushRabbit <noreply@rushrabbit.com>';
+				$this->Email->to      = sprintf('%s <%s>', $dataToSave['User']['email'], $dataToSave['User']['email']);
+				$this->Email->subject = 'Your password has been changed on RushRabbit';
+				$this->Email->send($emailText);
+				
+				$this->Session->setFlash('You have been sent an email with a new password.');
+				$this->redirect(array('controller' => 'event_groups', 'action'=>'index'));
+			} else {
+				$this->Session->setFlash('An error occured. Please try again');
+			}
+		}
+	}
 //	function edit($id = null) {
 //		$this->loadModel('Event');
 //		if (!$id && empty($this->data)) {
