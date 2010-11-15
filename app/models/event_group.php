@@ -130,15 +130,22 @@ class EventGroup extends AppModel {
 		return true;
 		
 	}
-	
+	function getencodedPath($data = null) {
+		if (empty($data['EventGroup']['path']))
+			$data['EventGroup']['path'] = urlencodecustom($data['EventGroup']['name']);
+        $path = $data['pathstart']."/".$data['EventGroup']['path'];
+        if (empty($data['pathstart']))
+        		$path = $data['EventGroup']['path'];
+        return $path;
+	}
 	function save($data = null, $validate = true, $fieldList = array()) {
         $returnval = parent::save($data, $validate, $fieldList);
         if ($returnval && $data != null && array_key_exists('pathstart', $data)) {
-        	if (empty($data['EventGroup']['path']))
-				$data['EventGroup']['path'] = urlencodecustom($data['EventGroup']['name']);
-        	$path = $data['pathstart']."/".$data['EventGroup']['path'];
-        	if (empty($data['pathstart']))
-        		$path = $data['EventGroup']['path'];
+//        	if (empty($data['EventGroup']['path']))
+//				$data['EventGroup']['path'] = urlencodecustom($data['EventGroup']['name']);
+//        	$path = $data['pathstart']."/".$data['EventGroup']['path'];
+			$path = $this->getencodedPath($data);
+        	
         	$this->set('path', $path);
         	$this->save(null, false);//no validation now
         }
