@@ -80,7 +80,9 @@ a
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	padding: 10px;
-	margin: 10px;
+	margin: 20px;
+	
+	margin-top: 15px;
 }
 
 .admin_header
@@ -94,6 +96,8 @@ a
 	
 	margin-top: 0;
 	border-top: none;
+	
+	padding-bottom: 2px;
 }
 
 .rinoa_small_inline
@@ -122,14 +126,22 @@ h1
 
 .rinoa_large_inline
 {
-	position:relative;
-	bottom: -3px;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	bottom: -5px;
+	margin-top: -200px;
 }
 
 .hr
 {
 	border-bottom: #aaa 1px solid;
 	padding: 8px 0;
+}
+
+.info_box_heading
+{
+	padding: 0 0 5px 0;
 }
 
 table
@@ -166,4 +178,30 @@ td, th
 .right
 {
 	float: right;
+}
+
+.admin_login_info
+{
+	font-size: 14px;
+	font-style: normal;
+	margin-left: 20px;
+}
+
+.unconfirmed
+{
+	background-color: #fbf9ee;
+}
+
+.table_tiny_buttons .make_button
+{
+	font-size: .8em;
+	margin: 1px;
+}
+
+.table_tiny_buttons .make_button img
+{
+	height: 12px;
+	width: 12px;
+	margin: 1px;
+	padding: 1px;
 }

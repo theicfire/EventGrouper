@@ -187,3 +187,10 @@ strong
 	margin-top: 5px;
 	border-top: 1px solid #ccc;
 }
+
+.form_explanation
+{
+	padding: 5px;
+	color: #333;
+	margin: 3px 0;
+}

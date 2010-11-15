@@ -1,7 +1,10 @@
 <?php if ($currenteventGroup['EventGroup']['parent_id'] == 0) {
 
-	echo "glorify this";
-}?>
+	$top_level = true;
+}
+else { $top_level = false; }
+
+?>
 <?php if(isset($notification))
 { ?>
 	
@@ -14,11 +17,15 @@
 
 <div class="info_box">
     
-	<h1>Current Group</h1>
-	<p><?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?></p>
+	<h1><?php echo $currenteventGroup['EventGroup']['name']; ?></h1>
 	<div class="form_section">
-		<h2><?php echo $currenteventGroup['EventGroup']['name']; ?></h2>
-				<div><p>Description:</p><p><?php echo $currenteventGroup['EventGroup']['description']; ?></p></div>
+		<h2><?php echo $top_level?"[Conference] Information":"Group Information"; ?></h2>
+				<div><p>Description:<?php 
+				if( !$currenteventGroup['EventGroup']['description'] == "") 
+				echo "</p><p>" . $currenteventGroup['EventGroup']['description'] . "</p>";
+				else
+				echo " <em>No Description</em></p>"; ?></div>
+				<p><? echo $top_level?"":"Path: ".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path'])); ?></p>
 				<div style="height: 10px;"> </div>
 			<div>
 				<a href="<?php echo $html->url("/".$currenteventGroup['EventGroup']['path']); ?>"
@@ -39,24 +46,34 @@
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 				class="small_icon_inline_button" /> Add events</a>
 			<?php }?>
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {?>
-				
-				<a class="make_button" href="<?php echo $html->url("/event_groups/delete/" . $currenteventGroup['EventGroup']['id']); ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $currenteventGroup['EventGroup']['name']; ?>?&#039;);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Delete</a>
-
-			<?php }?>
+			
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {?>
 				
 				<a class="make_button" href="<?php echo $html->url("/permissions/view/" . $currenteventGroup['EventGroup']['id']); ?>">
 				<img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" class="small_icon_inline_button" /> Edit Permissions</a>
 			<?php }?>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {?>
+				
+				<a class="make_button" href="<?php echo $html->url("/event_groups/delete/" . $currenteventGroup['EventGroup']['id']); ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $currenteventGroup['EventGroup']['name']; ?>?&#039;);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Delete</a>
+
+			<?php }?>
 			</div>
 	</div>
-</div>
-<div class="info_box">
+
     
-	<h1>Contents of "<?php echo $currenteventGroup['EventGroup']['name']; ?>"</h1>      
+	<!-- <h1>Contents of "<?php echo $currenteventGroup['EventGroup']['name']; ?>"</h1> -->     
 	<div class="form_section">
-		<h2>Groups Contained</h2>  
+		<h2>Groups Contained</h2>
+		
+		<?php if( count($eventGroups)==0 )
+		{ ?>
+		
+		<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> There are no subgroups in "<?php echo $currenteventGroup['EventGroup']['name']; ?>".</p>
+		
+		<?php }
+		else { 
+		?>
+		  
 		<table class="full_width">
 			<tr><th>Path</th><th>Description</th><th>Actions</th></tr>  
 		    <?php foreach ($eventGroups as $eventGroup) {?>
@@ -67,7 +84,7 @@
 						<td>
 							<?php echo $eventGroup['EventGroup']['description']; ?>
 						</td>
-						<td><a href="<?php echo $html->url("/".$eventGroup['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
+						<td class="table_tiny_buttons"><a href="<?php echo $html->url("/".$eventGroup['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
 						class="small_icon_inline_button" /> View in timeline</a> 
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'update')) {?>
 							<a href="<?php echo $html->url("/event_groups/edit/".$eventGroup['EventGroup']['id']); ?>"
@@ -99,10 +116,21 @@
 			<?php }?>      
 	            
 		</table>
+		<?php } ?>
+		
+		
 		</div>
 		
 		<div class="form_section">
 		<h2>Events Contained</h2>  
+		
+		<?php if( count($eventsUnderGroup)==0 )
+		{ ?>
+			<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> There are no events in "<?php echo $currenteventGroup['EventGroup']['name']; ?>" or any of its subgroups.</p>
+		<?php }
+		else {
+		?>
+		
 		<table class="full_width">
 			<tr><th>Title</th><th>Description</th><th>Time</th><th>Event Group</th><th>Actions</th></tr>
 			<?php foreach ($eventsUnderGroup as $event) {?>
@@ -132,6 +160,7 @@
 			</tr>
 			<?php }?>
 		</table>
+		<?php } ?>
 	</div>      
 	<!--<a href="#" class="make_button"><img src="/eventgrouper/css/rinoa/add.png" class="rinoa_small_inline" /> Add another email address</a>-->
 </div>

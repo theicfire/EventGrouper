@@ -93,8 +93,11 @@ h1
 
 .rinoa_large_inline
 {
-	position:relative;
-	bottom: -3px;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	bottom: -23px;
+	
 }
 
 .hr
@@ -137,4 +140,9 @@ td, th
 .right
 {
 	float: right;
+}
+
+.unconfirmed
+{
+	background-color: #fbf9ee;
 }

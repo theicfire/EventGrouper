@@ -68,11 +68,11 @@
 	
 	    <div id="personal_id" class="admin_header">
 	    
-	    	<div class="left"><div class="admin_panel_logo"><strong>RushRabbit</strong> Administration Panel</div>
-	    	<p><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</p></div>
-	        <div class="right"><p>
+	    	<div class="left"><div class="admin_panel_logo"><strong>RushRabbit</strong> Administration Panel <span class="admin_login_info"><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</span></div>
+	    	</div>
+	        <div class="right" style="text-align: right"><p>
 	        
-	        <a href="<?php echo $html->url('/users/index'); ?>" class="make_button">Admin panel home</a> <a href="<?php echo $html->url('/'); ?>" class="make_button">Exit admin panel</a> <a href="<?php echo $html->url('/users/changepassword'); ?>" class="make_button">Edit Account</a> <a href="<?php echo $html->url("/");?>" class="make_button logoutlink">Log out</a> 
+	        <a href="<?php echo $html->url('/users/index'); ?>">Admin panel home</a> <a href="<?php echo $html->url('/'); ?>">Exit admin panel</a><br /><a href="<?php echo $html->url('/users/changepassword'); ?>">Edit Account</a> <a href="<?php echo $html->url("/");?>" class="logoutlink">Log out</a> 
 	        
 	        </p>
 	        
