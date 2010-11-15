@@ -1,3 +1,7 @@
+<?php if ($currenteventGroup['EventGroup']['parent_id'] == 0) {
+
+	echo "glorify this";
+}?>
 <?php if(isset($notification))
 { ?>
 	
