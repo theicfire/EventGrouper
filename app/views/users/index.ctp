@@ -14,7 +14,7 @@ $(document).ready(function() {
 <h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
 	class="<?php echo $html->url('/'); ?>css/rinoa_large_inline" /> My Groups</h1>
 <a href="<?php echo $html->url('/'); ?>event_groups/add/0" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/add.png"
-			class="small_icon_inline_button" /> Create a new group</a>
+			class="small_icon_inline_button" /> Create a new [conference]</a>
 <table class="full_width">
 	<tr>
 		<th>Group</th>
