@@ -291,3 +291,29 @@ a
 	list-style: disc;
 	font-weight: normal;
 }
+
+table.generic
+{
+	margin: 10px 0;
+	background: #fff;
+}
+
+.full_width
+{
+	width: 100%;
+}
+
+table.generic td
+{
+}
+
+table.generic th
+{
+	font-weight: bold;
+}
+
+table.generic td, table.generic th
+{
+	border: #aaa 1px solid;
+	padding: 5px;
+}

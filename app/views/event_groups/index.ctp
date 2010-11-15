@@ -50,9 +50,31 @@ function open_dialog()
 <?php } else { ?>
 
 <div class="form_section" style="float:right; width: 430px;">
-<h2>Create a Conference</h2>
+<h2>Recently Viewed [Conference]s</h2>
 
-<?php echo $html->link('Click here to create a conference', '/event_groups/add/0', array('class'=>'make_button')); ?>
+<?php if (isset($watchlist)) {?>
+	<table class="full_width generic">
+	<tr>
+	<th>Name</th><th>Last visited</th>
+	</tr>
+	<?php foreach ($watchlist as $eventGroup) {?>
+	<tr>
+			<td>
+				<?php echo $html->link($eventGroup['event_groups']['name'], "/".$eventGroup['event_groups']['path']); ?>
+			</td>
+			<td>
+				<?php echo date( 'l, F jS Y' , strtotime($eventGroup['event_groups_users']['time']) ); ?>
+			</td>
+	</tr>
+	<?php }?>
+	</table>
+<?php }?>
+</div>
+
+<div class="form_section" style="float:right; width: 430px;">
+<h2>Create a [Conference]</h2>
+
+<?php echo $html->link('Click here to create a [conference]', '/event_groups/add/0', array('class'=>'make_button')); ?>
 
 </div>
 
@@ -85,27 +107,7 @@ function open_dialog()
 
 
 
-<?php if (isset($watchlist)) {?>
-	Watchlist:
-	<table border="1">
-	<tr>
-	<td>name</td><td>description</td><td>Last visited</td>
-	</tr>
-	<?php foreach ($watchlist as $eventGroup) {?>
-	<tr>
-			<td>
-				<?php echo $html->link($eventGroup['event_groups']['name'], "/".$eventGroup['event_groups']['path']); ?>
-			</td>
-			<td>
-				<?php echo $eventGroup['event_groups']['description']; ?>
-			</td>
-			<td>
-				<?php echo $eventGroup['event_groups_users']['time']; ?>
-			</td>
-	</tr>
-	<?php }?>
-	</table>
-<?php }?>
+
 
 
 
