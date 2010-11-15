@@ -311,7 +311,7 @@ echo "</style>";
             
         </div>
     
-    
+    <div class="clear"></div>
     
     </div>
     

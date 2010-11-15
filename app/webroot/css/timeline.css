@@ -421,8 +421,13 @@ margin: 10px;
 
 .r_ribbon_box
 {
-	border-style: none solid solid solid;
-	border: 1px solid #ccc;
+border: 1px solid #ccc;
+	border-style: none solid none none;
+	
 	padding: 0 9px;
 }
 
+#r_main_ribbon_container
+{
+	border-bottom: 1px solid #aaa;
+}
