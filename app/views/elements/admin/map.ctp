@@ -1,5 +1,25 @@
 <div class="form_section">
-<h2>Location</h2>
+
+<h2>
+<?php
+if( isset( $whichForm ) )
+{
+	if( $whichForm == "toplevel" || $whichForm == "subgroup" )
+	{
+		echo "Default Location";
+	}
+}
+else {
+	
+	echo "Location";
+	
+} ?>
+</h2>
+
+<?php if( isset( $whichForm ) && $whichForm == "toplevel" )
+{
+	echo "<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> This will be the default location for all events and subgroups in this [conference].  It should be a general area, such as a conference center, university, or city, rather than a specific street address or room.</p>";
+} ?>
 
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo $MAPS_API_KEY;?>&sensor=false"
             type="text/javascript"></script>
