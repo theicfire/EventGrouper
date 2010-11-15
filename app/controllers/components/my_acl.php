@@ -60,7 +60,7 @@ class MyAclComponent extends Object {
 			if (!$permission)
     			$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $id), $action);
 		}
-//		printf('type: %s id: %s userid: %s action: %s => %s', $type, $id, $userid, $action, $permission);
+		printf('type: %s id: %s userid: %s action: %s => %s', $type, $id, $userid, $action, $permission);
     	return $permission;
     }
 }

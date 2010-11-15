@@ -82,44 +82,49 @@ class EventGroupsController extends AppController {
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'id' => $parentId)));
 		if (!empty($this->data)) {
-			$oldData = $this->data;
 			$this->data['pathstart'] = $this->params['form']['pathstart']; 
-			$this->EventGroup->create();
-			if ($this->EventGroup->save($this->data)) {
-				$eventGroupId = $this->EventGroup->getLastInsertId();
-				//now add an aco
-				if ($this->data['EventGroup']['parent_id'] == 0) {
-					$acoParentId = null;
-				} else {
-					$acoParent = $this->EventGroup->query("SELECT id FROM acos WHERE foreign_key = ".$this->data['EventGroup']['parent_id']." AND model = 'EventGroup'");
-					if (!empty($acoParent))
-						$acoParentId = $acoParent[0]['acos']['id'];
-					else
+			$possibleSame = $this->EventGroup->find('first', array('conditions' => array('path' => $this->EventGroup->getencodedPath($this->data))));
+			if (empty($possibleSame)) {
+				$oldData = $this->data;
+				$this->EventGroup->create();
+				if ($this->EventGroup->save($this->data)) {
+					$eventGroupId = $this->EventGroup->getLastInsertId();
+					//now add an aco
+					if ($this->data['EventGroup']['parent_id'] == 0) {
 						$acoParentId = null;
+					} else {
+						$acoParent = $this->EventGroup->query("SELECT id FROM acos WHERE foreign_key = ".$this->data['EventGroup']['parent_id']." AND model = 'EventGroup'");
+						if (!empty($acoParent))
+							$acoParentId = $acoParent[0]['acos']['id'];
+						else
+							$acoParentId = null;
+					}
+					
+					$acoArr = array(
+						'model' => 'EventGroup',
+						'parent_id' => $acoParentId,
+						'foreign_key' => $eventGroupId
+					);
+					$this->Acl->Aco->create();
+					$this->Acl->Aco->save($acoArr);
+					//and now add permissions to the users
+					//NOTE: we assume that the user is logged in to get to this page (and has a session)
+					//NOTE: we are giving the users who make the event groups full permissions
+					if ($acoParentId == null) {
+						$userid = $this->Session->read('userid');
+						$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId));
+						//add read priveleges for guests
+						$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
+					}
+					$this->set('notification', 'The group has been saved. You can now add events or more subgroups.');
+					$newGroup = $this->EventGroup->findById($eventGroupId);
+					$this->redirect("/event_groups/view_admin/".$newGroup['EventGroup']['path']);
+				} else {
+					$this->data = $oldData;
+					$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
 				}
-				
-				$acoArr = array(
-					'model' => 'EventGroup',
-					'parent_id' => $acoParentId,
-					'foreign_key' => $eventGroupId
-				);
-				$this->Acl->Aco->create();
-				$this->Acl->Aco->save($acoArr);
-				//and now add permissions to the users
-				//NOTE: we assume that the user is logged in to get to this page (and has a session)
-				//NOTE: we are giving the users who make the event groups full permissions
-				if ($acoParentId == null) {
-					$userid = $this->Session->read('userid');
-					$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId));
-					//add read priveleges for guests
-					$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
-				}
-				$this->set('notification', 'The group has been saved. You can now add events or more subgroups.');
-				$newGroup = $this->EventGroup->findById($eventGroupId);
-				$this->redirect("/event_groups/view_admin/".$newGroup['EventGroup']['path']);
 			} else {
-				$this->data = $oldData;
-				$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('This path has already been taken.', true));
 			}
 		}
 		$groupPath = $this->EventGroup->getPath($parentId);
