@@ -1,4 +1,8 @@
 <?php echo $this->Form->create('EventGroup'); ?>
+
+<?php $top_level = true;
+if (count($groupPath) > 0) { $top_level = false; } ?>
+
 <div id="new_group" class="info_box">
     
     <script type="text/javascript" >
@@ -39,11 +43,17 @@
     
     <h1><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png" class="rinoa_large_inline" /> 
 	<?php 
-	if ($type == 'add') echo "New group";
-	else echo "Edit group";
+	if ( $top_level ) {
+		if ($type == 'add') echo "New [Conference]";
+		else echo "Edit [Conference] Information";
+	}
+	else {
+		if ($type == 'add') echo "New Group for Events";
+		else echo "Edit Group Information";
+	}
 	?>
 	</h1>
-    <p><?php if (count($groupPath) > 0) echo "in ".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?></p>
+    <p><?php if ( !$top_level ) echo "in ".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?></p>
     
         <div class="form_section">
 			<h2>Basic Information</h2>
@@ -51,7 +61,18 @@
         
 			<?php echo $form->create('EventGroup');?>
 			<?php echo $form->input('name', array('type' => 'text', 'class' => 'textfield'));?>
-			<p class="form_tip">This name will be displayed on the group's page, and will be used for searching. (for example, "Baker Hall")</p>
+			<p class="form_tip">
+			
+			<?php 
+				if ( $top_level ) {
+					echo "This name will be displayed on the home page of the [conference].";
+				}
+				else {
+					echo "This name will be displayed on the group's page, and will be used for searching. (for example, 'MIT Juggling Club')";
+				}
+			?>
+			
+			</p>
 			
 <!--			<label>Picture</label>-->
 <!--			<input type="file" name="picture" />-->
@@ -73,7 +94,7 @@
 						else
 						{ echo "http://www.oursite.com".$path;	}
 						
-						echo '</span></p>';
+						echo '</span>.  This URL should be easy to remember and type.</p>';
 					} else {
 						echo $form->input('path', array('type' => 'hidden'));
 					}
@@ -94,7 +115,17 @@
 		$hasDefault = false;
 		if (!empty($group['EventGroup']['longitude']))
 			$hasDefault = true;
-		echo $this->element('admin/map', array('type'=>'EventGroup', 'centerLat' => $centerLat, 'centerLong' => $centerLong, 'hasDefault' => $hasDefault));
+			
+		if ( $top_level )
+		{
+			$whichForm = "toplevel";
+		}
+		else
+		{
+			$whichForm = "subgroup";
+		}
+			
+		echo $this->element('admin/map', array('type'=>'EventGroup', 'centerLat' => $centerLat, 'centerLong' => $centerLong, 'hasDefault' => $hasDefault, 'whichForm' => $whichForm));
 		?>
         <div class="form_section">
         <h2>Submit for Approval</h2>

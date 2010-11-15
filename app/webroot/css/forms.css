@@ -86,14 +86,20 @@
 	font-size: 2em;
 }
 
-form .error
+form label.error
 {
 	color: #900;
 	font-weight: normal;
+	display: inline;
 }
 
 .checkbox_list
 {
+}
+
+strong
+{
+	font-weight: bold;
 }
 
 .checkbox_list li
