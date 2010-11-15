@@ -148,7 +148,7 @@ echo "</style>";
     
     <div id="r_main_ribbon_container">
     
-    	<div class="r_ribbon_box ui-state-default" id="view_mode" priority="1000">
+    	<div class="r_ribbon_box" id="view_mode" priority="1000">
         	<div class="r_rb_title">View Mode</div>
             
             <div class="r_rb_left_bottom"></div>
@@ -164,7 +164,7 @@ echo "</style>";
             
         </div>
         
-         <div class="r_ribbon_box  ui-state-default" id="filters" priority="800">
+         <div class="r_ribbon_box" id="filters" priority="800">
         	<div class="r_rb_title">Filters</div>
             
             <div class="r_rb_left_bottom"></div>
@@ -240,7 +240,7 @@ echo "</style>";
             
         </div>
         
-        <div class="r_ribbon_box  ui-state-default" id="my_account" priority="1200">
+        <div class="r_ribbon_box" id="my_account" priority="1200">
         	<div class="r_rb_title">My Account</div>
             
             <div class="r_rb_left_bottom"></div>
@@ -258,7 +258,7 @@ echo "</style>";
         
        
         
-        <div class="r_ribbon_box  ui-state-default" id="administration" priority="901">
+        <div class="r_ribbon_box" id="administration" priority="901">
         	<div class="r_rb_title">Administration</div>
             
             <div class="r_rb_left_bottom"></div>
@@ -274,7 +274,7 @@ echo "</style>";
             
         </div>
         
-        <div class="r_ribbon_box  ui-state-default" id="log_in" style="display: none;" priority="900">
+        <div class="r_ribbon_box" id="log_in" style="display: none;" priority="900">
         	<div class="r_rb_title">Log In</div>
             
             <div class="r_rb_left_bottom"></div>
