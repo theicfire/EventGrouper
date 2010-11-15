@@ -118,6 +118,23 @@ a
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	font-size: 1.2em;
+	text-align: center;
+}
+
+.curr_time_large .is_currently
+{
+font-size: .8em;
+display: block;
+}
+.curr_time_large #curr_time
+{
+font-size: 1.2em;
+display: block;
+}
+.curr_time_large #curr_date
+{
+font-size: .8em;
+display: block;
 }
 
 .mini_event_stream_horizontal
