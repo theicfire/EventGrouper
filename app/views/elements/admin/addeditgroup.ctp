@@ -65,7 +65,7 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
 			
 			<?php 
 				if ( $top_level ) {
-					echo "This name will be displayed on the home page of the [conference].";
+					echo "This name will be displayed on the home page of the [conference].  (for example, 'MIT Campus Preview Weekend')";
 				}
 				else {
 					echo "This name will be displayed on the group's page, and will be used for searching. (for example, 'MIT Juggling Club')";
@@ -95,6 +95,11 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
 						{ echo "http://www.oursite.com".$path;	}
 						
 						echo '</span>.  This URL should be easy to remember and type.</p>';
+						?>
+						
+						<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You will not be able to change this URL later.</p>
+						
+						<?php
 					} else {
 						echo $form->input('path', array('type' => 'hidden'));
 					}
@@ -128,7 +133,8 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
 		echo $this->element('admin/map', array('type'=>'EventGroup', 'centerLat' => $centerLat, 'centerLong' => $centerLong, 'hasDefault' => $hasDefault, 'whichForm' => $whichForm));
 		?>
         <div class="form_section">
-        <h2>Submit for Approval</h2>
+        <h2>Save Information</h2>
+        
         <input type="hidden" name="data[EventGroup][parent_id]" id="EventGroupParentId" value="<?=$parentId?>">
 		<input type="hidden" name="pathstart" value="<?=$currenteventGroup['EventGroup']['path']?>">
 		<?php if ($type == 'edit') echo $form->input('id', array('type'=>'hidden'));?>

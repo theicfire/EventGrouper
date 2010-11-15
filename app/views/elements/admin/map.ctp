@@ -19,7 +19,12 @@ else {
 <?php if( isset( $whichForm ) && $whichForm == "toplevel" )
 {
 	echo "<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> This will be the default location for all events and subgroups in this [conference].  It should be a general area, such as a conference center, university, or city, rather than a specific street address or room.</p>";
-} ?>
+}
+else if( isset( $whichForm ) && $whichForm == "subgroup" )
+{
+	echo "<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> This will be the default location for all events and subgroups in this group.  It should be the specific building or street address where this group will have most of their events.</p>";
+}
+ ?>
 
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo $MAPS_API_KEY;?>&sensor=false"
             type="text/javascript"></script>
@@ -289,7 +294,7 @@ var hasBeenInit = false;
 				</div>
 				
 				<div id="bm_left">
-					<p>Use the search bar above, or simply click a location on the map.</p>
+					<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> Use the search bar above to find places, or click on the map to select a location.</p>
 				
 				</div>
 			
