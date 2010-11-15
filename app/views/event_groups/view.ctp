@@ -102,7 +102,7 @@ echo "</style>";
     
     <div id="timeline_content">
     
-        <div id="tl_navigation">
+        <!-- <div id="tl_navigation">    <!-- marked for deletion!
             <div id="breadcrumb">
                 <div class="nav_title">currently viewing</div>
                 <div class="nav_links">
@@ -113,10 +113,6 @@ echo "</style>";
             <div id="subgroups">
                 <div class="nav_title">groups inside "<?=$currenteventGroup['EventGroup']['name'];?>"</div>
                 <div class="nav_links">
-<!--                    <a href="#" class="group_1">Burton-Conner</a> -->
-<!--                    <a href="#" class="group_2">Next House</a> -->
-<!--                    <a href="#" class="group_3">Random Hall</a> -->
-<!--                    <a href="#" class="group_4">New House</a>-->
                     <?php 
 					$linksArr = array();
 					foreach ($eventGroups as $eventGroup) {
@@ -130,7 +126,7 @@ echo "</style>";
             </div>     
 
             <div class="clear"></div>
-        </div>
+        </div> -->
     
     <script type="text/javascript">
 
@@ -149,16 +145,36 @@ echo "</style>";
     <div id="r_main_ribbon_container">
     
     	<div class="r_ribbon_box" id="view_mode" priority="1000">
-        	<div class="r_rb_title">View Mode</div>
+        	<div class="r_rb_title">Currently Viewing</div>
             
             <div class="r_rb_left_bottom"></div>
             <div class="r_rb_right_bottom"></div>
             
             <div class="r_priority_box">
             	
-                <a href="#" class="button_large"><img src="<?php echo $html->url('/'); ?>css/rinoa/report.png" /><br /><label class="button_label">List</label></a>
-                <a href="#" class="button_large"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" /><br /><label class="button_label">Map</label></a>
-                <a href="#" class="button_large"><img src="<?php echo $html->url('/'); ?>css/rinoa/favorites.png" /><br /><label class="button_label">Favorites</label></a>
+                <div id="breadcrumb">
+					<div class="nav_title">currently viewing</div>
+					<div class="nav_links">
+					<?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?>
+					</div>
+				</div>
+			
+				<div id="subgroups">
+					<div class="nav_title">groups inside "<?=$currenteventGroup['EventGroup']['name'];?>"</div>
+					<div class="nav_links">
+						<?php 
+						$linksArr = array();
+						foreach ($eventGroups as $eventGroup) {
+							if(in_array($eventGroup['EventGroup']['path'], $pathLength[$minLength])) {
+								$linksArr[] = $html->link($eventGroup['EventGroup']['name'], "/".$eventGroup['EventGroup']['path'], array('class' => "group_".$eventGroup['EventGroup']['id']));
+							}
+						}
+						echo implode($linksArr," ");
+						?>
+					</div>
+				</div>     
+
+				<div class="clear"></div>
             
             </div>
             
