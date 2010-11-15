@@ -20,12 +20,48 @@ else { $top_level = false; }
 	<h1><?php echo $currenteventGroup['EventGroup']['name']; ?></h1>
 	<div class="form_section">
 		<h2><?php echo $top_level?"[Conference] Information":"Group Information"; ?></h2>
-				<div><p>Description:<?php 
+				<table class="horizontal_no_border">
+					<tr>
+						<th>Name</th><td><?php echo $currenteventGroup['EventGroup']['name']; ?></td>
+					</tr>
+					<tr>
+					
+					<?php if($top_level)
+					{
+						echo "<th>URL</th><td>" . "/".$currenteventGroup['EventGroup']['path']."/"."</td>";
+						}
+					else
+					{
+						echo "<th>Path</th><td>".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))."</td>"; 
+						
+					}?>
+					</tr>
+					<tr>
+						<th>Description</th><td><?php 
 				if( !$currenteventGroup['EventGroup']['description'] == "") 
-				echo "</p><p>" . $currenteventGroup['EventGroup']['description'] . "</p>";
+				echo $currenteventGroup['EventGroup']['description'] ;
 				else
-				echo " <em>No Description</em></p>"; ?></div>
-				<p><? echo $top_level?"":"Path: ".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path'])); ?></p>
+				echo " <em>No Description</em>"; ?></td>
+					</tr>
+					<tr>
+					<?php $location = $currenteventGroup['EventGroup']['location'];
+					 $centerLat = $currenteventGroup['EventGroup']['latitude'];
+							$centerLong = $currenteventGroup['EventGroup']['longitude'];?>
+					
+					
+						<th>Location Name</th><td><?php echo $location; ?>
+						
+						</td>
+					</tr>
+					<tr>
+					
+					
+						<th>Location on Map</th><td>					
+						<img id='staticmap' src="http://maps.google.com/maps/api/staticmap?center=<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&zoom=16&size=400x100&maptype=roadmap&markers=color:red|label:A|<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&sensor=false" />
+						
+						</td>
+					</tr>
+				</table>
 				<div style="height: 10px;"> </div>
 			<div>
 				<a href="<?php echo $html->url("/".$currenteventGroup['EventGroup']['path']); ?>"
@@ -107,7 +143,7 @@ else { $top_level = false; }
 							<img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" class="small_icon_inline_button" /> Edit Permissions</a>
 						<?php }?>
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'delete')) {?>
-						<a class="make_button" href="<?=$html->url('/'); ?>event_groups/delete/<?php echo $eventGroup['EventGroup']['id']; ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $eventGroup['EventGroup']['name']; ?>?&#039;);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Delete</a>
+						<a class="make_button" href="<?=$html->url('/'); ?>event_groups/delete/<?php echo $eventGroup['EventGroup']['id']; ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $eventGroup['EventGroup']['name']; ?>?&#039);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Delete</a>
 						<?php 
 							//echo $html->link(__('Delete', true), array('action' => 'delete', $eventGroup['EventGroup']['id']), array('class'=>'make_button'), sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id']));
 						}?>
@@ -132,7 +168,7 @@ else { $top_level = false; }
 		?>
 		
 		<table class="full_width">
-			<tr><th>Title</th><th>Description</th><th>Time</th><th>Event Group</th><th>Actions</th></tr>
+			<tr><th>Title</th><th>Description</th><th>Time</th><th>Group</th><th>Location</th><th>Actions</th></tr>
 			<?php foreach ($eventsUnderGroup as $event) {?>
 			<tr id="event-<?=$event['Event']['id']?>">
 					<td>
@@ -142,11 +178,13 @@ else { $top_level = false; }
 						<?php echo $event['Event']['description']; ?>
 					</td>
 					<td>
-						<?php echo date('m/d/y g:i a', strtotime($event['Event']['time_start']))." to ".
-						date('m/d/y g:i a', strtotime($event['Event']['time_start']) + $event['Event']['duration']*60); ?>
+						<?php echo date('g:i a n/d/y', strtotime($event['Event']['time_start']))." to ". date('g:i a n/d/y', strtotime($event['Event']['time_start']) + $event['Event']['duration']*60); ?>
 					</td>
 					<td>
 						<?php echo $event['EventGroup']['name']; ?>
+					</td>
+					<td>
+						<?php echo $event['Event']['location']; ?>
 					</td>
 					<td class="actions">
 						<?php echo $html->link(__('View', true), array('controller' => 'events', 'action' => 'view', $event['Event']['id'])); ?>

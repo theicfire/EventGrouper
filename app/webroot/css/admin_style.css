@@ -166,7 +166,7 @@ th
 
 td, th
 {
-	border: #aaa 1px solid;
+	border: #ccc 1px solid;
 	padding: 5px;
 }
 
@@ -204,4 +204,18 @@ td, th
 	width: 12px;
 	margin: 1px;
 	padding: 1px;
+}
+
+table.horizontal_no_border
+{
+}
+table.horizontal_no_border td, table.horizontal_no_border th
+{
+	border: none;
+	vertical-align: top;
+}
+
+table.horizontal_no_border th
+{
+	padding-right: 30px;
 }
