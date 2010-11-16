@@ -119,10 +119,14 @@ function giveEventsJs() {
 
 	$(".make_button").button();
 }
-function getEvents(date, search, time_start, isCalendar) {
+function getEvents(date, search, time_start, viewType) {
 	$("#eventHolder").html('');
 	$('#loadingimage').show();
-	$.get(phpVars.root+"/event_groups/ajaxListEvents/"+phpVars.currentEventGroupId, { date_start: date, search: search, time_start:time_start, isCalendar:isCalendar},
+	var loc = 'ajaxListEvents';
+	if (viewType == 'map') {
+		loc = 'map_view';
+	}
+	$.get(phpVars.root+"/event_groups/"+loc+"/"+phpVars.currentEventGroupId, { date_start: date, search: search, time_start:time_start, viewType:viewType},
    function(data){
      $("#eventHolder").html(data);
      $('#loadingimage').hide();
@@ -130,7 +134,7 @@ function getEvents(date, search, time_start, isCalendar) {
    });
 }
 function refreshEvents() {
-	getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#isCalendar").is(':checked'));
+	getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val());
 	setHashFromPage();
 }
 function setHashFromPage(){
@@ -178,14 +182,24 @@ $(document).ready( function(){
 	$("#gotoall").click(function() {
 		$("#gotoall").addClass('active');
 		$("#gotoschedule").removeClass('active');
-		$("#isCalendar").attr('checked', false);
+		$("#gotomap").removeClass('active');
+		$("#viewType").val('');
 		refreshEvents();
 		return false;
 	});
 	$("#gotoschedule").click(function() {
 		$("#gotoschedule").addClass('active');
 		$("#gotoall").removeClass('active');
-		$("#isCalendar").attr('checked', true);
+		$("#gotomap").removeClass('active');
+		$("#viewType").val('calendar');
+		refreshEvents();
+		return false;
+	});
+	$("#gotomap").click(function() {
+		$("#gotomap").addClass('active');
+		$("#gotoall").removeClass('active');
+		$("#gotoschedule").removeClass('active');
+		$("#viewType").val('map');
 		refreshEvents();
 		return false;
 	});
@@ -204,7 +218,8 @@ $(document).ready( function(){
 	setInterval( "update_time()", 1000 );
 
 	setPageFromHash();
-	if ($("#isCalendar").is(':checked')) $("#gotoschedule").trigger('click');
+	if ($("#viewType").val() == 'calendar') $("#gotoschedule").trigger('click');
+	if ($("#viewType").val() == 'map') $("#gotomap").trigger('click');
 	else $("#filter_submit").trigger('click');
 
 	

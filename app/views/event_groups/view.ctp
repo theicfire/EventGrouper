@@ -95,7 +95,8 @@ echo "</style>";
         <li class="mt_tab"><a class="active" href="#" id="gotoall">Timeline</a></li> 
         <li class="mt_tab"><a href="#" id="gotoschedule">
         	<?php echo $session->check('userid')?"Favorites":"Login to view your favorites";?>
-		</a></li>
+		</a></li> 
+		<li class="mt_tab"><a href="#" id="gotomap">Map</a></li>
     </ul>
     <div class="clear"></div>
     </div>
@@ -242,7 +243,8 @@ echo "</style>";
 
                 <div class="r_form_tip" id="text_tip_large">Search in currently displayed events.<br />For example: "food" or "tour"</div>
                 <div class="r_form_tip" id="text_tip_small" style="display: none;">Example: "food" or "tour"</div>
-            <input type="checkbox" class="putInHash" name="isCalendar" id="isCalendar" style="display:none">
+<!--            <input type="checkbox" class="putInHash" name="isCalendar" id="isCalendar" style="display:none">-->
+            <input type="hidden" class="putInHash" name="viewType" id="viewType" value="timeline">
             </div>
             
              <div class="r_priority_box" id="refresh_button">

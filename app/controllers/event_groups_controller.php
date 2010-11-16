@@ -198,6 +198,16 @@ class EventGroupsController extends AppController {
 		
 	}
 	function ajaxListEvents($id) {
+		
+		$this->sharedAjaxList($id);
+		
+		$this->render('ajax_list_events', 'ajax');
+	}
+	function map_view($id) {
+		$this->sharedAjaxList($id);
+		$this->render('map_view', 'ajax');
+	}
+	function sharedAjaxList($id) {
 		$userStuff = null;
 		if ($this->Session->check('username')) {
 			$userStuff = $this->User->find('first', array('conditions' => array('email' => $this->Session->read('username'))));
@@ -227,8 +237,7 @@ class EventGroupsController extends AppController {
 		$params['status'] = array('confirmed', 'hidden');
 		$groupPath = $this->EventGroup->getPath($id);
 		$treeList = $this->EventGroup->generateTreeList();
-		$viewCalendar = false;
-		if (isset($this->params['url']['isCalendar']) && $this->params['url']['isCalendar'] == 'true') {
+		if (isset($this->params['url']['viewType']) && $this->params['url']['viewType'] == 'calendar') {
 			if ($this->Session->check('userid'))
 				$eventsUnderGroup = $this->EventGroup->getFavorites($this->Session->read('userid'));
 			else
@@ -237,18 +246,9 @@ class EventGroupsController extends AppController {
 			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, null);
 		}
 		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'viewCalendar'));
-		
-		
-		$this->render('ajax_list_events', 'ajax');
 	}
 	
-	function map_view($id) {
-		$params = array();
-		$params['status'] = array('confirmed', 'hidden');
-		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, 10);
-		$this->set(compact('eventsUnderGroup'));
-		
-	}
+	
 
 }
 ?>
