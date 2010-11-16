@@ -8,18 +8,11 @@ $(function() {
 			tips = $( ".validateTips" );
 
 		function updateTips( t ) {
-			tips
-				.text( t )
-				.addClass( "ui-state-highlight" );
-			setTimeout(function() {
-				tips.removeClass( "ui-state-highlight", 1500 );
-			}, 500 );
+			tips.text( t ).addClass( "ui-state-highlight" );
 		}
 		
 		$( "#dialog-form" ).dialog({
 			autoOpen: false,
-			height: 300,
-			width: 350,
 			modal: true,
 			buttons: {
 				"Login": function() {
@@ -28,7 +21,7 @@ $(function() {
 						if (data == "good")
 							window.location.reload();
 						else
-							updateTips("You're email and password did not match");
+							updateTips("Incorrect email and password combination.");
 					});
 				},
 				"Cancel": function() {

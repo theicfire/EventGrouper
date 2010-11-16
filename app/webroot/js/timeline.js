@@ -34,33 +34,7 @@ var floating = false;
 
 function scroll_handler(event)
 {
-		if ($("#top_locator").length == 0)
-			return false;
-		/*console.log($(document).height()-($(document).scrollTop()+$(window).height()));*/
-		if($("#top_locator").offset().top - $(document).scrollTop() < 10 )
-		{
-			left_distance = $("#top_locator").offset().left - $(document).scrollLeft();
-			$("#right_floater").addClass("floating_box");
-			$("#right_floater").css("left", left_distance);
-		}
-		else if($("#top_locator").offset().top - $(document).scrollTop() > 10 )
-		{
-			$("#right_floater").removeClass("floating_box");
-		}
-		
-		if($("#which_day_container_locator").offset().top - $(document).scrollTop() < 10 )
-		{
-			left_distance = $("#which_day_container_locator").offset().left - $(document).scrollLeft() - 6;
-			$("#which_day_container").addClass("day_floating_box");
-			$("#which_day_container").css("left", left_distance);
-			
-			$("#which_day_container_locator").addClass("which_day_spacer");
-		}
-		else if($("#which_day_container_locator").offset().top - $(document).scrollTop() > 10 )
-		{
-			$("#which_day_container").removeClass("day_floating_box");
-			$("#which_day_container_locator").removeClass("which_day_spacer");
-		}
+	//this will scroll the timeline. (sashko)
 }
 function giveEventsJs() {
 //	$( ".timeline_cell" ).find(".event_block").draggable({ revert: "invalid", helper: "clone", opacity: .7, zIndex: 1000 });
