@@ -62,4 +62,7 @@
 	Router::connect('/login/:action/*', array('controller' => 'login'));
 	Router::connect('/events/:action/*', array('controller' => 'events'));
 	Router::connect('/users/:action/*', array('controller' => 'users'));
+	Router::connect('/admin/:action/*', array('controller' => 'admin'));
+	Router::connect('/feedback', array('controller' => 'other', 'action' => 'feedback'));
+	Router::connect('/about_us', array('controller' => 'other', 'action' => 'about_us')); 
 	Router::connect('/*', array('controller' => 'event_groups', 'action' => 'view')); 
