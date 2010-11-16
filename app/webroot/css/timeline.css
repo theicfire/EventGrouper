@@ -435,7 +435,7 @@ border: 1px solid #ccc;
 	position: absolute;
 	top: 0;
 	right: 0;
-	left: 200px;
+	left: 300px;
 	bottom: 0;
 }
 
@@ -445,6 +445,7 @@ border: 1px solid #ccc;
 	left: 0;
 	top: 0;
 	bottom: 0;
-	width: 200px;
-	overflow: hidden;
+	width: 300px;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
