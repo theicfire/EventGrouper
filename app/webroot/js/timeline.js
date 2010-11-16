@@ -96,10 +96,26 @@ function giveEventsJs() {
 	}
 	else if ($("#viewType").val() == 'map')
 	{
+		initialize_desktop_map();
+		
+		//$("#conference_header").hide( "blind", null, 1000 );
 	}
 
 	$(".make_button").button();
 }
+
+function initialize_desktop_map()
+{
+	var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var myOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("desktop_map_container"),
+        myOptions);
+}
+
 function getEvents(date, search, time_start, viewType) {
 	$("#eventHolder").html('');
 	$('#loadingimage').show();
