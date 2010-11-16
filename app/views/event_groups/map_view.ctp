@@ -1,1 +1,1 @@
-<?php print_r($eventsUnderGroup); ?>
+<!-- <?php print_r($eventsUnderGroup); ?> lol -->
