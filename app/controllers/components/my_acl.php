@@ -11,7 +11,7 @@ class MyAclComponent extends Object {
 	function runcheck($type, $id, $action = '*') {
 		$permission = $this->check($type, $id, $action);
     	if (!$permission) {
-    		//$this->Session->setFlash('You do not have permissions to go there');
+    		$this->Session->setFlash('You do not have permissions to go there');
     		$this->controller->redirect('/');
     	}
     }
@@ -60,7 +60,7 @@ class MyAclComponent extends Object {
 			if (!$permission)
     			$permission = $acl->check(array('model' => 'User', 'foreign_key' => $userid), array('model' => $type, 'foreign_key' => $id), $action);
 		}
-		printf('type: %s id: %s userid: %s action: %s => %s', $type, $id, $userid, $action, $permission);
+		//printf('type: %s id: %s userid: %s action: %s => %s', $type, $id, $userid, $action, $permission);
     	return $permission;
     }
 }
