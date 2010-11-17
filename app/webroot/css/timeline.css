@@ -40,7 +40,7 @@
 
 #split
 {
-	margin: 0 10px;
+	margin: 0;
 }
 
 #my_schedule
@@ -112,16 +112,6 @@ background: #fff;
 .mys_cell
 {
 	display: none;
-}
-
-#main_view_table
-{
-	width: 100%;
-}
-
-#main_view_table td
-{
-	vertical-align: top;
 }
 
 .timeslot_title
@@ -276,8 +266,7 @@ margin: 10px;
 
 .ajax_events
 {
-	width: 95%;
-	margin: 10px auto;
+width: 100%;
 }
 
 /*ribbon! */
@@ -430,4 +419,33 @@ border: 1px solid #ccc;
 #r_main_ribbon_container
 {
 	border-bottom: 1px solid #aaa;
+}
+
+/* MAPS */
+
+#desktop_map_window
+{
+	position: relative;
+	height: 400px;
+	width: 100%;
+}
+
+#desktop_map_container
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 300px;
+	bottom: 0;
+}
+
+#desktop_map_event_list
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 300px;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }

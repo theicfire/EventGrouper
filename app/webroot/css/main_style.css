@@ -156,9 +156,20 @@ display: block;
 #main_tabs
 {
 	border-bottom: #666 1px solid;
-	padding-left: 30px;
-	padding-top: 10px;
+	padding-left: 10px;
 	background: url(grad_shadow/tab_bg.png) repeat-x bottom;
+}
+
+#conference_title
+{
+	display: block;
+	float: left;
+	margin-right: 20px;
+	font-weight: bold;
+}
+
+#mt_list
+{
 }
 
 .mt_tab
@@ -169,15 +180,15 @@ display: block;
 .mt_tab a
 {
 	display: block;
-	color: #000;
+	color: #444;
 	text-decoration: none;
-	font-size: 1.2em;
+	font-size: 1em;
 	float: left;
-	padding: 5px 8px;
+	padding: 4px 6px;
 	border: 1px solid #aaa;
 	border-bottom: none;
 	background: #fff;
-	margin-right: 7px;
+	margin-right: 3px;
 	border-radius: 5px 5px 0 0;
 	-moz-border-radius: 5px 5px 0 0;
 	position: relative;
@@ -186,14 +197,7 @@ display: block;
 
 .mt_tab a.active
 {
-	display: block;
-	color: #000;
-	text-decoration: none;
-	font-size: 1.2em;
-	float: left;
-	padding: 5px 8px;
 	border-color: #666;
-	position: relative;
 	border-bottom: #fff 1px solid;
 }
 

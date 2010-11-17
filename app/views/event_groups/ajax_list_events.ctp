@@ -1,4 +1,4 @@
-
+<table>
 <?php
 if (count($eventsUnderGroup) == 0)
 { ?>
@@ -129,5 +129,5 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
                 
 <?php
 }?>      
- 
+ </table>
 

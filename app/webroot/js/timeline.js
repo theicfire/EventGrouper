@@ -34,33 +34,7 @@ var floating = false;
 
 function scroll_handler(event)
 {
-		if ($("#top_locator").length == 0)
-			return false;
-		/*console.log($(document).height()-($(document).scrollTop()+$(window).height()));*/
-		if($("#top_locator").offset().top - $(document).scrollTop() < 10 )
-		{
-			left_distance = $("#top_locator").offset().left - $(document).scrollLeft();
-			$("#right_floater").addClass("floating_box");
-			$("#right_floater").css("left", left_distance);
-		}
-		else if($("#top_locator").offset().top - $(document).scrollTop() > 10 )
-		{
-			$("#right_floater").removeClass("floating_box");
-		}
-		
-		if($("#which_day_container_locator").offset().top - $(document).scrollTop() < 10 )
-		{
-			left_distance = $("#which_day_container_locator").offset().left - $(document).scrollLeft() - 6;
-			$("#which_day_container").addClass("day_floating_box");
-			$("#which_day_container").css("left", left_distance);
-			
-			$("#which_day_container_locator").addClass("which_day_spacer");
-		}
-		else if($("#which_day_container_locator").offset().top - $(document).scrollTop() > 10 )
-		{
-			$("#which_day_container").removeClass("day_floating_box");
-			$("#which_day_container_locator").removeClass("which_day_spacer");
-		}
+	//this will scroll the timeline. (sashko)
 }
 function giveEventsJs() {
 //	$( ".timeline_cell" ).find(".event_block").draggable({ revert: "invalid", helper: "clone", opacity: .7, zIndex: 1000 });
@@ -82,43 +56,66 @@ function giveEventsJs() {
 //	}
 //		
 //	});
-	$(".scheduletoggle").click(function() {
-		var eventBlock = $(this).parent().parent(); 
-		var id = eventBlock.attr('id').split("-")[1];
-		var textEl = $(this);
-		if (eventBlock.hasClass('onCalendar')) {
-			$.ajax({url: phpVars.root+"/events/removeFromCalendar/"+id,
-			success: function() {
-				eventBlock.removeClass('onCalendar');
-				eventBlock.addClass('offCalendar');
-				
-				textEl.siblings('.addToSchedule').show();
-				textEl.hide();
-			}
-			});
-		} else {
-			$.ajax({url: phpVars.root+"/events/addToCalendar/"+id,
-			success: function() {
-				eventBlock.removeClass('offCalendar');
-				eventBlock.addClass('onCalendar');
-				textEl.hide();
-				textEl.siblings('.removeFromSchedule').show();				
-			}
-			});
 
-			
-		}
-		return false;
-	});
-	$('.tagLink').click(function() {
-		$('#searchBox').val($(this).html());
-		refreshEvents();
-		return false;
-	});
-	
+	if ($("#viewType").val() == 'calendar' || $("#viewType").val() == '' )
+	{
+
+		$(".scheduletoggle").click(function() {
+			var eventBlock = $(this).parent().parent(); 
+			var id = eventBlock.attr('id').split("-")[1];
+			var textEl = $(this);
+			if (eventBlock.hasClass('onCalendar')) {
+				$.ajax({url: phpVars.root+"/events/removeFromCalendar/"+id,
+				success: function() {
+					eventBlock.removeClass('onCalendar');
+					eventBlock.addClass('offCalendar');
+					
+					textEl.siblings('.addToSchedule').show();
+					textEl.hide();
+				}
+				});
+			} else {
+				$.ajax({url: phpVars.root+"/events/addToCalendar/"+id,
+				success: function() {
+					eventBlock.removeClass('offCalendar');
+					eventBlock.addClass('onCalendar');
+					textEl.hide();
+					textEl.siblings('.removeFromSchedule').show();				
+				}
+				});
+
+				
+			}
+			return false;
+		});
+		$('.tagLink').click(function() {
+			$('#searchBox').val($(this).html());
+			refreshEvents();
+			return false;
+		});
+	}
+	else if ($("#viewType").val() == 'map')
+	{
+		initialize_desktop_map();
+		
+		//$("#conference_header").hide( "blind", null, 1000 );
+	}
 
 	$(".make_button").button();
 }
+
+function initialize_desktop_map()
+{
+	var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var myOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("desktop_map_container"),
+        myOptions);
+}
+
 function getEvents(date, search, time_start, viewType) {
 	$("#eventHolder").html('');
 	$('#loadingimage').show();
