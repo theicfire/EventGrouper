@@ -58,6 +58,8 @@
 
 	// Set default controller routes
 	Router::connect('/event_groups/:action/*', array('controller' => 'event_groups'));
+	Router::connect('/mob/:action/*', array('controller' => 'm'));
+	Router::connect('/m/*', array('controller' => 'm', 'action' => 'search'));
 	Router::connect('/permissions/:action/*', array('controller' => 'permissions'));
 	Router::connect('/login/:action/*', array('controller' => 'login'));
 	Router::connect('/events/:action/*', array('controller' => 'events'));
