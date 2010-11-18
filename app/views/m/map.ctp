@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
+
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php __('Mobile EventGrouper'); ?>
@@ -229,7 +232,7 @@
 		  initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 		  map.setCenter(initialLocation);
 		  
-		  var me_marker = new google.maps.Marker({
+		  me_marker = new google.maps.Marker({
 			  position: initialLocation, 
 			  map: map, 
 			  title: "You are here.",
