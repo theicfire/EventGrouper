@@ -136,15 +136,95 @@ function initialize_desktop_map()
 		
 		map_data[i].myLatlng = new google.maps.LatLng(event['Event']['latitude'],event['Event']['longitude']);
 		
+		var map_icon;
+		
+		switch ( i ){
+			case 0: 
+			map_icon = "a.png";
+			break;
+			case 1: 
+			map_icon = "b.png";
+			break;
+			case 2: 
+			map_icon = "c.png";
+			break;
+			case 3: 
+			map_icon = "d.png";
+			break;
+			case 4: 
+			map_icon = "e.png";
+			break;
+			case 5: 
+			map_icon = "f.png";
+			break;
+			case 6: 
+			map_icon = "g.png";
+			break;
+			case 7: 
+			map_icon = "h.png";
+			break;
+			case 8: 
+			map_icon = "i.png";
+			break;
+			case 9: 
+			map_icon = "j.png";
+			break;
+			default: 
+			map_icon = "rest.png";
+			break;
+		}
+		
+		map_icon = "/EventGrouper/img/maps/" + map_icon;
+		
+		switch ( i ){
+			case 0: 
+			list_icon = "a_ns.png";
+			break;
+			case 1: 
+			list_icon = "b_ns.png";
+			break;
+			case 2: 
+			list_icon = "c_ns.png";
+			break;
+			case 3: 
+			list_icon = "d_ns.png";
+			break;
+			case 4: 
+			list_icon = "e_ns.png";
+			break;
+			case 5: 
+			list_icon = "f_ns.png";
+			break;
+			case 6: 
+			list_icon = "g_ns.png";
+			break;
+			case 7: 
+			list_icon = "h_ns.png";
+			break;
+			case 8: 
+			list_icon = "i_ns.png";
+			break;
+			case 9: 
+			list_icon = "j_ns.png";
+			break;
+			default: 
+			list_icon = "rest.png";
+			break;
+		}
+		
+		list_icon = "/EventGrouper/img/maps/" + list_icon;
+		
 		map_data[i].marker = new google.maps.Marker({
 			  position: map_data[i].myLatlng, 
 			  map: map, 
-			  title:event['Event']['title']
+			  title:event['Event']['title'],
+			  icon: map_icon
 		  });   
 		
 		map_data[i].marker.id = i;
 		
 		put_in_sidebar += "<div class='map_search_result'>";
+		put_in_sidebar += "<img class='msr_icon' src='" + list_icon + "' />";
 		put_in_sidebar += "<h3 class='msr_title'>" + event['Event']['title'] + "</h3>";
 		
 		put_in_sidebar += "</div>";

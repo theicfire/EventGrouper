@@ -449,3 +449,25 @@ border: 1px solid #ccc;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
+
+#desktop_map_event_list h2
+{
+	border-bottom: 1px solid #ccc;
+	padding: 5px;
+}
+
+.map_search_result
+{
+	border-bottom: 1px solid #ccc;
+	padding: 5px;
+	padding-left: 40px;
+	min-height: 40px;
+	position: relative;
+}
+
+.msr_icon
+{
+	position: absolute;
+	left: 8px;
+	top:0;
+}
