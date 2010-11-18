@@ -465,9 +465,25 @@ border: 1px solid #ccc;
 	position: relative;
 }
 
+.map_search_result h3
+{
+	font-weight: bold;
+}
+
 .msr_icon
 {
 	position: absolute;
 	left: 8px;
 	top:0;
+}
+
+.gmaps_in_infowindow
+{
+	
+}
+
+.gmaps_in_infowindow h3
+{
+	font-weight: bold;
+	padding-right: 18px;
 }

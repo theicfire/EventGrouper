@@ -223,6 +223,8 @@ function initialize_desktop_map()
 		
 		map_data[i].marker.id = i;
 		
+		map_data[i].time_start = new Date(event['Event']['time_start']);
+		
 		put_in_sidebar += "<div class='map_search_result'>";
 		put_in_sidebar += "<img class='msr_icon' src='" + list_icon + "' />";
 		put_in_sidebar += "<h3 class='msr_title'>" + event['Event']['title'] + "</h3>";
@@ -230,11 +232,16 @@ function initialize_desktop_map()
 		{
 			put_in_sidebar += "<p>" + "no location" + "</p>";
 		}
+		put_in_sidebar += "<p>" + map_data[i].time_start.getHours() + ":" + map_data[i].time_start.getMinutes() + "</p>";
 		put_in_sidebar += "</div>";
 		
 		var text_in_infowindow = "";
 		
-		text_in_infowindow = "hey the name if this event is " + event['Event']['title'];
+		text_in_infowindow = "<div class='gmaps_in_infowindow'>";
+		text_in_infowindow += "<h3>" + event['Event']['title'] + "</h3>";
+		
+		
+		text_in_infowindow += "</div>";
 		
 		map_data[i].infowindow = new google.maps.InfoWindow({
 			content: text_in_infowindow
