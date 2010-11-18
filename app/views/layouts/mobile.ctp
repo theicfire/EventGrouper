@@ -43,7 +43,7 @@
 			if ($this->Session->read('username') == null) {
 				?>
 				
-				<?php echo $html->link("Log In", "/mob/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?> | <fb:login-button perms="email"></fb:login-button>
+				<?php echo $html->link("Log In", "/mob/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?> <?php /* |  <fb:login-button perms="email"></fb:login-button> */ ?>
 				<?php 
 			} else {
 				?><?php echo "Logged in as ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/mob/logout", array("class" => "logoutlink"));?>
@@ -59,7 +59,7 @@
 
 		</div>
 	</div>
-	
+	<?php /*
 <!--	facebook stuff-->
 	<div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
@@ -86,7 +86,7 @@
     	});
     	return false;
     });
-    </script>
+    </script> */ ?>
 
     
     

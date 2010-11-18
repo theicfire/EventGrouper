@@ -54,13 +54,13 @@ else
 	<form name="filter" id="filter" method="GET" action="<?php echo $html->url("/mob/view/".$id); ?>">
 	<table>
 		<tr>
-			<th>Keywords</th><td><input type="text" name="search" id="search" value="<?php echo $urlParams['search']?>"></td>
+			<th>Keywords</th><td><input type="text" name="search" id="search" value="<?php echo isset($urlParams['search'])?($urlParams['search']):"" ?>"></td>
 		</tr>
 		<tr>
-			<th>Time Start</th><td><input type="text" name="time_start" id="time_start" value="<?php echo $urlParams['time_start']?>"></td>
+			<th>Time Start</th><td><input type="text" name="time_start" id="time_start" value="<?php echo isset($urlParams['time_start'])?($urlParams['time_start']):""?>"></td>
 		</tr>
 		<tr>
-			<th>Date Start</th><td><input type="text" name="date_start" id="date_start" value="<?php echo $urlParams['date_start']?>"></td>
+			<th>Date Start</th><td><input type="text" name="date_start" id="date_start" value="<?php echo isset($urlParams['date_start'])?($urlParams['date_start']):""?>"></td>
 		</tr>
 	</table>
 	<div style="padding: 5px;"><input type="submit" value="go!"></div>

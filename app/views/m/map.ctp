@@ -4,8 +4,8 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php __('Mobile EventGrouper | '); ?>
-		<?php echo $title_for_layout; ?>
+		<?php __('Mobile EventGrouper'); ?>
+		<?php // echo $title_for_layout; ?>
 	</title>
     
 	<?php
@@ -15,6 +15,7 @@
 			$phpVars = array();
 		$phpVars['root'] = $this->base;
 		echo $this->Html->scriptBlock('var phpVars = '.$javascript->object($phpVars).';');
+		echo $javascript->link(array('jquery-1.4.2.min.js'));
 	?>
 	
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
@@ -22,6 +23,8 @@
 	<script type="text/javascript">
 	
 	window.onload = initialize_mobile_map;
+	
+	var map, map_data;
 	
 		function initialize_mobile_map()
 {
@@ -31,7 +34,7 @@
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var map = new google.maps.Map(document.getElementById("m_map_container"),
+    map = new google.maps.Map(document.getElementById("m_map_container"),
         myOptions);
 
     map_data = eval(document.getElementById("json_map_data").innerHTML);
@@ -44,10 +47,11 @@
 		map.panTo(latlng);
     }
     
-    var put_in_sidebar = "";
+    var put_in_select = "";
     
 	for (i = 0; i < map_data.length; i++) {
 		var event = map_data[i];
+
 		
 		var event_id = event['Event']['id'];
 		
@@ -129,6 +133,14 @@
 			break;
 		}
 		
+		var letter = "";
+		if( i >= 0 && i<10 )
+		{
+			letter = list_icon.substring( 0, 1 ).toUpperCase() + ". ";
+		}
+		else
+		{}
+		
 		list_icon = phpVars.root + "/img/maps/" + list_icon;
 		
 		map_data[i].marker = new google.maps.Marker({
@@ -142,31 +154,62 @@
 		
 		map_data[i].time_start = new Date(event['Event']['time_start']);
 		
-		put_in_sidebar += "<div class='map_search_result'>";
-		put_in_sidebar += "<img class='msr_icon' src='" + list_icon + "' />";
-		put_in_sidebar += "<h3 class='msr_title'>" + event['Event']['title'] + "</h3>";
+		var add_z = false;
+		
+		if( map_data[i].time_start.getMinutes() < 10 )
+		{
+			add_z = true;
+		}
+		
+		map_data[i].time_end = new Date( map_data[i].time_start.getTime() + event['Event']['duration'] * 1000 * 60 );
+		
+		var add_zz = false;
+		
+		if( map_data[i].time_end.getMinutes() < 10 )
+		{
+			add_zz = true;
+		}
+		
+		
+		
+		put_in_select += "<option value='" + i + "'>" + letter + event['Event']['title'] + ", " + map_data[i].time_start.getHours() + ":" + (add_z?"0":"") + map_data[i].time_start.getMinutes() + "</option>";
 		if( event['Event']['latitude'] == null )
 		{
-			put_in_sidebar += "<p>" + "no location" + "</p>";
+			//put_in_sidebar += "<p>" + "no location" + "</p>";
 		}
-		put_in_sidebar += "<p>" + map_data[i].time_start.getHours() + ":" + map_data[i].time_start.getMinutes() + "</p>";
-		put_in_sidebar += "</div>";
-		
-		var text_in_infowindow = "";
-		
-		text_in_infowindow = "<div class='gmaps_in_infowindow'>";
-		text_in_infowindow += "<h3>" + event['Event']['title'] + "</h3>";
+		//put_in_sidebar += "<p>" + map_data[i].time_start.getHours() + ":" + map_data[i].time_start.getMinutes() + "</p>";
+		//put_in_sidebar += "</div>";
 		
 		
-		text_in_infowindow += "</div>";
+		
+		map_data[i].text_in_infowindow = "";
+		
+		map_data[i].text_in_infowindow = "<div class='gmaps_in_infowindow'>";
+		map_data[i].text_in_infowindow += "<h3>" + event['Event']['title'] + "</h3>";
+		map_data[i].text_in_infowindow += "<p>" + map_data[i].time_start.getHours() + ":" + (add_z?"0":"") + map_data[i].time_start.getMinutes() + " to " + map_data[i].time_end.getHours() + ":" + (add_zz?"0":"") + map_data[i].time_end.getMinutes() + "</p>";
+		
+		if( event['Event']['location'] != "" )
+		map_data[i].text_in_infowindow += "<p>" + event['Event']['location'] + "</p>";
+		else
+		map_data[i].text_in_infowindow += "<p>" +  "</p>";
+		
+		if( event['Event']['description'] != "" )
+		map_data[i].text_in_infowindow += "<p>" + event['Event']['description'] + "</p>";
+		else
+		map_data[i].text_in_infowindow += "<p>" + "No description" + "</p>";
+		map_data[i].text_in_infowindow += "</div>";
 		
 		map_data[i].infowindow = new google.maps.InfoWindow({
-			content: text_in_infowindow
+			content: map_data[i].text_in_infowindow
 		});
 		
-		bindInfoWindow(map_data[i].marker, map, map_data[i].infowindow, text_in_infowindow)
+		bindInfoWindow(map_data[i].marker, map, map_data[i].infowindow, map_data[i].text_in_infowindow)
 		
 	}
+	
+	$("#show_event").append(put_in_select);
+	
+	$("#show_event").change( handle_select );
 	
 	if( map_data.length == 0)
 	{
@@ -176,16 +219,39 @@
 	//$("#map_search_result_list").html( put_in_sidebar );
 
 
-	if(navigator.geolocation) {
+	}
+	
+	function centerMapOnLocation()
+	{
+		if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
 		  initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 		  map.setCenter(initialLocation);
-		  alert("location!");
+		  
+		  var me_marker = new google.maps.Marker({
+			  position: initialLocation, 
+			  map: map, 
+			  title: "You are here.",
+			  icon: phpVars.root + "/img/maps/" + "man_ns.png"
+		  });  
+		  
 		}, function() {
 		});
-	  // Try Google Gears Geolocation
 	  }
-
+	}
+	
+	function handle_select()
+	{
+		var number = $("#show_event").val();
+		
+		var m = map_data[number].marker;
+		var i = map_data[number].infowindow;
+		var t = map_data[number].text_in_infowindow;
+		i.setContent(t);
+		for (j = 0; j < map_data.length; j++) {
+			map_data[j].infowindow.close();
+		}
+		i.open(map, m);
 	}
 	
 	function bindInfoWindow(marker, map, infoWindow, html) {
@@ -207,6 +273,7 @@
 <body>
 
 <div id="m_map_top_bar">
+<div>
 <?php
 $getarr = $_GET;
 unset($getarr['url']);
@@ -218,7 +285,15 @@ echo $html->link('Schedule', "/mob/view/".$id."?".$getstr);
 if ($session->check('userid'))
 	echo " ".$html->link('Favorites', "/mob/view/".$id."?".$getstr."viewType=calendar");
 echo " Map";
- ?>
+ ?> 
+ <a href="javascript:centerMapOnLocation()">My location</a></div> <!-- <a href="javascript:showList()">Show list</a> -->
+ 
+ <select id="show_event">
+	
+ 
+ </select>
+ 
+ 
  </div>
  
  <div id="m_map_container"></div>
