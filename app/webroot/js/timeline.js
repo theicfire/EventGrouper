@@ -30,6 +30,8 @@ function update_time()
 	$("#curr_date").html(currentDateString);
 }
 
+var map_data = new Array();
+
 var floating = false;
 
 function scroll_handler(event)
@@ -108,12 +110,80 @@ function initialize_desktop_map()
 {
 	var latlng = new google.maps.LatLng(-34.397, 150.644);
     var myOptions = {
-      zoom: 8,
+      zoom: 16,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("desktop_map_container"),
         myOptions);
+    
+    map_data = eval($("#json_map_data").html());
+    
+    if( map_data.length > 0 )
+    {
+		//if there are events, it sets the center of the map to the first event returned as a result.  far from optimal - it should take some sort of weighted average of the lat and longs
+		
+		latlng = new google.maps.LatLng(map_data[0]['Event']['latitude'], map_data[0]['Event']['longitude']);
+		map.panTo(latlng);
+    }
+    
+    var put_in_sidebar = "";
+    
+	for (i = 0; i < map_data.length; i++) {
+		var event = map_data[i];
+		
+		var event_id = event['Event']['id'];
+		
+		map_data[i].myLatlng = new google.maps.LatLng(event['Event']['latitude'],event['Event']['longitude']);
+		
+		map_data[i].marker = new google.maps.Marker({
+			  position: map_data[i].myLatlng, 
+			  map: map, 
+			  title:event['Event']['title']
+		  });   
+		
+		map_data[i].marker.id = i;
+		
+		put_in_sidebar += "<div class='map_search_result'>";
+		put_in_sidebar += "<h3 class='msr_title'>" + event['Event']['title'] + "</h3>";
+		
+		put_in_sidebar += "</div>";
+		
+		var text_in_infowindow = "";
+		
+		text_in_infowindow = "hey the name if this event is " + event['Event']['title'];
+		
+		map_data[i].infowindow = new google.maps.InfoWindow({
+			content: text_in_infowindow
+		});
+		
+		bindInfoWindow(map_data[i].marker, map, map_data[i].infowindow, text_in_infowindow)
+		
+	}
+	
+	if( map_data.length == 0)
+	{
+		put_in_sidebar = "<div class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> There are no events that match your set of options.</div>"
+	}
+	
+	$("#map_search_result_list").html( put_in_sidebar );
+	
+	 /* var marker = new google.maps.Marker({
+		  position: myLatlng, 
+		  map: map, 
+		  title:"Hello World!"
+	  });   */
+}
+
+function bindInfoWindow(marker, map, infoWindow, html) {
+  google.maps.event.addListener(marker, 'click', function() {
+    infoWindow.setContent(html);
+    
+    for (i = 0; i < map_data.length; i++) {
+		map_data[i].infowindow.close();
+	}
+    infoWindow.open(map, marker);
+  });
 }
 
 function getEvents(date, search, time_start, viewType) {
