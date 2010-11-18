@@ -147,7 +147,8 @@
 			  position: map_data[i].myLatlng, 
 			  map: map, 
 			  title:event['Event']['title'],
-			  icon: map_icon
+			  icon: map_icon,
+			  zIndex: 1000-i
 		  });   
 		
 		map_data[i].marker.id = i;
@@ -271,6 +272,7 @@
 </head>
 
 <body>
+<div id="size_box">
 
 <div id="m_map_top_bar">
 <div>
@@ -307,4 +309,6 @@ echo "<span id='json_map_data' style='display: none'>";
 						echo "</span>";
 
 ?>
+
+</div>
 </body>
