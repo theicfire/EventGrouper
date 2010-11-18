@@ -252,7 +252,7 @@ Chase's additions
 */
 .onCalendar
 {
-	opacity:.5;
+	border-color: #000;
 }
 
 .no_results

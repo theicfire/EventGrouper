@@ -149,7 +149,7 @@ echo "</style>";
             
             </div>
             
-            <div class="r_priority_box" id="filter_auto_time_big">
+            <div class="r_priority_box" id="filter_auto_time_big" style="display: none">
             	
                 <div class="r_third_text_row">Auto Time</div>
                 <a href="#" class="button_small"><label class="button_label">Now</label></a>
@@ -172,7 +172,7 @@ echo "</style>";
              <div class="r_priority_box" id="refresh_button">
             	
                 <a href="#" class="button_large" id="filter_submit"><img src="<?php echo $html->url('/'); ?>css/rinoa/refresh.png" /><br /><label class="button_label">Refresh</label></a><br />
-                <a href="#" class="button_small" id="filter_reset"><label class="button_label">Reset</label></a>
+                <a href="#" class="button_small" id="filter_reset" style="display: none;"><label class="button_label">Reset</label></a>
             
             </div>
             
@@ -180,60 +180,7 @@ echo "</style>";
             
         </div>
         
-        <div class="r_ribbon_box" id="my_account" priority="1200">
-        	<div class="r_rb_title">My Account</div>
-            
-            <div class="r_rb_left_bottom"></div>
-            <div class="r_rb_right_bottom"></div>
-            
-            <div class="r_priority_box">
-            	
-                <div class="r_third_text_row">Hello, sashko@mit.edu</div>
-                <a href="#" class="button_small"><img src="<?php echo $html->url('/'); ?>css/rinoa/user.png" /><label class="button_label">Account Options</label><div class="r_down_arrow_container"><span class="ui-icon ui-icon-triangle-1-s"></span></div></a><br />
-                <a href="#" class="button_small"><img src="<?php echo $html->url('/'); ?>css/rinoa/unlock.png" /><label class="button_label">Log Out</label></a>
-            
-            </div>
-            
-        </div>
         
-       
-        
-        <div class="r_ribbon_box" id="administration" priority="901">
-        	<div class="r_rb_title">Administration</div>
-            
-            <div class="r_rb_left_bottom"></div>
-            <div class="r_rb_right_bottom"></div>
-            
-            <div class="r_priority_box">
-            	
-                <div class="r_third_text_row">You can add events here.</div>
-                <a href="#" class="button_small"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" /><label class="button_label">Add Event</label></a><br />
-                <a href="#" class="button_small"><img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" /><label class="button_label">Go to Admin Panel</label></a>
-            
-            </div>
-            
-        </div>
-        
-        <div class="r_ribbon_box" id="log_in" style="display: none;" priority="900">
-        	<div class="r_rb_title">Log In</div>
-            
-            <div class="r_rb_left_bottom"></div>
-            <div class="r_rb_right_bottom"></div>
-            
-            <div class="r_priority_box">
-            	
-               	<form >
-                <div class="r_rb_form_row"><input type="text" class="input_text" /> <label>Email</label></div>
-                <div class="r_rb_form_row"><input type="text" class="input_text" /> <label>Password</label></div>
-                
-                <a href="#" class="button_small"><img src="<?php echo $html->url('/'); ?>css/rinoa/user.png" /><label class="button_label">Log In</label></a>
-                <a href="#" class="button_small"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png" /><label class="button_label">Register</label></a>
-                
-                </form>
-            
-            </div>
-            
-        </div>
     
     <div class="clear"></div>
     
