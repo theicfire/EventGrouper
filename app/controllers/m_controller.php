@@ -34,15 +34,20 @@ class MController extends AppController {
 		$id = $currenteventGroup['EventGroup']['id'];
 		if ($this->Session->check('userid') && $currenteventGroup['EventGroup']['parent_id'] == 0)
 			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
-		$this->set(compact('id'));		
+		$this->set(compact('id', 'currenteventGroup'));		
 	}
 	function view($id) {
 		$this->sharedList($id);
 	}
 	function map($id) {
+		$this->layout = '';
 		$this->sharedList($id);
 	}
 	function sharedList($id) {
+		
+		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
+		'id' => $id)));
+		
 		$userStuff = null;
 		if ($this->Session->check('username')) {
 			$userStuff = $this->User->find('first', array('conditions' => array('email' => $this->Session->read('username'))));
@@ -80,7 +85,10 @@ class MController extends AppController {
 		} else {
 			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, null);
 		}
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum', 'userStuff', 'viewCalendar', 'id'));
+		
+		$urlParams = $this->params['url'];
+		
+		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum', 'userStuff', 'viewCalendar', 'id', 'currenteventGroup', 'urlParams'));
 	}
 	function login() {
 		if (!empty($_POST['email'])) {

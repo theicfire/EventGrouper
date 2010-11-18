@@ -26,29 +26,18 @@
 		<?php __('Mobile EventGrouper | '); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
-	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
-    
-    
     
 	<?php
 		echo $this->Html->meta('icon');
 		echo $scripts_for_layout;
-		echo $html->css(array('main_style.css','forms.css')); 
+		echo $html->css(array('mobile.css')); 
 		
 	?>
 	
 	
 </head>
 <body>
-
-<script type="text/javascript">
-	$(document).ready( function () { $(".make_button").button() } );
-</script>
-
-<div id="help_modal"></div>
-
-    
-			<?php echo $html->link("RushRabbit", "/mob/index", array('class'=>'uh_logo'))?> <span><a href="<?= $html->url('/about_us');?>" class="general_link">About Us</a> <a href="<?= $html->url('/feedback');?>" class="general_link">Feedback</a></span>
+			<div class="m_header"><?php echo $html->link("RushRabbit", "/mob/index", array('class'=>'m_logo'))?> <br />
 		        
 			<?php
 			if ($this->Session->read('username') == null) {
@@ -57,8 +46,9 @@
 				<?php echo $html->link("Log In", "/mob/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?> | <fb:login-button perms="email"></fb:login-button>
 				<?php 
 			} else {
-				?><?php echo "Logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/mob/logout", array("class" => "logoutlink"));?>
+				?><?php echo "Logged in as ".$this->Session->read('username');?> | <?php echo $html->link("Log Out", "/mob/logout", array("class" => "logoutlink"));?>
 			<?php }?>
+			</div>
 	 
 	<div id="container">
 		<div id="content">
@@ -113,8 +103,8 @@
     
     
     
-    <div class="sql_dump">
-		<?php echo $this->element('sql_dump'); ?>
+    <div class="sql_dump" >
+		<?php // echo $this->element('sql_dump'); ?>
 	</div>
 </body>
 </html>
