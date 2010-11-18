@@ -1,0 +1,134 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* RESET */
+table { border-collapse: collapse; border-spacing: 0; }
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input { margin: 0; padding: 0; }
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,strong,th { font-size: 1em; font-weight: normal; font-style: normal; }
+ul { list-style: none; }
+fieldset,img { border: none; }
+caption,th { text-align: left; }
+
+body
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+}
+
+a
+{
+	color: #069;
+	text-decoration: underline;
+}
+
+.m_header
+{
+	background: #ccc;
+	border-bottom: 1px solid #aaa;
+	padding: 5px;
+	font-size: 14px;
+}
+
+.m_logo
+{
+	font-weight: bold;
+	font-size: 16px;
+	font-style: italic;
+}
+
+h1
+{
+	font-size: 1.2em;
+	padding: 5px;
+}
+
+.m_nav_bar
+{
+}
+
+.nav_item
+{
+	display: block;
+	float: left;
+	padding: 5px;
+}
+
+span.nav_item
+{
+	border: 1px #ccc solid;
+	color: #000;
+}
+
+.clear
+{
+	clear: both;
+}
+
+
+.m_event_block
+{
+	padding: 5px;
+	margin: 2px;
+	border: #ccc 1px solid;
+	border-radius: 5px;
+}
+
+.m_search td, .m_search th
+{
+	padding: 5px;
+}
+
+.m_event_time
+{
+	font-size: .8em;
+}
+
+.m_event_title
+{
+	font-weight: bold;
+}
+
+#m_map_top_bar
+{
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	background: #fff;
+}
+
+#m_map_container
+{
+	display: block;
+	position: absolute;
+	top: 50px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #fff;
+}
+
+#m_map_bottom_bar
+{
+	display: block;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	background: #fff;
+	display: none;
+}
+
+.gmaps_in_infowindow h3
+{
+	padding-right: 20px;
+}
+
+.gmaps_in_infowindow p
+{
+	font-size: .9em;
+	color: #333;
+}
