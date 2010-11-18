@@ -35,65 +35,6 @@ foreach ($eventGroups as $eventGroup) {
 }
 echo "</style>";
 ?>
-
-   <!-- <div id="conference_header">
-    	
-    
-    	<div id="ch_left">
-        <div id="ch_right">
-        	<div class="curr_time_large"><span class="is_currently">It's currently</span> <span id="curr_time">7:55 pm</span> <span id="curr_date">August 27, 2010</span></div>
-        </div>
-		<!--<ul>
-			<li><?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
-				echo $html->link(__('Add EventGroup Under This', true), array('action' => 'add', $currenteventGroup['EventGroup']['id'])); 
-			}?> </li>
-			<li><?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
-				echo $html->link(__('Add Event Under This', true), array('controller' => 'events', 'action' => 'add', $currenteventGroup['EventGroup']['id'])); 
-			}?> </li>
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {
-				echo $html->link(__('Edit', true), array('action' => 'edit', $currenteventGroup['EventGroup']['id'])); 
-			}?>
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {
-				echo $html->link(__('Delete', true), array('action' => 'delete', $currenteventGroup['EventGroup']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id'])); 
-			}?>
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {
-				echo $html->link(__('Edit Permissions', true), array('controller' => 'permissions', 'action' => 'view', $currenteventGroup['EventGroup']['id']));
-			}?>
-		</ul>-->
-        	<!--<div id="chl_organization"><a href="#">REX (Residence Exploration)</a></div>-->
-        	<!--
-            <div id="chl_title"><?php echo $currenteventGroup['EventGroup']['name']; ?></div>
-            
-            <div id="chl_address"><?php echo $currenteventGroup['EventGroup']['description']; ?></div>
-            
-            <?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
-				//echo $html->link(__('Edit in admin panel', true), array('action' => 'edit', $currenteventGroup['EventGroup']['id'])); 
-				
-				?> <a class="make_button" href="<?php echo $html->url("/event_groups/view_admin/" . $currenteventGroup['EventGroup']['path']); ?>">
-				<img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png" class="small_icon_inline_button" /> Edit in admin panel</a> <?php
-			}?>
-        </div>
-        
-        
-        
-        <div class="clear"></div>
-    </div> -->
-    
-    <!--<div class="mini_event_stream_horizontal">
-    	<div id="mes_header">Coming up</div>
-        <ul class="mes_list">
-        	<li class="mes_item">Item</li>
-            <li class="mes_item">Item</li>
-            <li class="mes_item">Item</li>
-            <li class="mes_item">Item</li>
-            <li class="mes_item">Item</li>
-            <li class="mes_item">Item</li>
-            <li class="mes_item">Item</li>
-            <li class="mes_item">Item</li>
-            <li class="mes_item">Item</li>
-        </ul>
-        <div class="clear"></div>
-    </div>-->
     
     <div id="main_tabs"> <h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
     <ul id="mt_list">
@@ -109,31 +50,6 @@ echo "</style>";
     
     <div id="timeline_content">
     
-        <!-- <div id="tl_navigation">    <!-- marked for deletion!
-            <div id="breadcrumb">
-                <div class="nav_title">currently viewing</div>
-                <div class="nav_links">
-                <?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?>
-				</div>
-            </div>
-        
-            <div id="subgroups">
-                <div class="nav_title">groups inside "<?=$currenteventGroup['EventGroup']['name'];?>"</div>
-                <div class="nav_links">
-                    <?php 
-					$linksArr = array();
-					foreach ($eventGroups as $eventGroup) {
-						if(in_array($eventGroup['EventGroup']['path'], $pathLength[$minLength])) {
-							$linksArr[] = $html->link($eventGroup['EventGroup']['name'], "/".$eventGroup['EventGroup']['path'], array('class' => "group_".$eventGroup['EventGroup']['id']));
-						}
-					}
-					echo implode($linksArr," ");
-					?>
-                </div>
-            </div>     
-
-            <div class="clear"></div>
-        </div> -->
     
     <script type="text/javascript">
 
@@ -331,13 +247,6 @@ echo "</style>";
         	</div>
         	
         <table width="100%">
-        
-        
-        
-        <!--<tr><td class="timeslot_title"></td><td class="timeline_cell"><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/down.png" class="small_icon_inline_button" />Show more events</a>
-            
-            <div class="clear"></div>
-            </td><td class="mys_cell"></td></tr> -->
         
         </table> <!-- end main view table -->
         </div>
