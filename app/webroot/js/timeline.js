@@ -174,7 +174,7 @@ function initialize_desktop_map()
 			break;
 		}
 		
-		map_icon = "/EventGrouper/img/maps/" + map_icon;
+		map_icon = phpVars.root + "/img/maps/" + map_icon;
 		
 		switch ( i ){
 			case 0: 
@@ -212,7 +212,7 @@ function initialize_desktop_map()
 			break;
 		}
 		
-		list_icon = "/EventGrouper/img/maps/" + list_icon;
+		list_icon = phpVars.root + "/img/maps/" + list_icon;
 		
 		map_data[i].marker = new google.maps.Marker({
 			  position: map_data[i].myLatlng, 
@@ -226,7 +226,10 @@ function initialize_desktop_map()
 		put_in_sidebar += "<div class='map_search_result'>";
 		put_in_sidebar += "<img class='msr_icon' src='" + list_icon + "' />";
 		put_in_sidebar += "<h3 class='msr_title'>" + event['Event']['title'] + "</h3>";
-		
+		if( event['Event']['latitude'] == null )
+		{
+			put_in_sidebar += "<p>" + "no location" + "</p>";
+		}
 		put_in_sidebar += "</div>";
 		
 		var text_in_infowindow = "";
