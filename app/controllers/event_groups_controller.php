@@ -81,11 +81,18 @@ class EventGroupsController extends AppController {
 		//todo add row in event_groups_users
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'id' => $parentId)));
+		$groupPath = $this->EventGroup->getPath($parentId);
 		if (!empty($this->data)) {
 			$this->data['pathstart'] = $this->params['form']['pathstart']; 
 			$possibleSame = $this->EventGroup->find('first', array('conditions' => array('path' => $this->EventGroup->getencodedPath($this->data))));
 			if (empty($possibleSame)) {
 				$oldData = $this->data;
+				if (!empty($groupPath)) {
+					$this->data['EventGroup']['highest_name'] = $groupPath[0]['EventGroup']['name'];	
+				} else {
+					$this->data['EventGroup']['highest_name'] = $this->data['EventGroup']['name']; 
+				}
+				
 				$this->EventGroup->create();
 				if ($this->EventGroup->save($this->data)) {
 					$eventGroupId = $this->EventGroup->getLastInsertId();
@@ -127,7 +134,7 @@ class EventGroupsController extends AppController {
 				$this->Session->setFlash(__('This path has already been taken.', true));
 			}
 		}
-		$groupPath = $this->EventGroup->getPath($parentId);
+		
 		
 		$this->data['EventGroup']['location'] = $currenteventGroup['EventGroup']['location'];
 		$this->set(compact('parentId', 'currenteventGroup', 'groupPath'));
@@ -149,10 +156,19 @@ class EventGroupsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->MyAcl->runcheck('EventGroup',$id,'update');
+		$currenteventGroup = $this->EventGroup->findById($parentId);
 		if (!empty($this->data)) {
 			if (!$id)
 				$id = $this->data['EventGroup']['id'];
-			$this->data['pathstart'] = $this->params['form']['pathstart']; 
+			$this->data['pathstart'] = $this->params['form']['pathstart'];
+			if ($this->data['EventGroup']['name'] != $currenteventGroup['EventGroup']['name']) {//change all event groups under with the new highest name if it changed
+				$eventGroups = $this->EventGroup->children($id);
+				foreach ($eventGroups as $eventGroup) {
+					$eventGroup['EventGroup']['highest_name'] = $this->data['EventGroup']['name'];
+					$this->EventGroup->save($eventGroup);
+				}
+				$this->data['EventGroup']['highest_name'] = $this->data['EventGroup']['name'];
+			} 
 			if ($this->EventGroup->save($this->data)) {
 				$this->Session->setFlash(__('The EventGroup has been saved', true));
 				$eventStuff = $this->EventGroup->findById($id);
@@ -167,7 +183,7 @@ class EventGroupsController extends AppController {
 //		$this->set('parentEventGroup',$this->EventGroup->findById(0));
 		$this->set('parentEventGroup',$this->EventGroup->findById($parentId));
 		$groupPath = $this->EventGroup->getPath($parentId);
-		$currenteventGroup = $this->EventGroup->findById($parentId);
+		
 		$this->set(compact('groupPath', 'parentId', 'currenteventGroup'));
 		$this->set('isAdmin', true);
 	}

@@ -53,7 +53,7 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
 	}
 	?>
 	</h1>
-    <p><?php if ( !$top_level ) echo "in ".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?></p>
+    <p><?php if ( !$top_level ) echo "in ".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path'], 'highestName' => $currenteventGroup['EventGroup']['highest_name']))?></p>
     
         <div class="form_section">
 			<h2>Basic Information</h2>

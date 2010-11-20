@@ -83,7 +83,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 
 							<span class="event_tags group_<?=$event['EventGroup']['id']?>">
 <!--									posted by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a>-->
-									posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path']))?>
+									posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?>
 									<?php if (!empty($event['Event']['tags'])) { 
 										echo " in ";
 										$tagArr = explode(",", $event['Event']['tags']);

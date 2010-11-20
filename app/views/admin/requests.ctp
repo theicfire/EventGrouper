@@ -36,7 +36,7 @@ $(document).ready(function() {
 					date('m/d/y g:i a', strtotime($event['Event']['time_start']) + $event['Event']['duration']*60); ?>
 				</td>
 				<td>
-					<?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path']))?>
+					<?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?>
 				</td>
 				<td>
 					<?= $event['Event']['tags']?>

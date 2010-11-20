@@ -4,7 +4,11 @@ $pathArr = explode("/", $groupStr);
 $curPath = "";
 for ($i = 0; $i < count($pathArr); $i++) {
 	$curPath .= "/".$pathArr[$i];
-	$groupPath[$i]['EventGroup'] = array('name' => $pathArr[$i], 'path' => $curPath);
+	$name = $pathArr[$i];
+	if ($i == 0) {
+		$name = $highestName;
+	}
+	$groupPath[$i]['EventGroup'] = array('name' => $name, 'path' => $curPath);
 	
 }
 $linksArr = array();

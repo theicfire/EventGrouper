@@ -44,7 +44,7 @@ foreach($userEventGroups as $group) {
 		if ($group['EventGroup']['parent_id'] == 0) {
 ?>
 		<tr>
-			<td><?= $this->element('grouppath', array('groupStr' => $group['EventGroup']['path']));?></td>
+			<td><?= $this->element('grouppath', array('groupStr' => $group['EventGroup']['path'], 'highestName' => $group['EventGroup']['highest_name']));?></td>
 			<td><?= $group['EventGroup']['eventgroupcount']?></td>
 			<td><?= $group['EventGroup']['eventcount']?></td>
 			<td class="table_tiny_buttons"><a href="<?php echo $html->url("/".$group['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
@@ -131,7 +131,7 @@ foreach($userEventGroups as $group) {
 		if ($group['EventGroup']['parent_id'] != 0) {
 ?>
 		<tr>
-			<td><?= $this->element('grouppath', array('groupStr' => $group['EventGroup']['path']));?></td>
+			<td><?= $this->element('grouppath', array('groupStr' => $group['EventGroup']['path'], 'highestName' => $group['EventGroup']['highest_name']));?></td>
 			<td><?= $group['EventGroup']['eventgroupcount']?></td>
 			<td><?= $group['EventGroup']['eventcount']?></td>
 			<td class="table_tiny_buttons"><a href="<?php echo $html->url("/".$group['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
@@ -195,7 +195,7 @@ foreach($userEventGroups as $group) {
 	<?php foreach ($sentEvents as $event) {?>
 	<tr id="event-<?=$event['Event']['id']?>">
 		<td><?=$event['Event']['title']?></td>
-		<td><?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path']))?></td>
+		<td><?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></td>
 		<td <?php switch($event['Event']['status']){
 			case "unconfirmed": echo "class='unconfirmed'"; break;
 			

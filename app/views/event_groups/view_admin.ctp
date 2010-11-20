@@ -32,7 +32,7 @@ else { $top_level = false; }
 						}
 					else
 					{
-						echo "<th>Path</th><td>".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))."</td>"; 
+						echo "<th>Path</th><td>".$this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path'], 'highestName' => $currenteventGroup['EventGroup']['highest_name']))."</td>"; 
 						
 					}?>
 					</tr>
@@ -115,7 +115,7 @@ else { $top_level = false; }
 		    <?php foreach ($eventGroups as $eventGroup) {?>
 				<tr>
 						<td>
-							<?= $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path']));?>
+							<?= $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path'], 'highestName' => $eventGroup['EventGroup']['highest_name']));?>
 						</td>
 						<td>
 							<?php echo $eventGroup['EventGroup']['description']; ?>
