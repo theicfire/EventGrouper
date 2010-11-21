@@ -19,7 +19,7 @@
 					</td>
 					<td>
 						<?php foreach($userPerm['userEventGroups'] as $eventGroup) {
-							echo $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path']));
+							echo $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path'], 'highestName' => $eventGroup['EventGroup']['highest_name']));
 							echo "<br>";
 						}
 						?>
