@@ -41,8 +41,10 @@ class EventGroupsController extends AppController {
 		if ($this->Session->check('userid') && $currenteventGroup['EventGroup']['parent_id'] == 0)
 			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
 		$eventGroups = $this->EventGroup->children($id);
+		//just doing this to get the earliest date
+		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
 		$groupPath = $this->EventGroup->getPath($id);
-		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup'));
+		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'eventsUnderGroup'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));		
 	}
 	function view_admin() {

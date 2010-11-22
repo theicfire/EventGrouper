@@ -144,7 +144,15 @@ echo "</style>";
                             <option value="22">10:00 pm</option>
                             <option value="23">11:00 pm</option>
                         </select></div>
-                <div class="r_rb_form_row"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" class="r_mini_icon" /> <label class="form_label">Date</label> <input type="text" name="date_start" id="datestart" class="input_text putInHash" style="width: 70px;" value="7/23/2010" /></div>                
+                <div class="r_rb_form_row"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" class="r_mini_icon" /> 
+                <label class="form_label">Date</label> <input type="text" name="date_start" id="datestart" class="input_text putInHash" style="width: 70px;" 
+                	value="<?php 
+                	if (!empty($eventsUnderGroup))
+                		echo date('m/d/y', strtotime($eventsUnderGroup[0]['Event']['time_start']));
+                	else
+                		echo date('m/d/y');
+                		?>" />
+                </div>                
                 </form>
             
             </div>
