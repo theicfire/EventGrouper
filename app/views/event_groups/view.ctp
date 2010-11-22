@@ -78,7 +78,7 @@ echo "</style>";
                 <div id="breadcrumb">
 					<div class="nav_title">currently viewing</div>
 					<div class="nav_links">
-					<?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path']))?>
+					<?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path'], 'highestName' => $currenteventGroup['EventGroup']['highest_name']))?>
 					</div>
 				</div>
 			
@@ -166,7 +166,7 @@ echo "</style>";
                 <div class="r_form_tip" id="text_tip_large">Search in currently displayed events.<br />For example: "food" or "tour"</div>
                 <div class="r_form_tip" id="text_tip_small" style="display: none;">Example: "food" or "tour"</div>
 <!--            <input type="checkbox" class="putInHash" name="isCalendar" id="isCalendar" style="display:none">-->
-            <input type="hidden" class="putInHash" name="viewType" id="viewType" value="timeline">
+            <input type="hidden" class="putInHash" name="viewType" id="viewType" value="">
             </div>
             
              <div class="r_priority_box" id="refresh_button">
