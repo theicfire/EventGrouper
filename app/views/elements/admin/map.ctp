@@ -115,9 +115,9 @@ var hasBeenInit = false;
 		$("#latInput").val(lat);
 		$("#longInput").val(lng);
 		
-		$("#staticmap").attr("src", "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=16&size=400x300&maptype=roadmap&markers=color:red|label:A|" + lat + "," + lng + "&sensor=false");
-		$("#staticmap_out").attr("src", "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=12&size=200x300&maptype=roadmap&markers=color:red|label:A|" + lat + "," + lng + "&sensor=false");
-		$("#staticmap_in").attr("src", "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=18&size=200x300&maptype=roadmap&markers=color:red|label:A|" + lat + "," + lng + "&sensor=false");
+		$("#staticmap").attr("src", "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=18&size=400x300&maptype=roadmap&markers=color:red|label:A|" + lat + "," + lng + "&sensor=false");
+		$("#staticmap_out").attr("src", "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=16&size=200x300&maptype=roadmap&markers=color:red|label:A|" + lat + "," + lng + "&sensor=false");
+		$("#staticmap_in").attr("src", "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=12&size=200x300&maptype=roadmap&markers=color:red|label:A|" + lat + "," + lng + "&sensor=false");
 		
 		close_map();
 	}
@@ -129,13 +129,15 @@ var hasBeenInit = false;
 
 	function map_click_handler( overlay, latlng )
 	{
-		message = generate_info_window( "", latlng.lat(), latlng.lng() );
-		
-		map.openInfoWindow(latlng, message);
-		
-		click_location = latlng;
-		
-		$("make_button").button();
+		if (latlng != null) {
+			message = generate_info_window( "", latlng.lat(), latlng.lng() );
+			
+			map.openInfoWindow(latlng, message);
+			
+			click_location = latlng;
+			
+			$("make_button").button();
+		}
 	}
 	
 	$(document).ready( page_stuff );
