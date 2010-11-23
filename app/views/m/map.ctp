@@ -50,11 +50,11 @@
 		map.panTo(latlng);
     }
     
-    var put_in_select = "";
+//    var put_in_select = "";
     
 	for (i = 0; i < map_data.length; i++) {
 		var event = map_data[i];
-
+		console.log(event);
 		
 		var event_id = event['Event']['id'];
 		
@@ -176,11 +176,11 @@
 		
 		
 		
-		put_in_select += "<option value='" + i + "'>" + letter + event['Event']['title'] + ", " + map_data[i].time_start.getHours() + ":" + (add_z?"0":"") + map_data[i].time_start.getMinutes() + "</option>";
-		if( event['Event']['latitude'] == null )
-		{
-			//put_in_sidebar += "<p>" + "no location" + "</p>";
-		}
+//		put_in_select += "<option value='" + i + "'>" + letter + event['Event']['title'] + ", " + map_data[i].time_start.getHours() + ":" + (add_z?"0":"") + map_data[i].time_start.getMinutes() + "</option>";
+//		if( event['Event']['latitude'] == null )
+//		{
+//			//put_in_sidebar += "<p>" + "no location" + "</p>";
+//		}
 		//put_in_sidebar += "<p>" + map_data[i].time_start.getHours() + ":" + map_data[i].time_start.getMinutes() + "</p>";
 		//put_in_sidebar += "</div>";
 		
@@ -190,7 +190,7 @@
 		
 		map_data[i].text_in_infowindow = "<div class='gmaps_in_infowindow'>";
 		map_data[i].text_in_infowindow += "<h3>" + event['Event']['title'] + "</h3>";
-		map_data[i].text_in_infowindow += "<p>" + map_data[i].time_start.getHours() + ":" + (add_z?"0":"") + map_data[i].time_start.getMinutes() + " to " + map_data[i].time_end.getHours() + ":" + (add_zz?"0":"") + map_data[i].time_end.getMinutes() + "</p>";
+		map_data[i].text_in_infowindow += "<p>" + event['Event']['nice_time_start'] + "</p>";
 		
 		if( event['Event']['location'] != "" )
 		map_data[i].text_in_infowindow += "<p>" + event['Event']['location'] + "</p>";
@@ -211,8 +211,8 @@
 		
 	}
 	
-	$("#show_event").append(put_in_select);
-	
+//	$("#show_event").append(put_in_select);
+//	
 	$("#show_event").change( handle_select );
 	
 	if( map_data.length == 0)
@@ -294,7 +294,13 @@ echo " Map";
  <a href="javascript:centerMapOnLocation()">My location</a></div> <!-- <a href="javascript:showList()">Show list</a> -->
  
  <select id="show_event">
-	
+ <?php 
+ $i = 0;
+ foreach ($eventsUnderGroup as $event) {
+ 	printf('<option value="%s">%s. %s, %s</option>',
+ 	$i, chr($i+65), $event['Event']['title'], date('n/j/y g:m:s', strtotime($event['Event']['time_start'])));//todo fix letters.. have a max..
+ 	$i++;
+ }?>
  
  </select>
  

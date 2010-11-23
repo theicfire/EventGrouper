@@ -41,9 +41,9 @@ class MController extends AppController {
 	}
 	function map($id) {
 		$this->layout = '';
-		$this->sharedList($id);
+		$this->sharedList($id, 'map');
 	}
-	function sharedList($id) {
+	function sharedList($id, $viewType = null) {
 		
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'id' => $id)));
@@ -84,6 +84,16 @@ class MController extends AppController {
 				$eventsUnderGroup = array();
 		} else {
 			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, null);
+		}
+		if ($viewType == 'map') {
+			$newArr = array();
+			foreach ($eventsUnderGroup as $event) {
+				if (!empty($event['Event']['latitude'])) {
+					$event['Event']['nice_time_start'] = date('n/j/y g:m:s', strtotime($event['Event']['time_start']));
+					$newArr[] = $event;
+				}
+			}
+			$eventsUnderGroup = $newArr;
 		}
 		
 		$urlParams = $this->params['url'];
