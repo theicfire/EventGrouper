@@ -225,15 +225,15 @@ function initialize_desktop_map()
 		
 		map_data[i].time_start = new Date(event['Event']['time_start']);
 		
-		put_in_sidebar += "<div class='map_search_result'>";
-		put_in_sidebar += "<img class='msr_icon' src='" + list_icon + "' />";
-		put_in_sidebar += "<h3 class='msr_title'>" + event['Event']['title'] + "</h3>";
-		if( event['Event']['latitude'] == null )
-		{
-			put_in_sidebar += "<p>" + "no location" + "</p>";
-		}
-		put_in_sidebar += "<p>" + map_data[i].time_start.getHours() + ":" + map_data[i].time_start.getMinutes() + "</p>";
-		put_in_sidebar += "</div>";
+//		put_in_sidebar += "<div class='map_search_result'>";
+//		put_in_sidebar += "<img class='msr_icon' src='" + list_icon + "' />";
+//		put_in_sidebar += "<h3 class='msr_title'>" + event['Event']['title'] + "</h3>";
+//		if( event['Event']['latitude'] == null )
+//		{
+//			put_in_sidebar += "<p>" + "no location" + "</p>";
+//		}
+//		put_in_sidebar += "<p>" + map_data[i].time_start.getHours() + ":" + map_data[i].time_start.getMinutes() + "</p>";
+//		put_in_sidebar += "</div>";
 		
 		var text_in_infowindow = "";
 		
@@ -256,7 +256,7 @@ function initialize_desktop_map()
 		put_in_sidebar = "<div class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> There are no events that match your set of options.</div>"
 	}
 	
-	$("#map_search_result_list").html( put_in_sidebar );
+//	$("#map_search_result_list").html( put_in_sidebar );//bad programming!
 	
 	 /* var marker = new google.maps.Marker({
 		  position: myLatlng, 
