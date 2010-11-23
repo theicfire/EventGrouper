@@ -263,6 +263,15 @@ class EventGroupsController extends AppController {
 		} else {
 			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, null);
 		}
+		if (isset($this->params['url']['viewType']) && $this->params['url']['viewType'] == 'map') {
+			$newArr = array();
+			foreach ($eventsUnderGroup as $event) {
+				if (!empty($event['Event']['latitude'])) {
+					$newArr[] = $event;
+				}
+			}
+			$eventsUnderGroup = $newArr;
+		}
 		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'viewCalendar'));
 	}
 	

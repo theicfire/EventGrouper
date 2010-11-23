@@ -1,9 +1,3 @@
-hello
-<pre>
-
-</pre>
-<!-- <?php print_r($eventsUnderGroup); ?> lol -->
-
 <div id="desktop_map_window">
 <div id="desktop_map_event_list">
 <h2>Search Results</h2>
