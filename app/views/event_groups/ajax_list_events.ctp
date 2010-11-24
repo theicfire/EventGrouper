@@ -41,71 +41,35 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
             	<div class="hiddenid"><?=$event['Event']['id']?></div>
             	
             	<div class="event_top_row">
-                	
-                	<!--
-                    <td class="event_titlebar" rowspan="2">
-						<div class="titlebar_text">
-						
-						<ul class="event_block_actions">
-						
-						<li>
-							<?php 
-							if (!$session->check('userid'))
-								echo "add to my schedule";
-							else {
-								?><a href="#" class="scheduletoggle">
-								<?php 
-								if ($onUserCalendar) echo "Unfavorite"; 
-								else echo "Favorite"; 
-								?>
-								</a>
-								
-							<?php }?>
-						</li>
-						 <li><a href="#">share</a></li>
-						 <li><a href="#">view on map</a></li>
-						 </div>
-					 </td>-->
-
-							<span class="event_title">
-								<?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?>
-							</span>
-							
-							<span class="event_time">
-								<?php echo date('g:i a', strtotime($event['Event']['time_start']))." to ".date('g:i a', strtotime($event['Event']['time_start'])+$event['Event']['duration']*60)?>
-							</span>
-							
-							<?php if (!empty($event['Event']['location'])) {?>
-							<span class="event_location">
-								at <a  class="group_<?=$event['EventGroup']['id']?>" href="#location"><?=$event['Event']['location']?></a>
-							</span>
-							<?php }?>
-
-							<span class="event_tags group_<?=$event['EventGroup']['id']?>">
-<!--									posted by <a href="<?php echo $html->url("/".$event['EventGroup']['path']);?>" class="group_<?=$event['EventGroup']['id']?>"><?php echo $event['EventGroup']['name']; ?></a>-->
-									posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?>
-									<?php if (!empty($event['Event']['tags'])) { 
-										echo " in ";
-										$tagArr = explode(",", $event['Event']['tags']);
-										foreach ($tagArr as $tag) {
-											echo "<a href='#' class='tagLink'>".trim($tag)."</a> ";
-										}
-									}?>
-							</span>
-							<?php 
-							if (!$session->check('userid'))
-								echo "Login to Favorite";
-							else {?>
-								<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
-								<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="small_icon_inline_button"  />
-								</a>
-								
-								<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
-								<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="small_icon_inline_button"  /> 
+					<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
+					<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="small_icon_inline_button"  />
+					</a>
 					
-								</a>
-								
-							<?php }?>
+					<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
+					<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="small_icon_inline_button"  /> 
+		
+					</a>
+					
+					<span class="event_title">
+						<?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?>
+					</span>
+					
+					<?php if (!empty($event['Event']['location'])) {?>
+						<span class="event_location">
+							<b>At</b> <?=$event['Event']['location']?>
+						</span>
+					<?php }?>
+					 <b>In</b> <span class="event_path"><?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></span>
+					<span class="event_tags group_<?=$event['EventGroup']['id']?>">
+							
+							<?php if (!empty($event['Event']['tags'])) {
+								$tagArr = explode(",", $event['Event']['tags']);
+								foreach ($tagArr as $tag) {
+									echo "<a href='#' class='tagLink'>".trim($tag)."</a> ";
+								}
+							}?>
+					</span>
+							
                 </div>
                 <div>
                         

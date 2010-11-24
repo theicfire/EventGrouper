@@ -144,15 +144,15 @@ echo "</style>";
                             <option value="22">10:00 pm</option>
                             <option value="23">11:00 pm</option>
                         </select></div>
-                <div class="r_rb_form_row"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" class="r_mini_icon" /> 
-                <label class="form_label">Date</label> <input type="text" name="date_start" id="datestart" class="input_text putInHash" style="width: 70px;" 
-                	value="<?php 
-                	if (!empty($eventsUnderGroup))
-                		echo date('m/d/y', strtotime($eventsUnderGroup[0]['Event']['time_start']));
+                <div class="r_rb_form_row"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" class="r_mini_icon" />
+                <?php if (!empty($eventsUnderGroup))
+                		$dateIn = date('m/d/Y', strtotime($eventsUnderGroup[0]['Event']['time_start']));
                 	else
-                		echo date('m/d/y');
-                		?>" />
-                </div>                
+                		$dateIn = date('m/d/Y');?> 
+                <label class="form_label">Date</label> <input type="text" name="date_start" id="datestart" class="input_text putInHash" style="width: 70px;" 
+                	value="<?=$dateIn?>" />
+                </div>  
+                <input type="hidden" id="date_start_default" value="<?=$dateIn?>">
                 </form>
             
             </div>
@@ -172,7 +172,7 @@ echo "</style>";
                 <div class="r_rb_form_row"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="r_mini_icon" /> <label class="form_label">Keywords</label> <input type="text" name="search" id="searchBox" class="putInHash input_text" style="width: 90px;" /></div>              
 
                 <div class="r_form_tip" id="text_tip_large">Search in currently displayed events.<br />For example: "food" or "tour"</div>
-                <div class="r_form_tip" id="text_tip_small" style="display: none;">Example: "food" or "tour"</div>
+                <div class="r_form_tip" id="searcherr">Please search for at least 4 letters</div>
 <!--            <input type="checkbox" class="putInHash" name="isCalendar" id="isCalendar" style="display:none">-->
             <input type="hidden" class="putInHash" name="viewType" id="viewType" value="">
             </div>
@@ -180,7 +180,7 @@ echo "</style>";
              <div class="r_priority_box" id="refresh_button">
             	
                 <a href="#" class="button_large" id="filter_submit"><img src="<?php echo $html->url('/'); ?>css/rinoa/refresh.png" /><br /><label class="button_label">Refresh</label></a><br />
-                <a href="#" class="button_small" id="filter_reset" style="display: none;"><label class="button_label">Reset</label></a>
+<!--                <a href="#" class="button_small" id="filter_reset"><label class="button_label">Reset</label></a>-->
             
             </div>
             

@@ -1,3 +1,4 @@
+var currentHash;
 function addtoschedule( a_id )
 {
 	alert("add " + a_id + " to schedule");
@@ -290,9 +291,31 @@ function getEvents(date, search, time_start, viewType) {
      giveEventsJs();
    });
 }
-function refreshEvents() {
-	getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val());
+function refreshEvents(isCalendar) {
+	if (!validate()) return false;
+	if (isCalendar)
+		getEvents('01/01/1970', '', '0', $("#viewType").val());
+	else
+		getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val());
+	console.log($("#datestart").val());
+	console.log('refreshing');
 	setHashFromPage();
+}
+function validate() {
+	if ($('#searchBox').val().length > 0 && $('#searchBox').val().length < 4) {
+		$('#text_tip_large').hide();
+		$('#searcherr').show();
+		console.log('BADD');
+		return false;
+	}
+	$('#text_tip_large').show();
+	$('#searcherr').hide();
+	return true;
+}
+function resetFields() {
+	$("#datestart").val($("#date_start_default").val());
+	$("#searchBox").val('');
+	$("#time_start").val(0);
 }
 function setHashFromPage(){
 	var paramArr = [];
@@ -311,10 +334,12 @@ function setHashFromPage(){
 		urlStrArr.push(key+"="+paramArr[key]);
 	}	
 	location.hash = urlStrArr.join("&");
+	currentHash = location.hash;
 	
 }
 function setPageFromHash(){
 	if (location.hash){
+		currentHash = location.hash;
 		hash =location.hash.substring(1);
 		urlStrArr = hash.split("&");
 		for (var key in urlStrArr) {
@@ -328,9 +353,25 @@ function setPageFromHash(){
 		}
 	}
 }
+function checkAndRunHash() {
+	if (currentHash != location.hash) {
+		console.log(currentHash);
+		console.log(location.hash);
+		loadPage();
+		console.log('different');
+	}
+		
+}
+function loadPage() {
+	setPageFromHash();
+	if ($("#viewType").val() == 'calendar') $("#gotoschedule").trigger('click');
+	else if ($("#viewType").val() == 'map') $("#gotomap").trigger('click');
+	else if ($("#viewType").val() == '') $("#gotoall").trigger('click');
+	
+}
 
 $(document).ready( function(){
-	
+	setInterval(checkAndRunHash, 250);
 	$("#datestart").datepicker();
 	$("#filter_submit").click(function() {
 		refreshEvents();
@@ -341,7 +382,8 @@ $(document).ready( function(){
 		$("#gotoschedule").removeClass('active');
 		$("#gotomap").removeClass('active');
 		$("#viewType").val('');
-		refreshEvents();
+		$("#r_main_ribbon_container").show();
+		refreshEvents(false);
 		return false;
 	});
 	$("#gotoschedule").click(function() {
@@ -349,7 +391,8 @@ $(document).ready( function(){
 		$("#gotoall").removeClass('active');
 		$("#gotomap").removeClass('active');
 		$("#viewType").val('calendar');
-		refreshEvents();
+		refreshEvents(true);
+		$("#r_main_ribbon_container").hide();
 		return false;
 	});
 	$("#gotomap").click(function() {
@@ -357,7 +400,8 @@ $(document).ready( function(){
 		$("#gotoall").removeClass('active');
 		$("#gotoschedule").removeClass('active');
 		$("#viewType").val('map');
-		refreshEvents();
+		$("#r_main_ribbon_container").show();
+		refreshEvents(false);
 		return false;
 	});
 	$(".previous_events_button").button();
@@ -374,10 +418,7 @@ $(document).ready( function(){
 	
 	setInterval( "update_time()", 1000 );
 
-	setPageFromHash();
-	if ($("#viewType").val() == 'calendar') $("#gotoschedule").trigger('click');
-	if ($("#viewType").val() == 'map') $("#gotomap").trigger('click');
-	else $("#filter_submit").trigger('click');
+	loadPage();
 
 	
 	

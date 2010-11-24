@@ -487,3 +487,11 @@ border: 1px solid #ccc;
 	font-weight: bold;
 	padding-right: 18px;
 }
+#searcherr {
+	color:red;
+	display:none;
+}
+.event_tags {
+	float:right;	
+	margin: 4px 0 0 4px;
+}
