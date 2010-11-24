@@ -88,7 +88,7 @@
 			<?php
 			if ($this->Session->read('username') == null) {
 				?>
-				
+				<div id="loggedIn" style="display:none"></div>
 				<div id="uh_right"><?php echo $html->link("Log In", "/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?> | <fb:login-button perms="email"></fb:login-button></div>
 				<?php 
 			} else {
@@ -150,7 +150,7 @@
 		<input type="text" name="email" id="email" value="" class="textfield" />
 		<label for="password">Password</label>
 		<input type="password" name="password" id="password" value="" class="textfield" />
-<p><a href="<?=$html->url('/users/forgotpassword')?>">Forgot Password?</a> </p>
+<p><a href="<?=$html->url('/users/forgotpassword')?>">Forgot Password?</a> <a href="<?=$html->url('/users/add')?>">Register</a> </p>
 	</fieldset>
 	</form>
 

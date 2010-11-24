@@ -39,9 +39,7 @@ echo "</style>";
     <div id="main_tabs"> <h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
     <ul id="mt_list">
         <li class="mt_tab"><a class="active" href="#" id="gotoall">Timeline</a></li> 
-        <li class="mt_tab"><a href="#" id="gotoschedule">
-        	<?php echo $session->check('userid')?"Favorites":"Login to view your favorites";?>
-		</a></li> 
+        <li class="mt_tab"><a href="#" id="gotoschedule">Favorites</a></li> 
 		<li class="mt_tab"><a href="#" id="gotomap">Map</a></li>
 		<div class="clear"></div>
     </ul>
