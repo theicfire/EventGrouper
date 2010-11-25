@@ -40,7 +40,7 @@
 
 #split
 {
-	margin: 0;
+	margin: 20px;
 }
 
 #my_schedule
@@ -214,6 +214,12 @@ background: #fff;
 {
 	display: none;
 }
+
+#which_day_container
+{
+	padding: 10px;
+	border-bottom: #ccc 1px solid;
+}	
 
 #which_day_is_it
 {
@@ -419,6 +425,11 @@ border: 1px solid #ccc;
 #r_main_ribbon_container
 {
 	border-bottom: 1px solid #aaa;
+}
+
+.scheduletoggle
+{
+	font-size: 12px;
 }
 
 /* MAPS */
