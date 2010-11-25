@@ -15,7 +15,9 @@ $pathLength = array();
 foreach ($eventGroups as $eventGroup) {
 	$pathLength[count(explode('/',$eventGroup['EventGroup']['path']))][] = $eventGroup['EventGroup']['path'];
 }
-$minLength = min(array_keys($pathLength));
+$minLength = 0;
+if (!empty($pathLength))
+	$minLength = min(array_keys($pathLength));
 $colorList = array('C00', '360', '606', '009', '630', '033', 'f60', 'C09');
 foreach ($eventGroups as $eventGroup) {
 	$idIndex = array_search($eventGroup['EventGroup']['path'], $pathLength[$minLength]);

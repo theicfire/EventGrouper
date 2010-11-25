@@ -71,8 +71,12 @@
 	    	<div class="left"><div class="admin_panel_logo"><strong>RushRabbit</strong> Administration Panel <span class="admin_login_info"><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</span></div>
 	    	</div>
 	        <div class="right" style="text-align: right"><p>
-	        
-	        <a href="<?php echo $html->url('/users/index'); ?>">Admin panel home</a> <a href="<?php echo $html->url('/'); ?>">Exit admin panel</a><br /><a href="<?php echo $html->url('/users/changepassword'); ?>">Edit Account</a> <a href="<?php echo $html->url("/");?>" class="logoutlink">Log out</a> 
+	        <?php 
+	        $path = "";
+	        if (isset($currenteventGroup))
+	        	$path = $currenteventGroup['EventGroup']['path'];
+	        ?>
+	        <a href="<?php echo $html->url('/users/index'); ?>">Admin panel home</a> <a href="<?php echo $html->url("/".$path); ?>">Exit admin panel</a><br /><a href="<?php echo $html->url('/users/changepassword'); ?>">Edit Account</a> <a href="<?php echo $html->url("/");?>" class="logoutlink">Log out</a> 
 	        
 	        </p>
 	        
@@ -91,9 +95,12 @@
 				<div id="loggedIn" style="display:none"></div>
 				<div id="uh_right"><?php echo $html->link("Log In", "/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?> | <fb:login-button perms="email"></fb:login-button></div>
 				<?php 
-			} else {
-				?>
-				<div id="uh_right"><?php echo "Logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Admin Panel", "/users/index");?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
+			} else { 
+		        $path = "users/index";
+		        if (isset($currenteventGroup))
+		        	$path = "event_groups/view_admin/".$currenteventGroup['EventGroup']['path'];
+		        ?>
+				<div id="uh_right"><?php echo "Logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Admin Panel", "/".$path);?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
 			<?php }?>
 			<div class="clear"></div>
 	    </div>

@@ -39,8 +39,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 						
 						
 						<span class="event_title">
-							<!-- <?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?> -->
-							<?=$event['Event']['title']?>
+							<?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?>
 						</span> 
 						
 						&nbsp; 

@@ -98,6 +98,7 @@ else { $top_level = false; }
 			<?php }?>
 			</div>
 	</div>
+	<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {?> 
 	<div class="form_section">
 			<h2>Permissions</h2>
 			<form name="loginForm" id="loginForm" method="post">
@@ -128,7 +129,7 @@ else { $top_level = false; }
 		            
 			</table>
 		</div>      
-    
+    <?php }?>
 	<!-- <h1>Contents of "<?php echo $currenteventGroup['EventGroup']['name']; ?>"</h1> -->     
 	<div class="form_section">
 		<h2>Groups Contained</h2>
