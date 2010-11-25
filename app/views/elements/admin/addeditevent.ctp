@@ -166,11 +166,14 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 <?php 
 //default times
 //$time_start = date('g:i a');
-$time_start = "10:00 am";
-$date_start = date('m/d/Y');
-$time_end = "11:00 am";
-//$time_end = date('g:i a', time()+60*60);
-$date_end = date('m/d/Y', time()+60*60);
+if (!empty($eventsUnderGroup))
+	$timeIn = strtotime($eventsUnderGroup[0]['Event']['time_start']);
+else
+	$timeIn = strtotime(date('y-m-d 12:00', strtotime('now')));
+$time_start = date('g:i a', $timeIn);
+$date_start = date('m/d/Y', $timeIn);
+$time_end = date('g:i a', $timeIn+60*60);
+$date_end = date('m/d/Y', $timeIn+60*60);
 if (!empty($this->data['Event']['time_start'])) {
 	$date_start = date('m/d/Y', strtotime($this->data['Event']['time_start']));
 	$time_start = date('g:i a', strtotime($this->data['Event']['time_start']));
