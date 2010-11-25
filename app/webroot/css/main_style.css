@@ -207,28 +207,58 @@ display: block;
 .event_block
 {
 	background: #fff;
-	border: 1px solid #ccc;
 	position: relative;
 	font-family: Arial, Helvetica, sans-serif;
-	margin: 0 5px 5px 0;
-	border-radius: 5px;
-	-moz-border-radius:  5px;
+	margin: 0;
 	overflow: hidden;
 	font-size: 1em;
 	overflow: hidden;
 	padding: 7px;
+	padding-bottom: 13px;
+}
+
+.odd
+{
+	background: #f5f8ff;
 }
 
 .event_block .event_title
 {
-	font-size: 1.3em;
+	font-size: 1.2em;
+	color: #000;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.event_block .event_tags
+{
+	font-size: .9em;
+}
+
+.event_block .timeline_icon
+{
+	height: 1.4em;
+	width: 1.4em;
+	position: relative:
+	bottom: -2px;
+	margin-bottom: -2px;
 }
 
 .event_block .event_top_row
 {
-	border-bottom: #ccc 1px solid;
 	padding-bottom: 3px;
 	margin-bottom: 3px;
+}
+
+.event_block .event_description
+{
+	font-size: .9em;
+	color: #333;
+}
+
+.event_block .event_time
+{
+	font-weight: bold;
 }
 
 .hiddenid
