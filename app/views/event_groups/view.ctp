@@ -11,9 +11,6 @@
 
 <?php echo $html->css('timeline', 'stylesheet', array('media'=>'all' ), false); ?>
 <?php 
-//goes in style tags
-echo "<style type='text/css'>";
-//goes in style tags
 $pathLength = array();
 foreach ($eventGroups as $eventGroup) {
 	$pathLength[count(explode('/',$eventGroup['EventGroup']['path']))][] = $eventGroup['EventGroup']['path'];
@@ -30,10 +27,7 @@ foreach ($eventGroups as $eventGroup) {
 			}
 		}
 	}
-	echo "a.group_".$eventGroup['EventGroup']['id']." { color: #".$colorList[$idIndex]."; }\n";
-	echo ".group_".$eventGroup['EventGroup']['id']." a { color: #".$colorList[$idIndex]."; }\n";
 }
-echo "</style>";
 ?>
     
     <div id="main_tabs"> <h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
@@ -198,10 +192,6 @@ echo "</style>";
             <?php echo $html->image('loading.gif', array('id' => 'loadingimage'));?>
             <div class="ajax_events" id="eventHolder">
         	</div>
-        	
-        <table width="100%">
-        
-        </table> <!-- end main view table -->
         </div>
     
     </div>
