@@ -96,7 +96,8 @@ class PermissionsController extends AppController {
 			
 			$this->Session->setFlash(__('Permission deleted', true));
 			
-			$this->redirect(array('action' => 'view', $groupId));
+			$newGroup = $this->EventGroup->findById($groupId);
+			$this->redirect("/event_groups/view_admin/".$newGroup['EventGroup']['path']);
 		}
 		
 	}

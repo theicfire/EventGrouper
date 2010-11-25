@@ -2,9 +2,9 @@
 class EventGroupsController extends AppController {
 
 	var $name = 'EventGroups';
-	var $uses = array('EventGroup', 'User');
+	var $uses = array('EventGroup', 'User', 'UserAlias');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
-	var $components = array('Acl', 'MyAcl', 'Facebook');
+	var $components = array('Acl', 'MyAcl', 'Facebook', 'Email');
 
 	function index() {
 		$this->Session->write('testses', 'stuffinhere');
@@ -71,9 +71,95 @@ class EventGroupsController extends AppController {
 		$eventGroups = $this->EventGroup->children($id);
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
 		$treeList = $this->EventGroup->generateTreeList();
+		
+		
+		
+		
+		
+		
+		//start permissions section
+		//check permissions
+		//from now on, assume userid is set
+		$groupId = $id;//noob
+		if ($this->MyAcl->check('EventGroup',$groupId,'editperms'))
+		{
+			
+			$currentGroup = $this->EventGroup->findById($groupId);
+			$hasAlias = false;
+			$unregistered = false;
+			if (!empty($this->data)) {//adding a user
+				$userRow = $this->User->findByEmail($this->data['email']);
+				if (!empty($userRow) && $this->MyAcl->checkUser('EventGroup',$groupId,$userRow['User']['id'], 'create'))
+					$this->Session->setFlash("This user already has permissions to this group");
+				else {
+					if (empty($userRow)) {
+						$aliasRow = $this->UserAlias->findByAlias($this->data['email']);
+						if (!empty($aliasRow)) {
+							$userRow['User'] = $aliasRow['User'];
+							$hasAlias = true;
+						} else {
+							echo "in here";
+							//add this user to the database and email the user about it
+							$this->User->create();
+							$userData = array('email' => $this->data['email'], 'pass' => 'unregistered');
+							$this->User->set($userData);
+							$this->User->save();
+							$userRow = $this->User->findById($this->User->getLastInsertId());
+							$unregistered = true;
+							
+							$aroArr = array(
+								'model' => 'User',
+								'foreign_key' => $userRow['User']['id'],
+								'parent_id' => 1//This is the designated guest id in aros
+							);
+							$this->Acl->Aro->create();
+							$this->Acl->Aro->save($aroArr);
+						}
+					} 
+					
+					//add permissions
+					$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userRow['User']['id']), array('model' => 'EventGroup', 'foreign_key' => $groupId), 'create');
+					if ($unregistered) {
+						$alertText = "This user has not registered yet. He/she will be sent an email to sign up.";
+						$emailText = sprintf("You have been granted permissions to %s. Go here to sign up: %s",
+						FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path'],
+						FULL_BASE_URL.$this->webroot."users/add/".$userRow['User']['id']);
+					}
+					elseif ($hasAlias) {
+						$alertText = $userRow['User']['email']."(".$this->data['email'].") added";
+						$emailText = sprintf("You have been granted permissions to %s.",
+						FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path']);
+					}
+					else {
+						$alertText = $userRow['User']['email']." added";
+						$emailText = sprintf("You have been granted permissions to %s.",
+						FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path']);
+					}
+					$this->Session->setFlash($alertText);
+					
+					echo $emailText;
+					$this->Email->from    = 'RushRabbit <noreply@rushrabbit.com>';
+					$this->Email->to      = sprintf('%s <%s>', $userRow['User']['email'], $userRow['User']['email']);
+					$this->Email->subject = 'You\'ve been granted permissions on RushRabbit';
+					$this->Email->send($emailText);
+				}
+							
+				
+			
+			}
+			$userPerms = $this->EventGroup->getAllPermissions($groupId, $this->Session->read('userid'));
+			$this->set(compact('userPerms', 'groupId', 'groupPath'));
+		}
+		//end permissions section
+		
+		
+		
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'treeList', 'eventsUnderGroup'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));	
 		$this->set('isAdmin', true);	
+	}
+	function view_permissions($groupId) {
+		
 	}
 
 	function add($parentId = null) {

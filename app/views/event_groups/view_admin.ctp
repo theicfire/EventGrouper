@@ -56,9 +56,12 @@ else { $top_level = false; }
 					<tr>
 					
 					
-						<th>Location on Map</th><td>					
+						<th>Location on Map</th><td>	
+						<?php if (!empty($centerLat)) {?>				
 						<img id='staticmap' src="http://maps.google.com/maps/api/staticmap?center=<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&zoom=16&size=400x100&maptype=roadmap&markers=color:red|label:A|<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&sensor=false" />
-						
+						<?php } else {?>
+						No Location
+						<?php }?>
 						</td>
 					</tr>
 				</table>
@@ -95,7 +98,36 @@ else { $top_level = false; }
 			<?php }?>
 			</div>
 	</div>
-
+	<div class="form_section">
+			<h2>Permissions</h2>
+			<form name="loginForm" id="loginForm" method="post">
+			Add a User: <input type="text" name="data[email]" class="textfield">
+			<input type="submit" value="Add" class="make_button">
+			</form>      
+			<table class="full_width">
+				
+			            
+				<tr><th>Email address</th><th>Permissions</th><th>Actions</th></tr>  
+			     <?php foreach ($userPerms as $userPerm) {?>
+				<tr>
+						<td>
+							<?php echo $userPerm['users']['email']; ?>
+						</td>
+						<td>
+							<?php foreach($userPerm['userEventGroups'] as $eventGroup) {
+								echo $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path'], 'highestName' => $eventGroup['EventGroup']['highest_name']));
+								echo "<br>";
+							}
+							?>
+						</td>
+						<td class="actions">
+							<?php echo $html->link('Remove', array('controller' => 'permissions', 'action' => 'delete', $groupId, $userPerm['aros_acos']['aro_id']), array('class' => 'make_button'), "Are you sure you want to delete this?");?>
+						</td>
+				</tr>
+				<?php }?>      
+		            
+			</table>
+		</div>      
     
 	<!-- <h1>Contents of "<?php echo $currenteventGroup['EventGroup']['name']; ?>"</h1> -->     
 	<div class="form_section">
