@@ -170,9 +170,9 @@ foreach ($eventGroups as $eventGroup) {
             </div>
             
              <div class="r_priority_box" id="refresh_button">
-            	
                 <a href="#" class="button_large" id="filter_submit"><img src="<?php echo $html->url('/'); ?>css/rinoa/refresh.png" /><br /><label class="button_label">Refresh</label></a><br />
-<!--                <a href="#" class="button_small" id="filter_reset"><label class="button_label">Reset</label></a>-->
+                <a href="#" class="button_small" id="filter_reset"><label class="button_label">Reset</label></a>
+                <a href="#" class="button_small" id="filter_reset_date"><label class="button_label">First Day</label></a>
             
             </div>
             
