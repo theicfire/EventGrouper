@@ -38,7 +38,7 @@ class EventGroupsController extends AppController {
 			'hasAndBelongsToMany' => array('User')	
 			)
 		); 
-		if ($this->Session->check('userid') && $currenteventGroup['EventGroup']['parent_id'] == 0)
+		if ($this->Session->check('userid') && $currenteventGroup['EventGroup']['parent_id'] == 0)//todo see same code below
 			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
 		$eventGroups = $this->EventGroup->children($id);
 		//just doing this to get the earliest date
@@ -66,7 +66,8 @@ class EventGroupsController extends AppController {
 			'hasAndBelongsToMany' => array('User')	
 			)
 		); 
-		
+		if ($this->Session->check('userid') && $currenteventGroup['EventGroup']['parent_id'] == 0)//todo change this so that this will add top on children...
+			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
 		$eventGroups = $this->EventGroup->children($id);
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
 		$treeList = $this->EventGroup->generateTreeList();

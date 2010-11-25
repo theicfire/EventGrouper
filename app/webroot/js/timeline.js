@@ -301,15 +301,12 @@ function refreshEvents(isCalendar) {
 		getEvents('01/01/1970', '', '0', $("#viewType").val());
 	else
 		getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val());
-	console.log($("#datestart").val());
-	console.log('refreshing');
 	setHashFromPage();
 }
 function validate() {
 	if ($('#searchBox').val().length > 0 && $('#searchBox').val().length < 4) {
 		$('#text_tip_large').hide();
 		$('#searcherr').show();
-		console.log('BADD');
 		return false;
 	}
 	$('#text_tip_large').show();
@@ -320,6 +317,9 @@ function resetFields() {
 	$("#datestart").val($("#date_start_default").val());
 	$("#searchBox").val('');
 	$("#time_start").val(0);
+}
+function resetDate() {
+	$("#datestart").val($("#date_start_default").val());
 }
 function setHashFromPage(){
 	var paramArr = [];
@@ -359,10 +359,7 @@ function setPageFromHash(){
 }
 function checkAndRunHash() {
 	if (currentHash != location.hash) {
-		console.log(currentHash);
-		console.log(location.hash);
 		loadPage();
-		console.log('different');
 	}
 		
 }
@@ -409,6 +406,16 @@ $(document).ready( function(){
 		$("#gotoschedule").removeClass('active');
 		$("#viewType").val('map');
 		$("#r_main_ribbon_container").show();
+		refreshEvents(false);
+		return false;
+	});
+	$("#filter_reset").click(function() {
+		resetFields();
+		refreshEvents(false);
+		return false;
+	});
+	$("#filter_reset_date").click(function() {
+		resetDate();
 		refreshEvents(false);
 		return false;
 	});
