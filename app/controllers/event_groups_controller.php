@@ -143,6 +143,9 @@ class EventGroupsController extends AppController {
 		$this->set(compact('parentId', 'currenteventGroup', 'groupPath'));
 		$this->set('isAdmin', true);
 	}
+	function addTool($parentId = null) {
+		$this->set('isAdmin', true);
+	}
 
 	function edit($id = null) {
 //		if (!empty($this->data['EventGroup']) && array_key_exists('parent_id', $this->data['EventGroup']))
