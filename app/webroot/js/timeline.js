@@ -347,6 +347,10 @@ function setHashFromPage(){
 	}	
 	location.hash = urlStrArr.join("&");
 	currentHash = location.hash;
+	$('.pathLinks a, .groupLinks a').each(function() {//make it so that all the path links have the current hash
+		$(this).attr('href', $(this).attr('href').split('#')[0] + location.hash);
+	});
+	
 	
 }
 function setPageFromHash(){
