@@ -60,25 +60,6 @@ function map_init(latitude, longitude) {
   }
 }
 function giveEventsJs() {
-//	$( ".timeline_cell" ).find(".event_block").draggable({ revert: "invalid", helper: "clone", opacity: .7, zIndex: 1000 });
-//	$( ".timeline_cell" ).find(".event_block").css("cursor", "move");
-//	
-//	$( ".mys_cell" ).droppable({hoverClass: "mys_hover", activeClass: "mys_acceptor",
-//		
-//	drop: function(event, ui)
-//	{
-//		var hiddenid = $(ui.draggable).attr("hiddenid");
-//		addtoschedule(hiddenid);
-//		$(ui.draggable).fadeTo(1, .5);
-//
-//		$.ajax({url: "<?=$this->base?>/events/addToCalendar/"+hiddenid,
-//			success: function() {
-//				alert('added');
-//			}
-//		});
-//	}
-//		
-//	});
 
 	if ($("#viewType").val() == 'calendar' || $("#viewType").val() == '' )
 	{
@@ -113,6 +94,18 @@ function giveEventsJs() {
 		
 		//$("#conference_header").hide( "blind", null, 1000 );
 	}
+	var locArr = location.hash.split('&');
+	var locArrNew = new Array();
+	for (var part in locArr) {
+		var sides = locArr[part].split('=');
+		if (sides[0] == 'viewType')
+			sides[1] = '';
+		locArrNew.push(sides[0] + '=' + sides[1]);
+	}
+	var locString = locArrNew.join('&');
+	$('.pathLinks a, .groupLinks a').each(function() {//make it so that all the path links have the current hash
+		$(this).attr('href', $(this).attr('href').split('#')[0] + locString);
+	});
 	
 	
 	$(".make_button").button();
@@ -346,9 +339,6 @@ function setHashFromPage(){
 	}	
 	location.hash = urlStrArr.join("&");
 	currentHash = location.hash;
-	$('.pathLinks a, .groupLinks a').each(function() {//make it so that all the path links have the current hash
-		$(this).attr('href', $(this).attr('href').split('#')[0] + location.hash);
-	});
 	
 	
 }

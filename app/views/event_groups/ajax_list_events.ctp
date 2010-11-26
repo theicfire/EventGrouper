@@ -92,7 +92,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 					</div>
                 <div>
                         
-                        <div class="event_description"><?=$event['Event']['description']?> Posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></div>
+                        <div class="event_description pathLinks"><?=$event['Event']['description']?> Posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></div>
                         
                 </div>        
                 <!-- <div style="float: right">
