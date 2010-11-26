@@ -3,24 +3,23 @@ class EventGroup extends AppModel {
 
 	var $name = 'EventGroup';
 	var $actsAs = array('Tree');
-//	var $validate = array(
-//		'name' => array(
-//			'rule' => '/^[-0-9a-zA-Z_+&.!, ]*$/',
-//			'message' => 'Required. Letters, numbers, and spaces only!',
-//			'allowEmpty' => false
-//		),
-//		'photo_url' => array(
-//			'rule' => 'url',
-//			'message' => "That's not a valid url",
-//			'allowEmpty' => true
-//		),
-//		'path' => array(
-//			'valid' => array ('rule' => '/^[-0-9a-zA-Z]*$/i', 'message' => 'Required. Letters numbers, and dashes only'),
-//			'isUnique' => array('rule' => 'isUnique', 'message' => 'This url has already been taken'),
-//			'allowEmpty' => true
-//			
-//		)
-//	);
+	var $validate = array(
+		'name' => array(
+			'rule' => '/^[0-9a-zA-Z .,!&+_]{2,}$/',
+			'allowEmpty' => false
+		),
+		'path' => array(
+			'valid' => array ('rule' => '/^[-0-9a-zA-Z]*$/i', 'message' => 'Required. Letters numbers, and dashes only'),
+			'isUnique' => array('rule' => 'isUnique', 'message' => 'This url has already been taken'),
+			'allowEmpty' => true
+			
+		),
+		'location' => array(
+			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
+			'message' => 'Letters, numbers, and spaces only!',
+			'allowEmpty' => true
+		),
+	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $hasMany = array(
 		'Event' => array(

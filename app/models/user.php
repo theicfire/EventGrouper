@@ -3,6 +3,7 @@ class User extends AppModel {
 
 	var $name = 'User';
 	var $actsAs = 'ExtendAssociations';
+//	javascript can do the validation here... if the user passes this, whatever.
 //	var $validate = array(
 //		'email' => array(
 //			'rule' => '/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i',

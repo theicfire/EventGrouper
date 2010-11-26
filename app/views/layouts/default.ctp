@@ -57,11 +57,14 @@
 	
 </head>
 <body>
-
+<noscript>
+This site does not work with Javascript disabled. Please enable Javascript.
+<style type="text/css">#everything {display:none}</style>
+</noscript>
 <script type="text/javascript">
 	$(document).ready( function () { $(".make_button").button() } );
 </script>
-
+<div id="everything">
 <div id="help_modal"></div>
 
     <?php if (isset($isAdmin) && $session->check('userid')) {?>
@@ -179,7 +182,7 @@
     
     
     
-    
+</div>
     <div class="sql_dump">
 		<?php echo $this->element('sql_dump'); ?>
 	</div>
