@@ -1,4 +1,6 @@
 var currentHash;
+var map_data = new Array();
+var floating = false;
 function addtoschedule( a_id )
 {
 	alert("add " + a_id + " to schedule");
@@ -31,9 +33,7 @@ function update_time()
 	$("#curr_date").html(currentDateString);
 }
 
-var map_data = new Array();
 
-var floating = false;
 
 function scroll_handler(event)
 {
@@ -70,21 +70,9 @@ function giveEventsJs() {
 			return false;
 		});
 		$(".event_title a").click(function() {
-			$('#eventloadingimage').show();
-			$( "#event-content" ).hide();
-			$( "#event-popup" ).dialog( "open" );
-			var id = $(this).parent().parent().parent().attr('id').split('-')[1];
-			var latitude = $(this).parent().parent().children('#latitude').html();
-			var longitude = $(this).parent().parent().children('#longitude').html();
-			$.get(phpVars.root + "/events/view/"+ id, function(data){
-				$( "#event-content" ).html(data);
-				$( "#event-content" ).show();
-				if (latitude.length != 0) 
-					map_init(latitude, longitude);
-				$('#eventloadingimage').hide();
-				
-				
-			});
+			
+			openEventPopup($(this));
+			
 			return false;
 		});
 	}
@@ -94,21 +82,32 @@ function giveEventsJs() {
 		
 		//$("#conference_header").hide( "blind", null, 1000 );
 	}
-	var locArr = location.hash.split('&');
-	var locArrNew = new Array();
-	for (var part in locArr) {
-		var sides = locArr[part].split('=');
-		if (sides[0] == 'viewType')
-			sides[1] = '';
-		locArrNew.push(sides[0] + '=' + sides[1]);
-	}
-	var locString = locArrNew.join('&');
+	var locString = addToHash(location.hash, 'viewType', '');
 	$('.pathLinks a, .groupLinks a').each(function() {//make it so that all the path links have the current hash
 		$(this).attr('href', $(this).attr('href').split('#')[0] + locString);
 	});
 	
 	
 	$(".make_button").button();
+}
+function openEventPopup(ob) {
+	var id = ob.parent().parent().parent().attr('id').split('-')[1];
+	$('#eventloadingimage').show();
+	$( "#event-content" ).hide();
+	$( "#event-popup" ).dialog( "open" );
+	var latitude = ob.parent().parent().children('#latitude').html();
+	var longitude = ob.parent().parent().children('#longitude').html();
+	$.get(phpVars.root + "/events/view/"+ id, function(data){
+		$( "#event-content" ).html(data);
+		$( "#event-content" ).show();
+		if (latitude.length != 0) 
+			map_init(latitude, longitude);
+		$('#eventloadingimage').hide();
+		
+		
+	});
+	changeHash(addToHash(location.hash, 'viewId', id));
+	$('#viewId').val(id);
 }
 
 function initialize_desktop_map()
@@ -293,6 +292,9 @@ function getEvents(date, search, time_start, viewType) {
      $("#eventHolder").html(data);
      $('#loadingimage').hide();
      giveEventsJs();
+     if (getFromHash('viewId') != '') {
+    	 openEventPopup($('#event-'+getFromHash('viewId')).find('.event_title a'));
+     }
    });
 }
 function refreshEvents(isCalendar) {
@@ -321,6 +323,45 @@ function resetFields() {
 function resetDate() {
 	$("#datestart").val($("#date_start_default").val());
 }
+function addToHash(hash, key, val) {
+	hash = hash.substring(1);
+	var locArr = hash.split('&');
+	var locArrNew = new Array();
+	for (var part in locArr) {
+		var sides = locArr[part].split('=');
+		if (sides[0] == key)
+			continue;
+		locArrNew.push(sides[0] + '=' + sides[1]);
+	}
+	locArrNew.push(key+'='+val);
+	return locArrNew.join('&');
+}
+function removeFromHash(hash, key) {
+	hash = hash.substring(1);
+	var locArr = hash.split('&');
+	var locArrNew = new Array();
+	for (var part in locArr) {
+		var sides = locArr[part].split('=');
+		if (sides[0] == key)
+			continue;
+		locArrNew.push(sides[0] + '=' + sides[1]);
+	}
+	return locArrNew.join('&');
+}
+function getFromHash(key) {
+	hash = location.hash.substring(1);
+	var locArr = hash.split('&');
+	for (var part in locArr) {
+		var sides = locArr[part].split('=');
+		if (sides[0] == key)
+			return sides[1];
+	}
+	return false;
+}
+function changeHash(hash) {
+	location.hash = hash;
+	currentHash = '#' + hash;
+}
 function setHashFromPage(){
 	var paramArr = [];
 //	paramArr['id'] = $("#quizletId").val();
@@ -337,8 +378,7 @@ function setHashFromPage(){
 	for (var key in paramArr) {
 		urlStrArr.push(key+"="+paramArr[key]);
 	}	
-	location.hash = urlStrArr.join("&");
-	currentHash = location.hash;
+	changeHash(urlStrArr.join("&"));
 	
 	
 }
@@ -349,13 +389,16 @@ function setPageFromHash(){
 		urlStrArr = hash.split("&");
 		for (var key in urlStrArr) {
 			var params = urlStrArr[key].split("=");
-			if($("#"+params[0]).attr('type')!="checkbox"){
-				$("#"+params[0]).val(params[1]);
-			}
-			else{
-				$("#"+params[0]).attr('checked',params[1]=="true");
+			if ($("#"+params[0]).length != 0){ 
+				if ($("#"+params[0]).attr('type')!="checkbox"){
+					$("#"+params[0]).val(params[1]);
+				}
+				else{
+					$("#"+params[0]).attr('checked',params[1]=="true");
+				}
 			}
 		}
+		
 	}
 }
 function checkAndRunHash() {
@@ -425,7 +468,11 @@ $(document).ready( function(){
 	$( "#event-popup" ).dialog({
 		autoOpen: false,
 		modal: true,
-		minWidth: 960
+		minWidth: 960,
+		close: function(){
+			changeHash(addToHash(location.hash, 'viewId', ''));
+			$('#viewId').val('');
+		}
 	});
 	
 	$(".make_button").button();
