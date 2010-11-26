@@ -34,6 +34,10 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
 					minlength: 2,
 					validurl: true
 				},
+				'data[Event][location]': {
+					required: false,
+					nospecial: true
+				},
 			},
 		});
 	}

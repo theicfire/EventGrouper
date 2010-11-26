@@ -111,7 +111,9 @@
 			}
 			
 		});
-		
+		$.validator.addMethod("TAGS", function(value, element) {  
+		    return this.optional(element) || /^([a-z]|, ?)*$/i.test(value);  
+		    }, "Please enter a comma seperated list of tags (i.e. food, adventure, organization).");
 		$("form").validate({
 			rules: {
 				'data[Event][title]': {
@@ -136,6 +138,15 @@
 					isdate: true,
 					comparedates: true
 				},
+				'data[Event][description]': {
+					required: false,
+					nospecial: true
+				},
+				'data[Event][location]': {
+					required: false,
+					nospecial: true
+				},
+				'data[Event][tags]': "required TAGS",
 			}
 		});
 	}
