@@ -42,8 +42,6 @@ function scroll_handler(event)
 
 
 function map_init(latitude, longitude) {
-	console.log(latitude);
-	console.log(longitude);
 	var map;
 	var default_zoom_level = 16;
 	if (GBrowserIsCompatible()) {
@@ -100,7 +98,8 @@ function giveEventsJs() {
 			$.get(phpVars.root + "/events/view/"+ id, function(data){
 				$( "#event-content" ).html(data);
 				$( "#event-content" ).show();
-				map_init(latitude, longitude);
+				if (latitude.length != 0) 
+					map_init(latitude, longitude);
 				$('#eventloadingimage').hide();
 				
 				

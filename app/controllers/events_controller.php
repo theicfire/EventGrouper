@@ -8,14 +8,8 @@ class EventsController extends AppController {
 
 
 	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid Event.', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->MyAcl->runcheck('Event',$id,'read');
 		$event = $this->Event->read(null, $id);
-		$groupPath = $this->EventGroup->getPath($event['EventGroup']['id']);
-		$this->set(compact('event', 'groupPath'));
+		$this->set(compact('event'));
 		$this->render('view', 'ajax');
 	}
 

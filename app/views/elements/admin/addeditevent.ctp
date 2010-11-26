@@ -61,7 +61,7 @@
 					required: false,
 					nospecial: true
 				},
-				'data[Event][tags]': "required TAGS",
+				'data[Event][tags]': "TAGS",
 			}
 		});
 	}

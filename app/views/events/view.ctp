@@ -14,20 +14,18 @@
 	</div>
 
 <?php 
-} else {
-	echo "location not specified";
 }
-
 ?>
 
 <h1 class="event_name"><?=$event['Event']['title']?></h1>
-<?php $onUserCalendar = false;
-foreach ($event['User'] as $user) {
-	if ($user['email'] == $session->read('username')) {
-		$onUserCalendar = true;
-		break;
-	}
-}
+<?php
+//$onUserCalendar = false;
+//foreach ($event['User'] as $user) {
+//	if ($user['email'] == $session->read('username')) {
+//		$onUserCalendar = true;
+//		break;
+//	}
+//}
 ?>
 <div class="event_time">
 	<b>From:</b> <?=date('m/d/Y g:i a', strtotime($event['Event']['time_start']))?><br />
