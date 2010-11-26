@@ -44,7 +44,7 @@
 		$phpVars['root'] = $this->base;
 		echo $this->Html->scriptBlock('var phpVars = '.$javascript->object($phpVars).';');
 //		echo $this->Html->css('cake.custom');
-		echo $javascript->link(array('jquery-1.4.2.min.js', 'login.js', 'jqueryui/jquery-ui-1.8.5.custom.min.js', 'jquery-validate.js'));
+		echo $javascript->link(array('jquery-1.4.2.min.js', 'login.js', 'jqueryui/jquery-ui-1.8.5.custom.min.js', 'jquery-validate.js', 'frontend_general.js'));
 		echo $scripts_for_layout;
 		
 	?>

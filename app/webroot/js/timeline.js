@@ -39,6 +39,28 @@ function scroll_handler(event)
 {
 	//this will scroll the timeline. (sashko)
 }
+
+
+function map_init(latitude, longitude) {
+	console.log(latitude);
+	console.log(longitude);
+	var map;
+	var default_zoom_level = 16;
+	if (GBrowserIsCompatible()) {
+	  
+	  
+	map = new GMap2(document.getElementById("event_map_container"));
+	map.setCenter(new GLatLng(latitude, longitude), default_zoom_level);
+	map.setUIToDefault();
+	
+	map.setZoom(  default_zoom_level );
+	
+	map.enableContinuousZoom();
+	
+	map.addOverlay( new GMarker( new GLatLng(latitude, longitude) ) );
+
+  }
+}
 function giveEventsJs() {
 //	$( ".timeline_cell" ).find(".event_block").draggable({ revert: "invalid", helper: "clone", opacity: .7, zIndex: 1000 });
 //	$( ".timeline_cell" ).find(".event_block").css("cursor", "move");
@@ -62,42 +84,27 @@ function giveEventsJs() {
 
 	if ($("#viewType").val() == 'calendar' || $("#viewType").val() == '' )
 	{
-
-		$(".scheduletoggle").click(function() {
-			if ($('#loggedIn').length != 0) {
-				$( "#dialog-form" ).dialog( "open" );
-				return false;
-			}
-			var eventBlock = $(this).parent().parent(); 
-			var id = eventBlock.attr('id').split("-")[1];
-			var textEl = $(this);
-			if (eventBlock.hasClass('onCalendar')) {
-				$.ajax({url: phpVars.root+"/events/removeFromCalendar/"+id,
-				success: function() {
-					eventBlock.removeClass('onCalendar');
-					eventBlock.addClass('offCalendar');
-					
-					textEl.siblings('.addToSchedule').show();
-					textEl.hide();
-				}
-				});
-			} else {
-				$.ajax({url: phpVars.root+"/events/addToCalendar/"+id,
-				success: function() {
-					eventBlock.removeClass('offCalendar');
-					eventBlock.addClass('onCalendar');
-					textEl.hide();
-					textEl.siblings('.removeFromSchedule').show();				
-				}
-				});
-
-				
-			}
-			return false;
-		});
+		scheduleToggle();
 		$('.tagLink').click(function() {
 			$('#searchBox').val($(this).html());
 			refreshEvents();
+			return false;
+		});
+		$(".event_title a").click(function() {
+			$('#eventloadingimage').show();
+			$( "#event-content" ).hide();
+			$( "#event-popup" ).dialog( "open" );
+			var id = $(this).parent().parent().parent().attr('id').split('-')[1];
+			var latitude = $(this).parent().parent().children('#latitude').html();
+			var longitude = $(this).parent().parent().children('#longitude').html();
+			$.get(phpVars.root + "/events/view/"+ id, function(data){
+				$( "#event-content" ).html(data);
+				$( "#event-content" ).show();
+				map_init(latitude, longitude);
+				$('#eventloadingimage').hide();
+				
+				
+			});
 			return false;
 		});
 	}
@@ -107,7 +114,8 @@ function giveEventsJs() {
 		
 		//$("#conference_header").hide( "blind", null, 1000 );
 	}
-
+	
+	
 	$(".make_button").button();
 }
 
@@ -421,6 +429,11 @@ $(document).ready( function(){
 	});
 	$(".previous_events_button").button();
 	$("#filter_submit").button();
+	$( "#event-popup" ).dialog({
+		autoOpen: false,
+		modal: true,
+		minWidth: 960
+	});
 	
 	$(".make_button").button();
 	
@@ -438,3 +451,4 @@ $(document).ready( function(){
 	
 	
 });
+

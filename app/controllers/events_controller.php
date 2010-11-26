@@ -16,6 +16,7 @@ class EventsController extends AppController {
 		$event = $this->Event->read(null, $id);
 		$groupPath = $this->EventGroup->getPath($event['EventGroup']['id']);
 		$this->set(compact('event', 'groupPath'));
+		$this->render('view', 'ajax');
 	}
 
 	function add($eventGroupId = null) {

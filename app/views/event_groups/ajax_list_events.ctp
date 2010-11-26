@@ -37,7 +37,8 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
             	
 					<div class="event_top_row">
 						
-						
+						<div style="display:none" id="latitude"><?=$event['Event']['latitude']?></div>
+						<div style="display:none" id="longitude"><?=$event['Event']['longitude']?></div>
 						<span class="event_title">
 							<?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?>
 						</span> 

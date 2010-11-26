@@ -1,6 +1,11 @@
 
-
-
+<?php echo $html->css('event_page', 'stylesheet', array('media'=>'all' ), false); ?>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo $MAPS_API_KEY;?>&sensor=false"
+            type="text/javascript"></script>
+            <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAA7y3UIBfi1OwkPnNUDew4MhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTdgodaUd_SdFl6FS-YLDeZ4gdhpA" type="text/javascript"></script>
+<style type="text/css">
+      @import url("http://www.google.com/uds/css/gsearch.css");
+</style>
 <?php $javascript->link('jqueryui/jquery-ui-1.8.5.custom.min.js', false); ?>
 <?php $javascript->link('jqueryui/jquery.ui.timeselector.js', false); ?>
 <?php $javascript->link('timeline.js', false); ?>
@@ -198,3 +203,12 @@ foreach ($eventGroups as $eventGroup) {
     
     </div>
     
+
+<!--Event popup-->
+<div id="event-popup" class="popup" title="Event Details">
+<?php echo $html->image('loading.gif', array('id' => 'eventloadingimage'));?>
+<div id="event-content">
+</div>
+
+</div>
+<!--End Event Popup-->
