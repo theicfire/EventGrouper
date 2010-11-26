@@ -11,7 +11,6 @@ $oldDay = "";
 $odd= true;
 for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 	$event = $eventsUnderGroup[$i];
-	$currentHour = date('H', strtotime($event['Event']['time_start']));
 	$currentDay = date('Y-m-d', strtotime($event['Event']['time_start']));	
 	if ($oldDay != $currentDay) {
 		$oldDay = $currentDay;?>
@@ -21,9 +20,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 				<!-- <a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/back.png" class="small_icon_inline_button" />Previous day</a><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/go.png" class="small_icon_inline_button" />Next day</a> -->
 			</div> 
 
-	<?php }?>
-
-            <?php while (true) {
+	<?php }
             	$event = $eventsUnderGroup[$i];
             	$onUserCalendar = false;
             	if ($session->check('userid') && array_key_exists('onUsersCalendar',$event['Event']))
@@ -95,7 +92,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 					</div>
                 <div>
                         
-                        <div class="event_description"><?=$event['Event']['description']?> Posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?>.</div>
+                        <div class="event_description"><?=$event['Event']['description']?> Posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></div>
                         
                 </div>        
                 <!-- <div style="float: right">
@@ -107,13 +104,6 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 
                 </div> 
                 
-                <?php 
-            	$i++;
-            	if (!($i < count($eventsUnderGroup) && date('H', strtotime($eventsUnderGroup[$i]['Event']['time_start'])) == $currentHour)) {
-            		$i--;
-            		break;
-            	}
-            }?>
                 <!-- end event block -->
 
                 
