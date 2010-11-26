@@ -50,8 +50,8 @@
 	?>
 	<?php if (isset($isAdmin)) {
 		
-		echo $javascript->link(array('admin.js'));
-		echo $html->css(array('admin_style.css'));
+		echo $javascript->link(array('admin.js', 'jquery.timePicker.min.js'));
+		echo $html->css(array('admin_style.css', 'timePicker'));
 	}?>
 	
 	

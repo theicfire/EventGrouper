@@ -1,142 +1,57 @@
 <script type="text/javascript" >
     
-    $(document).ready( init_validation );
+    $(document).ready(function() {
+    	$("#time1, #time2").timePicker({
+        	show24Hours:false
+        });
+        $('#date1, #date2').datepicker();
+            
+        // Keep the duration between the two inputs.
+        $("#time1").change(function() {
+          if ($("#time2").val()) { // Only update when second input has a value.
+            // Calculate duration.
+            var duration = 60*60*1000;
+            var time = $.timePicker("#time1").getTime();
+            // Calculate and update the time in the second input.
+            $.timePicker("#time2").setTime(new Date(new Date(time.getTime() + duration)));
+          }
+        });
+        $("#time2").change(function() {
+            if($.timePicker("#time1").getTime() > $.timePicker(this).getTime()) {
+          	  var duration = 60*60*1000;
+          	  var time = $.timePicker("#time2").getTime();
+                // Calculate and update the time in the second input.
+                $.timePicker("#time1").setTime(new Date(new Date(time.getTime() - duration)));
+            }
+          });
+        $("#date1").change(function() {
+        	$("#date2").val($('#date1').val());
+          });
+        $("#date2").change(function() {
+            var date1 = new Date($("#date1").val());
+            var date2 = new Date($("#date2").val());
+            if (date2 < date1)
+            	$("#date1").val($('#date2').val());
+            
+        });
+        init_validation(); 
+    });
     
     function nospecial( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z_+&.!,'? ]*$");  }
-    function isdate( value, element ){ return this.optional(element) || value.match("^[0-9][0-9]?/[0-9][0-9]?/(19|20|21)?[0-9][0-9]$");  }
-    function istime( value, element ){
-		if(value.match( /^[0-9][0-9]?(:[0-9][0-9](:[0-9][0-9])?)?( )*(am|pm|a|p)?$/i ))
-		validformat = true;
-		else
-		return this.optional(element);
-		
-		if(gettime(value))		
-		return true;
-		else
-		return this.optional(element);
-	}
-	
-	function gettime( value )
-	{
-		if(value.match( /(am|pm|a|p)/i ))
-		{timeformat = "12 hour";}
-		else
-		{timeformat = "24 hour";}
-		
-		if(timeformat=="12 hour")	{
-			if(value.match( /(am|a)/i )) time_offset = 0;
-			else time_offset = 12;
-			value = value.replace( /( )*(am|pm|a|p)$/i, "");
-		}
-		else
-		{ time_offset = 0; }
-		
-		timearray = value.split(":");
-		
-		hours=minutes=seconds=0;
-		
-		hours = parseInt(timearray[0]) + time_offset;
-		if(timearray[1])
-		minutes = parseInt(timearray[1]);
-		if(timearray[2])
-		seconds = parseInt(timearray[2]);
-		if(hours<24 && minutes<60 && seconds<60)
-		{
-			return hours.toString() + ":" + (minutes<10?'0':'') + minutes.toString() + ":" + (seconds<10?'0':'') + seconds.toString();
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	function comparestartandend( value, element ){
-		
-		date_start = new Date( $("[name='data[Other][date_start]']").val() );
-		date_end = new Date( $("[name='data[Other][date_end]']").val() );
-		
-		time_start = gettime( $("[name='data[Other][time_start]']").val() ).split(":");
-		time_end = gettime( $("[name='data[Other][time_end]']").val() ).split(":");
-		
-		date_start.setHours( time_start[0] );
-		date_start.setMinutes( time_start[1] );
-		date_start.setSeconds( time_start[2] );
-		
-		date_end.setHours( time_end[0] );
-		date_end.setMinutes( time_end[1] );
-		date_end.setSeconds( time_end[2] );
-		
-		return this.optional(element) || (date_start < date_end);
-	}
     
     jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, spaces, and . , ! & + _ '");
-    jQuery.validator.addMethod("istime", istime, "Please enter a valid time.");
-    jQuery.validator.addMethod("isdate", isdate, "Please enter a valid date.");
-    jQuery.validator.addMethod("comparedates", comparestartandend, "Make sure your end time is after your start time.");
     
     function init_validation(){
-		
-//		now = new Date();
-//		
-//		now_in_mseconds = now.getTime();
-//		an_hour = 1000*60*60;
-//		next_hour = now_in_mseconds - (now_in_mseconds % an_hour) + an_hour;
-//		next_hour_date = new Date( next_hour );
-//		
-//		$("[name='data[Other][time_start]']").val( next_hour_date.getHours() + ":00" );
-//		$("[name='data[Other][date_start]']").val( (next_hour_date.getMonth()+1) + "/" + next_hour_date.getDate() + "/"  + next_hour_date.getFullYear() );
-//		
-//		in_an_hour = next_hour + an_hour;
-//		in_an_hour_date = new Date( in_an_hour );
-//		
-//		$("[name='data[Other][time_end]']").val( in_an_hour_date.getHours() + ":00" );
-//		$("[name='data[Other][date_end]']").val( (in_an_hour_date.getMonth()+1) + "/" + in_an_hour_date.getDate() + "/"  + in_an_hour_date.getFullYear() );
-		
-		$("input[name='data[Other][date_start]']").blur( function(){
-			
-			if( $("input[name='data[Other][date_end]']").val() == "" )
-			{
-				date_start = new Date( $("[name='data[Other][date_start]']").val() );
-				time_start = gettime( $("[name='data[Other][time_start]']").val() ).split(":");
-				date_start.setHours( time_start[0] );
-				date_start.setMinutes( time_start[1] );
-				date_start.setSeconds( time_start[2] );
-				dt_start = date_start.getTime();
-				
-				dt_end = dt_start + an_hour;
-				dt_end_date = new Date( dt_end );
-				
-				$("[name='data[Other][time_end]']").val( dt_end_date.getHours() + ":00" );
-				$("input[name='data[Other][date_end]']").val( (dt_end_date.getMonth()+1) + "/" + dt_end_date.getDate() + "/"  + dt_end_date.getFullYear() )
-			}
-			
-		});
+    	
 		$.validator.addMethod("TAGS", function(value, element) {  
 		    return this.optional(element) || /^([a-z]|, ?)*$/i.test(value);  
 		    }, "Please enter a comma seperated list of tags (i.e. food, adventure, organization).");
 		$("form").validate({
-			rules: {
+				rules: {
 				'data[Event][title]': {
 					required: true,
 					minlength: 2,
 					nospecial: true
-				},
-				'data[Other][time_start]': {
-					required: true,
-					istime: true
-				},
-				'data[Other][time_end]': {
-					required: true,
-					istime: true
-				},
-				'data[Other][date_start]': {
-					required: true,
-					isdate: true
-				},
-				'data[Other][date_end]': {
-					required: true,
-					isdate: true,
-					comparedates: true
 				},
 				'data[Event][description]': {
 					required: false,
@@ -196,13 +111,13 @@ if (!empty($this->data['Event']['duration'])) {
 ?>
 <div style="float:left;">
 	<label>Start Time</label><input type="text"
-		name="data[Other][time_start]" class="time_input textfield"
+		name="data[Other][time_start]" class="time_input textfield" id="time1"
 		value="<?=$time_start?>" />
 	<p class="form_tip">For example: 8:05 pm or 17:47</p>	
 	</div>
 	<div style="float:left; padding-left: 20px;">
 		<label>Start Date</label><input type="text"
-		name="data[Other][date_start]" class="date_input textfield"
+		name="data[Other][date_start]" class="date_input textfield" id="date1"
 		value="<?=$date_start?>" /> 
 	<p class="form_tip">Click inside the field for a date picker.</p>
 </div>
@@ -213,7 +128,7 @@ if (!empty($this->data['Event']['duration'])) {
 
 <div style="float:left;">
 	<label>End Time</label><input
-		type="text" name="data[Other][time_end]" class="time_input textfield"
+		type="text" name="data[Other][time_end]" class="time_input textfield" id="time2"
 		value="<?=$time_end?>" />
 		<p class="form_tip">&nbsp;</p>
 		</div>
@@ -221,7 +136,7 @@ if (!empty($this->data['Event']['duration'])) {
 		
 		
 		<label>End Date</label><input type="text"
-		name="data[Other][date_end]" class="date_input textfield"
+		name="data[Other][date_end]" class="date_input textfield" id="date2"
 		value="<?=$date_end?>" /> 
 </div>
 
@@ -245,7 +160,7 @@ echo $this->element('admin/map', array('type'=>'Event', 'centerLat' => $centerLa
 <div class="form_section">
 <h2>Submit for Approval</h2>
 <?php if ($type == 'edit') echo $form->input('id', array('type'=>'hidden'));?>
-<?=$this->Form->button('Submit', array('type' => 'submit', 'class' => 'make_button'));?>
+<?=$form->submit('Submit', array('type' => 'submit', 'class' => 'make_button'));?>
 <p class="form_tip">This group will be approved by the group coordinators.</p>
 </div>
 
