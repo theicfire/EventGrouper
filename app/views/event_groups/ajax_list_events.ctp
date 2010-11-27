@@ -16,7 +16,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 		$oldDay = $currentDay;?>
 	
 			<div id="which_day_container">
-				<span id="which_day_is_it"><?php echo date('l, F j', strtotime($event['Event']['time_start'])); ?></span>            
+				<span id="which_day_is_it"><?php echo date('l, F j Y', strtotime($event['Event']['time_start'])); ?></span>            
 				<!-- <a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/back.png" class="small_icon_inline_button" />Previous day</a><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/go.png" class="small_icon_inline_button" />Next day</a> -->
 			</div> 
 

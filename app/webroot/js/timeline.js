@@ -37,7 +37,21 @@ function update_time()
 
 function scroll_handler(event)
 {
-	//this will scroll the timeline. (sashko)
+	if( !floating && $("#scroll_locator").offset().top <= $(window).scrollTop() )
+	{
+		$("#scroll").addClass("yes_scroll");
+		
+		$("#spacer").height($("#scroll").outerHeight());
+		
+		floating = true;
+	}
+	else if( floating && $("#scroll_locator").offset().top > $(window).scrollTop())
+	{
+		$("#scroll").removeClass("yes_scroll");
+		$("#spacer").height(0);
+		
+		floating = false;
+	}
 }
 
 

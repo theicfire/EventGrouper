@@ -89,7 +89,7 @@ This site does not work with Javascript disabled. Please enable Javascript.
 	    </div>
     <?php } else {?>
     
-	    <div id="universal_header">
+	 <!--   <div id="universal_header">
 			<div id="uh_left"><?php echo $html->link("RushRabbit", "/", array('class'=>'uh_logo'))?> <span><a href="<?= $html->url('/about_us');?>" class="general_link">About Us</a> <a href="<?= $html->url('/feedback');?>" class="general_link">Feedback</a></span></div>
 		        
 			<?php
@@ -106,7 +106,7 @@ This site does not work with Javascript disabled. Please enable Javascript.
 				<div id="uh_right"><?php echo "Logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Admin Panel", "/".$path);?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
 			<?php }?>
 			<div class="clear"></div>
-	    </div>
+	    </div> -->
     <?php }?>
     
     

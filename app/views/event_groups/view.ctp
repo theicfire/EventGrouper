@@ -36,15 +36,139 @@ foreach ($eventGroups as $eventGroup) {
 	}
 }
 ?>
+	<div id="fixed_top">
+
+		<div id="noscroll">
+		
+		
+		<h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
+						
+						
+					
+						<div id="subgroups">
+							<div class="nav_title">groups inside "<?=$currenteventGroup['EventGroup']['name'];?>"</div>
+							<div class="nav_links">
+								<?php 
+								$linksArr = array();
+								foreach ($eventGroups as $eventGroup) {
+									if(in_array($eventGroup['EventGroup']['path'], $pathLength[$minLength])) {
+										$linksArr[] = $html->link($eventGroup['EventGroup']['name'], "/".$eventGroup['EventGroup']['path'], array('class' => "group_".$eventGroup['EventGroup']['id']));
+									}
+								}
+								echo implode($linksArr," ");
+								?>
+							</div>
+						</div>
+		
+		
+		<div></div>
+		
+			<div id="main_tabs"> 
+			<ul id="mt_list">
+				<li class="mt_tab"><a class="active" href="#" id="gotoall">Timeline</a></li> 
+				<li class="mt_tab"><a href="#" id="gotoschedule">Favorites</a></li> 
+				<li class="mt_tab"><a href="#" id="gotomap">Map</a></li>
+				<div class="clear"></div>
+			</ul>
+			<div class="clear"></div>
+			</div> 
+		
+		
+		</div>
     
-    <div id="main_tabs"> <h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
-    <ul id="mt_list">
-        <li class="mt_tab"><a class="active" href="#" id="gotoall">Timeline</a></li> 
-        <li class="mt_tab"><a href="#" id="gotoschedule">Favorites</a></li> 
-		<li class="mt_tab"><a href="#" id="gotomap">Map</a></li>
-		<div class="clear"></div>
-    </ul>
-    <div class="clear"></div>
+    <div id="scroll_locator"></div>
+    <div style="position: relative;">
+		
+    
+		<div id="scroll" >
+		
+			
+		
+				<div id="r_main_ribbon_container">
+			
+				<div id="breadcrumb" style="float: left;" >
+							<div class="nav_title">currently viewing</div>
+							<div class="nav_links">
+							<?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path'], 'highestName' => $currenteventGroup['EventGroup']['highest_name']))?>
+							</div>
+						</div>
+
+					<div class="filter_section">
+						<img src="<?php echo $html->url('/'); ?>css/rinoa/clock.png" class="filter_icon" alt="Time:" title="Time" /> <label class="form_label">Time</label> <select name="time_start" id="time_start" class="putInHash input_text">
+									<option value="0">midnight</option>
+									<option value="1">1:00 am</option>
+									<option value="2">2:00 am</option>
+									<option value="3">3:00 am</option>
+									
+									<option value="4">4:00 am</option>
+									<option value="5">5:00 am</option>
+									<option value="6">6:00 am</option>
+									<option value="7">7:00 am</option>
+									
+									<option value="8">8:00 am</option>
+									<option value="9">9:00 am</option>
+									<option value="10">10:00 am</option>
+									<option value="11">11:00 am</option>
+									
+									<option value="12">noon</option>
+									<option value="13">1:00 pm</option>
+									<option value="14">2:00 pm</option>
+									<option value="15">3:00 pm</option>
+									
+									<option value="16">4:00 pm</option>
+									<option value="17">5:00 pm</option>
+									<option value="18">6:00 pm</option>
+									<option value="19">7:00 pm</option>
+									
+									<option value="20">8:00 pm</option>
+									<option value="21">9:00 pm</option>
+									<option value="22">10:00 pm</option>
+									<option value="23">11:00 pm</option>
+								</select>
+								
+						</div>
+								
+								
+								<div class="filter_section">
+						<img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" alt="Date:" title="Date" class="filter_icon" />
+						<?php if (!empty($eventsUnderGroup))
+								$dateIn = date('m/d/Y', strtotime($eventsUnderGroup[0]['Event']['time_start']));
+							else
+								$dateIn = date('m/d/Y');?> 
+						<label class="form_label">Date</label> <input type="text" name="date_start" id="datestart" class="input_text putInHash" style="width: 100px;" 
+							value="<?=$dateIn?>" />
+						
+						<input type="hidden" id="date_start_default" value="<?=$dateIn?>">
+						</div>
+					<div class="filter_section">
+						<img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="filter_icon" title="Search" alt="Search:" /> <label class="form_label">Search</label> <input type="text" name="search" id="searchBox" class="putInHash input_text" style="width: 100px;" /> 
+						<div class="r_form_tip" id="searcherr">Please search for at least 4 letters</div>
+		<!--            <input type="checkbox" class="putInHash" name="isCalendar" id="isCalendar" style="display:none">-->
+					<input type="hidden" class="putInHash" name="viewType" id="viewType" value="">
+					</div>
+					
+					<div class="filter_buttons">
+						<a href="#" class="button_small" id="filter_submit"><img src="<?php echo $html->url('/'); ?>css/rinoa/refresh.png" /><label class="button_label">Refresh</label></a>
+						<a href="#" class="button_small" id="filter_reset"><label class="button_label">Reset</label></a>
+						<a href="#" class="button_small" id="filter_reset_date"><label class="button_label">First Day</label></a>
+				</div>
+					
+				<div class="clear"></div>	
+					
+				</div>
+				
+				
+			
+			<div class="clear"></div>
+			
+			</div>
+			
+    
+		
+		</div>
+    </div>
+    
+    <div id="spacer"></div>
     </div>
     
     <div id="timeline_content">
@@ -63,7 +187,7 @@ foreach ($eventGroups as $eventGroup) {
 		$(".ui-button-text").css("padding", "4px");
 		}
 		</script>
-    
+
     <div id="r_main_ribbon_container">
     
     	<div class="r_ribbon_box" id="view_mode" priority="1000">
@@ -193,7 +317,7 @@ foreach ($eventGroups as $eventGroup) {
     <div class="clear"></div>
     
     </div>
-    
+
     
     	<div id="split">
         
