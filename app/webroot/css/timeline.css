@@ -1,14 +1,56 @@
 /* timeline */
 
+h1#conference_title
+{
+	display: block;
+	font-size: 1.5em;
+	
+}
+
 #tl_navigation
 {
 	padding: 10px;
 }
 
-#tl_navigation #breadcrumb
+.make_button
+{
+	cursor: pointer;
+}
+
+.make_button label
+{
+	cursor: pointer;
+}
+
+.make_button img
+{
+	cursor: pointer;
+}
+
+.make_button span
+{
+	cursor: pointer;
+}
+
+#breadcrumb
 {
 	float: left;
-	padding: 10px;
+	padding: 6px 10px;
+	font-size: .8em;
+}
+
+#scroll .form_label
+{
+	position: absolute;
+	left: -9000px;
+}
+
+.filter_icon
+{
+	position: relative;
+	margin: -5px 0;
+	height: 1.2em;
+	width: 1.2em;
 }
 
 #tl_navigation #subgroups
@@ -90,7 +132,7 @@
 	background: #fff;
 	padding: 3px;
 	border: #999 1px solid;
-	width: 90px;
+	width: 120px;
 	margin-right: 5px;
 }
 
@@ -275,6 +317,22 @@ margin: 10px;
 width: 100%;
 }
 
+.filter_section
+{
+	padding: 10px;
+	float: left;
+}
+
+.filter_buttons
+{
+	padding: 8px;
+	float: left;
+}
+
+.nav_title
+{
+}
+
 /*ribbon! */
 
 .button_large label
@@ -397,13 +455,12 @@ width: 100%;
 	font-size: 12px;
 }
 
-.r_rb_form_row input.input_text
+input.text_input
 {
-	font-size: 12px;
-	height: 14px;
+	width: 300px;
 }
 
-.r_rb_form_row select.input_text
+select.input_text
 {
 	font-size: 12px;
 }
@@ -425,11 +482,35 @@ border: 1px solid #ccc;
 #r_main_ribbon_container
 {
 	border-bottom: 1px solid #aaa;
+	background-color: #fff;
 }
 
 .scheduletoggle
 {
 	font-size: 12px;
+}
+
+#scroll
+{
+	z-index: 9000;
+	width: 100%;
+	top: 0;
+}
+
+.yes_scroll
+{
+	position: fixed;
+		background: #fff;
+		z-index: 9000;
+		width: 100%;
+		top: 0;
+
+	}
+
+#top_spacer
+{
+	height: 120px;
+	width: 100%;
 }
 
 /* MAPS */

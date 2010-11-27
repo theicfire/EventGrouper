@@ -37,7 +37,21 @@ var floating = false;
 
 function scroll_handler(event)
 {
-	//this will scroll the timeline. (sashko)
+	if( !floating && $("#scroll_locator").offset().top <= $(window).scrollTop() )
+	{
+		$("#scroll").addClass("yes_scroll");
+		
+		$("#spacer").height($("#scroll").outerHeight());
+		
+		floating = true;
+	}
+	else if( floating && $("#scroll_locator").offset().top > $(window).scrollTop())
+	{
+		$("#scroll").removeClass("yes_scroll");
+		$("#spacer").height(0);
+		
+		floating = false;
+	}
 }
 function giveEventsJs() {
 //	$( ".timeline_cell" ).find(".event_block").draggable({ revert: "invalid", helper: "clone", opacity: .7, zIndex: 1000 });
