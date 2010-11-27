@@ -61,7 +61,7 @@
 					required: false,
 					nospecial: true
 				},
-				'data[Event][tags]': "TAGS",
+				'data[Event][tags]': "TAGS"
 			}
 		});
 	}
@@ -77,7 +77,7 @@ else echo $this->Form->create('Event', array('action' => "edit/")); ?>
 	if ($type == 'add') echo "New event";
 	else echo "Edit event";
 	?></h1>
-<p>in <?= $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path'], 'highestName' => $eventGroup['EventGroup']['highest_name']))?></p>
+<div>in <?= $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path'], 'highestName' => $eventGroup['EventGroup']['highest_name']))?></div>
 
 <div class="form_section">
 <h2>Basic Information</h2>
@@ -113,13 +113,11 @@ if (!empty($this->data['Event']['duration'])) {
 	<label>Start Time</label><input type="text"
 		name="data[Other][time_start]" class="time_input textfield" id="time1"
 		value="<?=$time_start?>" />
-	<p class="form_tip">For example: 8:05 pm or 17:47</p>	
 	</div>
 	<div style="float:left; padding-left: 20px;">
 		<label>Start Date</label><input type="text"
 		name="data[Other][date_start]" class="date_input textfield" id="date1"
 		value="<?=$date_start?>" /> 
-	<p class="form_tip">Click inside the field for a date picker.</p>
 </div>
 
 <div class="clear"></div>
@@ -143,6 +141,7 @@ if (!empty($this->data['Event']['duration'])) {
 <div class="clear"></div>
 	
 <?php echo $form->input('tags', array('type' => 'text', 'class' => 'textfield'));?>
+<p class="form_tip">Comma seperated list. Ex Food, Entertainment</p>
 
 </div>
 

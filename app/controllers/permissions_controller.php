@@ -1202,7 +1202,7 @@ EOT;
 		$events = array();
 		for ($i = 0; $i < count($matches[1]); $i++) {
 			$times = explode("-", $matches[1][$i]);
-			$timeStart = date("Y-m-d H:i:s", strtotime("8 April 2010 ".$times[0]));
+			$timeStart = date("Y-m-d H:i:s", strtotime("8 April 2010 ".$times[0]));//important
 //			print_r($times);
 			if (empty($times[1]))
 				$duration = 60;
@@ -1217,13 +1217,36 @@ EOT;
 					'title' => $matches[3][$i],
 					'location' => $matches[4][$i],
 					'description' => $matches[5][$i],
-					'event_group_id' => 7,
+					'event_group_id' => 101,//important
 					'time_start' => $timeStart,
 					'duration' => $duration,
-					'user_id' => 6
+					'user_id' => 37,//important
+					'tags' => $matches[2][$i],
+					'status' => 'confirmed'
 				)
 			);
-			print_r($insertArr);
+			$tagList = array(
+				'A' => 'Academic',
+				'R' => 'Arts',
+				'S' => 'Athletic',
+				'T' => 'Tour',
+				'C' => 'Class',
+				'F' => 'fraternity, sorority, living',
+				'*' => 'featured',
+				'D' => 'Dormitory',
+				'P' => 'Parents',
+				'G' => 'Religious',
+				'O' => 'Student, Oraganization',
+				'M' => 'minority',
+				'U' => 'UROP'
+			
+			);
+			$tagArr = array();
+			for ($j = 0; $j < strlen($insertArr['Event']['tags']); $j++) {
+				$tagArr[] = $tagList[substr($insertArr['Event']['tags'], $j, 1)];
+			}
+			$insertArr['Event']['tags'] = implode(',', $tagArr);
+			pr($insertArr);
 			$this->Event->create();
 			$this->Event->save($insertArr);
 			

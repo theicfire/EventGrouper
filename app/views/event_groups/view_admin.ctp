@@ -1,11 +1,18 @@
-<?php if ($currenteventGroup['EventGroup']['parent_id'] == 0) {
-
-	$top_level = true;
-}
-else { $top_level = false; }
-
-?>
-<?php if(isset($notification))
+<script type="text/javascript">
+$(document).ready(function() {
+	$("form#loginForm").validate({
+		rules: {
+		'data[email]': {
+			required:true,
+			email: true
+		}
+	}
+	});
+});
+</script>
+<?php
+$top_level = $currenteventGroup['EventGroup']['parent_id'] == 0;
+if(isset($notification))
 { ?>
 	
 	<div class="cake_notification">
@@ -86,11 +93,6 @@ else { $top_level = false; }
 				class="small_icon_inline_button" /> Add events</a>
 			<?php }?>
 			
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {?>
-				
-				<a class="make_button" href="<?php echo $html->url("/permissions/view/" . $currenteventGroup['EventGroup']['id']); ?>">
-				<img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" class="small_icon_inline_button" /> Edit Permissions</a>
-			<?php }?>
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {?>
 				
 				<a class="make_button" href="<?php echo $html->url("/event_groups/delete/" . $currenteventGroup['EventGroup']['id']); ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $currenteventGroup['EventGroup']['name']; ?>?&#039;);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Delete</a>
@@ -98,36 +100,40 @@ else { $top_level = false; }
 			<?php }?>
 			</div>
 	</div>
-	<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {?> 
-	<div class="form_section">
+	<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'editperms')) {?>
+		<div class="form_section">
 			<h2>Permissions</h2>
 			<form name="loginForm" id="loginForm" method="post">
 			Add a User: <input type="text" name="data[email]" class="textfield">
 			<input type="submit" value="Add" class="make_button">
-			</form>      
-			<table class="full_width">
-				
+			</form>   
+			<?php if( count($userPerms)==0 ) { ?>
+			<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> No one else has permissions to "<?php echo $currenteventGroup['EventGroup']['name']; ?>" or any of its subgroups.</p>
+			<?php } else {?>   
+				<table class="full_width">
+					
+				            
+					<tr><th>Email address</th><th>Permissions</th><th>Actions</th></tr>  
+				     <?php foreach ($userPerms as $userPerm) {?>
+					<tr>
+							<td>
+								<?php echo $userPerm['users']['email']; ?>
+							</td>
+							<td>
+								<?php foreach($userPerm['userEventGroups'] as $eventGroup) {
+									echo $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path'], 'highestName' => $eventGroup['EventGroup']['highest_name']));
+									echo "<br>";
+								}
+								?>
+							</td>
+							<td class="actions">
+								<?php echo $html->link('Remove', array('controller' => 'permissions', 'action' => 'delete', $groupId, $userPerm['aros_acos']['aro_id']), array('class' => 'make_button'), "Are you sure you want to delete this?");?>
+							</td>
+					</tr>
+					<?php }?>      
 			            
-				<tr><th>Email address</th><th>Permissions</th><th>Actions</th></tr>  
-			     <?php foreach ($userPerms as $userPerm) {?>
-				<tr>
-						<td>
-							<?php echo $userPerm['users']['email']; ?>
-						</td>
-						<td>
-							<?php foreach($userPerm['userEventGroups'] as $eventGroup) {
-								echo $this->element('grouppath', array('groupStr' => $eventGroup['EventGroup']['path'], 'highestName' => $eventGroup['EventGroup']['highest_name']));
-								echo "<br>";
-							}
-							?>
-						</td>
-						<td class="actions">
-							<?php echo $html->link('Remove', array('controller' => 'permissions', 'action' => 'delete', $groupId, $userPerm['aros_acos']['aro_id']), array('class' => 'make_button'), "Are you sure you want to delete this?");?>
-						</td>
-				</tr>
-				<?php }?>      
-		            
-			</table>
+				</table>
+			<?php }?>
 		</div>      
     <?php }?>
 	<!-- <h1>Contents of "<?php echo $currenteventGroup['EventGroup']['name']; ?>"</h1> -->     
@@ -169,11 +175,6 @@ else { $top_level = false; }
 							<a href="<?php echo $html->url("/events/add/".$eventGroup['EventGroup']['id']); ?>"
 							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 							class="small_icon_inline_button" /> Add events</a>
-						<?php }?>
-						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'editperms')) {?>
-				
-							<a class="make_button" href="<?php echo $html->url("/permissions/view/" . $eventGroup['EventGroup']['id']); ?>">
-							<img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png" class="small_icon_inline_button" /> Edit Permissions</a>
 						<?php }?>
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'delete')) {?>
 						<a class="make_button" href="<?=$html->url('/'); ?>event_groups/delete/<?php echo $eventGroup['EventGroup']['id']; ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $eventGroup['EventGroup']['name']; ?>?&#039);"><img src="<?php echo $html->url('/'); ?>css/rinoa/close.png" class="small_icon_inline_button" /> Delete</a>

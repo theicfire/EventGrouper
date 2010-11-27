@@ -24,10 +24,10 @@ class EventsController extends AppController {
 			
 			App::import('Helper', 'Html'); // loadHelper('Html'); in CakePHP 1.1.x.x
 	        $html = new HtmlHelper();			
-			$flashMessage = "The Event has been submitted and is being reviewed. To see it's status go to the ".$html->link('Admin Panel Home', '/users/index')." Page."; 
+			$flashMessage = "<b>".$this->data['Event']['title']."</b> has been submitted and is under review. To see it's status go to the ".$html->link('Admin Panel Home', '/users/index')." Page."; 
 			if ($this->MyAcl->check('EventGroup',$eventGroupId,'bigOwner')) {
 				$this->data['Event']['status'] = 'hidden'; 
-				$flashMessage = "This Event has been saved.";
+				$flashMessage = "<b>".$this->data['Event']['title']."</b> saved. ".$html->link('See it in the timeline.', "/".$eventGroup['EventGroup']['path']);
 			}
 			$this->Session->setFlash($flashMessage);
 			if ($this->Event->save($this->data)) {
@@ -46,8 +46,8 @@ class EventsController extends AppController {
 				$this->Acl->Aco->save($acoArr);
 				//since this has a parent_id, permissions should already be set
 				
-				
-				$this->redirect("/event_groups/view_admin/".$eventGroup['EventGroup']['path']);
+				$this->data = array();
+//				$this->redirect("/event_groups/view_admin/".$eventGroup['EventGroup']['path']);
 			} else {
 				$this->Session->setFlash(__('The Event could not be saved. Please, try again.', true));
 			}

@@ -112,9 +112,15 @@ This site does not work with Javascript disabled. Please enable Javascript.
     
 	<div id="container">
 		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
+			
+			<?php 
+			$flash = $this->Session->flash();
+			if (!empty($flash)) {
+				echo "<div class='form_explanation ui-state-highlight ui-corner-all'>";
+				echo "<span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> ";
+				echo $flash;
+				echo "</div>";
+			}?>
 			<?php echo $content_for_layout; ?>
 
 		</div>

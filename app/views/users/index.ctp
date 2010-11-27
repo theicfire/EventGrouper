@@ -69,11 +69,6 @@ foreach($userEventGroups as $group) {
 					class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/check.png"
 					class="small_icon_inline_button" /> Check requests</a>
 				<?php }?>
-				<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'bigOwner')) {?> 
-					<a href="<?php echo $html->url("/permissions/view/".$group['EventGroup']['id']); ?>"
-					class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/applications.png"
-					class="small_icon_inline_button" /> Edit permissions</a>
-				<?php }?>
 				</td>
 		</tr>
 
@@ -156,9 +151,6 @@ foreach($userEventGroups as $group) {
 					class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/check.png"
 					class="small_icon_inline_button" /> Check Requests</a>
 				<?php }?>
-				<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'editperms')) {
-					echo $html->link(__('Edit Permissions', true), array('controller' => 'permissions', 'action' => 'view', $group['EventGroup']['id']));
-				}?>
 				</td>
 		</tr>
 

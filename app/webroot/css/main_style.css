@@ -368,3 +368,6 @@ table.generic td, table.generic th
 	border: #aaa 1px solid;
 	padding: 5px;
 }
+.pathLinks {
+	display:inline;
+}
