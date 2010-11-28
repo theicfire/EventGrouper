@@ -374,7 +374,7 @@ function getFromHash(key) {
 }
 function changeHash(hash) {
 	location.hash = hash;
-	currentHash = '#' + hash;
+	currentHash = hash;
 }
 function setHashFromPage(){
 	var paramArr = [];
@@ -392,7 +392,7 @@ function setHashFromPage(){
 	for (var key in paramArr) {
 		urlStrArr.push(key+"="+paramArr[key]);
 	}	
-	changeHash(urlStrArr.join("&"));
+	changeHash('#' + urlStrArr.join("&"));
 	
 	
 }
@@ -501,7 +501,7 @@ $(document).ready( function(){
 	setInterval( "update_time()", 1000 );
 
 	loadPage();
-
+	
 	
 	
 });
