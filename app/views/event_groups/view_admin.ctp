@@ -138,10 +138,15 @@ if(isset($notification))
     <?php }?>
 	<!-- <h1>Contents of "<?php echo $currenteventGroup['EventGroup']['name']; ?>"</h1> -->     
 	<div class="form_section">
-		<h2>Groups Contained</h2>
+		<h2>Subgroups <?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
+				<a href="<?php echo $html->url("/event_groups/add/".$currenteventGroup['EventGroup']['id']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
+				class="small_icon_inline_button" /> Add subgroups</a>
+			<?php }?>
 		
 		<?php if( count($eventGroups)==0 )
-		{ ?>
+		{ ?></h2> 
+		
 		
 		<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> There are no subgroups in "<?php echo $currenteventGroup['EventGroup']['name']; ?>".</p>
 		
@@ -192,7 +197,12 @@ if(isset($notification))
 		</div>
 		
 		<div class="form_section">
-		<h2>Events Contained</h2>  
+		<h2>Events <?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
+				<a href="<?php echo $html->url("/events/add/".$currenteventGroup['EventGroup']['id']); ?>"
+				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
+				class="small_icon_inline_button" /> Add events</a>
+			<?php }?> </h2> 
+		
 		
 		<?php if( count($eventsUnderGroup)==0 )
 		{ ?>
@@ -221,7 +231,6 @@ if(isset($notification))
 						<?php echo $event['Event']['location']; ?>
 					</td>
 					<td class="actions">
-						<?php echo $html->link(__('View', true), array('controller' => 'events', 'action' => 'view', $event['Event']['id'])); ?>
 						<?php if ($access->check('Event',$event['Event']['id'], 'update')) {
 							echo $html->link(__('Edit', true), array('controller' => 'events', 'action' => 'edit', $event['Event']['id'])); 
 						}?>

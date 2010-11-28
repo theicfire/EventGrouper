@@ -47,7 +47,7 @@ foreach ($eventGroups as $eventGroup) {
 					
 						<div id="subgroups">
 							<div class="nav_title">groups inside "<?=$currenteventGroup['EventGroup']['name'];?>"</div>
-							<div class="nav_links">
+							<div class="nav_links pathLinks">
 								<?php 
 								$linksArr = array();
 								foreach ($eventGroups as $eventGroup) {

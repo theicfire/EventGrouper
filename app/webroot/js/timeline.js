@@ -348,7 +348,7 @@ function addToHash(hash, key, val) {
 		locArrNew.push(sides[0] + '=' + sides[1]);
 	}
 	locArrNew.push(key+'='+val);
-	return locArrNew.join('&');
+	return '#' + locArrNew.join('&');
 }
 function removeFromHash(hash, key) {
 	hash = hash.substring(1);
@@ -360,7 +360,7 @@ function removeFromHash(hash, key) {
 			continue;
 		locArrNew.push(sides[0] + '=' + sides[1]);
 	}
-	return locArrNew.join('&');
+	return '#' + locArrNew.join('&');
 }
 function getFromHash(key) {
 	hash = location.hash.substring(1);
@@ -416,7 +416,7 @@ function setPageFromHash(){
 	}
 }
 function checkAndRunHash() {
-	if (currentHash != location.hash) {
+	if (location.hash.length != 0 && currentHash != location.hash) {
 		loadPage();
 	}
 		

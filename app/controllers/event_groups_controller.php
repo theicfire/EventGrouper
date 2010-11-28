@@ -212,7 +212,7 @@ class EventGroupsController extends AppController {
 						//add read priveleges for guests
 						$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
 					}
-					$this->set('notification', 'The group has been saved. You can now add events or more subgroups.');
+					$this->Session->setFlash('Great! You\'ve just added a group. Now you can start adding events, permissions, and subgroups');
 					$newGroup = $this->EventGroup->findById($eventGroupId);
 					$this->redirect("/event_groups/view_admin/".$newGroup['EventGroup']['path']);
 				} else {
