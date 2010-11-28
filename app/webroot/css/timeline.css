@@ -32,6 +32,16 @@ h1#conference_title
 	cursor: pointer;
 }
 
+#toolbar_small_shadow
+{
+	background: url(grad_shadow/toolbar_shadow.png);
+	position: absolute;
+	height: 8px;
+	bottom: -8px;
+	left: 0;
+	width: 100%;
+}
+
 #breadcrumb
 {
 	float: left;
@@ -53,9 +63,8 @@ h1#conference_title
 	width: 1.2em;
 }
 
-#tl_navigation #subgroups
+#subgroups
 {
-	float: left;
 	padding: 10px;
 }
 
