@@ -1,113 +1,98 @@
 <div class="ajax_event_list">
-<?php
-if (count($eventsUnderGroup) == 0)
-{ ?>
-	<div class="no_results">
-	<img src="<?php echo $html->url('/css/'); ?>rinoa/document.png" class="small_icon_inline_button" /> There are no events which match this set of options.
-	</div>
+	<?php //if there are no events, show this message
+	if (count($eventsUnderGroup) == 0)
+	{ ?>
+		<div class="no_results ui-state-highlight">
+		<span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> There are no events which match this set of options.
+		</div>
+		
+	<?php } ?>
 	
-<?php }
-$oldDay = "";
-$odd= true;
-for ($i = 0; $i < count($eventsUnderGroup); $i++) {
+<?php
+
+//initializing variables for main loop
+$oldDay = ""; //used to determine when to show the day headers
+$odd= true; //used to shade alternate lines
+
+for ($i = 0; $i < count($eventsUnderGroup); $i++) //main loop
+{
 	$event = $eventsUnderGroup[$i];
+	
+	//test for new day
 	$currentDay = date('Y-m-d', strtotime($event['Event']['time_start']));	
 	if ($oldDay != $currentDay) {
 		$oldDay = $currentDay;?>
 	
 			<div id="which_day_container">
-				<span id="which_day_is_it"><?php echo date('l, F j Y', strtotime($event['Event']['time_start'])); ?></span>            
+				<h2 id="which_day_is_it"><?php echo date('l, F j Y', strtotime($event['Event']['time_start'])); ?></h2>            
 				<!-- <a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/back.png" class="small_icon_inline_button" />Previous day</a><a class="make_button" href="#"><img src="<?php echo $html->url('/css/'); ?>rinoa/go.png" class="small_icon_inline_button" />Next day</a> -->
 			</div> 
 
 	<?php }
-            	$event = $eventsUnderGroup[$i];
-            	$onUserCalendar = false;
-            	if ($session->check('userid') && array_key_exists('onUsersCalendar',$event['Event']))
-					$onUserCalendar = true;
-				
-            ?>
-            	<?php $odd = !$odd; ?>
-            	<div class="event_block<?php if ($onUserCalendar) echo " onCalendar"; if ($odd) echo " odd"; ?>" id="event-<?=$event['Event']['id']?>">
+	//end test for new day
+	
+	//determine if the event is in the user's favorites
+	if ($session->check('userid') && array_key_exists('onUsersCalendar',$event['Event'])) { $onUserCalendar = true; }
+	else { $onUserCalendar = false;	}
+	?>
             	
-					<div class="hiddenid"><?=$event['Event']['id']?></div>
-            	
-					<div class="event_top_row">
-						
-						<div style="display:none" id="latitude"><?=$event['Event']['latitude']?></div>
-						<div style="display:none" id="longitude"><?=$event['Event']['longitude']?></div>
-						<span class="event_title">
-							<?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?>
-						</span> 
-						
-						&nbsp; 
-						
-						
-						
-						<span class="event_time">
-								<?php  
-								$start_time = strtotime($event['Event']['time_start']);
-								$end_time = strtotime($event['Event']['time_start']) + $event['Event']['duration'] * 60;
-								
-								/*if( date('a', $start_time) ==  date('a', $end_time) )
-								{
-									echo date('g:i', $start_time) . " to " . date('g:i a', $end_time);
-								}
-								else
-								{*/
-									echo date('g:i a', $start_time) . " to " . date('g:i a', $end_time);
-								
-								
-								  ?>
-							</span>
-						<?php if (!empty($event['Event']['location'])) {?>
-							<span class="event_location">
-								at <?=$event['Event']['location']?>
-							</span>
-						<?php }?>
-						
-						<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
-						<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="timeline_icon"  />
-						</a>
-						
-						<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
-						<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="timeline_icon"  />
+    <?php $odd = !$odd; //alternate rows ?>
+    
+    <?php //start event block ?>	
+    <div class="event_block<?php echo ($onUserCalendar?" onCalendar":"") . ($odd?" odd":""); ?>" id="event-<?=$event['Event']['id']?>">
+		<div class="hiddenid"><?=$event['Event']['id']?></div>
+		<div class="event_top_row">
+			<div style="display:none" id="latitude"><?=$event['Event']['latitude']?></div>
+			<div style="display:none" id="longitude"><?=$event['Event']['longitude']?></div>
 			
-						</a>
-						 
-						<span class="event_tags group_<?=$event['EventGroup']['id']?>">
-								
-								<?php if (!empty($event['Event']['tags'])) {
-									
-									echo "Tags: ";
-									
-									$tagArr = explode(",", $event['Event']['tags']);
-									foreach ($tagArr as $tag) {
-										echo "<a href='#' class='tagLink'>".trim($tag)."</a> ";
-									}
-								}?>
-						</span>
-							
-						<div class="clear"></div>	
-					</div>
-                <div>
-                        
-                        <span class="event_description"><?=$event['Event']['description']?> Posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></span>
-                        
-                </div>        
-                <!-- <div style="float: right">
-                
-                in <span class="event_path"></span>
-                </div>
-
-                    <div class="clear"></div> -->
-
-                </div> 
-                
-                <!-- end event block -->
-
-                
-<?php
-}?>      
-
+			<h3 class="event_title" style="display: inline"><?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?></h3> 
+			&nbsp; 
+			<span class="event_time">
+				<?php
+				//get start and end times; maybe add some better logic here later.. show dates?
+				$start_time = strtotime($event['Event']['time_start']);
+				$end_time = strtotime($event['Event']['time_start']) + $event['Event']['duration'] * 60;
+				echo date('g:i a', $start_time) . " to " . date('g:i a', $end_time);
+				?>
+			</span>
+			
+			<?php
+			// I feel like location should never be empty.  maybe sometimes there won't be a lat/long, but there should always be a location...
+			if (!empty($event['Event']['location'])) {?>
+				<span class="event_location">
+					at <?=$event['Event']['location']?>
+				</span>
+			<?php }?>
+			
+			<?php // button to add to favorites ?>
+			<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
+			<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="timeline_icon"  />
+			</a>
+			
+			<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
+			<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="timeline_icon"  />
+			</a>
+			
+			<?php if (!empty($event['Event']['tags'])) { ?>	 
+				<span class="event_tags group_<?=$event['EventGroup']['id']?>">
+					<?php
+						echo "Tags: ";
+						$tagArr = explode(",", $event['Event']['tags']);
+						foreach ($tagArr as $tag) {
+								echo "<a href='#' class='tagLink'>".trim($tag)."</a> ";	
+						}
+					?>
+				</span>
+			<?php } ?>			
+			
+			<div class="clear"></div>	
+		</div> <!-- end top row -->
+		<div> <!-- second row -->
+			<span class="event_description">
+				<?=$event['Event']['description']?>
+				Posted by <?=$this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?>
+			</span>
+		</div>
+	</div> <!-- end event block -->
+<?php } //end main loop ?>
 </div>

@@ -9,6 +9,9 @@
 						?>
 <div id="map_search_result_list">
 <?php 
+
+if( count($eventsUnderGroup) > 0 )
+{
 $i = 0;
 $imageArr = array('a_ns', 'b_ns', 'c_ns', 'd_ns', 'e_ns', 'f_ns', 'g_ns', 'h_ns', 'i_ns', 'j_ns', 'rest');
 $odd = false;
@@ -20,11 +23,11 @@ foreach ($eventsUnderGroup as $event) {
 	
 	?>
 	<div class="map_search_result <?=($odd?'odd':'') ?>">
-	<a href="javascript:open_window_by_i(<?=$i?>)"><img src="<?=$html->url('/') ?>img/maps/<?=$imageArr[$i] ?>.png" class="msr_icon"></a>
+	<a href="javascript:map_open_by_id(<?=$event['Event']['id']?>)"><img src="<?=$html->url('/') ?>img/maps/<?=$imageArr[$i] ?>.png" class="msr_icon"></a>
 	
 	<span id="event_id_<?=$event['Event']['id']?>" style="display: none;"><?=$i?></span>
 	
-	<h3 class="msr_title"><a href="javascript:open_window_by_i(<?=$i?>)"><?=$event['Event']['title']?></a>
+	<h3 class="msr_title"><a href="javascript:map_open_by_id(<?=$event['Event']['id']?>)"><?=$event['Event']['title']?></a>
 	
 						<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
 						<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="msr_fav_icon"  />
@@ -132,7 +135,20 @@ foreach ($eventsUnderGroup as $event) {
 	$i++;
 	if ($i >= count($imageArr)) $i = count($imageArr)-1; 
 	$odd = !$odd;
-}?>
+}
+
+}
+else //if there are no results
+{
+	?>
+	<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> There are no events which match this set of options.</p>
+	<?php
+}
+
+?>
+
+
+
 </div>
 </div>
 

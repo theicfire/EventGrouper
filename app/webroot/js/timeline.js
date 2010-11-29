@@ -76,7 +76,7 @@ function map_init(latitude, longitude) {
   }
 }
 function giveEventsJs() {
-
+	var locString;
 	if ($("#viewType").val() == 'calendar' || $("#viewType").val() == '' )
 	{
 		scheduleToggle();
@@ -93,16 +93,20 @@ function giveEventsJs() {
 		});
 		
 		$("#eventHolder").removeClass( "map_container_div" );
+		
+		locString = addToHash(location.hash, 'viewType', '');
 	}
 	else if ($("#viewType").val() == 'map')
 	{
+		scheduleToggle();
 		initialize_desktop_map();
 		
 		$("#eventHolder").addClass( "map_container_div" );
 		
+		locString = location.hash;
 		//$("#conference_header").hide( "blind", null, 1000 );
 	}
-	var locString = addToHash(location.hash, 'viewType', '');
+	
 	$('.pathLinks a, .groupLinks a').each(function() {//make it so that all the path links have the current hash
 		$(this).attr('href', $(this).attr('href').split('#')[0] + locString);
 	});
@@ -163,6 +167,12 @@ function initialize_desktop_map()
 		latlng = new google.maps.LatLng(map_data[0]['Event']['latitude'], map_data[0]['Event']['longitude']);
 		map.panTo(latlng);
     }
+    else
+    {
+		latlng = new google.maps.LatLng(0, 0);
+		map.panTo(latlng);
+		map.setZoom(2);
+	}
     
     var put_in_sidebar = "";
     
@@ -247,6 +257,11 @@ function bindInfoWindow(marker, map, infoWindow, html) {
 	}
     infoWindow.open(map, marker);
   });
+  
+  google.maps.event.addListener(infoWindow, 'closeclick', function() {
+    $("#mapViewId").val('');
+    changeHash(removeFromHash(location.hash, 'mapViewId'));
+  });
 }
 
 function getEvents(date, search, time_start, viewType) {
@@ -264,20 +279,21 @@ function getEvents(date, search, time_start, viewType) {
      if (viewType != 'map' && getFromHash('viewId') != '') {
     	 openEventPopup($('#event-'+getFromHash('viewId')).find('.event_title a'));
      }
-     else if (viewType == 'map' && getFromHash('viewId') != '') {
-		 map_open_by_id( getFromHash('viewId') );
+     else if (viewType == 'map' && getFromHash('mapViewId') != '') {
+		 map_open_by_id( getFromHash('mapViewId') );
 	 }
    });
 }
 
 function map_open_by_id( id )
 {
-	alert("looking...");
-	if( $("#event_id_" + id ).length > 0 )
+	if( $("#event_id_" + id ).length = 1 )
 		 {
-			 alert("event present!");
-			
+			 	open_window_by_i( $("#event_id_" + id ).html() );		
 		 }
+		 
+	changeHash(addToHash(location.hash, 'mapViewId', id));
+	$('#mapViewId').val(id);
 }
 
 function refreshEvents(isCalendar) {
@@ -411,6 +427,8 @@ $(document).ready( function(){
 		$("#gotomap").removeClass('active');
 		$("#viewType").val('');
 		$("#r_main_ribbon_container").show();
+		$("#favorites_ribbon").hide();
+		$("#mapViewId").val('');
 		refreshEvents(false);
 		return false;
 	});
@@ -425,6 +443,8 @@ $(document).ready( function(){
 		$("#viewType").val('calendar');
 		refreshEvents(true);
 		$("#r_main_ribbon_container").hide();
+		$("#favorites_ribbon").show();
+		$("#mapViewId").val('');
 		return false;
 	});
 	$("#gotomap").click(function() {
@@ -433,6 +453,8 @@ $(document).ready( function(){
 		$("#gotoschedule").removeClass('active');
 		$("#viewType").val('map');
 		$("#r_main_ribbon_container").show();
+		$("#favorites_ribbon").hide();
+		
 		refreshEvents(false);
 		return false;
 	});
@@ -451,7 +473,9 @@ $(document).ready( function(){
 	$( "#event-popup" ).dialog({
 		autoOpen: false,
 		modal: true,
-		minWidth: 960,
+		width: 900,
+		minWidth: 900,
+		position: [ 30, 100 ],
 		close: function(){
 			changeHash(addToHash(location.hash, 'viewId', ''));
 			$('#viewId').val('');

@@ -71,8 +71,10 @@ foreach ($eventGroups as $eventGroup) {
 			<div id="main_tabs"> 
 			<ul id="mt_list">
 				<li class="mt_tab"><a class="active" href="#" id="gotoall">Timeline</a></li> 
-				<li class="mt_tab"><a href="#" id="gotoschedule">Favorites</a></li> 
+				
 				<li class="mt_tab"><a href="#" id="gotomap">Map</a></li>
+				
+				<li class="mt_tab"><a href="#" id="gotoschedule"><img src="<?php echo $html->url('/'); ?>css/rinoa/favorites.png" class="tab_icon"  /> Favorites</a></li> 
 				<div class="clear"></div>
 			</ul>
 			<div class="clear"></div>
@@ -150,8 +152,9 @@ foreach ($eventGroups as $eventGroup) {
 						<img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="filter_icon" title="Search" alt="Search:" /> <label class="form_label">Search</label> <input type="text" name="search" id="searchBox" class="putInHash input_text" style="width: 100px;" /> 
 						<div class="r_form_tip" id="searcherr">Please search for at least 4 letters</div>
 		<!--            <input type="checkbox" class="putInHash" name="isCalendar" id="isCalendar" style="display:none">-->
-					<input type="hidden" class="putInHash" name="viewType" id="viewType" value="">
-					<input type="hidden" class="putInHash" name="viewId" id="viewId" value="">
+					<input type="hidden" class="putInHash" name="viewType" id="viewType" value="" />
+					<input type="hidden" class="putInHash" name="viewId" id="viewId" value="" />
+					<input type="hidden" class="putInHash" name="mapViewId" id="mapViewId" value="" />
 					</div>
 					
 					<div class="filter_buttons">
@@ -164,7 +167,15 @@ foreach ($eventGroups as $eventGroup) {
 					
 				</div>
 				
-				
+				<div id="favorites_ribbon" style="display: none;">
+
+					<div class="filter_section">
+						These are your favorites.
+						</div>
+					
+				<div class="clear"></div>	
+					
+				</div>
 			
 			<div class="clear"></div>
 			

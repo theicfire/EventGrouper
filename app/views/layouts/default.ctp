@@ -160,7 +160,7 @@ This site does not work with Javascript disabled. Please enable Javascript.
 
 <?php // echo $html->link("Register", "/users/add");?>
 
-	<form>
+	<form action="#" id="loginForm">
 	<fieldset>
 		<label for="email">Email</label>
 		<input type="text" name="email" id="email" value="" class="textfield" />

@@ -277,6 +277,16 @@ display: block;
 	padding-right: 5px;
 }
 
+.tab_icon
+{
+	height: 1em;
+	width: 1em;
+	margin-bottom: -10px;
+	vertical-align: top;
+	position: relative;
+	top: 1px;
+}
+
 .td .tdi_text
 {
 	font-size: 1.3em;

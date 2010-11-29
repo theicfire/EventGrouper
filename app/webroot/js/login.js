@@ -11,19 +11,33 @@ $(function() {
 			tips.text( t ).addClass( "ui-state-highlight" );
 		}
 		
-		$( "#dialog-form" ).dialog({
-			autoOpen: false,
-			modal: true,
-			buttons: {
-				"Login": function() {
-					$.post(phpVars.root+'/login/checkLogin', 
+		email.keydown( check_for_enter );
+		password.keydown( check_for_enter );
+		
+		function check_for_enter( event )
+		{
+			if(event.which == 13) //this is the enter key
+			{
+				log_in();
+			}
+		}
+		
+		function log_in()
+		{
+			$.post(phpVars.root+'/login/checkLogin', 
 							{email: email.val(), pass: password.val()}, function (data) {
 						if (data == "good")
 							window.location.reload();
 						else
 							updateTips("Incorrect email and password combination.");
 					});
-				},
+		}
+		
+		$( "#dialog-form" ).dialog({
+			autoOpen: false,
+			modal: true,
+			buttons: {
+				"Login": log_in,
 				"Cancel": function() {
 					$( this ).dialog( "close" );
 				}
