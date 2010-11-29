@@ -45,7 +45,7 @@ class EventGroupsController extends AppController {
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
 		$groupPath = $this->EventGroup->getPath($id);
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'eventsUnderGroup'));
-		$this->set('phpVars', array('currentEventGroupId'=> $id));		
+		$this->set('phpVars', array('currentEventGroupId'=> $id));	
 	}
 	function view_admin() {
 		$pathUrl = explode("/",$this->params['url']['url']);

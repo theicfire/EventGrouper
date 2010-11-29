@@ -1,4 +1,4 @@
-
+<div class="ajax_event_list">
 <?php
 if (count($eventsUnderGroup) == 0)
 { ?>
@@ -92,7 +92,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 					</div>
                 <div>
                         
-                        <span class="event_description"><?=$event['Event']['description']?> Posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></div>
+                        <span class="event_description"><?=$event['Event']['description']?> Posted by <?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></span>
                         
                 </div>        
                 <!-- <div style="float: right">
@@ -110,4 +110,4 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) {
 <?php
 }?>      
 
-
+</div>

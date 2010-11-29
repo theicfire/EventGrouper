@@ -200,6 +200,9 @@ foreach ($eventGroups as $eventGroup) {
         
             <?php echo $html->image('loading.gif', array('id' => 'loadingimage'));?>
             <div class="ajax_events" id="eventHolder">
+            
+            
+            
         	</div>
         </div>
     

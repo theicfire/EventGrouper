@@ -21,9 +21,9 @@ if ($groupPath != null) {
 		}
 	}
 }
-echo "<div class='pathLinks'>";
+echo "<span class='pathLinks'>";
 echo implode($linksArr," > ");
-echo "</div>";
+echo "</span>";
 
 
 ?>

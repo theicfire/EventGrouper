@@ -54,7 +54,7 @@
     
 	for (i = 0; i < map_data.length; i++) {
 		var event = map_data[i];
-		console.log(event);
+		//console.log(event);
 		
 		var event_id = event['Event']['id'];
 		
