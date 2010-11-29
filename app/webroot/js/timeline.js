@@ -3,41 +3,7 @@ var map_data = new Array();
 var floating = false;
 var map;
 
-function addtoschedule( a_id )
-{
-	alert("add " + a_id + " to schedule");
-}
-
-function update_time()
-{
-	currentTime = new Date();
-	var currentHours = currentTime.getHours ( );
-	var currentMinutes = currentTime.getMinutes ( );
-	var currentSeconds = currentTime.getSeconds ( );
-	
-	currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
-	currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
-	
-	var timeOfDay = ( currentHours < 12 ) ? "am" : "pm";
-	currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
-	currentHours = ( currentHours == 0 ) ? 12 : currentHours;
-	
-	var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-	
-	$("#curr_time").html(currentTimeString);
-	
-	var m_names = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-	var curr_date = currentTime.getDate();
-	var curr_month = currentTime.getMonth();
-	var curr_year = currentTime.getFullYear();
-	currentDateString = m_names[curr_month] + " " + curr_date + ", " + curr_year;
-	
-	$("#curr_date").html(currentDateString);
-}
-
-
-
-function scroll_handler(event)
+function scroll_handler(event) // used to determine when the toolbar should scroll
 {
 	if( !floating && $("#scroll_locator").offset().top <= $(window).scrollTop() )
 	{
@@ -56,8 +22,8 @@ function scroll_handler(event)
 	}
 }
 
-
-function map_init(latitude, longitude) {
+function map_init(latitude, longitude) //initialize map in event popup
+{
 	var map;
 	var default_zoom_level = 16;
 	if (GBrowserIsCompatible()) {
@@ -75,7 +41,9 @@ function map_init(latitude, longitude) {
 
   }
 }
-function giveEventsJs() {
+
+function giveEventsJs() //goes through most of the page adding JS stuff.. could have used a more descriptive name though
+{
 	var locString;
 	if ($("#viewType").val() == 'calendar' || $("#viewType").val() == '' )
 	{
@@ -104,16 +72,15 @@ function giveEventsJs() {
 		$("#eventHolder").addClass( "map_container_div" );
 		
 		locString = location.hash;
-		//$("#conference_header").hide( "blind", null, 1000 );
 	}
 	
 	$('.pathLinks a, .groupLinks a').each(function() {//make it so that all the path links have the current hash
 		$(this).attr('href', $(this).attr('href').split('#')[0] + locString);
 	});
 	
-	
 	$(".make_button").button();
 }
+
 function openEventPopup(ob) {
 	var id = ob.parent().parent().parent().attr('id').split('-')[1];
 	$('#eventloadingimage').show();
@@ -134,7 +101,7 @@ function openEventPopup(ob) {
 	$('#viewId').val(id);
 }
 
-function map_sizing()
+function map_sizing() //handles resizing the map to fill the screen
 {
 	total_height = $(window).height();
 	
@@ -220,35 +187,28 @@ function initialize_desktop_map()
 		
 		//building content for InfoWindow
 		map_data[i].text_in_infowindow = $("#" + i + "_infowindow").html();
-		
-		
-		
-		
-		
-		
 		map_data[i].infowindow = new google.maps.InfoWindow({
 			content: map_data[i].text_in_infowindow
 		});
 		
 		bindInfoWindow(map_data[i].marker, map, map_data[i].infowindow, map_data[i].text_in_infowindow)
-		
 	}
 }
 
-function open_window_by_i( number )
-	{
-		
-		var m = map_data[number].marker;
-		var i = map_data[number].infowindow;
-		var t = map_data[number].text_in_infowindow;
-		i.setContent(t);
-		for (j = 0; j < map_data.length; j++) {
-			map_data[j].infowindow.close();
-		}
-		i.open(map, m);
+function open_window_by_i( number ) //open the window associated with that 'i'
+{
+	var m = map_data[number].marker;
+	var i = map_data[number].infowindow;
+	var t = map_data[number].text_in_infowindow;
+	i.setContent(t);
+	for (j = 0; j < map_data.length; j++) {
+		map_data[j].infowindow.close();
 	}
+	i.open(map, m);
+}
 
-function bindInfoWindow(marker, map, infoWindow, html) {
+function bindInfoWindow(marker, map, infoWindow, html) //binds opening the infowindow to clicking on the marker
+{
   google.maps.event.addListener(marker, 'click', function() {
     infoWindow.setContent(html);
     
@@ -264,7 +224,8 @@ function bindInfoWindow(marker, map, infoWindow, html) {
   });
 }
 
-function getEvents(date, search, time_start, viewType) {
+function getEvents(date, search, time_start, viewType) //loads events into #eventHolder
+{
 	$("#eventHolder").html('');
 	$('#loadingimage').show();
 	var loc = 'ajaxListEvents';
@@ -285,12 +246,12 @@ function getEvents(date, search, time_start, viewType) {
    });
 }
 
-function map_open_by_id( id )
+function map_open_by_id( id ) //open an infowindow based on the id of the event
 {
 	if( $("#event_id_" + id ).length = 1 )
-		 {
-			 	open_window_by_i( $("#event_id_" + id ).html() );		
-		 }
+	{
+		open_window_by_i( $("#event_id_" + id ).html() );		
+	}
 		 
 	changeHash(addToHash(location.hash, 'mapViewId', id));
 	$('#mapViewId').val(id);
@@ -304,6 +265,7 @@ function refreshEvents(isCalendar) {
 		getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val());
 	setHashFromPage();
 }
+
 function validate() {
 	if ($('#searchBox').val().length > 0 && $('#searchBox').val().length < 4) {
 		$('#text_tip_large').hide();
@@ -314,14 +276,17 @@ function validate() {
 	$('#searcherr').hide();
 	return true;
 }
+
 function resetFields() {
 	$("#datestart").val($("#date_start_default").val());
 	$("#searchBox").val('');
 	$("#time_start").val(0);
 }
+
 function resetDate() {
 	$("#datestart").val($("#date_start_default").val());
 }
+
 function addToHash(hash, key, val) {
 	hash = hash.substring(1);
 	var locArr = hash.split('&');
@@ -335,6 +300,7 @@ function addToHash(hash, key, val) {
 	locArrNew.push(key+'='+val);
 	return '#' + locArrNew.join('&');
 }
+
 function removeFromHash(hash, key) {
 	hash = hash.substring(1);
 	var locArr = hash.split('&');
@@ -347,6 +313,7 @@ function removeFromHash(hash, key) {
 	}
 	return '#' + locArrNew.join('&');
 }
+
 function getFromHash(key) {
 	hash = location.hash.substring(1);
 	var locArr = hash.split('&');
@@ -357,10 +324,12 @@ function getFromHash(key) {
 	}
 	return false;
 }
+
 function changeHash(hash) {
 	location.hash = hash;
 	currentHash = hash;
 }
+
 function setHashFromPage(){
 	var paramArr = [];
 //	paramArr['id'] = $("#quizletId").val();
@@ -381,6 +350,7 @@ function setHashFromPage(){
 	
 	
 }
+
 function setPageFromHash(){
 	if (location.hash){
 		currentHash = location.hash;
@@ -400,12 +370,14 @@ function setPageFromHash(){
 		
 	}
 }
+
 function checkAndRunHash() {
 	if (location.hash.length != 0 && currentHash != location.hash) {
 		loadPage();
 	}
 		
 }
+
 function loadPage() {
 	setPageFromHash();
 	if ($("#viewType").val() == 'calendar') $("#gotoschedule").trigger('click');
@@ -484,18 +456,11 @@ $(document).ready( function(){
 	
 	$(".make_button").button();
 	
-
-	
-//	$("#filter_submit").hide();
-	
 	$(window).scroll( scroll_handler );
 	$(window).resize( scroll_handler );
 	
 	setInterval( "update_time()", 1000 );
 
 	loadPage();
-	
-	
-	
 });
 
