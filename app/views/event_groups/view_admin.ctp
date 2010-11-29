@@ -12,6 +12,10 @@ $(document).ready(function() {
 </script>
 <?php
 $top_level = $currenteventGroup['EventGroup']['parent_id'] == 0;
+$canCreate = false;
+if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
+	$canCreate = true;
+}
 if(isset($notification))
 { ?>
 	
@@ -82,12 +86,12 @@ if(isset($notification))
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
 				class="small_icon_inline_button" /> Edit info</a>
 			<?php }?>
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
+			<?php if ($canCreate) {?> 
 				<a href="<?php echo $html->url("/event_groups/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
 				class="small_icon_inline_button" /> Add subgroups</a>
 			<?php }?>
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
+			<?php if ($canCreate) {?> 
 				<a href="<?php echo $html->url("/events/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 				class="small_icon_inline_button" /> Add events</a>
@@ -138,7 +142,7 @@ if(isset($notification))
     <?php }?>
 	<!-- <h1>Contents of "<?php echo $currenteventGroup['EventGroup']['name']; ?>"</h1> -->     
 	<div class="form_section">
-		<h2>Subgroups <?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
+		<h2>Subgroups <?php if ($canCreate) {?> 
 				<a href="<?php echo $html->url("/event_groups/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
 				class="small_icon_inline_button" /> Add subgroups</a>
@@ -197,7 +201,7 @@ if(isset($notification))
 		</div>
 		
 		<div class="form_section">
-		<h2>Events <?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {?> 
+		<h2>Events <?php if ($canCreate) {?> 
 				<a href="<?php echo $html->url("/events/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 				class="small_icon_inline_button" /> Add events</a>
@@ -231,10 +235,10 @@ if(isset($notification))
 						<?php echo $event['Event']['location']; ?>
 					</td>
 					<td class="actions">
-						<?php if ($access->check('Event',$event['Event']['id'], 'update')) {
+						<?php if ($canCreate) {
 							echo $html->link(__('Edit', true), array('controller' => 'events', 'action' => 'edit', $event['Event']['id'])); 
 						}?>
-						<?php if ($access->check('Event',$event['Event']['id'], 'delete')) {
+						<?php if ($canCreate) {
 							echo $html->link(__('Delete', true), array('controller' => 'events', 'action' => 'delete', $event['Event']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $event['Event']['id'])); 
 						}?>
 					</td>

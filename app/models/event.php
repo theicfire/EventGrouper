@@ -3,28 +3,28 @@ class Event extends AppModel {
 
 	var $name = 'Event';
 	var $actsAs = 'ExtendAssociations';
-//	var $validate = array(
-//		'title' => array(
-//			'valid' => array ('rule' => '/^[0-9a-zA-Z .,!&+_]{2,}$/','message' => 'Required. Letters, numbers, and spaces only!'),
-//			
-//		),
-//		'time_start' => array(
-//			'rule' => '/^[0-9: -]+$/i',
-//			'message' => "Fix this..."
-//		),
-//		'tags' => array(
-//			'rule' => '/^([a-z]|, ?)*$/',
-//			'allowEmpty' => true
-//		),
-//		'location' => array(
-//			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
-//			'allowEmpty' => true
-//		),
-//		'description' => array(
-//			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
-//			'allowEmpty' => true
-//		),
-//	); 
+	var $validate = array(
+		'title' => array(
+			'valid' => array ('rule' => '/^[0-9a-zA-Z .,!&+_]{2,}$/','message' => 'Required. Letters, numbers, and spaces only!'),
+			
+		),
+		'time_start' => array(
+			'rule' => '/^[0-9: -]+$/i',
+			'message' => "Fix this..."
+		),
+		'tags' => array(
+			'rule' => '/^([a-z]|, ?)*$/',
+			'allowEmpty' => true
+		),
+		'location' => array(
+			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
+			'allowEmpty' => true
+		),
+		'description' => array(
+			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
+			'allowEmpty' => true
+		),
+	); 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
