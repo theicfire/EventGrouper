@@ -19,6 +19,10 @@ class EventGroup extends AppModel {
 			'message' => 'Letters, numbers, and spaces only!',
 			'allowEmpty' => true
 		),
+		'description' => array(
+			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
+			'allowEmpty' => true
+		),
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $hasMany = array(

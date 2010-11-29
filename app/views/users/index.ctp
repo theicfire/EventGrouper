@@ -19,24 +19,22 @@ $(document).ready(function() {
 <?php
 
 $top_level = false;
-
+$not_top_level = false;
 if(count($userEventGroups)!=0)
 foreach($userEventGroups as $group) {
-		if ($group['EventGroup']['parent_id'] == 0)
-		{
-			$top_level = true;
-		}
+	if ($group['EventGroup']['parent_id'] == 0) {
+		$top_level = true;
+	} else {
+		$not_top_level = true;
 	}
-			
-			?>
+}
+?>
 			
 <?php if($top_level){ ?>
 
 <table class="full_width">
 	<tr>
 		<th>Name</th>
-		<th>Subgroups</th>
-		<th>Events</th>
 		<th>Actions</th>
 	</tr>
 <?php 
@@ -45,8 +43,6 @@ foreach($userEventGroups as $group) {
 ?>
 		<tr>
 			<td><?= $this->element('grouppath', array('groupStr' => $group['EventGroup']['path'], 'highestName' => $group['EventGroup']['highest_name']));?></td>
-			<td><?= $group['EventGroup']['eventgroupcount']?></td>
-			<td><?= $group['EventGroup']['eventcount']?></td>
 			<td class="table_tiny_buttons"><a href="<?php echo $html->url("/".$group['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
 				class="small_icon_inline_button" /> View in timeline</a> 
 				<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'update')) {?>
@@ -98,27 +94,12 @@ foreach($userEventGroups as $group) {
 
 <h1 class="info_box_heading"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
 	class="rinoa_large_inline" /> My Groups</h1>
-<?php
-
-$not_top_level = false;
-
-if(count($userEventGroups)!=0)
-foreach($userEventGroups as $group) {
-		if ($group['EventGroup']['parent_id'] != 0)
-		{
-			$not_top_level = true;
-		}
-	}
-			
-			?>
 
 <?php if($not_top_level){ ?>
 	
 <table class="full_width">
 	<tr>
 		<th>Group</th>
-		<th>Subgroups</th>
-		<th>Events</th>
 		<th>Actions</th>
 	</tr>
 <?php 
@@ -127,8 +108,6 @@ foreach($userEventGroups as $group) {
 ?>
 		<tr>
 			<td><?= $this->element('grouppath', array('groupStr' => $group['EventGroup']['path'], 'highestName' => $group['EventGroup']['highest_name']));?></td>
-			<td><?= $group['EventGroup']['eventgroupcount']?></td>
-			<td><?= $group['EventGroup']['eventcount']?></td>
 			<td class="table_tiny_buttons"><a href="<?php echo $html->url("/".$group['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
 				class="small_icon_inline_button" /> View in timeline</a> 
 				<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'update')) {?>
