@@ -243,6 +243,8 @@ display: block;
 	margin-bottom: -2px;
 }
 
+
+
 .event_block .event_top_row
 {
 	padding-bottom: 3px;
@@ -342,6 +344,10 @@ display: block;
 	font-weight: normal;
 }
 
+#fixed_top
+{
+	z-index: 900;
+}
 table.generic
 {
 	margin: 10px 0;

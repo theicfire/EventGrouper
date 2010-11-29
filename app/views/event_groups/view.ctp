@@ -43,22 +43,27 @@ foreach ($eventGroups as $eventGroup) {
 		
 		<h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
 						
-						
-					
-						<div id="subgroups">
-							<div class="nav_title">groups inside "<?=$currenteventGroup['EventGroup']['name'];?>"</div>
-							<div class="nav_links pathLinks">
-								<?php 
-								$linksArr = array();
+
+						<?php		$linksArr = array();
 								foreach ($eventGroups as $eventGroup) {
 									if(in_array($eventGroup['EventGroup']['path'], $pathLength[$minLength])) {
 										$linksArr[] = $html->link($eventGroup['EventGroup']['name'], "/".$eventGroup['EventGroup']['path'], array('class' => "group_".$eventGroup['EventGroup']['id']));
 									}
-								}
+								} ?>
+					
+					<?php if( count($linksArr) > 0 ) { ?>
+					
+						<div id="subgroups">
+							<div class="nav_title">groups inside "<?=$currenteventGroup['EventGroup']['name'];?>"</div>
+							<div class="nav_links">
+								
+								<?php
 								echo implode($linksArr," ");
 								?>
 							</div>
 						</div>
+						
+					<?php } ?>
 		
 		
 		<div></div>
@@ -82,6 +87,7 @@ foreach ($eventGroups as $eventGroup) {
     
 		<div id="scroll" >
 		
+		<div id="toolbar_small_shadow"></div>
 			
 		
 				<div id="r_main_ribbon_container">
@@ -161,9 +167,11 @@ foreach ($eventGroups as $eventGroup) {
 			
 			<div class="clear"></div>
 			
+			
+			
 			</div>
 			
-    
+			
 		
 		</div>
     </div>
@@ -192,6 +200,9 @@ foreach ($eventGroups as $eventGroup) {
         
             <?php echo $html->image('loading.gif', array('id' => 'loadingimage'));?>
             <div class="ajax_events" id="eventHolder">
+            
+            
+            
         	</div>
         </div>
     

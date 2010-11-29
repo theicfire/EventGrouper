@@ -32,11 +32,26 @@ h1#conference_title
 	cursor: pointer;
 }
 
+#toolbar_small_shadow
+{
+	background: url(grad_shadow/toolbar_shadow.png);
+	position: absolute;
+	height: 8px;
+	bottom: -8px;
+	left: 0;
+	width: 100%;
+}
+
 #breadcrumb
 {
 	float: left;
 	padding: 6px 10px;
 	font-size: .8em;
+}
+
+#scroll
+{
+	z-index: 9000;
 }
 
 #scroll .form_label
@@ -53,9 +68,8 @@ h1#conference_title
 	width: 1.2em;
 }
 
-#tl_navigation #subgroups
+#subgroups
 {
-	float: left;
 	padding: 10px;
 }
 
@@ -80,7 +94,7 @@ h1#conference_title
 	display: none;
 }
 
-#split
+.ajax_event_list
 {
 	margin: 20px;
 }
@@ -520,6 +534,7 @@ border: 1px solid #ccc;
 	position: relative;
 	height: 400px;
 	width: 100%;
+	z-index: 0;
 }
 
 #desktop_map_container
@@ -546,28 +561,48 @@ border: 1px solid #ccc;
 {
 	border-bottom: 1px solid #ccc;
 	padding: 5px;
+	padding-top: 10px;
 }
 
 .map_search_result
 {
-	border-bottom: 1px solid #ccc;
 	padding: 5px;
 	padding-left: 40px;
 	min-height: 40px;
 	position: relative;
 }
+.msr_fav_icon
+{
+	height: 1.3em;
+	width: 1.3em;
+	position: relative:
+	bottom: -1px;
+	margin-bottom: -1px;
+}
 
 .map_search_result h3
 {
-	font-weight: bold;
+	font-size: 1.1em;
 }
 
 .msr_icon
 {
 	position: absolute;
 	left: 8px;
-	top:0;
+	top:3px;
 }
+
+.msr_time
+{
+	font-size: .9em;
+	font-weight: bold;
+}
+
+.msr_desc
+{
+	font-size: .8em;
+}
+
 
 .gmaps_in_infowindow
 {
@@ -586,4 +621,9 @@ border: 1px solid #ccc;
 .event_tags {
 	float:right;	
 	margin: 4px 0 0 4px;
+}
+
+#map_container_div 
+{
+	position: absolute;
 }
