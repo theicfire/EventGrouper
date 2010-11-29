@@ -151,6 +151,7 @@ foreach ($eventGroups as $eventGroup) {
 						<div class="r_form_tip" id="searcherr">Please search for at least 4 letters</div>
 		<!--            <input type="checkbox" class="putInHash" name="isCalendar" id="isCalendar" style="display:none">-->
 					<input type="hidden" class="putInHash" name="viewType" id="viewType" value="">
+					<input type="hidden" class="putInHash" name="viewId" id="viewId" value="">
 					</div>
 					
 					<div class="filter_buttons">

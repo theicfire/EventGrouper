@@ -261,11 +261,25 @@ function getEvents(date, search, time_start, viewType) {
      $("#eventHolder").html(data);
      $('#loadingimage').hide();
      giveEventsJs();
-     if (getFromHash('viewId') != '') {
+     if (viewType != 'map' && getFromHash('viewId') != '') {
     	 openEventPopup($('#event-'+getFromHash('viewId')).find('.event_title a'));
      }
+     else if (viewType == 'map' && getFromHash('viewId') != '') {
+		 map_open_by_id( getFromHash('viewId') );
+	 }
    });
 }
+
+function map_open_by_id( id )
+{
+	alert("looking...");
+	if( $("#event_id_" + id ).length > 0 )
+		 {
+			 alert("event present!");
+			
+		 }
+}
+
 function refreshEvents(isCalendar) {
 	if (!validate()) return false;
 	if (isCalendar)

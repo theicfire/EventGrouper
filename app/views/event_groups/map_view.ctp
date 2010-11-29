@@ -22,6 +22,8 @@ foreach ($eventsUnderGroup as $event) {
 	<div class="map_search_result <?=($odd?'odd':'') ?>">
 	<a href="javascript:open_window_by_i(<?=$i?>)"><img src="<?=$html->url('/') ?>img/maps/<?=$imageArr[$i] ?>.png" class="msr_icon"></a>
 	
+	<span id="event_id_<?=$event['Event']['id']?>" style="display: none;"><?=$i?></span>
+	
 	<h3 class="msr_title"><a href="javascript:open_window_by_i(<?=$i?>)"><?=$event['Event']['title']?></a>
 	
 						<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
