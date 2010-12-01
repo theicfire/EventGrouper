@@ -277,6 +277,7 @@ function refreshEvents(isCalendar, keepPage) {
 	if (!keepPage) {
 		$('#p').val(1);
 	}
+	$(window).scrollTop(0);
 	setHashFromPage();
 }
 
