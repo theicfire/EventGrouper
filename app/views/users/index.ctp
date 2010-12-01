@@ -169,6 +169,8 @@ foreach($userEventGroups as $group) {
 		<td><?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></td>
 		<td <?php switch($event['Event']['status']){
 			case "unconfirmed": echo "class='unconfirmed'"; break;
+			case "confirmed": echo "class='confirmed'"; break;
+			case "rejected": echo "class='rejected'"; break;
 			
 			
 			

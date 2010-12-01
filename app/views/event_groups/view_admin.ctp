@@ -2,11 +2,11 @@
 $(document).ready(function() {
 	$("form#loginForm").validate({
 		rules: {
-		'data[email]': {
-			required:true,
-			email: true
+			'data[email]': {
+				required:true,
+				email: true
+			}
 		}
-	}
 	});
 });
 </script>
@@ -108,16 +108,17 @@ if(isset($notification))
 		<div class="form_section">
 			<h2>Permissions</h2>
 			<form name="loginForm" id="loginForm" method="post">
-			Add a User: <input type="text" name="data[email]" class="textfield">
-			<input type="submit" value="Add" class="make_button">
+			<p>Enter someone's email to give them permission to edit "<?php echo $currenteventGroup['EventGroup']['name']; ?>".  <a href="#">What is this?</a></p>
+			<input type="text" name="data[email]" class="textfield">
+			<input type="submit" value="Add" class="make_button"> 
 			</form>   
 			<?php if( count($userPerms)==0 ) { ?>
-			<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> No one else has permissions to "<?php echo $currenteventGroup['EventGroup']['name']; ?>" or any of its subgroups.</p>
+			<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> No one else has permission to edit "<?php echo $currenteventGroup['EventGroup']['name']; ?>" or any subgroups.</p>
 			<?php } else {?>   
 				<table class="full_width">
 					
 				            
-					<tr><th>Email address</th><th>Permissions</th><th>Actions</th></tr>  
+					<tr><th>Email address</th><th>Permissions to</th><th>Actions</th></tr>  
 				     <?php foreach ($userPerms as $userPerm) {?>
 					<tr>
 							<td>
@@ -147,9 +148,9 @@ if(isset($notification))
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
 				class="small_icon_inline_button" /> Add subgroups</a>
 			<?php }?>
-		
+		</h2> 
 		<?php if( count($eventGroups)==0 )
-		{ ?></h2> 
+		{ ?>
 		
 		
 		<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> There are no subgroups in "<?php echo $currenteventGroup['EventGroup']['name']; ?>".</p>

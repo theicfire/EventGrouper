@@ -36,6 +36,10 @@ foreach ($eventGroups as $eventGroup) {
 	<div id="noscroll">
 		<h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
 		
+		<p><?php //echo $currenteventGroup['EventGroup']['description'];?></p>
+		
+		...this isn't quite finished, almost there though
+		
 		<?php //still not sure what this does...
 			$linksArr = array();
 			foreach ($eventGroups as $eventGroup) {
