@@ -106,7 +106,7 @@ foreach ($eventGroups as $eventGroup) {
 				<input type="hidden" class="putInHash" name="viewType" id="viewType" value="" />
 				<input type="hidden" class="putInHash" name="viewId" id="viewId" value="" />
 				<input type="hidden" class="putInHash" name="mapViewId" id="mapViewId" value="" />
-				<input type="hidden" class="putInHash" name="p" id="p" value="" />
+				<input type="hidden" class="putInHash" name="p" id="p" value="1" />
 
 				<div class="filter_section">
 					<img src="<?php echo $html->url('/'); ?>css/rinoa/clock.png" class="filter_icon" alt="Time:" title="Time" /> <label class="form_label">Time</label> <select name="time_start" id="time_start" class="putInHash input_text">
