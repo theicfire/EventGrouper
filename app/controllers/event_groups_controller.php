@@ -343,7 +343,11 @@ class EventGroupsController extends AppController {
 			else
 				$eventsUnderGroup = array();
 		} else {
-			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, null);
+			$p = 1;
+			if (isset($this->params['url']['p'])) {
+				$p = $this->params['url']['p'];
+			}
+			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, ($p-1)*100 . ",100");
 		}
 		if (isset($this->params['url']['viewType']) && $this->params['url']['viewType'] == 'map') {
 			$newArr = array();

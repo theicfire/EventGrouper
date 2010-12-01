@@ -1,4 +1,5 @@
 <div class="ajax_event_list">
+<input id="eventCount" type="hidden" value="<?php echo count($eventsUnderGroup)?>">
 	<?php //if there are no events, show this message
 	if (count($eventsUnderGroup) == 0)
 	{ ?>
