@@ -15,8 +15,9 @@ $(document).ready(function() {
 <div id="admin_notifications" class="info_box">
 
 
-<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" />Requests</h1>
+<h1 class="hr"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" /> Requests</h1>
 
+<? if( count($eventsUnderGroup) > 0 ) { ?>
 <table class="full_width">
 	<tr><th>User</th><th>title</th><th>description</th><th>Time</th><th>event group</th><th>tags</th><th>actions</th></tr>
 		<?php foreach ($eventsUnderGroup as $event) {
@@ -50,6 +51,14 @@ $(document).ready(function() {
 		<?php }}?>
 
 </table>
+<?php } else { ?>
+
+
+<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> No requests here!</p>
+
+
+
+<?php } ?>
 
 </div>
 
