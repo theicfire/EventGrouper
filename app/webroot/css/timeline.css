@@ -68,11 +68,6 @@ h1#conference_title
 	width: 1.2em;
 }
 
-#subgroups
-{
-	padding: 10px;
-}
-
 #tl_navigation .nav_title
 {
 	font-size: .8em;
@@ -626,4 +621,37 @@ border: 1px solid #ccc;
 #map_container_div 
 {
 	position: absolute;
+}
+
+#conference_info
+{
+	border: 1px solid #ccc;
+	padding: 7px 10px;
+	margin: 10px;
+}
+
+#conference_info h1
+{
+	padding-bottom: 5px;
+	font-weight: bold;
+}
+	
+.subgroups_drop
+{
+	border: 1px solid #777;
+	float: left;
+	margin-top: 4px;
+}
+
+#subgroups_drop_link
+{
+	display: block;
+	padding: 3px;
+	
+}
+
+.subgroups_drop_content
+{
+	padding: 5px;
+	border-top: 1px dashed #ccc;
 }

@@ -34,11 +34,11 @@ foreach ($eventGroups as $eventGroup) {
 ?>
 <div id="fixed_top"> <?php //stuff at the top ?>
 	<div id="noscroll">
+	
+	<div id="conference_info">
 		<h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
 		
-		<p><?php //echo $currenteventGroup['EventGroup']['description'];?></p>
-		
-		...this isn't quite finished, almost there though
+		<p><?php echo $currenteventGroup['EventGroup']['description'];?></p>
 		
 		<?php //still not sure what this does...
 			$linksArr = array();
@@ -49,17 +49,34 @@ foreach ($eventGroups as $eventGroup) {
 			}
 		?>
 					
-		<?php if( count($linksArr) > 0 ) { //if there are subgroups... ?>	
+		<?php if( count($linksArr) > 0 ) { //if there are subgroups... ?>
+		
+		<script type="text/javascript">
+		
+		function toggle_subgroups()
+		{
+			$(".subgroups_drop_content").slideToggle();
+			$("#sd_icon_closed").toggle();
+			$("#sd_icon_open").toggle();
+		}
+		
+		</script>
+			
 			<div id="subgroups">
-				<div class="nav_title">groups inside "<?=$currenteventGroup['EventGroup']['name'];?>"</div>
-				<div class="nav_links">
+				<div class="subgroups_drop"><a href="javascript:toggle_subgroups()" id="subgroups_drop_link"><span id="sd_icon_closed" class='ui-icon ui-icon-triangle-1-e' style='float: left; margin-right: 5px;'></span><span id="sd_icon_open" class='ui-icon ui-icon-triangle-1-s' style='float: left; margin-right: 5px; display: none;'></span> Subgroups of <?=$currenteventGroup['EventGroup']['name'];?> (<?=count($linksArr)?>) </a>
+				
+				<div class="subgroups_drop_content" style="display: none;">
 					
 					<?php
 					echo implode($linksArr," ");
 					?>
 				</div>
+				
+				</div>
+				<div class="clear"></div>
 			</div>
 		<?php } ?>
+	</div>
 		
 		<div id="main_tabs"> 
 			<ul id="mt_list">

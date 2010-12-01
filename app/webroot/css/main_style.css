@@ -78,90 +78,11 @@ a
 	text-decoration: none;
 }
 
-#conference_header
-{
-}
-
-#ch_left
-{
-	padding: 10px;
-}
-
-#chl_organization
-{
-	font-size: 1.2em;
-}
-
-#chl_title
-{
-	font-size: 2em;
-}
-
-#chl_location
-{
-}
-
-#ch_right
-{
-	float: right;
-	padding-left: 10px;
-	padding-bottom: 10px;
-}
-
-.curr_time_large
-{
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	font-size: 1.2em;
-	text-align: center;
-}
-
-.curr_time_large .is_currently
-{
-font-size: .8em;
-display: block;
-}
-.curr_time_large #curr_time
-{
-font-size: 1.2em;
-display: block;
-}
-.curr_time_large #curr_date
-{
-font-size: .8em;
-display: block;
-}
-
-.mini_event_stream_horizontal
-{
-	background: #999;
-	overflow: hidden;	
-}
-
-#mes_header
-{
-	float: left;
-}
-
-.mes_item
-{
-	float: left;
-}
-
 #main_tabs
 {
 	border-bottom: #666 1px solid;
 	padding-left: 10px;
 	background: url(grad_shadow/tab_bg.png) repeat-x bottom;
-}
-
-#conference_title
-{
-	display: block;
-	padding: 10px;
-	font-weight: bold;
 }
 
 #mt_list
