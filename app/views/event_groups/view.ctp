@@ -89,6 +89,7 @@ foreach ($eventGroups as $eventGroup) {
 				<input type="hidden" class="putInHash" name="viewType" id="viewType" value="" />
 				<input type="hidden" class="putInHash" name="viewId" id="viewId" value="" />
 				<input type="hidden" class="putInHash" name="mapViewId" id="mapViewId" value="" />
+				<input type="hidden" class="putInHash" name="p" id="p" value="" />
 
 				<div class="filter_section">
 					<img src="<?php echo $html->url('/'); ?>css/rinoa/clock.png" class="filter_icon" alt="Time:" title="Time" /> <label class="form_label">Time</label> <select name="time_start" id="time_start" class="putInHash input_text">
@@ -147,6 +148,8 @@ foreach ($eventGroups as $eventGroup) {
 					<a href="#" class="button_small" id="filter_submit"><img src="<?php echo $html->url('/'); ?>css/rinoa/refresh.png" /><label class="button_label">Refresh</label></a>
 					<a href="#" class="button_small" id="filter_reset"><label class="button_label">Reset</label></a>
 					<a href="#" class="button_small" id="filter_reset_date"><label class="button_label">First Day</label></a>
+					<a href="#" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>
+					<a href="#" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>
 				</div>
 					
 				<div class="clear"></div>	

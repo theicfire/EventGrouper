@@ -224,7 +224,7 @@ function bindInfoWindow(marker, map, infoWindow, html) //binds opening the infow
   });
 }
 
-function getEvents(date, search, time_start, viewType) //loads events into #eventHolder
+function getEvents(date, search, time_start, viewType, p) //loads events into #eventHolder
 {
 	$("#eventHolder").html('');
 	$('#loadingimage').show();
@@ -232,7 +232,7 @@ function getEvents(date, search, time_start, viewType) //loads events into #even
 	if (viewType == 'map') {
 		loc = 'map_view';
 	}
-	$.get(phpVars.root+"/event_groups/"+loc+"/"+phpVars.currentEventGroupId, { date_start: date, search: search, time_start:time_start, viewType:viewType},
+	$.get(phpVars.root+"/event_groups/"+loc+"/"+phpVars.currentEventGroupId, { date_start: date, search: search, time_start:time_start, viewType:viewType, p:p},
    function(data){
      $("#eventHolder").html(data);
      $('#loadingimage').hide();
@@ -243,6 +243,17 @@ function getEvents(date, search, time_start, viewType) //loads events into #even
      else if (viewType == 'map' && getFromHash('mapViewId') != '') {
 		 map_open_by_id( getFromHash('mapViewId') );
 	 }
+     //pages.. todo this won't work if there are exactly 100 events
+     if ($('#eventCount').val() != 100) {
+    	 $('#nextpage').hide();
+     } else {
+    	 $('#nextpage').show();
+     }
+     if ($('#p').val() == 1) {
+    	 $('#prevpage').hide();
+     } else {
+    	 $('#prevpage').show();
+     }
    });
 }
 
@@ -257,12 +268,16 @@ function map_open_by_id( id ) //open an infowindow based on the id of the event
 	$('#mapViewId').val(id);
 }
 
-function refreshEvents(isCalendar) {
+function refreshEvents(isCalendar, keepPage) {
 	if (!validate()) return false;
 	if (isCalendar)
-		getEvents('01/01/1970', '', '0', $("#viewType").val());
+		getEvents('01/01/1970', '', '0', $("#viewType").val(), 1);
 	else
-		getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val());
+		getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val(), $("#p").val());
+	if (!keepPage) {
+		$('#p').val(1);
+	}
+	$(window).scrollTop(0);
 	setHashFromPage();
 }
 
@@ -401,7 +416,7 @@ $(document).ready( function(){
 		$("#r_main_ribbon_container").show();
 		$("#favorites_ribbon").hide();
 		$("#mapViewId").val('');
-		refreshEvents(false);
+		refreshEvents(false, true);
 		return false;
 	});
 	$("#gotoschedule").click(function() {
@@ -438,6 +453,16 @@ $(document).ready( function(){
 	$("#filter_reset_date").click(function() {
 		resetDate();
 		refreshEvents(false);
+		return false;
+	});
+	$("#nextpage").click(function() {
+		$('#p').val($('#p').val()*1.0 + 1);
+		refreshEvents(false, true);
+		return false;
+	});
+	$("#prevpage").click(function() {
+		$('#p').val($('#p').val()*1.0 - 1);
+		refreshEvents(false, true);
 		return false;
 	});
 	$(".previous_events_button").button();
