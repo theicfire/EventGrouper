@@ -48,7 +48,7 @@
 		
 						<div id="<?=$i?>_infowindow" style="display: none">
 							<?php //start event block ?>	
-							<div class="event_block<?php echo ($onUserCalendar?" onCalendar":"") . ($odd?" odd":""); ?>" id="event-<?=$event['Event']['id']?>">
+							<div class="event_block<?php echo ($onUserCalendar?" onCalendar":""); ?>" id="event-<?=$event['Event']['id']?>">
 								<div class="hiddenid"><?=$event['Event']['id']?></div>
 								<div class="event_top_row">
 									<div style="display:none" id="latitude"><?=$event['Event']['latitude']?></div>

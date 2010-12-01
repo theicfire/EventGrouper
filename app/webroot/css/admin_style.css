@@ -79,10 +79,10 @@ a
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
-	padding: 10px;
+	padding: 5px;
 	margin: 20px;
 	
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 .admin_header
@@ -91,13 +91,12 @@ a
 	border: 1px solid #ccc;
 	border-radius: 0 0 5px 5px;
 	-moz-border-radius:  0 0 5px 5px;
-	padding: 10px;
+	padding: 5px;
 	margin: 10px;
 	
 	margin-top: 0;
 	border-top: none;
-	
-	padding-bottom: 2px;
+	padding-bottom: 0;
 }
 
 .rinoa_small_inline
@@ -121,15 +120,16 @@ a
 
 h1
 {
-	font-size: 1.5em;
+	font-size: 1.3em;
+	padding: 0 0 0 5px;
 }
 
 .rinoa_large_inline
 {
-	width: 24px;
-	height: 24px;
+	width: 1.2em;
+	height: 1.2em;
 	position: relative;
-	bottom: -5px;
+	bottom: -.25em;
 	margin-top: -200px;
 }
 
@@ -141,18 +141,19 @@ h1
 
 .info_box_heading
 {
-	padding: 0 0 5px 0;
+	padding: 0 0 5px 5px;
 }
 
 table
 {
-	margin: 10px 0;
+	margin: 5px 0;
 	background: #fff;
 }
 
 .full_width
 {
 	width: 100%;
+	font-size: .9em;
 }
 
 td
@@ -166,8 +167,8 @@ th
 
 td, th
 {
-	border: #ccc 1px solid;
-	padding: 5px;
+	border: #ddd 1px solid;
+	padding: 3px 5px;
 }
 
 .left
@@ -218,6 +219,7 @@ td, th
 
 table.horizontal_no_border
 {
+font-size: .9em;
 }
 table.horizontal_no_border td, table.horizontal_no_border th
 {

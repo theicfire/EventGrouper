@@ -143,12 +143,13 @@ if(isset($notification))
     <?php }?>
 	<!-- <h1>Contents of "<?php echo $currenteventGroup['EventGroup']['name']; ?>"</h1> -->     
 	<div class="form_section">
-		<h2>Subgroups <?php if ($canCreate) {?> 
+		<h2>Subgroups 
+		</h2> 
+		<?php if ($canCreate) {?> 
 				<a href="<?php echo $html->url("/event_groups/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
 				class="small_icon_inline_button" /> Add subgroups</a>
 			<?php }?>
-		</h2> 
 		<?php if( count($eventGroups)==0 )
 		{ ?>
 		
@@ -169,7 +170,25 @@ if(isset($notification))
 						<td>
 							<?php echo $eventGroup['EventGroup']['description']; ?>
 						</td>
-						<td class="table_tiny_buttons"><a href="<?php echo $html->url("/".$eventGroup['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
+						<td style="width: 200px;" class="table_tiny_buttons"><a href="<?php echo $html->url("/".$eventGroup['EventGroup']['path']); ?>">View in timeline</a> 
+						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'update')) {?>
+							<a href="<?php echo $html->url("/event_groups/edit/".$eventGroup['EventGroup']['id']); ?>">Edit info</a>
+						<?php }?><br />
+						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'create')) {?> 
+							<a href="<?php echo $html->url("/event_groups/add/".$eventGroup['EventGroup']['id']); ?>">Add subgroups</a>
+						<?php }?>
+						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'create')) {?> 
+							<a href="<?php echo $html->url("/events/add/".$eventGroup['EventGroup']['id']); ?>">Add events</a>
+						<?php }?>
+						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'delete')) {?>
+						<a href="<?=$html->url('/'); ?>event_groups/delete/<?php echo $eventGroup['EventGroup']['id']; ?>" onclick="return confirm(&#039;Are you sure you want to delete the group <?php echo $eventGroup['EventGroup']['name']; ?>?&#039);">Delete</a>
+						<?php 
+							//echo $html->link(__('Delete', true), array('action' => 'delete', $eventGroup['EventGroup']['id']), array('class'=>'make_button'), sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id']));
+						}?>
+						</td>
+						
+						
+						<!-- <td class="table_tiny_buttons"><a href="<?php echo $html->url("/".$eventGroup['EventGroup']['path']); ?>" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
 						class="small_icon_inline_button" /> View in timeline</a> 
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'update')) {?>
 							<a href="<?php echo $html->url("/event_groups/edit/".$eventGroup['EventGroup']['id']); ?>"
@@ -191,7 +210,7 @@ if(isset($notification))
 						<?php 
 							//echo $html->link(__('Delete', true), array('action' => 'delete', $eventGroup['EventGroup']['id']), array('class'=>'make_button'), sprintf(__('Are you sure you want to delete # %s?', true), $currenteventGroup['EventGroup']['id']));
 						}?>
-						</td>
+						</td> -->
 				</tr>
 			<?php }?>      
 	            
@@ -202,12 +221,12 @@ if(isset($notification))
 		</div>
 		
 		<div class="form_section">
-		<h2>Events <?php if ($canCreate) {?> 
+		<h2>Events  </h2> 
+		<?php if ($canCreate) {?> 
 				<a href="<?php echo $html->url("/events/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 				class="small_icon_inline_button" /> Add events</a>
-			<?php }?> </h2> 
-		
+			<?php }?>
 		
 		<?php if( count($eventsUnderGroup)==0 )
 		{ ?>
@@ -220,14 +239,14 @@ if(isset($notification))
 			<tr><th>Title</th><th>Description</th><th>Time</th><th>Group</th><th>Location</th><th>Actions</th></tr>
 			<?php foreach ($eventsUnderGroup as $event) {?>
 			<tr id="event-<?=$event['Event']['id']?>">
-					<td>
+					<th>
 						<?php echo $event['Event']['title']; ?>
-					</td>
+					</th>
 					<td>
 						<?php echo $event['Event']['description']; ?>
 					</td>
-					<td>
-						<?php echo date('g:i a n/d/y', strtotime($event['Event']['time_start']))." to ". date('g:i a n/d/y', strtotime($event['Event']['time_start']) + $event['Event']['duration']*60); ?>
+					<td style="width: 120px;">
+						<?php echo date('g:i a n/d/y', strtotime($event['Event']['time_start']))."<br />to ". date('g:i a n/d/y', strtotime($event['Event']['time_start']) + $event['Event']['duration']*60); ?>
 					</td>
 					<td>
 						<?php echo $event['EventGroup']['name']; ?>
