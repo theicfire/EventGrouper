@@ -244,7 +244,7 @@ function getEvents(date, search, time_start, viewType, p) //loads events into #e
 		 map_open_by_id( getFromHash('mapViewId') );
 	 }
      //pages.. todo this won't work if there are exactly 100 events
-     if ($('#eventCount').val() != 100) {
+     if ($('#eventCount').val() != 10) {
     	 $('#nextpage').hide();
      } else {
     	 $('#nextpage').show();
