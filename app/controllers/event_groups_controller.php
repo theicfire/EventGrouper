@@ -316,14 +316,6 @@ class EventGroupsController extends AppController {
 		$this->render('map_view', 'ajax');
 	}
 	function sharedAjaxList($id) {
-		$userStuff = null;
-		if ($this->Session->check('username')) {
-			$userStuff = $this->User->find('first', array('conditions' => array('email' => $this->Session->read('username'))));
-			$eventsOnCalendar = $userStuff['EventsOnCalendar'];
-			//print_r($eventsOnCalendar);
-			$this->set(compact('eventsOnCalendar'));
-		}
-//		$this->MyAcl->runcheck('EventGroup',$id,'read');
 		
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('Event'),
@@ -362,7 +354,7 @@ class EventGroupsController extends AppController {
 			}
 			$eventsUnderGroup = $newArr;
 		}
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'userStuff', 'viewCalendar'));
+		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'viewCalendar'));
 	}
 	
 	

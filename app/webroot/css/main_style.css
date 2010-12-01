@@ -386,3 +386,6 @@ table.generic td, table.generic th
 .pathLinks {
 	display:inline;
 }
+dialog-form {
+	display:none;
+}

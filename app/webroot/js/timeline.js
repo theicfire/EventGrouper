@@ -458,8 +458,6 @@ $(document).ready( function(){
 	
 	$(window).scroll( scroll_handler );
 	$(window).resize( scroll_handler );
-	
-	setInterval( "update_time()", 1000 );
 
 	loadPage();
 });

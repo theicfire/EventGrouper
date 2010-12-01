@@ -48,15 +48,6 @@ class MController extends AppController {
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'id' => $id)));
 		
-		$userStuff = null;
-		if ($this->Session->check('username')) {
-			$userStuff = $this->User->find('first', array('conditions' => array('email' => $this->Session->read('username'))));
-			$eventsOnCalendar = $userStuff['EventsOnCalendar'];
-			//print_r($eventsOnCalendar);
-			$this->set(compact('eventsOnCalendar'));
-		}
-//		$this->MyAcl->runcheck('EventGroup',$id,'read');
-		
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('Event'),
 			'hasAndBelongsToMany' => array('User')	
@@ -98,7 +89,7 @@ class MController extends AppController {
 		
 		$urlParams = $this->params['url'];
 		
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum', 'userStuff', 'viewCalendar', 'id', 'currenteventGroup', 'urlParams'));
+		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum', 'id', 'currenteventGroup', 'urlParams'));
 	}
 	function login() {
 		if (!empty($_POST['email'])) {
