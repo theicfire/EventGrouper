@@ -3,9 +3,16 @@
 
 .event_name
 {
-	font-size: 2.5em;
+	font-size: 1.3em;
 	padding-top: 10px;
-	padding-bottom: 5px;
+	padding-bottom: 12px;
+	font-weight: bold;
+}
+
+a
+{
+	color: #069;
+	text-decoration: underline;
 }
 
 .event_location_box
@@ -41,5 +48,26 @@
 .event_location_box .map_links
 {
 	padding: 5px 10px;
-	font-size: .9em;
+}
+
+#event_page_content table th
+{
+	color: #777;
+}
+
+#event_page_content table td
+{
+	color: #000;
+}
+
+#event_page_content table td, #event_page_content table th
+{
+	padding: 3px 5px;
+	vertical-align: top;
+}
+
+#event_map_container
+{
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
