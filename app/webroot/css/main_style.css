@@ -307,3 +307,8 @@ table.generic td, table.generic th
 dialog-form {
 	display:none;
 }
+
+.flash_message
+{
+margin: 5px 30px;
+}

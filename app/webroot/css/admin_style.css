@@ -231,3 +231,8 @@ table.horizontal_no_border th
 {
 	padding-right: 30px;
 }
+
+.flash_message
+{
+margin: 5px 30px;
+}

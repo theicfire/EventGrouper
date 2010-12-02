@@ -30,7 +30,7 @@ if(isset($notification))
     
 	<h1><?php echo $currenteventGroup['EventGroup']['name']; ?></h1>
 	<div class="form_section">
-		<h2><?php echo $top_level?"[Conference] Information":"Group Information"; ?></h2>
+		<h2><?php echo $top_level?"Gathering Information":"Group Information"; ?></h2>
 				<table class="horizontal_no_border">
 					<tr>
 						<th>Name</th><td><?php echo $currenteventGroup['EventGroup']['name']; ?></td>

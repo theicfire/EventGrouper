@@ -48,8 +48,8 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
     <h1><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png" class="rinoa_large_inline" /> 
 	<?php 
 	if ( $top_level ) {
-		if ($type == 'add') echo "New [Conference]";
-		else echo "Edit [Conference] Information";
+		if ($type == 'add') echo "New Gathering";
+		else echo "Edit Gathering Information";
 	}
 	else {
 		if ($type == 'add') echo "New Group for Events";
@@ -69,7 +69,7 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
 			
 			<?php 
 				if ( $top_level ) {
-					echo "This name will be displayed on the home page of the [conference].  (for example, 'MIT Campus Preview Weekend')";
+					echo "This name will be displayed on the home page of the Gathering.  (for example, 'MIT Campus Preview Weekend')";
 				}
 				else {
 					echo "This name will be displayed on the group's page, and will be used for searching. (for example, 'MIT Juggling Club')";
