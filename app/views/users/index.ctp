@@ -14,7 +14,7 @@ $(document).ready(function() {
 <div id="admin_groups" class="info_box">
 
 <h1 class="info_box_heading"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
-	class="rinoa_large_inline" /> My [conference]s</h1>
+	class="rinoa_large_inline" /> My Gatherings</h1>
 
 <?php
 
@@ -80,12 +80,12 @@ foreach($userEventGroups as $group) {
 
 <?php } else { ?>
 
-<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You are not an administrator of any [conference].  However, you can create your own by clicking the button below!</p>
+<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You are not an administrator of any Gathering.  However, you can create your own by clicking the button below!</p>
 
 <?php } ?>
 
 <a href="<?php echo $html->url('/'); ?>event_groups/add/0" class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/add.png"
-			class="small_icon_inline_button" /> Create a new [conference]</a>
+			class="small_icon_inline_button" /> Create a new Gathering</a>
 </div>
 
 
@@ -183,7 +183,7 @@ foreach($userEventGroups as $group) {
 
 <?php } else { ?>
 
-<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You have not created any events yet.  If you have permission to create an event in an existing [conference], click an "Add events" button above.  If not, create your own [conference] and add events to it!</p>
+<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You have not created any events yet.  If you have permission to create an event in an existing Gathering, click an "Add events" button above.  If not, create your own Gathering and add events to it!</p>
 
 <?php } ?>
 

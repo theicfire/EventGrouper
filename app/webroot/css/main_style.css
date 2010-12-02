@@ -312,3 +312,33 @@ dialog-form {
 {
 margin: 5px 30px;
 }
+
+/*index*/
+#front_page
+{
+	width: 100%;
+	max-width: 1200px;
+	position: relative;
+	height: 400px;
+	overflow: none;
+}
+
+#front_comp, #back_comp
+{
+	position: absolute;
+	height: 664px;
+	width: 785px;
+	top: 600px;
+	left: 50%;
+	margin-left: -392px;
+}
+
+#info_overlay
+{
+	z-index: 5;
+	position: relative;
+	background: #fff;
+	width: 100%;
+	height: 400px;
+	border-top: 1px #aaa solid;
+}

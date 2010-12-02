@@ -162,9 +162,10 @@ foreach ($eventGroups as $eventGroup) {
 				</div>
 					
 				<div class="filter_buttons">
-					<a href="#" class="button_small" id="filter_submit"><img src="<?php echo $html->url('/'); ?>css/rinoa/refresh.png" /><label class="button_label">Refresh</label></a>
+					<a href="#" class="button_small" id="filter_submit"><img src="<?php echo $html->url('/'); ?>css/rinoa/refresh.png" /><label class="button_label">Update</label></a>
 					<a href="#" class="button_small" id="filter_reset"><label class="button_label">Reset</label></a>
 					<a href="#" class="button_small" id="filter_reset_date"><label class="button_label">First Day</label></a>
+					<!-- add a now button -->
 					<a href="#" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>
 					<a href="#" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>
 				</div>

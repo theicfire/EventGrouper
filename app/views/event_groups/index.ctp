@@ -1,32 +1,47 @@
-<div class="info_page">
-<h1>Welcome to RushRabbit.</h1>
-<p class="subtitle">the world's most advanced event and conference organization system.</p>
-<div class="hr"></div>
+<script type="text/javascript">
 
-<div class="form_section" style="float:left; width: 430px;">
-<h2>What is it?</h2>
-<p>RushRabbit allows you to manage large numbers of events.  It offers groundbreaking new features for the administrator and the conference attendee.</p>
-<p>
-	<ul class="front_page_list">
-		<li class="fpl_item">for administrators:
-			<ul class="front_page_sublist">
-			<li>Delegation of event planning</li>
-			<li>Interface for administrator approval of events</li>
-			<li>Rigid structure of groups and subgroups to ensure organization</li>
-			</ul>
+var positions = new Array();
 
-		</li>
-		<li class="fpl_item">for attendees:
-			<ul class="front_page_sublist">
-			<li>Filtering, sorting, and searching through events</li>
-			<li>Location-based event searching (even from a GPS-enabled phone)</li>
-			<li>Personal schedule builder</li>
-			</ul>
+$(document).ready( function () {
 
-		</li>
-	</ul>
-</p>
+	orient_front();
+	
+	$("#front_comp").click( orient_front );
+	$("#back_comp").click( orient_back );
+
+});
+
+function orient_front()
+{
+	$("#front_comp").animate( { left: '37.5%', top: 20, width: 785, height: 664, marginLeft: '-392', zIndex: 2 } );
+	
+	$("#back_comp").animate( { left: '87.5%', top: 200, width: 350, height: 296, marginLeft: '-175', zIndex: 1 } );
+}
+
+function orient_back()
+{
+	$("#front_comp").animate( { left: '15%', top: 200, width: 350, height: 296, marginLeft: '-175', zIndex: 1 } );
+	
+	$("#back_comp").animate( { left: '62.5%', top: 20, width: 785, height: 664, marginLeft: '-392', zIndex: 2 } );
+}
+
+</script>
+
+<div id="front_page">Hello!  Here are some images (not done yet):
+
+<img id="front_comp" src="<?php echo $html->url('/'); ?>img/front_comp.png" />
+
+<img id="back_comp" src="<?php echo $html->url('/'); ?>img/back_comp.png" />
+
+
 </div>
+
+<div id="info_overlay">
+hello!
+
+</div>
+
+
 
 <?php if ($this->Session->read('username') == null) { ?>
 
@@ -75,8 +90,6 @@ function open_dialog()
 <h2>Create a [Conference]</h2>
 
 <?php echo $html->link('Click here to create a [conference]', '/event_groups/add/0', array('class'=>'make_button')); ?>
-
-</div>
 
 <?php } ?>
 
