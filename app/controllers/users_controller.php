@@ -174,7 +174,7 @@ class UsersController extends AppController {
 			$curUser = $this->User->find('first', array('conditions' => array('email' => $this->data['User']['email'])));
 			$dataToSave = $this->data;
 			$dataToSave['User']['id'] = $curUser['User']['id'];
-			$newpass = 'randompass';
+			$newpass = $this->generatePassword(8,1);
 			$dataToSave['User']['pass'] = sha1($newpass);
 			if ($this->User->save($dataToSave)) {
 				$emailText = "You have requested a new password for your rushrabbit account. Your new password is:".$newpass."\n".
@@ -190,6 +190,31 @@ class UsersController extends AppController {
 				$this->Session->setFlash('An error occured. Please try again');
 			}
 		}
+	}
+	function generatePassword($length=6,$level=2){
+	
+	   list($usec, $sec) = explode(' ', microtime());
+	   srand((float) $sec + ((float) $usec * 100000));
+	
+	   $validchars[1] = "0123456789abcdfghjkmnpqrstvwxyz";
+	   $validchars[2] = "0123456789abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	   $validchars[3] = "0123456789_!@#$%&*()-=+/abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_!@#$%&*()-=+/";
+	
+	   $password  = "";
+	   $counter   = 0;
+	
+	   while ($counter < $length) {
+	     $actChar = substr($validchars[$level], rand(0, strlen($validchars[$level])-1), 1);
+	
+	     // All character must be different
+	     if (!strstr($password, $actChar)) {
+	        $password .= $actChar;
+	        $counter++;
+	     }
+	   }
+	
+	   return $password;
+	
 	}
 //	function edit($id = null) {
 //		$this->loadModel('Event');

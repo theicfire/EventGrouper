@@ -81,7 +81,7 @@ $(function() {
 			   data: {email: username},
 			   success: function (data) {
 					if (data != "good") {
-						$("#badLogin").show(200);
+						$("#badLogin").show();
 					} else {
 						$("#badLogin").css('display', 'none');
 					}
@@ -89,6 +89,5 @@ $(function() {
 			 });
 			if ($("#badLogin").is(':visible'))
 				return false;
-			return false;
 		});
 	});

@@ -26,7 +26,6 @@ class LoginController extends AppController {
 		$this->autoRender = false;
 		if (!empty($_POST['email'])) {
 			$userData = $this->User->find('first', array('conditions' => array('email' => $_POST['email']), 'pass !=' => 'unregistered', 'recursive' => -1));
-			print_r($userData);
 			if (!empty($userData)) {
 				echo "good";
 			} else {

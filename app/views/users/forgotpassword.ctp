@@ -31,7 +31,7 @@ function page_init()
 			echo $form->input('email', array( 'class'=>'textfield', 'label'=>'Email', 'id' => 'email' ));
 			
 		?>
-		<label id="badLogin" class="error" style="display:none;">That email doesn't exist on this site.</label>	
+		<div id="badLogin" class="error" style="display:none;">That email doesn't exist on this site.</div>	
 		<?php echo $form->end(array('label' => 'Submit', 'class'=>'make_button'));?>
 	</div>
 	

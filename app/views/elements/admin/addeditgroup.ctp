@@ -12,7 +12,7 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
     function nospecial( value, element ){ return this.optional(element) || value.match("^[^<>]*$");  }
     function validurl( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z]*$");  }
     
-    jQuery.validator.addMethod("nospecial", nospecial, "You cannot use < or > characters'");
+    jQuery.validator.addMethod("nospecial", nospecial, "You cannot use < or > characters");
     jQuery.validator.addMethod("validurl", validurl, "Only use letters, numbers, and dashes. (no spaces)");
     
     function init_validation(){
@@ -34,7 +34,11 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
 					minlength: 2,
 					validurl: true
 				},
-				'data[Event][location]': {
+				'data[EventGroup][location]': {
+					required: false,
+					nospecial: true
+				},
+				'data[EventGroup][description]': {
 					required: false,
 					nospecial: true
 				},
