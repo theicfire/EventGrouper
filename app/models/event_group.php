@@ -5,7 +5,7 @@ class EventGroup extends AppModel {
 	var $actsAs = array('Tree');
 	var $validate = array(
 		'name' => array(
-			'rule' => '/^[0-9a-zA-Z .,!&+_]{2,}$/',
+			'rule' => '/^[^<>]{2,}$/',
 			'allowEmpty' => false
 		),
 		'path' => array(
@@ -15,12 +15,12 @@ class EventGroup extends AppModel {
 			
 		),
 		'location' => array(
-			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
+			'rule' => '/^[^<>]*$/',
 			'message' => 'Letters, numbers, and spaces only!',
 			'allowEmpty' => true
 		),
 		'description' => array(
-			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
+			'rule' => '/^[^<>]*$/',
 			'allowEmpty' => true
 		),
 	);

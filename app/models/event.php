@@ -5,7 +5,7 @@ class Event extends AppModel {
 	var $actsAs = 'ExtendAssociations';
 	var $validate = array(
 		'title' => array(
-			'valid' => array ('rule' => '/^[0-9a-zA-Z .,!&+_]{2,}$/','message' => 'Required. Letters, numbers, and spaces only!'),
+			'valid' => array ('rule' => '/^[^<>]{2,}$/','message' => 'Required. Letters, numbers, and spaces only!'),
 			
 		),
 		'time_start' => array(
@@ -17,11 +17,11 @@ class Event extends AppModel {
 			'allowEmpty' => true
 		),
 		'location' => array(
-			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
+			'rule' => '/^[^<>]*$/',
 			'allowEmpty' => true
 		),
 		'description' => array(
-			'rule' => '/^[0-9a-zA-Z .,!&+_]*$/',
+			'rule' => '/^[^<>]*$/',
 			'allowEmpty' => true
 		),
 	); 

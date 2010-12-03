@@ -37,9 +37,9 @@
         init_validation(); 
     });
     
-    function nospecial( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z_+&.!,'? ]*$");  }
+    function nospecial( value, element ){ return this.optional(element) || value.match("^[^<>]*$");  }
     
-    jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, spaces, and . , ! & + _ '");
+    jQuery.validator.addMethod("nospecial", nospecial, "You cannot use < or > characters'");
     
     function init_validation(){
     	

@@ -9,10 +9,10 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
     
     $(document).ready( init_validation );
     
-    function nospecial( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z_+&.!,'? ]*$");  }
+    function nospecial( value, element ){ return this.optional(element) || value.match("^[^<>]*$");  }
     function validurl( value, element ){ return this.optional(element) || value.match("^[-0-9a-zA-Z]*$");  }
     
-    jQuery.validator.addMethod("nospecial", nospecial, "Only use letters, numbers, spaces, and . , ! & + _ '");
+    jQuery.validator.addMethod("nospecial", nospecial, "You cannot use < or > characters'");
     jQuery.validator.addMethod("validurl", validurl, "Only use letters, numbers, and dashes. (no spaces)");
     
     function init_validation(){
