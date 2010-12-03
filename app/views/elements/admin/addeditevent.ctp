@@ -44,8 +44,8 @@
     function init_validation(){
     	
 		$.validator.addMethod("TAGS", function(value, element) {  
-		    return this.optional(element) || /^([a-z]|, ?)*$/i.test(value);  
-		    }, "Please enter a comma seperated list of tags (i.e. food, adventure, organization).");
+		    return this.optional(element) || /^([a-z ])*$/i.test(value);  
+		    }, "Please enter a space seperated list of tags (i.e. food adventure organization).");
 		$("form").validate({
 				rules: {
 				'data[Event][title]': {

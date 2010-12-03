@@ -433,7 +433,7 @@ EOT;
 			for ($j = 0; $j < strlen($insertArr['Event']['tags']); $j++) {
 				$tagArr[] = $tagList[substr($insertArr['Event']['tags'], $j, 1)];
 			}
-			$insertArr['Event']['tags'] = implode(',', $tagArr);
+			$insertArr['Event']['tags'] = implode(' ', $tagArr);
 //			pr($insertArr);
 			$this->Event->create();
 			$this->Event->save($insertArr);

@@ -86,7 +86,7 @@
 										<span class="event_tags group_<?=$event['EventGroup']['id']?>">
 											<?php
 												echo "Tags: ";
-												$tagArr = explode(",", $event['Event']['tags']);
+												$tagArr = explode(" ", $event['Event']['tags']);
 												foreach ($tagArr as $tag) {
 														echo "<a href='#' class='tagLink'>".trim($tag)."</a> ";	
 												}

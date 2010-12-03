@@ -255,18 +255,31 @@ class EventGroupsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->MyAcl->runcheck('EventGroup',$id,'update');
-		$currenteventGroup = $this->EventGroup->findById($parentId);
+		$currenteventGroup = $this->EventGroup->findById($id);
 		if (!empty($this->data)) {
 			if (!$id)
 				$id = $this->data['EventGroup']['id'];
-			$this->data['pathstart'] = $this->params['form']['pathstart'];
-			if ($this->data['EventGroup']['name'] != $currenteventGroup['EventGroup']['name']) {//change all event groups under with the new highest name if it changed
-				$eventGroups = $this->EventGroup->children($id);
-				foreach ($eventGroups as $eventGroup) {
-					$eventGroup['EventGroup']['highest_name'] = $this->data['EventGroup']['name'];
-					$this->EventGroup->save($eventGroup);
+			if ($this->data['EventGroup']['name'] != $currenteventGroup['EventGroup']['name']) {
+				if ($currenteventGroup['EventGroup']['parent_id'] == 0) {//change all event groups under with the new highest name if it changed
+					$eventGroups = $this->EventGroup->children($id);
+					foreach ($eventGroups as $eventGroup) {
+						$eventGroup['EventGroup']['highest_name'] = $this->data['EventGroup']['name'];
+						$this->EventGroup->save($eventGroup);
+					}
+					$this->data['EventGroup']['highest_name'] = $this->data['EventGroup']['name'];
+				} else {//change all subgroup paths as well as the current group if the name changes
+					$path = $currenteventGroup['EventGroup']['path'];
+					$pathArr = explode('/', $path);
+					$pathArr[count($pathArr)-1] = $this->data['EventGroup']['name'];
+					$newpath = implode('/', $pathArr);
+					$this->data['EventGroup']['path'] = $newpath;
+					$eventGroups = $this->EventGroup->children($id);
+					foreach ($eventGroups as $eventGroup) {
+						$eventGroup['EventGroup']['path'] = preg_replace("@".$path."@", $newpath, $eventGroup['EventGroup']['path']);
+						echo "cooler path".$eventGroup['EventGroup']['path'];
+						$this->EventGroup->save($eventGroup);
+					}
 				}
-				$this->data['EventGroup']['highest_name'] = $this->data['EventGroup']['name'];
 			} 
 			if ($this->EventGroup->save($this->data)) {
 				$this->Session->setFlash(__('The EventGroup has been saved', true));

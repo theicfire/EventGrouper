@@ -13,7 +13,7 @@ class Event extends AppModel {
 			'message' => "Fix this..."
 		),
 		'tags' => array(
-			'rule' => '/^([a-z]|, ?)*$/',
+			'rule' => '/^([a-z ])*$/',
 			'allowEmpty' => true
 		),
 		'location' => array(

@@ -139,8 +139,8 @@ if (count($groupPath) > 0) { $top_level = false; } ?>
         <div class="form_section">
         <h2>Save Information</h2>
         
-        <input type="hidden" name="data[EventGroup][parent_id]" id="EventGroupParentId" value="<?=$parentId?>">
-		<input type="hidden" name="pathstart" value="<?=$currenteventGroup['EventGroup']['path']?>">
+        <?php if ($type=='add') {?><input type="hidden" name="data[EventGroup][parent_id]" id="EventGroupParentId" value="<?=$parentId?>"><?php }?>
+		<?php if ($type=='add') {?><input type="hidden" name="pathstart" value="<?=$currenteventGroup['EventGroup']['path']?>"><?php }?>
 		<?php if ($type == 'edit') echo $form->input('id', array('type'=>'hidden'));?>
         <?=$this->Form->button('Submit', array('type' => 'submit', 'class' => 'make_button'));?> 
 <!--        <p class="form_tip">This group will be approved by the REX coordinators.</p>-->
