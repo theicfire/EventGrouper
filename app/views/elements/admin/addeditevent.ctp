@@ -141,7 +141,7 @@ if (!empty($this->data['Event']['duration'])) {
 <div class="clear"></div>
 	
 <?php echo $form->input('tags', array('type' => 'text', 'class' => 'textfield'));?>
-<p class="form_tip">Comma seperated list. Ex Food, Entertainment</p>
+<p class="form_tip">Space seperated list. Ex Food Entertainment</p>
 
 </div>
 

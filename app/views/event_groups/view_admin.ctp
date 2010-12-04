@@ -60,14 +60,14 @@ if(isset($notification))
 							$centerLong = $currenteventGroup['EventGroup']['longitude'];?>
 					
 					
-						<th>Location Name</th><td><?php echo $location; ?>
+						<th>Default Location</th><td><?php echo $location; ?>
 						
 						</td>
 					</tr>
 					<tr>
 					
 					
-						<th>Location on Map</th><td>	
+						<th></th><td>	
 						<?php if (!empty($centerLat)) {?>				
 						<img id='staticmap' src="http://maps.google.com/maps/api/staticmap?center=<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&zoom=16&size=400x100&maptype=roadmap&markers=color:red|label:A|<?php echo $centerLat; ?>,<?php echo $centerLong; ?>&sensor=false" />
 						<?php } else {?>
@@ -96,6 +96,11 @@ if(isset($notification))
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png"
 				class="small_icon_inline_button" /> Add events</a>
 			<?php }?>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'bigOwner')) {?> 
+					<a href="<?php echo $html->url("/admin/requests/".$currenteventGroup['EventGroup']['id']); ?>"
+					class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/check.png"
+					class="small_icon_inline_button" /> Check requests (<?=$numRequests?>)</a>
+				<?php }?>
 			
 			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'delete')) {?>
 				

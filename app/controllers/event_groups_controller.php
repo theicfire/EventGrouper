@@ -147,8 +147,9 @@ class EventGroupsController extends AppController {
 				
 			
 			}
+			$numRequests = count($this->EventGroup->getAllEventsUnderThis($groupId, null, array('status' => 'unconfirmed')));
 			$userPerms = $this->EventGroup->getAllPermissions($groupId, $this->Session->read('userid'));
-			$this->set(compact('userPerms', 'groupId', 'groupPath'));
+			$this->set(compact('userPerms', 'groupId', 'groupPath', 'numRequests'));
 		}
 		//end permissions section
 		
