@@ -81,7 +81,6 @@ foreach ($eventGroups as $eventGroup) {
 		<div id="main_tabs"> 
 			<ul id="mt_list">
 				<li class="mt_tab"><a class="active" href="#" id="gotoall">Timeline</a></li> <?php //possibly add icons to the other tabs ?>
-				<li class="mt_tab"><a href="#" id="gotomap">Map</a></li>
 				<li class="mt_tab"><a href="#" id="gotoschedule"><img src="<?php echo $html->url('/'); ?>css/rinoa/favorites.png" class="tab_icon"  /> Favorites</a></li> 
 				<div class="clear"></div>
 			</ul>
@@ -95,6 +94,7 @@ foreach ($eventGroups as $eventGroup) {
 		<div id="scroll" >
 			<div id="toolbar_small_shadow"></div>
 			<div id="r_main_ribbon_container">
+				<div id="timelineOnly">
 				<div id="breadcrumb" style="float: left;" >
 					<div class="nav_title">currently viewing</div>
 					<div class="nav_links">
@@ -169,16 +169,24 @@ foreach ($eventGroups as $eventGroup) {
 					<a href="#" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>
 					<a href="#" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>
 				</div>
-					
-				<div class="clear"></div>	
-			</div>
-				
-			<div id="favorites_ribbon" style="display: none;">
-				<div class="filter_section">
+				</div>
+				<div id="favoritesOnly" class="filter_section">
 					These are your favorites.
 				</div>
+				<div id="favoritesOnly" class="filter_section">
+					<a href="#" id="viewMap">Map</a>
+					<a href="#" id="viewList">List</a>	
+				</div>
 				<div class="clear"></div>
+				
 			</div>
+				
+<!--			<div id="favorites_ribbon" style="display: none;">-->
+<!--				-->
+<!--				<a href="#" id="viewMap">Map</a>-->
+<!--				<a href="#" id="viewList">List</a>-->
+<!--				<div class="clear"></div>-->
+<!--			</div>-->
 			
 			<div class="clear"></div>
 		</div>

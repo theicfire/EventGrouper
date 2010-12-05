@@ -358,7 +358,7 @@ class EventGroupsController extends AppController {
 		$params['status'] = array('confirmed', 'hidden');
 		$groupPath = $this->EventGroup->getPath($id);
 		$treeList = $this->EventGroup->generateTreeList();
-		if (isset($this->params['url']['viewType']) && $this->params['url']['viewType'] == 'calendar') {
+		if (strpos($this->params['url']['viewType'], 'calendar') !== false) {
 			if ($this->Session->check('userid'))
 				$eventsUnderGroup = $this->EventGroup->getFavorites($this->Session->read('userid'));
 			else
@@ -370,7 +370,7 @@ class EventGroupsController extends AppController {
 			}
 			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params, ($p-1)*10 . ",10");
 		}
-		if (isset($this->params['url']['viewType']) && $this->params['url']['viewType'] == 'map') {
+		if (strpos($this->params['url']['viewType'], 'map') !== false) {
 			$newArr = array();
 			foreach ($eventsUnderGroup as $event) {
 				if (!empty($event['Event']['latitude'])) {
@@ -379,7 +379,7 @@ class EventGroupsController extends AppController {
 			}
 			$eventsUnderGroup = $newArr;
 		}
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'viewCalendar'));
+		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup'));
 	}
 	
 	

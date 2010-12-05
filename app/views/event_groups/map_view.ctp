@@ -1,4 +1,5 @@
 <div id="desktop_map_window">
+<input id="eventCount" type="hidden" value="<?php echo count($eventsUnderGroup)?>">
 	<div id="desktop_map_event_list">
 		<h2>Search Results</h2>
 		

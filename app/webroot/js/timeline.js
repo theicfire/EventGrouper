@@ -45,7 +45,7 @@ function map_init(latitude, longitude) //initialize map in event popup
 function giveEventsJs() //goes through most of the page adding JS stuff.. could have used a more descriptive name though
 {
 	var locString;
-	if ($("#viewType").val() == 'calendar' || $("#viewType").val() == '' )
+	if ($("#viewType").val().indexOf('map') == -1)
 	{
 		scheduleToggle();
 		$('.tagLink').click(function() {
@@ -63,9 +63,7 @@ function giveEventsJs() //goes through most of the page adding JS stuff.. could 
 		$("#eventHolder").removeClass( "map_container_div" );
 		
 		locString = addToHash(location.hash, 'viewType', '');
-	}
-	else if ($("#viewType").val() == 'map')
-	{
+	} else {
 		scheduleToggle();
 		initialize_desktop_map();
 		
@@ -229,7 +227,7 @@ function getEvents(date, search, time_start, viewType, p) //loads events into #e
 	$("#eventHolder").html('');
 	$('#loadingimage').show();
 	var loc = 'ajaxListEvents';
-	if (viewType == 'map') {
+	if (viewType.indexOf('map') != -1) {
 		loc = 'map_view';
 	}
 	$.get(phpVars.root+"/event_groups/"+loc+"/"+phpVars.currentEventGroupId, { date_start: date, search: search, time_start:time_start, viewType:viewType, p:p},
@@ -237,10 +235,10 @@ function getEvents(date, search, time_start, viewType, p) //loads events into #e
      $("#eventHolder").html(data);
      $('#loadingimage').hide();
      giveEventsJs();
-     if (viewType != 'map' && getFromHash('viewId') != '') {
+     if (viewType.indexOf('map') == -1 && getFromHash('viewId') != '') {
     	 openEventPopup($('#event-'+getFromHash('viewId')).find('.event_title a'));
      }
-     else if (viewType == 'map' && getFromHash('mapViewId') != '') {
+     else if (viewType.indexOf('map') != -1 && getFromHash('mapViewId') != '') {
 		 map_open_by_id( getFromHash('mapViewId') );
 	 }
      //pages.. todo this won't work if there are exactly 100 events
@@ -270,13 +268,14 @@ function map_open_by_id( id ) //open an infowindow based on the id of the event
 
 function refreshEvents(isCalendar, keepPage) {
 	if (!validate()) return false;
+	if (!keepPage) {
+		$('#p').val(1);
+		console.log('change page');
+	}
 	if (isCalendar)
 		getEvents('01/01/1970', '', '0', $("#viewType").val(), 1);
 	else
 		getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val(), $("#p").val());
-	if (!keepPage) {
-		$('#p').val(1);
-	}
 	$(window).scrollTop(0);
 	setHashFromPage();
 }
@@ -339,6 +338,19 @@ function getFromHash(key) {
 	}
 	return false;
 }
+function setInHash(key, value) {
+	hash = location.hash.substring(1);
+	var locArr = hash.split('&');
+	var locArrNew = new Array();
+	for (var part in locArr) {
+		var sides = locArr[part].split('=');
+		if (sides[0] == key)
+			locArrNew.push(sides[0] + '=' + value);
+		else
+			locArrNew.push(sides[0] + '=' + sides[1]);
+	}
+	return '#' + locArrNew.join('&');
+}
 
 function changeHash(hash) {
 	location.hash = hash;
@@ -382,7 +394,13 @@ function setPageFromHash(){
 				}
 			}
 		}
-		
+	}
+	if (getFromHash('viewType').indexOf('map') == -1) {
+		$("#viewMap").show();
+		$("#viewList").hide();
+	} else {
+		$("#viewMap").hide();
+		$("#viewList").show();
 	}
 }
 
@@ -395,12 +413,30 @@ function checkAndRunHash() {
 
 function loadPage() {
 	setPageFromHash();
-	if ($("#viewType").val() == 'calendar') $("#gotoschedule").trigger('click');
-	else if ($("#viewType").val() == 'map') $("#gotomap").trigger('click');
-	else if ($("#viewType").val() == '') $("#gotoall").trigger('click');
+	if ($("#viewType").val().indexOf('calendar') != -1) viewSchedule();
+	else viewAll();
 	
 }
-
+function viewAll() {
+	$("#gotoall").addClass('active');
+	$("#gotoschedule").removeClass('active');
+	$("#timelineOnly").show();
+	$("#favoritesOnly").hide();
+	$("#mapViewId").val('');
+	refreshEvents(false, true);
+}
+function viewSchedule() {
+	if ($('#loggedIn').length != 0) {
+		$( "#dialog-form" ).dialog( "open" );
+		return false;
+	}
+	$("#gotoschedule").addClass('active');
+	$("#gotoall").removeClass('active');
+	refreshEvents(true);
+	$("#timelineOnly").hide();
+	$("#favoritesOnly").show();
+	$("#mapViewId").val('');
+}
 $(document).ready( function(){
 	setInterval(checkAndRunHash, 250);
 	$("#datestart").datepicker();
@@ -409,40 +445,33 @@ $(document).ready( function(){
 		return false;
 	});
 	$("#gotoall").click(function() {
-		$("#gotoall").addClass('active');
-		$("#gotoschedule").removeClass('active');
-		$("#gotomap").removeClass('active');
-		$("#viewType").val('');
-		$("#r_main_ribbon_container").show();
-		$("#favorites_ribbon").hide();
-		$("#mapViewId").val('');
-		refreshEvents(false, true);
+		location.hash = setInHash('viewType', '');
 		return false;
 	});
 	$("#gotoschedule").click(function() {
-		if ($('#loggedIn').length != 0) {
-			$( "#dialog-form" ).dialog( "open" );
-			return false;
-		}
-		$("#gotoschedule").addClass('active');
-		$("#gotoall").removeClass('active');
-		$("#gotomap").removeClass('active');
-		$("#viewType").val('calendar');
-		refreshEvents(true);
-		$("#r_main_ribbon_container").hide();
-		$("#favorites_ribbon").show();
-		$("#mapViewId").val('');
+		location.hash = setInHash('viewType', 'calendar');
 		return false;
 	});
-	$("#gotomap").click(function() {
-		$("#gotomap").addClass('active');
-		$("#gotoall").removeClass('active');
-		$("#gotoschedule").removeClass('active');
-		$("#viewType").val('map');
-		$("#r_main_ribbon_container").show();
-		$("#favorites_ribbon").hide();
-		
-		refreshEvents(false);
+	$("#viewMap").click(function() {
+		$("#viewMap").hide();
+		$("#viewList").show();
+		var curView = getFromHash('viewType');
+		if (curView.indexOf('map') == -1) {
+			location.hash = setInHash('viewType', curView+"map");
+		}
+		return false;
+	});
+	$("#viewList").click(function() {
+		$("#viewMap").show();
+		$("#viewList").hide();
+		var curView = getFromHash('viewType');
+		if (curView.indexOf('map') != -1) {
+			if (curView.indexOf('calendar') != -1) {
+				location.hash = setInHash('viewType', 'calendar');
+			} else {
+				location.hash = setInHash('viewType', '');	
+			}
+		}
 		return false;
 	});
 	$("#filter_reset").click(function() {
