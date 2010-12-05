@@ -90,7 +90,7 @@ This site does not work with Javascript disabled. Please enable Javascript.
     <?php } else {?>
     
 	    <div id="universal_header">
-			<div id="uh_left"><?php echo $html->link("RushRabbit", "/", array('class'=>'uh_logo'))?> <span><a href="<?= $html->url('/about_us');?>" class="general_link">About Us</a> <a href="<?= $html->url('/feedback');?>" class="general_link">Feedback</a></span></div>
+			<div id="uh_left"><?php echo $html->link("RushRabbit", "/", array('class'=>'uh_logo'))?></div>
 		        
 			<?php
 			if ($this->Session->read('username') == null) {

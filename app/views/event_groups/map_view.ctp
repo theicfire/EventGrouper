@@ -34,13 +34,15 @@
 						<h3 class="msr_title">
 							<a href="javascript:map_open_by_id(<?=$event['Event']['id']?>)"><?=$event['Event']['title']?></a>
 		
-							<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
-							<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="msr_fav_icon"  />
-							</a>
-							
-							<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
-							<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="msr_fav_icon"  />
-							</a>
+							<div class="favwrap<?=$onUserCalendar?" onCalendar":""?>" style="display:inline" id="favevent-<?=$event['Event']['id']?>">
+								<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
+								<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="msr_fav_icon"  />
+								</a>
+								
+								<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
+								<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="msr_fav_icon"  />
+								</a>
+							</div>
 						</h3>
 						
 						<p class="msr_time"><?=date('g:i a n/d/Y', strtotime($event['Event']['time_start']))?> at <?=$event['Event']['location']?></p>
@@ -72,18 +74,8 @@
 										<span class="event_location">
 											at <?=$event['Event']['location']?>
 										</span>
-									<?php }?>
-									
-									<?php // button to add to favorites ?>
-									<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
-									<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="timeline_icon"  />
-									</a>
-									
-									<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
-									<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="timeline_icon"  />
-									</a>
-									
-									<?php if (!empty($event['Event']['tags'])) { ?>	 
+									<?php }
+										if (!empty($event['Event']['tags'])) { ?>	 
 										<span class="event_tags group_<?=$event['EventGroup']['id']?>">
 											<?php
 												echo "Tags: ";

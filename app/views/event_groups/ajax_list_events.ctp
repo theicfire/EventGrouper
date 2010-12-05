@@ -66,13 +66,15 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) //main loop
 			<?php }?>
 			
 			<?php // button to add to favorites ?>
-			<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
-			<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="timeline_icon"  />
-			</a>
-			
-			<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
-			<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="timeline_icon"  />
-			</a>
+			<div class="favwrap<?=$onUserCalendar?" onCalendar":""?>" style="display:inline" id="favevent-<?=$event['Event']['id']?>">
+				<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
+				<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="timeline_icon"  />
+				</a>
+				
+				<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
+				<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_delete.png" class="timeline_icon"  />
+				</a>
+			</div>
 			
 			<?php if (!empty($event['Event']['tags'])) { ?>	 
 				<span class="event_tags group_<?=$event['EventGroup']['id']?>">

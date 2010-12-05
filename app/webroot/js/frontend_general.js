@@ -4,7 +4,7 @@ function scheduleToggle() {
 		$( "#dialog-form" ).dialog( "open" );
 		return false;
 	}
-	var eventBlock = $(this).parent().parent(); 
+	var eventBlock = $(this).parent(); 
 	var id = eventBlock.attr('id').split("-")[1];
 	var textEl = $(this);
 	if (eventBlock.hasClass('onCalendar')) {

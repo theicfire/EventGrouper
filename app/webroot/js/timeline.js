@@ -270,7 +270,6 @@ function refreshEvents(isCalendar, keepPage) {
 	if (!validate()) return false;
 	if (!keepPage) {
 		$('#p').val(1);
-		console.log('change page');
 	}
 	if (isCalendar)
 		getEvents('01/01/1970', '', '0', $("#viewType").val(), 1);
@@ -395,12 +394,12 @@ function setPageFromHash(){
 			}
 		}
 	}
-	if (getFromHash('viewType').indexOf('map') == -1) {
-		$("#viewMap").show();
-		$("#viewList").hide();
-	} else {
+	if (getFromHash('viewType') != '' && getFromHash('viewType').indexOf('map') != -1) {
 		$("#viewMap").hide();
 		$("#viewList").show();
+	} else {
+		$("#viewMap").show();
+		$("#viewList").hide();
 	}
 }
 

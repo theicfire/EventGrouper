@@ -94,7 +94,7 @@ foreach ($eventGroups as $eventGroup) {
 		<div id="scroll" >
 			<div id="toolbar_small_shadow"></div>
 			<div id="r_main_ribbon_container">
-				<div id="timelineOnly">
+				<div id="timelineOnly" style="display:none">
 				<div id="breadcrumb" style="float: left;" >
 					<div class="nav_title">currently viewing</div>
 					<div class="nav_links">
@@ -170,12 +170,12 @@ foreach ($eventGroups as $eventGroup) {
 					<a href="#" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>
 				</div>
 				</div>
-				<div id="favoritesOnly" class="filter_section">
+				<div id="favoritesOnly" style="display:none" class="filter_section">
 					These are your favorites.
 				</div>
 				<div id="favoritesOnly" class="filter_section">
-					<a href="#" id="viewMap">Map</a>
-					<a href="#" id="viewList">List</a>	
+					<a href="#" id="viewMap" style="display:none">Map</a>
+					<a href="#" id="viewList" style="display:none">List</a>	
 				</div>
 				<div class="clear"></div>
 				
