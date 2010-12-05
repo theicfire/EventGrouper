@@ -62,21 +62,21 @@ function giveEventsJs() //goes through most of the page adding JS stuff.. could 
 		
 		$("#eventHolder").removeClass( "map_container_div" );
 		
-		locString = addToHash(location.hash, 'viewType', '');
 	} else {
 		scheduleToggle();
 		initialize_desktop_map();
 		
 		$("#eventHolder").addClass( "map_container_div" );
 		
-		locString = location.hash;
 	}
 	
-	$('.pathLinks a, .groupLinks a').each(function() {//make it so that all the path links have the current hash
-		$(this).attr('href', $(this).attr('href').split('#')[0] + locString);
-	});
-	
+	givePopupsAndEventsJs();
 	$(".make_button").button();
+}
+function givePopupsAndEventsJs() {
+	$('.pathLinks a, .groupLinks a').each(function() {//make it so that all the path links have the current hash
+		$(this).attr('href', $(this).attr('href').split('#')[0] + setInHash('viewId', ''));
+	});
 }
 
 function openEventPopup(ob) {
@@ -91,11 +91,18 @@ function openEventPopup(ob) {
 		$( "#event-content" ).show();
 		if (latitude.length != 0) 
 			map_init(latitude, longitude);
+		givePopupsAndEventsJs();
+		$('#locLink').click(function() {
+			$( "#event-popup" ).dialog( "close" );
+			var newHash = setInHash('mapViewId', id);
+			location.hash = setCustHash(newHash, 'viewType', 'map');
+			return false;
+		});
 		$('#eventloadingimage').hide();
 		
 		
 	});
-	changeHash(addToHash(location.hash, 'viewId', id));
+	changeHash(setInHash('viewId', id));
 	$('#viewId').val(id);
 }
 
@@ -262,7 +269,7 @@ function map_open_by_id( id ) //open an infowindow based on the id of the event
 		open_window_by_i( $("#event_id_" + id ).html() );		
 	}
 		 
-	changeHash(addToHash(location.hash, 'mapViewId', id));
+	changeHash(setInHash('mapViewId', id));
 	$('#mapViewId').val(id);
 }
 
@@ -300,20 +307,6 @@ function resetDate() {
 	$("#datestart").val($("#date_start_default").val());
 }
 
-function addToHash(hash, key, val) {
-	hash = hash.substring(1);
-	var locArr = hash.split('&');
-	var locArrNew = new Array();
-	for (var part in locArr) {
-		var sides = locArr[part].split('=');
-		if (sides[0] == key)
-			continue;
-		locArrNew.push(sides[0] + '=' + sides[1]);
-	}
-	locArrNew.push(key+'='+val);
-	return '#' + locArrNew.join('&');
-}
-
 function removeFromHash(hash, key) {
 	hash = hash.substring(1);
 	var locArr = hash.split('&');
@@ -338,7 +331,10 @@ function getFromHash(key) {
 	return false;
 }
 function setInHash(key, value) {
-	hash = location.hash.substring(1);
+	return setCustHash(location.hash, key, value);
+}
+function setCustHash(hash, key, value) {
+	hash = hash.substring(1);
 	var locArr = hash.split('&');
 	var locArrNew = new Array();
 	for (var part in locArr) {
@@ -384,7 +380,7 @@ function setPageFromHash(){
 		urlStrArr = hash.split("&");
 		for (var key in urlStrArr) {
 			var params = urlStrArr[key].split("=");
-			if ($("#"+params[0]).length != 0){ 
+			if ($("#"+params[0]).length != 0){
 				if ($("#"+params[0]).attr('type')!="checkbox"){
 					$("#"+params[0]).val(params[1]);
 				}
@@ -421,7 +417,6 @@ function viewAll() {
 	$("#gotoschedule").removeClass('active');
 	$("#timelineOnly").show();
 	$("#favoritesOnly").hide();
-	$("#mapViewId").val('');
 	refreshEvents(false, true);
 }
 function viewSchedule() {
@@ -434,7 +429,6 @@ function viewSchedule() {
 	refreshEvents(true);
 	$("#timelineOnly").hide();
 	$("#favoritesOnly").show();
-	$("#mapViewId").val('');
 }
 $(document).ready( function(){
 	setInterval(checkAndRunHash, 250);
@@ -502,7 +496,7 @@ $(document).ready( function(){
 		minWidth: 900,
 		position: [ 30, 100 ],
 		close: function(){
-			changeHash(addToHash(location.hash, 'viewId', ''));
+			changeHash(setInHash('viewId',''));
 			$('#viewId').val('');
 		}
 	});

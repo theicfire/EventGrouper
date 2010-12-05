@@ -98,7 +98,6 @@ class EventGroupsController extends AppController {
 							$userRow['User'] = $aliasRow['User'];
 							$hasAlias = true;
 						} else {
-							echo "in here";
 							//add this user to the database and email the user about it
 							$this->User->create();
 							$userData = array('email' => $this->data['email'], 'pass' => 'unregistered');
@@ -137,8 +136,7 @@ class EventGroupsController extends AppController {
 					}
 					$this->Session->setFlash($alertText);
 					
-					echo $emailText;
-					$this->Email->from    = 'RushRabbit <noreply@rushrabbit.com>';
+					$this->Email->from    = 'RushRabbit <frozen_fire1991@yahoo.com>';
 					$this->Email->to      = sprintf('%s <%s>', $userRow['User']['email'], $userRow['User']['email']);
 					$this->Email->subject = 'You\'ve been granted permissions on RushRabbit';
 					$this->Email->send($emailText);

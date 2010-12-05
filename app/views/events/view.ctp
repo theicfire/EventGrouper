@@ -9,10 +9,10 @@
 		<td><?=date('F j Y \a\t g:i a', strtotime($event['Event']['time_start']))?> - <?=date('F j Y \a\t g:i a', strtotime($event['Event']['time_start'])+$event['Event']['duration']*60)?></td>
 	</tr>
 	<tr>
-		<th>Location</th><td><?=$event['Event']['location']?></td>
+		<th>Location</th><td><a href="#" id="locLink"><?=$event['Event']['location']?></a></td>
 	</tr>
 	<tr>
-		<th>Posted by</th><td>[path]</td>
+		<th>Posted by</th><td><?= $this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?></td>
 	</tr>
 	<tr>
 		<th>Description</th><td><?=$event['Event']['description']?></td>

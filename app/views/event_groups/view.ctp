@@ -65,7 +65,7 @@ foreach ($eventGroups as $eventGroup) {
 			<div id="subgroups">
 				<div class="subgroups_drop"><a href="javascript:toggle_subgroups()" id="subgroups_drop_link"><span id="sd_icon_closed" class='ui-icon ui-icon-triangle-1-e' style='float: left; margin-right: 5px;'></span><span id="sd_icon_open" class='ui-icon ui-icon-triangle-1-s' style='float: left; margin-right: 5px; display: none;'></span> Subgroups of <?=$currenteventGroup['EventGroup']['name'];?> (<?=count($linksArr)?>) </a>
 				
-				<div class="subgroups_drop_content" style="display: none;">
+				<div class="subgroups_drop_content pathLinks" style="display: none;">
 					
 					<?php
 					echo implode($linksArr," ");
