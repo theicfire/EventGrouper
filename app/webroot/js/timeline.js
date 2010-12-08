@@ -49,6 +49,9 @@ function toggle_top()
 		$(window).trigger("resize");
 		
 		});
+		
+		$("#minimize_link").toggle();
+		$("#maximize_link").toggle();
 }
 
 function giveEventsJs() //goes through most of the page adding JS stuff.. could have used a more descriptive name though
@@ -120,7 +123,14 @@ function map_sizing() //handles resizing the map to fill the screen
 {
 	total_height = $(window).height();
 	
+	if($("#desktop_map_window"))
+	{
 	top_bit = $("#desktop_map_window").offset().top;
+	}
+	else
+	{
+		top_bit = 0;
+	}
 	
 	$("#desktop_map_window").height(total_height - top_bit);
 	
@@ -401,11 +411,11 @@ function setPageFromHash(){
 		}
 	}
 	if (getFromHash('viewType') != '' && getFromHash('viewType').indexOf('map') != -1) {
-		$("#viewMap").css("display", "none");
-		$("#viewList").css("display", "inline-block");
+		$(".viewMap").css("display", "none");
+		$(".viewList").css("display", "inline-block");
 	} else {
-		$("#viewMap").css("display", "inline-block");
-		$("#viewList").css("display", "none");
+		$(".viewMap").css("display", "inline-block");
+		$(".viewList").css("display", "none");
 	}
 }
 
@@ -427,6 +437,8 @@ function viewAll() {
 	$("#gotoschedule").removeClass('active');
 	$("#timelineOnly").show();
 	$("#favoritesOnly").hide();
+	$("#conference_info").show();
+	
 	refreshEvents(false, true);
 }
 function viewSchedule() {
@@ -439,6 +451,8 @@ function viewSchedule() {
 	refreshEvents(true);
 	$("#timelineOnly").hide();
 	$("#favoritesOnly").show();
+	
+	$("#conference_info").hide();
 }
 $(document).ready( function(){
 	setInterval(checkAndRunHash, 250);
@@ -455,18 +469,18 @@ $(document).ready( function(){
 		location.hash = setInHash('viewType', 'calendar');
 		return false;
 	});
-	$("#viewMap").click(function() {
-		$("#viewMap").hide();
-		$("#viewList").show();
+	$(".viewMap").click(function() {
+		$(".viewMap").hide();
+		$(".viewList").show();
 		var curView = getFromHash('viewType');
 		if (curView.indexOf('map') == -1) {
 			location.hash = setInHash('viewType', curView+"map");
 		}
 		return false;
 	});
-	$("#viewList").click(function() {
-		$("#viewMap").show();
-		$("#viewList").hide();
+	$(".viewList").click(function() {
+		$(".viewMap").show();
+		$(".viewList").hide();
 		var curView = getFromHash('viewType');
 		if (curView.indexOf('map') != -1) {
 			if (curView.indexOf('calendar') != -1) {

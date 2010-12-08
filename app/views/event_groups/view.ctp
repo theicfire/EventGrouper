@@ -35,9 +35,19 @@ foreach ($eventGroups as $eventGroup) {
 <div id="fixed_top"> <?php //stuff at the top ?>
 	<div id="noscroll">
 	
+	<div id="main_tabs"> 
+			<ul id="mt_list">
+				<li class="mt_tab"><a class="active" href="#" id="gotoall"><?=$currenteventGroup['EventGroup']['name'];?></a></li> <?php //possibly add icons to the other tabs ?>
+				<li class="mt_tab"><a href="#" id="gotoschedule"><img src="<?php echo $html->url('/'); ?>css/rinoa/favorites.png" class="tab_icon"  /> Favorites</a></li> 
+				<div class="clear"></div>
+			</ul>
+			<div class="clear"></div>
+		</div> 
+	
 	<div id="conference_info">
 	
-		<a id="minimize_link" href="javascript:toggle_top()" style="float: right">minimize top</a>
+		<a id="minimize_link" href="javascript:toggle_top()" style="float: right">- minimize box</a>
+		<a id="maximize_link" href="javascript:toggle_top()" style="float: right; display: none;">+ maximize box</a>
 		<h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
 		
 		<div id="top_stuff_toggle">
@@ -58,7 +68,11 @@ foreach ($eventGroups as $eventGroup) {
 		
 		function toggle_subgroups()
 		{
-			$(".subgroups_drop_content").slideToggle();
+			$(".subgroups_drop_content").slideToggle("fast", function () {
+		
+		$(window).trigger("resize");
+		
+		});
 			$("#sd_icon_closed").toggle();
 			$("#sd_icon_open").toggle();
 		}
@@ -84,14 +98,7 @@ foreach ($eventGroups as $eventGroup) {
 		</div>
 	</div>
 		
-		<div id="main_tabs"> 
-			<ul id="mt_list">
-				<li class="mt_tab"><a class="active" href="#" id="gotoall">Timeline</a></li> <?php //possibly add icons to the other tabs ?>
-				<li class="mt_tab"><a href="#" id="gotoschedule"><img src="<?php echo $html->url('/'); ?>css/rinoa/favorites.png" class="tab_icon"  /> Favorites</a></li> 
-				<div class="clear"></div>
-			</ul>
-			<div class="clear"></div>
-		</div> 
+		
 	</div>
     
     <div id="scroll_locator"></div> <?php //used to determine whether or not the #scroll div should float above the list or not ?>
@@ -109,8 +116,8 @@ foreach ($eventGroups as $eventGroup) {
 				</div>
 				
 				<div class="filter_buttons">
-					<a href="#" id="viewMap" class="button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" /><label class="button_label">Map View</label></a>
-					<a href="#" id="viewList" class="button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/document.png" /><label class="button_label">List View</label></a>	
+					<a href="#" class="viewMap button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" /><label class="button_label">Map View</label></a>
+					<a href="#" class="viewList button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/document.png" /><label class="button_label">List View</label></a>	
 				</div>
 				
 				<?php //hidden fields to put in the hash ?>
@@ -184,8 +191,8 @@ foreach ($eventGroups as $eventGroup) {
 				<div id="favoritesOnly" style="display:none">
 				<div class="filter_section">These are your favorites.</div>
 				<div class="filter_buttons">
-					<a href="#" id="viewMap" class="button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" /><label class="button_label">Map View</label></a>
-					<a href="#" id="viewList" class="button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/document.png" /><label class="button_label">List View</label></a>	
+					<a href="#" class="viewMap button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" /><label class="button_label">Map View</label></a>
+					<a href="#" class="viewList button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/document.png" /><label class="button_label">List View</label></a>	
 				</div>
 				</div>
 				<div class="clear"></div>
