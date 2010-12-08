@@ -35,10 +35,10 @@
 	</div>
 
 	<div id="header_actions">
-	
+	<?php if ($this->Session->read('username') == null) { ?>
 	<div class="form_section">
 	<h2>Get Started!</h2>
-	<?php if ($this->Session->read('username') == null) { ?>
+	
 	
 	Have an account? <a href="javascript:open_dialog()">Log in</a> 
 
@@ -49,8 +49,11 @@
 		</script>
 <br />
 		Need an account? <?php echo $html->link("Register", "/users/add", array('class'=>''));?>
-	<? } ?>
+	
 	</div>
+	
+	
+	<? } ?>
 	</div>
 
 <div class="clear"></div>
