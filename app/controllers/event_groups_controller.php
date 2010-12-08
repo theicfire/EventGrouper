@@ -90,7 +90,7 @@ class EventGroupsController extends AppController {
 			if (!empty($this->data)) {//adding a user
 				$userRow = $this->User->findByEmail($this->data['email']);
 				if (!empty($userRow) && $this->MyAcl->checkUser('EventGroup',$groupId,$userRow['User']['id'], 'create'))
-					$this->Session->setFlash("This user already has permissions to this group");
+					$this->Session->setFlash("This user already has permissions for this group.");
 				else {
 					if (empty($userRow)) {
 						$aliasRow = $this->UserAlias->findByAlias($this->data['email']);
@@ -223,7 +223,7 @@ class EventGroupsController extends AppController {
 					$this->redirect("/event_groups/view_admin/".$newGroup['EventGroup']['path']);
 				} else {
 					$this->data = $oldData;
-					$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
+					$this->Session->setFlash(__('The group could not be saved. Please, try again.', true));
 				}
 			} else {
 				$this->Session->setFlash(__('This path has already been taken.', true));
@@ -285,7 +285,7 @@ class EventGroupsController extends AppController {
 				$eventStuff = $this->EventGroup->findById($id);
 				$this->redirect("/event_groups/view_admin/".$eventStuff['EventGroup']['path']);
 			} else {
-				$this->Session->setFlash(__('The EventGroup could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The group could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
@@ -306,7 +306,7 @@ class EventGroupsController extends AppController {
 		$eventStuff = $this->EventGroup->findById($id);
 		$eventParent = $this->EventGroup->findById($eventStuff['EventGroup']['parent_id']);
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for EventGroup', true));
+			$this->Session->setFlash(__('Invalid group ID.', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->EventGroup->delete($id)) {
@@ -316,7 +316,7 @@ class EventGroupsController extends AppController {
 			$this->Acl->Aco->query("DELETE FROM aros_acos WHERE aco_id = ".$acosRow['Aco']['id']);
 			
 			
-			$this->Session->setFlash(__('EventGroup deleted', true));
+			$this->Session->setFlash(__('Group successfully deleted.', true));
 			$repath = "/event_groups/view_admin/".$eventParent['EventGroup']['path'];
 			if ($eventStuff['EventGroup']['parent_id']==0)
 				$repath = "/users/index";

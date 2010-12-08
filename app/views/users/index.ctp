@@ -144,17 +144,20 @@ foreach($userEventGroups as $group) {
 
 <?php } else { ?>
 
-<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You are not part of any groups.  <a href="#">What's a group?</a></p>
+<div class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You are not part of any groups.  <a href="javascript:$('#whats_a_group').slideToggle()">What's a group?</a>  <div id="whats_a_group" style="display: none; margin-top: 5px; padding-top: 5px; border-top: 1px dashed #aaa">A <b>group</b> is a part of a gathering that can independently organize events.  When you are in a group, you can contribute to a Gathering created by someone else. If you would like to be able to add events to someone's Gathering, ask them to create a group for you.</div>
+</div>
+
 
 <?php } ?>
 
 </div>
+
+<?php if(count($sentEvents)!=0){ ?>
+
 <div id="admin_notifications" class="info_box">
 
 
-<h1 class="info_box_heading"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" /> Events I Created</h1>
-
-<?php if(count($sentEvents)!=0){ ?>
+<h1 class="info_box_heading"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" /> Events Pending Review</h1>
 
 <table class="full_width">
 	<tr>
@@ -180,12 +183,12 @@ foreach($userEventGroups as $group) {
 	<?php }?>
 
 </table>
-
-<?php } else { ?>
+<!--
 
 <p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You have not created any events yet.  If you have permission to create an event in an existing Gathering, click an "Add events" button above.  If not, create your own Gathering and add events to it!</p>
 
-<?php } ?>
+-->
 
 </div>
 
+<?php } ?>
