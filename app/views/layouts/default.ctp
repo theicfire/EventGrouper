@@ -54,13 +54,12 @@
 		echo $html->css(array('admin_style.css', 'timePicker'));
 	}?>
 	
-	
-</head>
-<body>
-<noscript>
+	<noscript>
 This site does not work with Javascript disabled. Please enable Javascript.
 <style type="text/css">#everything {display:none}</style>
 </noscript>
+</head>
+<body>
 <script type="text/javascript">
 	$(document).ready( function () { $(".make_button").button() } );
 </script>
@@ -98,12 +97,9 @@ This site does not work with Javascript disabled. Please enable Javascript.
 				<div id="loggedIn" style="display:none"></div>
 				<div id="uh_right"><?php echo $html->link("Log In", "/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?> | <fb:login-button perms="email"></fb:login-button></div>
 				<?php 
-			} else { 
-		        $path = "users/index";
-		        if (isset($currenteventGroup))
-		        	$path = "event_groups/view_admin/".$currenteventGroup['EventGroup']['path'];
+			} else {
 		        ?>
-				<div id="uh_right"><?php echo "Logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Admin Panel", "/".$path);?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
+				<div id="uh_right"><?php echo "Logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Admin Panel Home", "/users/index");?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
 			<?php }?>
 			<div class="clear"></div>
 	    </div>

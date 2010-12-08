@@ -61,7 +61,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) //main loop
 			// I feel like location should never be empty.  maybe sometimes there won't be a lat/long, but there should always be a location...
 			if (!empty($event['Event']['location'])) {?>
 				<span class="event_location">
-					at <?=$event['Event']['location']?>
+					at <a href="#" class="locLink"><?=$event['Event']['location']?></a>
 				</span>
 			<?php }?>
 			
