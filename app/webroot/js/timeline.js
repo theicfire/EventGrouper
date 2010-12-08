@@ -464,6 +464,7 @@ function viewSchedule() {
 	$("#favoritesOnly").show();
 	
 	$("#conference_info").hide();
+	return true;
 }
 $(document).ready( function(){
 	setInterval(checkAndRunHash, 250);
@@ -477,7 +478,9 @@ $(document).ready( function(){
 		return false;
 	});
 	$("#gotoschedule").click(function() {
-		location.hash = setInHash('viewType', 'calendar');
+		if (viewSchedule()) {
+			changeHash(setInHash('viewType', 'calendar'));
+		}
 		return false;
 	});
 	$(".viewMap").click(function() {
