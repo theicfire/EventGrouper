@@ -71,6 +71,11 @@ function giveEventsJs() //goes through most of the page adding JS stuff.. could 
 			
 			return false;
 		});
+		$(".locLink").click(function() {
+			var id = $(this).parent().parent().parent().attr('id').split('-')[1];
+			goto_on_map(id);
+			return false;
+		});
 		
 		$("#eventHolder").removeClass( "map_container_div" );
 		
@@ -87,7 +92,9 @@ function giveEventsJs() //goes through most of the page adding JS stuff.. could 
 }
 function givePopupsAndEventsJs() {
 	$('.pathLinks a, .groupLinks a').each(function() {//make it so that all the path links have the current hash
-		$(this).attr('href', $(this).attr('href').split('#')[0] + setInHash('viewId', ''));
+		var changedHash = setInHash('viewId', '');
+		changedHash = setCustHash(changedHash, 'p', '1');
+		$(this).attr('href', $(this).attr('href').split('#')[0] + changedHash);
 	});
 }
 
@@ -116,7 +123,11 @@ function goto_on_map( id )
 {
 	$( "#event-popup" ).dialog( "close" );
 	var newHash = setInHash('mapViewId', id);
-	location.hash = setCustHash(newHash, 'viewType', 'map');
+	if (getFromHash('viewType').indexOf('calendar') != -1) {
+		location.hash = setCustHash(newHash, 'viewType', 'calendarmap');
+	} else {
+		location.hash = setCustHash(newHash, 'viewType', 'map');
+	}
 }
 
 function map_sizing() //handles resizing the map to fill the screen
@@ -284,13 +295,17 @@ function getEvents(date, search, time_start, viewType, p) //loads events into #e
 
 function map_open_by_id( id ) //open an infowindow based on the id of the event
 {
-	if( $("#event_id_" + id ).length = 1 )
+	if( $("#event_id_" + id ).length == 1 )
 	{
-		open_window_by_i( $("#event_id_" + id ).html() );		
+		open_window_by_i( $("#event_id_" + id ).html() );
+		changeHash(setInHash('mapViewId', id));
+		$('#mapViewId').val(id);
+	} else {
+		changeHash(setInHash('mapViewId', ''));
+		$('#mapViewId').val('');
 	}
 		 
-	changeHash(setInHash('mapViewId', id));
-	$('#mapViewId').val(id);
+	
 }
 
 function refreshEvents(isCalendar, keepPage) {
@@ -453,6 +468,7 @@ function viewSchedule() {
 	$("#favoritesOnly").show();
 	
 	$("#conference_info").hide();
+	return true;
 }
 $(document).ready( function(){
 	setInterval(checkAndRunHash, 250);
@@ -466,7 +482,9 @@ $(document).ready( function(){
 		return false;
 	});
 	$("#gotoschedule").click(function() {
-		location.hash = setInHash('viewType', 'calendar');
+		if (viewSchedule()) {
+			changeHash(setInHash('viewType', 'calendar'));
+		}
 		return false;
 	});
 	$(".viewMap").click(function() {

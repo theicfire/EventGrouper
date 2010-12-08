@@ -96,6 +96,10 @@ foreach ($eventGroups as $eventGroup) {
 		
 		
 		</div>
+		<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
+			echo $html->link('Edit this group', "/event_groups/view_admin/".$currenteventGroup['EventGroup']['path']);
+		}?>
+			
 	</div>
 		
 		
