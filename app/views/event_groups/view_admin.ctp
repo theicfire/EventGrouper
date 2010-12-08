@@ -264,7 +264,7 @@ if(isset($notification))
 							echo $html->link(__('Edit', true), array('controller' => 'events', 'action' => 'edit', $event['Event']['id'])); 
 						}?>
 						<?php if ($canCreate) {
-							echo $html->link(__('Delete', true), array('controller' => 'events', 'action' => 'delete', $event['Event']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $event['Event']['id'])); 
+							echo $html->link(__('Delete', true), array('controller' => 'events', 'action' => 'delete', $event['Event']['id']), null, sprintf(__('Are you sure you want to delete %s?', true), $event['Event']['title'])); 
 						}?>
 					</td>
 			</tr>

@@ -501,7 +501,7 @@ $(document).ready( function(){
 		refreshEvents(false);
 		return false;
 	});
-	$("#nextpage").click(function() {
+	/*$("#nextpage").click(function() {
 		$('#p').val($('#p').val()*1.0 + 1);
 		refreshEvents(false, true);
 		return false;
@@ -510,7 +510,7 @@ $(document).ready( function(){
 		$('#p').val($('#p').val()*1.0 - 1);
 		refreshEvents(false, true);
 		return false;
-	});
+	}); */
 	$(".previous_events_button").button();
 	$("#filter_submit").button();
 	$( "#event-popup" ).dialog({
@@ -533,3 +533,20 @@ $(document).ready( function(){
 	loadPage();
 });
 
+function get_current_page()
+{
+	return $('#p').val()*1.0;
+}
+function go_to_page( page_number )
+{
+	$('#p').val( page_number );
+	refreshEvents(false, true);
+}
+function next_page()
+{
+	go_to_page( get_current_page() + 1 );
+}
+function prev_page()
+{
+	go_to_page( get_current_page() - 1 );
+}

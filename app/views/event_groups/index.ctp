@@ -1,12 +1,70 @@
+<div class="fixed_width_page">
 
-<div id="what_is_a_gathering">RushRabbit lets you organize a conference, fair, college orientation, sports tournament, or any other large group of events.  Read about some of our features below, or see an example Gathering.</div>
+<div id="header_box">
 
-<?php
+	<div id="header_logo"><h1>RushRabbit</h1><p>...hop on over</p>
+	</div>
 
-$images = array( "stata.jpg", "killian.jpg", "zcenter.jpg" );
-$curr_image = $images[ rand( 0,2 ) ];
-?>
-<div id="image_header" style="background: url('<?php echo $html->url('/'); ?>img/<?=$curr_image?>')"></div>
+	<div id="header_actions">
+	
+	<?php if ($this->Session->read('username') == null) { ?>
+
+		<div class="form_section" style="float:right; width: 430px;">
+		<h2>Get Started</h2>
+
+		<label>Have an account?</label>
+		<a href="javascript:open_dialog()" class="make_button">Login</a>
+
+		<script type="text/javascript">
+		function open_dialog()
+		{ $( '#dialog-form' ).dialog( 'open' ); }
+
+		</script>
+
+		<label>Need an account?</label>
+		<?php echo $html->link("Register", "/users/add", array('class'=>'make_button'));?>
+
+
+		<?php } else { ?>
+
+		<div class="form_section" style="float:right; width: 430px;">
+		<h2>Your Recently Viewed Gatherings</h2>
+
+		<?php if (isset($watchlist)) {?>
+			<table class="full_width generic">
+			<tr>
+			<th>Name</th><th>Last visited</th>
+			</tr>
+			<?php foreach ($watchlist as $eventGroup) {?>
+			<tr>
+					<td>
+						<?php echo $html->link($eventGroup['event_groups']['name'], "/".$eventGroup['event_groups']['path']); ?>
+					</td>
+					<td>
+						<?php echo date( 'l, F jS Y' , strtotime($eventGroup['event_groups_users']['time']) ); ?>
+					</td>
+			</tr>
+			<?php }?>
+			</table>
+		<?php }
+		else {
+		?>
+		<p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You haven't viewed any Gatherings yet. Use the search bar at the top of the page to find one.</p>
+		<? } ?>
+		
+		<h2>Create your own Gathering</h2>
+		<?php echo $html->link('Click here to create a gathering', '/event_groups/add/0', array('class'=>'make_button')); ?>
+		
+		<?php } ?>
+		
+		
+		</div>
+	
+	</div>
+
+<div class="clear"></div>
+
+</div>
 
 <div class="fp_content">
 
@@ -63,82 +121,6 @@ $curr_image = $images[ rand( 0,2 ) ];
 
 </div>
 
-<?php if ($this->Session->read('username') == null) { ?>
-
-<div class="form_section" style="float:right; width: 430px;">
-<h2>Get Started</h2>
-
-<label>Have an account?</label>
-<a href="javascript:open_dialog()" class="make_button">Login</a>
-
-<script type="text/javascript">
-function open_dialog()
-{ $( '#dialog-form' ).dialog( 'open' ); }
-
-</script>
-
-<label>Need an account?</label>
-<?php echo $html->link("Register", "/users/add", array('class'=>'make_button'));?>
-
-</div>
-
-<?php } else { ?>
-
-<div class="form_section" style="float:right; width: 430px;">
-<h2>Recently Viewed [Conference]s</h2>
-
-<?php if (isset($watchlist)) {?>
-	<table class="full_width generic">
-	<tr>
-	<th>Name</th><th>Last visited</th>
-	</tr>
-	<?php foreach ($watchlist as $eventGroup) {?>
-	<tr>
-			<td>
-				<?php echo $html->link($eventGroup['event_groups']['name'], "/".$eventGroup['event_groups']['path']); ?>
-			</td>
-			<td>
-				<?php echo date( 'l, F jS Y' , strtotime($eventGroup['event_groups_users']['time']) ); ?>
-			</td>
-	</tr>
-	<?php }?>
-	</table>
-<?php }?>
-</div>
-
-<div class="form_section" style="float:right; width: 430px;">
-<h2>Create a [Conference]</h2>
-
-<?php echo $html->link('Click here to create a [conference]', '/event_groups/add/0', array('class'=>'make_button')); ?>
-
-<?php } ?>
-
-<!-- the real thing
-<div class="form_section" style="float:right; width: 430px;">
-<h2>Create a Conference</h2>
-
-<label>Name</label>
-<input type="text" class="textfield" />
-<p class="form_tip">for example, MIT Campus Preview Weekend</p>
-
-<input type="submit" value="Get started" class="make_button" />
-
-</div>
-
-<div class="form_section" style="float:right; width: 430px;">
-<h2>Search for a Conference</h2>
-
-<input type="text" class="textfield" />
-
-<input type="submit" value="Search" class="make_button" />
-
-</div> -->
-
-<div class="clear"></div>
-
-</div>
-
-
 
 
 
@@ -178,3 +160,5 @@ function open_dialog()
 </tr>
 <?php }?>
 </table>
+
+</div>

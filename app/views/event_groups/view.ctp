@@ -37,7 +37,7 @@ foreach ($eventGroups as $eventGroup) {
 	
 	<div id="main_tabs"> 
 			<ul id="mt_list">
-				<li class="mt_tab"><a class="active" href="#" id="gotoall"><?=$currenteventGroup['EventGroup']['name'];?></a></li> <?php //possibly add icons to the other tabs ?>
+				<li class="mt_tab"><a class="active" href="#" id="gotoall"><?=$currenteventGroup['EventGroup']['highest_name']?></a></li> <?php //possibly add icons to the other tabs ?>
 				<li class="mt_tab"><a href="#" id="gotoschedule"><img src="<?php echo $html->url('/'); ?>css/rinoa/favorites.png" class="tab_icon"  /> Favorites</a></li> 
 				<div class="clear"></div>
 			</ul>
@@ -184,8 +184,8 @@ foreach ($eventGroups as $eventGroup) {
 					<a href="#" class="button_small" id="filter_reset"><label class="button_label">Reset</label></a>
 					<a href="#" class="button_small" id="filter_reset_date"><label class="button_label">First Day</label></a>
 					<!-- add a now button -->
-					<a href="#" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>
-					<a href="#" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>
+					<a href="javascript:prev_page()" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>
+					<a href="javascript:next_page()" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>
 				</div>
 				</div>
 				<div id="favoritesOnly" style="display:none">

@@ -298,7 +298,6 @@ table.generic th
 
 table.generic td, table.generic th
 {
-	border: #aaa 1px solid;
 	padding: 5px;
 }
 .pathLinks {
@@ -418,8 +417,45 @@ right: 0;
 	font-weight: bold;
 }
 
-#image_header
+#header_box
 {
-	height: 200px;
-	background-position: top center;
+	margin: 20px auto;
+	position: relative;
+}
+
+#header_logo
+{
+	float: left;
+	position: relative;
+	padding: 5px 10px;
+	padding-bottom: 20px;
+	margin-left: 30px;
+}
+
+#header_logo h1
+{
+	font-size: 6em;
+	font-weight: bold;
+	font-style: italic;
+}
+
+#header_logo p
+{
+	font-size: 2em;
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
+}
+
+#header_actions
+{
+	float: right;
+	padding: 5px 10px;
+	margin-right: 30px;
+}
+
+.fixed_width_page
+{
+	width: 960px;
+	margin: 0 auto;
 }
