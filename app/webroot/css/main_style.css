@@ -417,3 +417,9 @@ right: 0;
 	font-size: 1.6em;
 	font-weight: bold;
 }
+
+#image_header
+{
+	height: 200px;
+	background-position: top center;
+}

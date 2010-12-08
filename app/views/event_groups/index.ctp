@@ -1,6 +1,13 @@
 
 <div id="what_is_a_gathering">RushRabbit lets you organize a conference, fair, college orientation, sports tournament, or any other large group of events.  Read about some of our features below, or see an example Gathering.</div>
 
+<?php
+
+$images = array( "stata.jpg", "killian.jpg", "zcenter.jpg" );
+$curr_image = $images[ rand( 0,2 ) ];
+?>
+<div id="image_header" style="background: url('<?php echo $html->url('/'); ?>img/<?=$curr_image?>')"></div>
+
 <div class="fp_content">
 
 <h2 class="fp_h2">Viewing Events</h2>
