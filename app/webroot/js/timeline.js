@@ -42,6 +42,15 @@ function map_init(latitude, longitude) //initialize map in event popup
   }
 }
 
+function toggle_top()
+{
+	$("#top_stuff_toggle").slideToggle("fast", function () {
+		
+		$(window).trigger("resize");
+		
+		});
+}
+
 function giveEventsJs() //goes through most of the page adding JS stuff.. could have used a more descriptive name though
 {
 	var locString;
@@ -92,18 +101,19 @@ function openEventPopup(ob) {
 		if (latitude.length != 0) 
 			map_init(latitude, longitude);
 		givePopupsAndEventsJs();
-		$('#locLink').click(function() {
-			$( "#event-popup" ).dialog( "close" );
-			var newHash = setInHash('mapViewId', id);
-			location.hash = setCustHash(newHash, 'viewType', 'map');
-			return false;
-		});
 		$('#eventloadingimage').hide();
 		
 		
 	});
 	changeHash(setInHash('viewId', id));
 	$('#viewId').val(id);
+}
+
+function goto_on_map( id )
+{
+	$( "#event-popup" ).dialog( "close" );
+	var newHash = setInHash('mapViewId', id);
+	location.hash = setCustHash(newHash, 'viewType', 'map');
 }
 
 function map_sizing() //handles resizing the map to fill the screen
@@ -391,11 +401,11 @@ function setPageFromHash(){
 		}
 	}
 	if (getFromHash('viewType') != '' && getFromHash('viewType').indexOf('map') != -1) {
-		$("#viewMap").hide();
-		$("#viewList").show();
+		$("#viewMap").css("display", "none");
+		$("#viewList").css("display", "inline-block");
 	} else {
-		$("#viewMap").show();
-		$("#viewList").hide();
+		$("#viewMap").css("display", "inline-block");
+		$("#viewList").css("display", "none");
 	}
 }
 

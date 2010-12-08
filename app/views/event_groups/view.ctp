@@ -36,8 +36,11 @@ foreach ($eventGroups as $eventGroup) {
 	<div id="noscroll">
 	
 	<div id="conference_info">
+	
+		<a id="minimize_link" href="javascript:toggle_top()" style="float: right">minimize top</a>
 		<h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
 		
+		<div id="top_stuff_toggle">
 		<p><?php echo $currenteventGroup['EventGroup']['description'];?></p>
 		
 		<?php //still not sure what this does...
@@ -76,6 +79,9 @@ foreach ($eventGroups as $eventGroup) {
 				<div class="clear"></div>
 			</div>
 		<?php } ?>
+		
+		
+		</div>
 	</div>
 		
 		<div id="main_tabs"> 
@@ -100,6 +106,11 @@ foreach ($eventGroups as $eventGroup) {
 					<div class="nav_links">
 					<?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path'], 'highestName' => $currenteventGroup['EventGroup']['highest_name']))?>
 					</div>
+				</div>
+				
+				<div class="filter_buttons">
+					<a href="#" id="viewMap" class="button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" /><label class="button_label">Map View</label></a>
+					<a href="#" id="viewList" class="button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/document.png" /><label class="button_label">List View</label></a>	
 				</div>
 				
 				<?php //hidden fields to put in the hash ?>
@@ -170,14 +181,15 @@ foreach ($eventGroups as $eventGroup) {
 					<a href="#" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>
 				</div>
 				</div>
-				<div id="favoritesOnly" style="display:none" class="filter_section">
-					These are your favorites.
+				<div id="favoritesOnly" style="display:none">
+				<div class="filter_section">These are your favorites.</div>
+				<div class="filter_buttons">
+					<a href="#" id="viewMap" class="button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" /><label class="button_label">Map View</label></a>
+					<a href="#" id="viewList" class="button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/document.png" /><label class="button_label">List View</label></a>	
 				</div>
-				<div id="favoritesOnly" class="filter_section">
-					<a href="#" id="viewMap" style="display:none">Map</a>
-					<a href="#" id="viewList" style="display:none">List</a>	
 				</div>
 				<div class="clear"></div>
+				
 				
 			</div>
 				

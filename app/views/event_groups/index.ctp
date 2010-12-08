@@ -4,44 +4,131 @@ var positions = new Array();
 
 $(document).ready( function () {
 
-	orient_front();
+	front();
 	
-	$("#front_comp").click( orient_front );
-	$("#back_comp").click( orient_back );
+	$("#front_comp").click( front );
+	$("#back_comp").click( back );
 
 });
 
 function orient_front()
 {
-	$("#front_comp").animate( { left: '37.5%', top: 20, width: 785, height: 664, marginLeft: '-392', zIndex: 2 } );
+	$("#front_comp").animate( { left: '37.5%', top: -50, width: 779, height: 641, marginLeft: '-390', zIndex: 2 } );
 	
-	$("#back_comp").animate( { left: '87.5%', top: 200, width: 350, height: 296, marginLeft: '-175', zIndex: 1 } );
+	$("#back_comp").animate( { left: '85%', top: 130, width: 350, height: 296, marginLeft: '-175', zIndex: 1 } );
 }
 
 function orient_back()
 {
-	$("#front_comp").animate( { left: '15%', top: 200, width: 350, height: 296, marginLeft: '-175', zIndex: 1 } );
+	$("#front_comp").animate( { left: '15%', top: 130, width: 350, height: 288, marginLeft: '-175', zIndex: 1 } );
 	
-	$("#back_comp").animate( { left: '62.5%', top: 20, width: 785, height: 664, marginLeft: '-392', zIndex: 2 } );
+	$("#back_comp").animate( { left: '62.5%', top: -50, width: 785, height: 664, marginLeft: '-392', zIndex: 2 } );
+}
+
+function front()
+{
+	orient_front();
+	
+	$("#front_info").show();
+	$("#back_info").hide();
+	
+	$("#front_end").addClass("front_page_active");
+	$("#back_end").removeClass("front_page_active");
+	
+	$("#back_end").addClass("front_page_inactive");
+	$("#front_end").removeClass("front_page_inactive");
+	
+	
+}
+
+function back()
+{
+	orient_back();
+	
+	$("#front_info").hide();
+	$("#back_info").show();
+	
+	$("#back_end").addClass("front_page_active");
+	$("#front_end").removeClass("front_page_active");
+	
+	$("#front_end").addClass("front_page_inactive");
+	$("#back_end").removeClass("front_page_inactive");
 }
 
 </script>
 
-<div id="front_page">Hello!  Here are some images (not done yet):
+<div class="gray">
+<div id="what_is_a_gathering">RushRabbit lets you organize a conference, fair, college orientation, sports tournament, or any other large group of events.  Read about some of our features below, or see an example Gathering.</div>
+
+<div id="front_page">
 
 <img id="front_comp" src="<?php echo $html->url('/'); ?>img/front_comp.png" />
 
 <img id="back_comp" src="<?php echo $html->url('/'); ?>img/back_comp.png" />
 
+<div id="tabs">
+
+<a href="javascript:front()" id="front_end" class="front_page_active">
+<span class="mini_heading">Front End</span>
+<h2 class="fp_heading">View Events</h2>
+</a>
+
+<a href="javascript:back()" id="back_end" class="front_page_inactive">
+<span class="mini_heading">Back End</span>
+<h2 class="fp_heading">Create Gatherings</h2>
+</a>
 
 </div>
 
-<div id="info_overlay">
-hello!
-
+</div>
 </div>
 
 
+
+<div class="info_overlay" id="front_info">
+<div class="fp_content">
+	<table class="fp_boxes">
+	<tr><td><h2 class="fp_info_header">Switch Between Timeline View and Map View</h2>
+	<p>RushRabbit allows you to view events on a map, so you can find what's going on near you.</p>
+	</td><td>
+	<h2 class="fp_info_header">Keep Track of Your Favorite Events</h2>
+	<p>Create an account and add events to your Favorites to keep track of those that interest you most.  Then, print out your Favorites, email them to someone, or sync them with your calendar.</p>
+	</td><td>
+	<h2 class="fp_info_header">Log in with Facebook</h2>
+	<p>If you have a Facebook account, you don't need to register with RushRabbit - just click the Facebook login button to connect with your existing account.</p>
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<h2 class="fp_info_header">Sync with Your Calendar</h2>
+	<p>Import the entire schedule of a Gathering or just your Favorites into Google Calender, iCal, Outlook, and many other programs.  Take it on the go with your smartphone.</p>
+	</td><td>
+	<h2 class="fp_info_header">Go to the Mobile Site</h2>
+	<p>Visit RushRabbit.com on your internet-enabled mobile phone to view your favorites or a map of events happening around you.  We support iPhone, Android, and WebOS.</p>
+	</td>
+	</tr>
+	</table>
+</div>
+</div>
+
+<div class="info_overlay" id="back_info" style="display: none">
+<div class="fp_content">
+
+	<h2 class="fp_info_header">Organize Large Numbers of Events</h2>
+	<p>This is some stuff in a paragraph.</p>
+	
+	<h2 class="fp_info_header">Create Groups and Subgroups</h2>
+	<p>This is some stuff in a paragraph.</p>
+	
+	<h2 class="fp_info_header">Give Groups Permission to Edit Their Own Events</h2>
+	<p>This is some stuff in a paragraph.</p>
+	
+	<h2 class="fp_info_header"></h2>
+	<p>This is some stuff in a paragraph.</p>
+
+</div>
+
+</div>
 
 <?php if ($this->Session->read('username') == null) { ?>
 

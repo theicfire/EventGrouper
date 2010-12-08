@@ -632,8 +632,12 @@ border: 1px solid #ccc;
 
 #conference_info h1
 {
-	padding-bottom: 5px;
 	font-weight: bold;
+}
+
+#conference_info p
+{
+	padding-top: 5px;
 }
 	
 .subgroups_drop
