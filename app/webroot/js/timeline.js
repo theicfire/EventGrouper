@@ -295,13 +295,17 @@ function getEvents(date, search, time_start, viewType, p) //loads events into #e
 
 function map_open_by_id( id ) //open an infowindow based on the id of the event
 {
-	if( $("#event_id_" + id ).length = 1 )
+	if( $("#event_id_" + id ).length == 1 )
 	{
-		open_window_by_i( $("#event_id_" + id ).html() );		
+		open_window_by_i( $("#event_id_" + id ).html() );
+		changeHash(setInHash('mapViewId', id));
+		$('#mapViewId').val(id);
+	} else {
+		changeHash(setInHash('mapViewId', ''));
+		$('#mapViewId').val('');
 	}
 		 
-	changeHash(setInHash('mapViewId', id));
-	$('#mapViewId').val(id);
+	
 }
 
 function refreshEvents(isCalendar, keepPage) {
