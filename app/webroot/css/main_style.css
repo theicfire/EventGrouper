@@ -408,13 +408,21 @@ right: 0;
 
 .fp_boxes td
 {
-	padding: 10px;
+	width: 320px;
 	vertical-align: top;
 }
+
+.fp_padding
+{
+	padding: 5px;
+}
+
 .fp_h2
 {
 	font-size: 1.6em;
 	font-weight: bold;
+	border-bottom: 1px solid #ccc;
+	margin: 10px 0;
 }
 
 #header_box
@@ -458,4 +466,11 @@ right: 0;
 {
 	width: 960px;
 	margin: 0 auto;
+}
+
+.fp_boxes img
+{
+	position: relative;
+	left: -15px;
+	margin-right: -30px;
 }
