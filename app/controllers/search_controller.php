@@ -8,10 +8,13 @@ class SearchController extends AppController {
 
 	function index() {
 		$eventGroups = array();
-		if (!empty($this->params['url']['q'])) {
+		if (isset($this->params['url']['q'])) {
 			$params= array('conditions' => array(
-			'parent_id' => 0,
-			sprintf('MATCH(EventGroup.name) AGAINST("%s" IN BOOLEAN MODE)',  $this->params['url']['q'])));
+			'parent_id' => 0));
+			if (!empty($this->params['url']['q'])) {
+				echo "hey";
+				$params['conditions'][] = sprintf('MATCH(EventGroup.name) AGAINST("%s" IN BOOLEAN MODE)',  $this->params['url']['q']);
+			}
 			$eventGroups = $this->EventGroup->find('all',$params);
 		}
 		$this->set(compact('eventGroups'));

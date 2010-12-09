@@ -102,7 +102,15 @@ class PermissionsController extends AppController {
 		
 	}
 	
-	
+	function trash2() {
+		$events = $this->Event->find('all');
+		foreach ($events as $event) {
+			$tags = $event['Event']['tags'];
+			$tags = preg_replace('/,/', '', $tags);
+			$event['Event']['tags'] = $tags;
+			$this->Event->save($event);
+		}
+	}
 	function trash() {
 		$this->autoRender = false;
 		$content = 
