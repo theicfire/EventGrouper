@@ -408,9 +408,15 @@ right: 0;
 
 .fp_boxes td
 {
-	padding: 10px;
+	width: 33%;
 	vertical-align: top;
 }
+
+.fp_padding
+{
+	padding: 5px;
+}
+
 .fp_h2
 {
 	font-size: 1.6em;
