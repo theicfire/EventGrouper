@@ -139,7 +139,11 @@ foreach ($eventGroups as $eventGroup) {
 				</div>
 
 				<div class="filter_section">
-					Show 
+					<style type="text/css">
+						.long_text {display: none;}
+						.compact_icons {display: inline;}
+					</style>
+					<span class="long_text">Show </span>
 					
 					
 					<!--<select name="viewDrop" id="viewDrop" class="input_text">
@@ -149,14 +153,14 @@ foreach ($eventGroups as $eventGroup) {
 					
 					</select>-->
 					
-					 events containing text 
-				
+					 <span class="long_text">events containing text </span>
+					<span class="compact_icons"><img src="<?php echo $html->url('/'); ?>css/rinoa/go.png" /></span>
 					<label class="form_label">Search</label>
 					<input type="text" name="search" id="searchBox" class="putInHash input_text" style="width: 100px;" /> 
 					<div class="r_form_tip" id="searcherr">Please search for at least 4 letters</div> <?php // needs to be styled better... ?>
 
 				
-					starting at or after
+					<span class="long_text">starting at or after</span>
 				
 					<label class="form_label">Time</label> <select name="time_start" id="time_start" class="putInHash input_text">
 						<option value="0">midnight</option>
@@ -190,7 +194,7 @@ foreach ($eventGroups as $eventGroup) {
 						<option value="23">11:00 pm</option>
 					</select>
 				
-					on 
+					<span class="long_text"> on </span>
 				
 					<?php //default date is first event in the list
 					if (!empty($eventsUnderGroup)) { $dateIn = date('m/d/Y', strtotime($eventsUnderGroup[0]['Event']['time_start'])); }
