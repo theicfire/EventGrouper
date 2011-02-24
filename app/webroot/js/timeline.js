@@ -445,9 +445,13 @@ function setPageFromHash(){
 	if (getFromHash('viewType') != '' && getFromHash('viewType').indexOf('map') != -1) {
 		$(".viewMap").css("display", "none");
 		$(".viewList").css("display", "inline-block");
+		$(".viewDrop").val(["map"]);
+		$("label[for=radio2]").addClass("ui-state-active");
 	} else {
 		$(".viewMap").css("display", "inline-block");
 		$(".viewList").css("display", "none");
+		$(".viewDrop").val(["list"]);
+		$("label[for=radio1]").addClass("ui-state-active");
 	}
 }
 
@@ -504,6 +508,21 @@ $(document).ready( function(){
 		}
 		return false;
 	});
+	$(".viewDrop").change(function(){
+			if($(".viewDrop:checked").val() == "map"){
+				$(".viewMap").click();
+			} else {
+				$(".viewList").click();
+			}
+		});
+	$("#datestart").change(function(){
+			refreshEvents();
+		return false;
+		});
+	$("#time_start").change(function(){
+			refreshEvents();
+		return false;
+		});
 	$(".viewMap").click(function() {
 		$(".viewMap").hide();
 		$(".viewList").show();
@@ -547,6 +566,7 @@ $(document).ready( function(){
 		return false;
 	}); */
 	$(".previous_events_button").button();
+	$(".viewDrop").button();
 	$("#filter_submit").button();
 	$( "#event-popup" ).dialog({
 		autoOpen: false,

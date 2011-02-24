@@ -69,7 +69,7 @@ This site does not work with Javascript disabled. Please enable Javascript.
 	
 	    <div id="personal_id" class="admin_header">
 	    
-	    	<div class="left"><div class="admin_panel_logo"><strong>RushRabbit</strong> Administration Panel <span class="admin_login_info"><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</span></div>
+	    	<div class="left"><div class="admin_panel_logo"><strong>EventSatellite</strong> Administration Panel <span class="admin_login_info"><img src="<?php echo $html->url('/'); ?>css/rinoa/lock.png" class="rinoa_small_inline" /> You are logged in as <span id="main_email"><?=$session->read('username')?></span>.</span></div>
 	    	</div>
 	        <div class="right" style="text-align: right"><p>
 	        <?php 
@@ -88,7 +88,7 @@ This site does not work with Javascript disabled. Please enable Javascript.
     <?php } else {?>
     
 	    <div id="universal_header">
-			<div id="uh_left"><?php echo $html->link("RushRabbit", "/", array('class'=>'uh_logo'))?></div>
+			<div id="uh_left"><?php echo $html->link("EventSatellite", "/", array('class'=>'uh_logo'))?></div>
 		        
 			<?php
 			if ($this->Session->read('username') == null) {

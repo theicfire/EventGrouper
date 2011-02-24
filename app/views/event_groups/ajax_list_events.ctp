@@ -1,4 +1,8 @@
 <div class="ajax_event_list">
+
+<a href="javascript:prev_page()" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>
+					<a href="javascript:next_page()" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>
+
 <input id="eventCount" type="hidden" value="<?php echo count($eventsUnderGroup)?>">
 	<?php //if there are no events, show this message
 	if (count($eventsUnderGroup) == 0)
@@ -53,7 +57,12 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) //main loop
 				//get start and end times; maybe add some better logic here later.. show dates?
 				$start_time = strtotime($event['Event']['time_start']);
 				$end_time = strtotime($event['Event']['time_start']) + $event['Event']['duration'] * 60;
-				echo date('g:i a', $start_time) . " to " . date('g:i a', $end_time);
+				echo date('g:i a', $start_time);
+				
+				if($event['Event']['duration'] > 0 ){
+					$end_time = strtotime($event['Event']['time_start']) + $event['Event']['duration'] * 60;
+					echo " to " . date('g:i a', $end_time);
+				}
 				?>
 			</span>
 			
@@ -93,7 +102,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) //main loop
 		<div> <!-- second row -->
 			<span class="event_description">
 				<?=$event['Event']['description']?>
-				Posted by <?=$this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?>
+				<small style="font-size: .8em">[posted by <?=$this->element('grouppath', array('groupStr' => $event['EventGroup']['path'], 'highestName' => $event['EventGroup']['highest_name']))?>]</small>
 			</span>
 		</div>
 	</div> <!-- end event block -->

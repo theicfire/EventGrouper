@@ -44,11 +44,15 @@ foreach ($eventGroups as $eventGroup) {
 	
 	<div id="conference_info">
 	
-		<a id="minimize_link" href="javascript:toggle_top()" style="float: right">- minimize box</a>
-		<a id="maximize_link" href="javascript:toggle_top()" style="float: right; display: none;">+ maximize box</a>
+		<a id="minimize_link" href="javascript:toggle_top()" style="float: right">- hide description</a>
+		<a id="maximize_link" href="javascript:toggle_top()" style="float: right; display: none;">+ show description</a>
+		
+		
+		
 		<h1 id="conference_title"><?=$currenteventGroup['EventGroup']['name'];?></h1>
 		
 		<div id="top_stuff_toggle">
+		<!-- <?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path'], 'highestName' => $currenteventGroup['EventGroup']['highest_name']))?> -->
 		<p><?php echo $currenteventGroup['EventGroup']['description'];?></p>
 		
 		<?php //still not sure what this does...
@@ -77,7 +81,7 @@ foreach ($eventGroups as $eventGroup) {
 		
 		</script>
 			
-			<div id="subgroups">
+			<!-- <div id="subgroups">
 				<div class="subgroups_drop"><a href="javascript:toggle_subgroups()" id="subgroups_drop_link"><span id="sd_icon_closed" class='ui-icon ui-icon-triangle-1-e' style='float: left; margin-right: 5px;'></span><span id="sd_icon_open" class='ui-icon ui-icon-triangle-1-s' style='float: left; margin-right: 5px; display: none;'></span> Subgroups of <?=$currenteventGroup['EventGroup']['name'];?> (<?=count($linksArr)?>) </a>
 				
 				<div class="subgroups_drop_content pathLinks" style="display: none;">
@@ -89,7 +93,7 @@ foreach ($eventGroups as $eventGroup) {
 				
 				</div>
 				<div class="clear"></div>
-			</div>
+			</div> -->
 		<?php } ?>
 		
 		
@@ -110,17 +114,14 @@ foreach ($eventGroups as $eventGroup) {
 			<div id="toolbar_small_shadow"></div>
 			<div id="r_main_ribbon_container">
 				<div id="timelineOnly" style="display:none">
-				<div id="breadcrumb" style="float: left;" >
+				<!-- <div id="breadcrumb" style="float: left;" >
 					<div class="nav_title">currently viewing</div>
 					<div class="nav_links">
 					<?= $this->element('grouppath', array('groupStr' => $currenteventGroup['EventGroup']['path'], 'highestName' => $currenteventGroup['EventGroup']['highest_name']))?>
 					</div>
-				</div>
+				</div> -->
 				
-				<div class="filter_buttons">
-					<a href="#" class="viewMap button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" /><label class="button_label">Map View</label></a>
-					<a href="#" class="viewList button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/document.png" /><label class="button_label">List View</label></a>	
-				</div>
+				
 				
 				<?php //hidden fields to put in the hash ?>
 				<input type="hidden" class="putInHash" name="viewType" id="viewType" value="" />
@@ -128,8 +129,36 @@ foreach ($eventGroups as $eventGroup) {
 				<input type="hidden" class="putInHash" name="mapViewId" id="mapViewId" value="" />
 				<input type="hidden" class="putInHash" name="p" id="p" value="1" />
 
+				<div class="filter_buttons">
+				
+					<div id="radioList">
+						<input type="radio" name="viewDrop" class="viewDrop button_small" value="list" id="radio1" /><label for="radio1"><img src="<?php echo $html->url('/'); ?>css/rinoa/document.png" class="r_mini_icon"  /> List</label>
+						<input type="radio" name="viewDrop" class="viewDrop button_small" value="map" id="radio2" /><label for="radio2"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" class="r_mini_icon"  />  Map</label>
+					</div>
+				
+				</div>
+
 				<div class="filter_section">
-					<img src="<?php echo $html->url('/'); ?>css/rinoa/clock.png" class="filter_icon" alt="Time:" title="Time" /> <label class="form_label">Time</label> <select name="time_start" id="time_start" class="putInHash input_text">
+					Show 
+					
+					
+					<!--<select name="viewDrop" id="viewDrop" class="input_text">
+						
+						<option value="list">list</option>
+						<option value="map">map</option>
+					
+					</select>-->
+					
+					 events containing text 
+				
+					<label class="form_label">Search</label>
+					<input type="text" name="search" id="searchBox" class="putInHash input_text" style="width: 100px;" /> 
+					<div class="r_form_tip" id="searcherr">Please search for at least 4 letters</div> <?php // needs to be styled better... ?>
+
+				
+					starting at or after
+				
+					<label class="form_label">Time</label> <select name="time_start" id="time_start" class="putInHash input_text">
 						<option value="0">midnight</option>
 						<option value="1">1:00 am</option>
 						<option value="2">2:00 am</option>
@@ -160,34 +189,46 @@ foreach ($eventGroups as $eventGroup) {
 						<option value="22">10:00 pm</option>
 						<option value="23">11:00 pm</option>
 					</select>
-				</div>
-												
-				<div class="filter_section">
+				
+					on 
+				
 					<?php //default date is first event in the list
 					if (!empty($eventsUnderGroup)) { $dateIn = date('m/d/Y', strtotime($eventsUnderGroup[0]['Event']['time_start'])); }
 					else { $dateIn = date('m/d/Y'); }
 					?> 
 					
-					<img src="<?php echo $html->url('/'); ?>css/rinoa/calendar.png" alt="Date:" title="Date" class="filter_icon" />
 					<label class="form_label">Date</label> <?php //label is made invisible with CSS ?>
+					<!--
 					<input type="text" name="date_start" id="datestart" class="input_text putInHash" style="width: 100px;" value="<?=$dateIn?>" />
 					<input type="hidden" id="date_start_default" value="<?=$dateIn?>">
+					-->
+					
+					<select name="date_start" id="datestart" class="input_text putInHash">
+						
+						<option value="04/07/2010">Thursday, Apr 7, 2011</option>
+						<option value="04/08/2010">Friday, Apr 8, 2011</option>
+						<option value="04/09/2010">Saturday, Apr 9, 2011</option>
+						<option value="04/10/2010">Sunday, Apr 10, 2011</option>
+					
+					</select>
+					
 				</div>
 				
-				<div class="filter_section">
-					<img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="filter_icon" title="Search" alt="Search:" />
-					<label class="form_label">Search</label>
-					<input type="text" name="search" id="searchBox" class="putInHash input_text" style="width: 100px;" /> 
-					<div class="r_form_tip" id="searcherr">Please search for at least 4 letters</div> <?php // needs to be styled better... ?>
+				<div class="filter_buttons" style="display:none">
+					<span style="display: none"><a href="#" class="viewMap button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/web.png" /><label class="button_label">Map View</label></a>
+					<a href="#" class="viewList button_small" style="display:none"><img src="<?php echo $html->url('/'); ?>css/rinoa/document.png" /><label class="button_label">List View</label></a></span>
+					
+					
 				</div>
+				
+				
 					
 				<div class="filter_buttons">
-					<a href="#" class="button_small" id="filter_submit"><img src="<?php echo $html->url('/'); ?>css/rinoa/refresh.png" /><label class="button_label">Update</label></a>
+					<a href="#" class="button_small" id="filter_submit"><img src="<?php echo $html->url('/'); ?>css/rinoa/go.png" /><label class="button_label">Go!</label></a>
 					<a href="#" class="button_small" id="filter_reset"><label class="button_label">Reset</label></a>
-					<a href="#" class="button_small" id="filter_reset_date"><label class="button_label">First Day</label></a>
+					<!-- <a href="#" class="button_small" id="filter_reset_date"><label class="button_label">Go To First Day</label></a> -->
 					<!-- add a now button -->
-					<a href="javascript:prev_page()" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>
-					<a href="javascript:next_page()" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>
+					
 				</div>
 				</div>
 				<div id="favoritesOnly" style="display:none">
