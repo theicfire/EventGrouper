@@ -22,8 +22,26 @@ function scroll_handler(event) // used to determine when the toolbar should scro
 	}
 }
 
-function map_init(latitude, longitude) //initialize map in event popup
+function map_init(latitude, longitude, goto_num) //initialize map in event popup
 {
+	
+	var latlng = new google.maps.LatLng(latitude, longitude);
+    var myOptions = {
+      zoom: 16,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("event_map_container"),
+        myOptions);
+        
+    var marker = new google.maps.Marker({
+      position: latlng, 
+      map: map
+	});  
+	
+	google.maps.event.addListener(marker, 'click', function(){ goto_on_map( goto_num) });
+
+/*
 	var map;
 	var default_zoom_level = 16;
 	if (GBrowserIsCompatible()) {
@@ -38,8 +56,7 @@ function map_init(latitude, longitude) //initialize map in event popup
 	map.enableContinuousZoom();
 	
 	map.addOverlay( new GMarker( new GLatLng(latitude, longitude) ) );
-
-  }
+*/
 }
 
 function toggle_top()
@@ -109,7 +126,7 @@ function openEventPopup(ob) {
 		$( "#event-content" ).html(data);
 		$( "#event-content" ).show();
 		if (latitude.length != 0) 
-			map_init(latitude, longitude);
+			map_init(latitude, longitude, id);
 		givePopupsAndEventsJs();
 		$('#eventloadingimage').hide();
 		
