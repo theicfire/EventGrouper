@@ -52,11 +52,13 @@ a
 #uh_left
 {
 	float: left;
+	margin: 4px;
 }
 
 #uh_right
 {
 	float: right;
+	margin: 3px;
 }
 
 .uh_logo
@@ -66,7 +68,7 @@ a
 	font-style: italic;
 	font-size: 1.1em;
 	text-decoration: none;
-	padding-left: 10px;
+	padding-right:10px;
 }
 
 .general_link
@@ -81,15 +83,17 @@ a
 {
 	border-bottom: #666 1px solid;
 	padding-left: 10px;
+	margin-top: 3px;
 }
 
 #mt_list
 {
+float: left;
 }
 
 .mt_tab
 {
-	
+	float: left;
 }
 
 .mt_tab a

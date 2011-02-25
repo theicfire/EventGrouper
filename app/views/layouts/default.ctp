@@ -87,7 +87,7 @@ This site does not work with Javascript disabled. Please enable Javascript.
 	    </div>
     <?php } else {?>
     
-	    <div id="universal_header">
+	    <!--<div id="universal_header">
 			<div id="uh_left"><?php echo $html->link("EventSatellite", "/", array('class'=>'uh_logo'))?></div>
 		        
 			<?php
@@ -101,7 +101,7 @@ This site does not work with Javascript disabled. Please enable Javascript.
 				<div id="uh_right"><?php echo "Logged in as: ".$this->Session->read('username');?> | <?php echo $html->link("Admin Panel Home", "/users/index");?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?></div>
 			<?php }?>
 			<div class="clear"></div>
-	    </div>
+	    </div>-->
     <?php }?>
     
     

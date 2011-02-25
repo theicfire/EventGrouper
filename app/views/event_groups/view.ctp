@@ -34,11 +34,31 @@ foreach ($eventGroups as $eventGroup) {
 	<div id="noscroll">
 	
 	<div id="main_tabs"> 
+	
+	<div id="uh_left"><?php echo $html->link("EventSatellite", "/", array('class'=>'uh_logo'))?></div>
+	<div id="uh_right">
+	
+	<?php
+			if ($this->Session->read('username') == null) {
+				?>
+				<div id="loggedIn" style="display:none"></div>
+				<?php echo $html->link("Log In", "/login", array('id' => 'login', 'class'=>'uh_link'));?> | <?php echo $html->link("Register", "/users/add", array('class'=>'uh_link'));?>
+				<?php 
+			} else {
+		        ?>
+				<?php echo "".$this->Session->read('username');?> | <?php echo $html->link("Admin", "/users/index");?> | <?php echo $html->link("Log Out", "/logout", array("class" => "logoutlink"));?>
+			<?php }?>
+	
+	</div>
 			<ul id="mt_list">
-				<li class="mt_tab"><a class="active" href="#" id="gotoall"><?=$currenteventGroup['EventGroup']['highest_name']?></a></li> <?php //possibly add icons to the other tabs ?>
+				<li class="mt_tab"><a href="#">Back to CPW website</a></li>
+				<li class="mt_tab"><a class="active" href="#" id="gotoall">CPW Schedule</a></li> <?php //possibly add icons to the other tabs ?>
 				<li class="mt_tab"><a href="#" id="gotoschedule"><img src="<?php echo $html->url('/'); ?>css/rinoa/favorites.png" class="tab_icon"  /> Favorites</a></li> 
 				<div class="clear"></div>
 			</ul>
+			
+			
+	
 			<div class="clear"></div>
 		</div> 
 	
@@ -139,28 +159,43 @@ foreach ($eventGroups as $eventGroup) {
 				</div>
 
 				<div class="filter_section">
-					<a href="javascript:toggle_compact()">shrink</a>
 				
 					<script type="text/javascript">
+						
+						$( function(){check_width()} );
+						$(window).resize( function(){check_width()});
+						
 						compact = true;
 						
-						$(function(){
+						function set_text(){
+							$(".long_text").css("display","inline");
+							$(".compact_icons").css("display","none");
+							compact = false;
+						}
+						
+						function set_icons(){
+							$(".long_text").css("display","none");
+							$(".compact_icons").css("display","inline");
+							compact = true;
+						}
+						
+						function check_width(){
 							if($(document).width()>960){
-								toggle_compact();
-							}
-						});
-					
-						function toggle_compact(){
-							if(!compact){
-								$(".long_text").css("display","none");
-								$(".compact_icons").css("display","inline");
-								compact = true;
+								set_text();
 							} else {
-								$(".long_text").css("display","inline");
-								$(".compact_icons").css("display","none");
-								compact = false;
+								set_icons();
 							}
 						}
+					
+						function toggle_compact(){
+							if(compact){
+								set_text();
+							} else {
+								set_icons();
+							}
+						}
+						
+						
 					
 					</script>
 				
