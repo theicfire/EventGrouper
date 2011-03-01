@@ -5,7 +5,11 @@
 </style>
 <?php $javascript->link('jqueryui/jquery-ui-1.8.5.custom.min.js', false); ?>
 <?php $javascript->link('jqueryui/jquery.ui.timeselector.js', false); ?>
+
+<?php $javascript->link('desktop_map.js', false); ?>
+
 <?php $javascript->link('timeline.js', false); ?>
+
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
@@ -216,8 +220,9 @@ foreach ($eventGroups as $eventGroup) {
 					 <span class="long_text">events containing text </span>
 					<span class="compact_icons"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="filter_icon" alt="Search:" title="Search" /></span>
 					<label class="form_label">Search</label>
+					<span class="r_form_tip" id="searcherr">Please search for at least 4 letters. <a href="javascript:searchErrHide()">close</a></span> <?php // needs to be styled better... ?>
 					<input type="text" name="search" id="searchBox" class="putInHash input_text" style="width: 100px;" /> 
-					<div class="r_form_tip" id="searcherr">Please search for at least 4 letters</div> <?php // needs to be styled better... ?>
+					
 
 				
 					<span class="long_text">starting at or after</span>

@@ -46,6 +46,8 @@ class EventGroupsController extends AppController {
 		$groupPath = $this->EventGroup->getPath($id);
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'eventsUnderGroup'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));	
+		
+		$this -> layout = 'timeline';
 	}
 	function view_admin() {
 		$pathUrl = explode("/",$this->params['url']['url']);

@@ -22,7 +22,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php __('EventGrouper | '); ?>
+		<?php __('Timeline | '); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
@@ -167,25 +167,9 @@ This site does not work with Javascript disabled. Please enable Javascript.
 
 </div>
 </div>
-<!--end login stuff-->
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 </div>
-    <div class="sql_dump">
-		<?php echo $this->element('sql_dump'); ?>
+    <div class="sql_dump" style="display: none;">
+		<?php //echo $this->element('sql_dump'); ?>
 	</div>
 </body>
 </html>

@@ -587,6 +587,15 @@ border: 1px solid #ccc;
 }
 #searcherr {
 	color:red;
+	
+	z-index: 900000000;
+	
+	position: absolute;
+	top: 32px;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 5px;
+	
 	display:none;
 }
 .event_tags {
