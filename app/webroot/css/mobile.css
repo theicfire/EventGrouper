@@ -97,18 +97,18 @@ span.nav_item
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 50px;
-	background: #fff;
+	height: 0px;
+	background: #eee;
+	color: #000;
+	border-bottom: 1px #777 solid;
 }
 
 #m_map_container
 {
 	display: block;
 	position: absolute;
-	top: 50px;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	height: 100%;
+	width: 100%;
 	background: #fff;
 }
 

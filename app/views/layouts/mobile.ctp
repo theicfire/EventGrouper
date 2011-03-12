@@ -38,7 +38,7 @@
 	
 </head>
 <body>
-			<div class="m_header"><?php echo $html->link("RushRabbit", "/mob/index", array('class'=>'m_logo'))?> <br />
+			<div class="m_header"><?php echo $html->link("EventSatellite", "/mob/index", array('class'=>'m_logo'))?> <br />
 		        
 			<?php
 			if ($this->Session->read('username') == null) {
