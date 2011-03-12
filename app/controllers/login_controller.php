@@ -39,6 +39,7 @@ class LoginController extends AppController {
 	function logout() {
 		$this->autoRender = false;
 		$this->Session->destroy();
+		$this->redirect($this->referer());
 	}
 	
 	
