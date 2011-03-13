@@ -35,7 +35,7 @@
 		
 							<div class="favwrap<?=$onUserCalendar?" onCalendar":""?>" style="display:inline" id="favevent-<?=$event['Event']['id']?>">
 								<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
-								<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="msr_fav_icon"  />
+								<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add_muted.png" class="msr_fav_icon"  />
 								</a>
 								
 								<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
