@@ -1,7 +1,7 @@
 <div id="desktop_map_window">
 	<div id="desktop_map_event_list">
 		<h2>Search Results</h2>
-		
+		<?=$this->element('paginate')?>
 		<?php
 		echo "<span id='json_map_data' style='display: none'>";
 		echo json_encode($eventsUnderGroup);
