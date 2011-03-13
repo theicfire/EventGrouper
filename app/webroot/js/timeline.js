@@ -161,8 +161,10 @@ function refreshEvents(isCalendar, keepPage) {
 	if (!keepPage) {
 		$('#p').val(1);
 	}
-	if (isCalendar)
+	if (isCalendar) {
 		getEvents('01/01/1970', '', '0', $("#viewType").val(), 1);
+		console.log('calendar!');
+	}
 	else
 		getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val(), $("#p").val());
 	$(window).scrollTop(0);
@@ -255,6 +257,7 @@ function setHashFromPage(){
 	for (var key in paramArr) {
 		urlStrArr.push(key+"="+paramArr[key]);
 	}	
+	console.log('changing to ', '#' + urlStrArr.join("&"));
 	changeHash('#' + urlStrArr.join("&"));
 	
 	
@@ -264,6 +267,7 @@ function setPageFromHash(){
 	if (location.hash){
 		currentHash = location.hash;
 		hash =location.hash.substring(1);
+		console.log('loading page from hash: ', hash);
 		urlStrArr = hash.split("&");
 		for (var key in urlStrArr) {
 			var params = urlStrArr[key].split("=");
@@ -314,9 +318,12 @@ function viewAll() {
 }
 function viewSchedule() {
 	if ($('#loggedIn').length != 0) {
+		changeHash(setInHash('viewType', ''));
+		console.log('not logged in');
 		$( "#dialog-form" ).dialog( "open" );
 		return false;
 	}
+	console.log('yeah, logged in');
 	$("#gotoschedule").addClass('active');
 	$("#gotoall").removeClass('active');
 	refreshEvents(true);
@@ -344,9 +351,8 @@ $(document).ready( function(){
 		return false;
 	});
 	$("#gotoschedule").click(function() {
-		if (viewSchedule()) {
-			changeHash(setInHash('viewType', 'calendar'));
-		}
+		changeHash(setInHash('viewType', 'calendar'));
+		loadPage();
 		return false;
 	});
 	$(".viewDrop").change(function(){
@@ -382,6 +388,7 @@ $(document).ready( function(){
 				location.hash = setInHash('viewType', 'calendar');
 			} else {
 				location.hash = setInHash('viewType', '');	
+				console.log('no calendar');
 			}
 		}
 		return false;
