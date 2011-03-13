@@ -48,11 +48,6 @@
  * Inflector::rules('plural', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  *
  */
-//Configure::write('FACEBOOK_APP_ID', '123876877669639');
-Configure::write('FACEBOOK_APP_ID', 'wrong');
-Configure::write('FACEBOOK_SECRET', '354b198fe792508dc25ce876f0156adf');
-Configure::write('MAPS_API_KEY', 'ABQIAAAAABnzd6MWnqrMp7oQmyOPmBSW7hyS5vOvcQCuXt8EmMEKI80i2RR3xMIG6NF8bxzodys0scGwnqS4kA');
-//Configure::write('MAPS_API_KEY', 'ABQIAAAAABnzd6MWnqrMp7oQmyOPmBQTt_Yy1q7-WtRWDymWOc7qKNnd8BQarfgCxx2e3wwaCijgqEBfPLbcfw');
 
 function urldecodecustom($url) {
 	return preg_replace("/-/", " ",$url);
