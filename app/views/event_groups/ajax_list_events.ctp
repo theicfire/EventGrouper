@@ -97,7 +97,7 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) //main loop
 			<?php // button to add to favorites ?>
 			<div class="favwrap<?=$onUserCalendar?" onCalendar":""?>" style="display:inline" id="favevent-<?=$event['Event']['id']?>">
 				<a href="#" class="scheduletoggle addToSchedule" style="<?php if ($onUserCalendar) { echo "display:none";} ?>">
-				<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add.png" class="timeline_icon"  />
+				<img src="<?php echo $html->url('/'); ?>css/rinoa/favorites_add_muted.png" class="timeline_icon"  />
 				</a>
 				
 				<a href="#" class="scheduletoggle removeFromSchedule" style="<?php if (!$onUserCalendar) { echo "display:none";} ?>">
