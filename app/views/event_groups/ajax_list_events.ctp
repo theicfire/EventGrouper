@@ -1,29 +1,28 @@
 <div class="ajax_event_list">
 
-
-<?php if ($curPage != 1) {
-	echo '<a href="javascript:prev_page()" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>';
-}?>
 <?php 
-if ($curPage-2 > 1) {
-	echo "...";
-}
-for ($i = $curPage-2; $i <= $curPage+2; $i++) {
-	if ($i > 0 && $i < $totalEventCount/10){ // page is hardcoded
-		$style = "";
-		if ($i == $curPage) $style = "style='font-weight:bold'";
-		echo "<a href=\"javascript:go_to_page(".$i.")\" class=\"button_small\" ".$style.">".$i."</a> ";
+if (isset($curPage)) {
+	if ($curPage != 1) {
+		echo '<a href="javascript:prev_page()" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>';
+	}
+	if ($curPage-2 > 1) {
+		echo "...";
+	}
+	for ($i = $curPage-2; $i <= $curPage+2; $i++) {
+		if ($i > 0 && $i < $totalEventCount/$eventsPerPage){ // page is hardcoded
+			$style = "";
+			if ($i == $curPage) $style = "style='font-weight:bold'";
+			echo "<a href=\"javascript:go_to_page(".$i.")\" class=\"button_small\" ".$style.">".$i."</a> ";
+		}
+	}
+	
+	if ($curPage < ($totalEventCount-1)/$eventsPerPage-1) {
+		echo '<a href="javascript:next_page()" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>';
 	}
 }
 ?>
-<?php 
-?>
-<?php if ($curPage < ($totalEventCount-1)/10-1) {
-	echo '<a href="javascript:next_page()" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>';
-}?>
 
 
-<input id="eventCount" type="hidden" value="<?php echo count($eventsUnderGroup)?>">
 	<?php //if there are no events, show this message
 	if (count($eventsUnderGroup) == 0)
 	{ ?>

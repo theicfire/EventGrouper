@@ -364,6 +364,7 @@ class EventGroupsController extends AppController {
 			else
 				$eventsUnderGroup = array();
 		} else {
+			$eventsPerPage = 10;
 			$p = 1;
 			if (isset($this->params['url']['p'])) {
 				$p = $this->params['url']['p'];
@@ -371,7 +372,7 @@ class EventGroupsController extends AppController {
 			$curPage = $p;
 			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params);
 			$totalEventCount = count($eventsUnderGroup); // super inefficient; this should be cached in a db table.
-			$eventsUnderGroup = array_slice($eventsUnderGroup, ($p-1)*10, 10);
+			$eventsUnderGroup = array_slice($eventsUnderGroup, ($p-1)*$eventsPerPage, $eventsPerPage);
 		}
 		if (strpos($this->params['url']['viewType'], 'map') !== false) {
 			$newArr = array();
@@ -382,7 +383,8 @@ class EventGroupsController extends AppController {
 			}
 			$eventsUnderGroup = $newArr;
 		}
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum','currenteventGroup', 'totalEventCount', 'curPage'));
+		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum',
+		'currenteventGroup', 'totalEventCount', 'curPage', 'eventsPerPage'));
 	}
 	
 	
