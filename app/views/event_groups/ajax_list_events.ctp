@@ -107,4 +107,6 @@ for ($i = 0; $i < count($eventsUnderGroup); $i++) //main loop
 
 <?=$this->element('paginate')?>
 
+<br /><br /><span class="footnote">CPW Scheduler by Chase Lambert and Sashko Stubailo, Class of 2014</span>
+
 </div>
