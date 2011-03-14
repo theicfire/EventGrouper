@@ -7,8 +7,8 @@ function scroll_handler(event) // used to determine when the toolbar should scro
 {
 	if( !floating && $("#scroll_locator").offset().top <= $(window).scrollTop() )
 	{
-		$("#scroll").addClass("yes_scroll");
 		$("#spacer").height($("#scroll").outerHeight());
+		$("#scroll").addClass("yes_scroll");
 		floating = true;
 	} else if( floating && $("#scroll_locator").offset().top > $(window).scrollTop()) {
 		$("#scroll").removeClass("yes_scroll");

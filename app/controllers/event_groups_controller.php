@@ -47,6 +47,7 @@ class EventGroupsController extends AppController {
 		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'eventsUnderGroup'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));	
 		
+		$this -> pageTitle = 'Schedule';
 		$this -> layout = 'timeline';
 	}
 	function view_admin() {
@@ -328,15 +329,15 @@ class EventGroupsController extends AppController {
 	}
 	function ajaxListEvents($id) {
 		
-		$this->sharedAjaxList($id);
+		$this->sharedAjaxList($id, 30);
 		
 		$this->render('ajax_list_events', 'ajax');
 	}
 	function map_view($id) {
-		$this->sharedAjaxList($id);
+		$this->sharedAjaxList($id, 10);
 		$this->render('map_view', 'ajax');
 	}
-	function sharedAjaxList($id) {
+	function sharedAjaxList($id, $eventsPerPage) {
 		
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('Event'),
@@ -364,7 +365,6 @@ class EventGroupsController extends AppController {
 			else
 				$eventsUnderGroup = array();
 		} else {
-			$eventsPerPage = 10;
 			$p = 1;
 			if (isset($this->params['url']['p'])) {
 				$p = $this->params['url']['p'];

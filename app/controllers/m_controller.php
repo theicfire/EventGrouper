@@ -39,6 +39,10 @@ class MController extends AppController {
 	function view($id) {
 		$this->sharedList($id);
 	}
+	function gencal($id) {
+		$this->layout = '';
+		$this->sharedList($id);
+	}
 	function map($id) {
 		$this->layout = '';
 		$this->sharedList($id, 'map');
