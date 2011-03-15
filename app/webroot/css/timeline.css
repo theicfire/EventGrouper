@@ -644,3 +644,17 @@ border: 1px solid #ccc;
 	padding: 5px;
 	border-top: 1px dashed #ccc;
 }
+
+.paginate_box
+{
+	float: left;
+	margin: 0px 0 10px 7px;
+	border: 1px dashed #ccc;
+	padding: 5px;
+}
+
+.p_active_page
+{
+	font-weight: bold;
+	text-decoration: none;
+}

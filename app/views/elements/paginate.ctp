@@ -1,22 +1,49 @@
 
 <?php 
-if (isset($curPage)) {
-	if ($curPage != 1) {
-		echo '<a href="javascript:prev_page()" class="button_small" id="prevpage"><label class="button_label">Previous Page</label></a>';
+if (isset($curPage)) { ?>
+<div>
+<div class="paginate_box">
+
+<?php
+
+	$numPages = ceil($totalEventCount/$eventsPerPage);
+	$firstPage = $curPage == 1;
+	$lastPage = $curPage == $numPages;
+	
+	echo 'Displaying results ' . (($curPage-1)*$eventsPerPage+1) . ' to ' . min(($curPage)*$eventsPerPage, $totalEventCount) . ' out of ' . $totalEventCount . '. ';
+
+	if (! $firstPage) {
+		echo '<a href="javascript:prev_page()" id="prevpage"><label class="button_label">Previous Page</label></a>';
 	}
 	if ($curPage-2 > 1) {
-		echo "...";
+		echo " ...";
 	}
-	for ($i = $curPage-2; $i <= $curPage+2; $i++) {
-		if ($i > 0 && $i < $totalEventCount/$eventsPerPage){ // page is hardcoded
-			$style = "";
-			if ($i == $curPage) $style = "style='font-weight:bold'";
-			echo "<a href=\"javascript:go_to_page(".$i.")\" class=\"button_small\" ".$style.">".$i."</a> ";
+	
+	if( $numPages > 1 ){
+		for ($i = $curPage-2; $i <= $curPage+2; $i++) {
+			if ($i > 0 && $i <= $numPages){ // page is hardcoded
+				$style = "";
+				if ($i == $curPage) $style = "class='p_active_page'";
+				echo " <a href=\"javascript:go_to_page(".$i.")\" ".$style.">".$i."</a> ";
+			}
 		}
 	}
 	
-	if ($curPage < ($totalEventCount-1)/$eventsPerPage-1) {
-		echo '<a href="javascript:next_page()" class="button_small" id="nextpage"><label class="button_label">Next Page</label></a>';
+	if ($curPage+2 < $numPages) {
+		echo " ...";
 	}
+	
+	if (! $lastPage) {
+		echo ' <a href="javascript:next_page()" id="nextpage"><label class="button_label">Next Page</label></a>';
+	}
+	
+	?>
+	
+	</div>
+	
+	<div class="clear"></div>
+	</div>
+	
+	<?php
 }
 ?>

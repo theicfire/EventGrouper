@@ -22,7 +22,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php __('Timeline | '); ?>
+		<?php __('MIT CPW | '); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
