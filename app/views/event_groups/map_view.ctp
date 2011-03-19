@@ -80,7 +80,12 @@
 												echo "Tags: ";
 												$tagArr = explode(" ", $event['Event']['tags']);
 												foreach ($tagArr as $tag) {
-														echo "<a href='#' class='tagLink'>".trim($tag)."</a> ";	
+														echo "<a href='";
+														
+														echo "javascript:$(\"#searchBox\").val(\"".trim($tag)."\");";
+														echo "refreshEvents();";
+														
+														echo "' class='tagLink'>".trim($tag)."</a> ";	
 												}
 											?>
 										</span>

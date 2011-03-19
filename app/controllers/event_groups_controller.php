@@ -329,12 +329,12 @@ class EventGroupsController extends AppController {
 	}
 	function ajaxListEvents($id) {
 		
-		$this->sharedAjaxList($id, 30);
+		$this->sharedAjaxList($id, 20);
 		
 		$this->render('ajax_list_events', 'ajax');
 	}
 	function map_view($id) {
-		$this->sharedAjaxList($id, 10);
+		$this->sharedAjaxList($id, 20);
 		$this->render('map_view', 'ajax');
 	}
 	function sharedAjaxList($id, $eventsPerPage) {

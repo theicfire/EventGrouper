@@ -39,7 +39,7 @@ foreach ($eventGroups as $eventGroup) {
 	
 	<div id="main_tabs"> 
 	
-	<div id="uh_left"><?php echo $html->link("EventSatellite", "/", array('class'=>'uh_logo'))?></div>
+	<div id="uh_left"><?php echo $html->link("CPW Events", "/", array('class'=>'uh_logo'))?></div>
 	<div id="uh_right">
 	
 	<?php

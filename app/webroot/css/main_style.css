@@ -473,7 +473,7 @@ right: 0;
 
 .fixed_width_page
 {
-	width: 960px;
+	width: 720px;
 	margin: 0 auto;
 }
 
@@ -483,3 +483,24 @@ right: 0;
 	left: -15px;
 	margin-right: -30px;
 }
+
+
+/* front page ********************/
+
+.spacer
+{
+	height: 10px;
+	overflow: hidden;
+}
+
+.fp_title
+{
+	font-size: 3em;
+	color: #444;
+}
+
+.fpn_h2
+{
+	font-size: 1.5em;
+}
+
