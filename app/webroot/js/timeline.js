@@ -428,6 +428,14 @@ function go_to_page( page_number )
 	$('#p').val( page_number );
 	refreshEvents(false, true);
 }
+function go_to_typed_page(numpages)
+{
+	value = parseInt($("#goToPageBox").val());
+	if( value > numpages || value <1 )
+	{
+		alert(value);
+	}
+}
 function next_page()
 {
 	go_to_page( get_current_page() + 1 );

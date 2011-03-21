@@ -73,7 +73,7 @@
 <p>Welcome to the new...</p>
 <h1 class="fp_title">CPW event system</h1>
 
-<p><a href='cpw'>Click here to see the events!</a></p>
+<p><a href='<?=$html->url('/cpw') ?>'>Click here to see the events!</a></p>
 
 <div class="hr">&nbsp;</div>
 
