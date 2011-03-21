@@ -55,8 +55,10 @@ foreach ($eventGroups as $eventGroup) {
 	
 	</div>
 			<ul id="mt_list">
-				<li class="mt_tab"><a href="#">Back to CPW website</a></li>
-				<li class="mt_tab"><a class="active" href="#" id="gotoall">CPW Schedule</a></li> <?php //possibly add icons to the other tabs ?>
+				<li class="mt_tab"><a 
+href="http://web.mit.edu/admissions/cpw/">Back to CPW website</a></li>
+				<li class="mt_tab"><a class="active" href="#" 
+id="gotoall">CPW Schedule</a></li> <?php //possibly add icons to the other tabs ?>
 				<li class="mt_tab"><a href="#" id="gotoschedule"><img src="<?php echo $html->url('/'); ?>css/rinoa/favorites.png" class="tab_icon"  /> Favorites</a></li> 
 				<div class="clear"></div>
 			</ul>
