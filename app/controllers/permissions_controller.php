@@ -116,18 +116,20 @@ class PermissionsController extends AppController {
 		
 		
 		
-		$content = file_get_contents('http://localhost/eventgrouper/xlsparser/trythis.csv');
+		$content = file_get_contents('http://localhost/eventgrouper/eventlist3.csv');
 		$data = str_getcsv($content, "\n");
 		array_shift($data); // delete first element which is just field names
-		
+		$num = 0;
+		$prevId = 0;
 		foreach ($data as $dat) {
-			$row = str_getcsv($dat, ';', '\'');
+			$num++;
+			$row = str_getcsv($dat, ';', '"');
 			$timeStart = date("Y-m-d H:i:s", strtotime($row[0]." ".$row[1]));
-			print_r($row);
+			//print_r($row);
 			$timeEnd = date("Y-m-d H:i:s", strtotime($row[0]." ".$row[2]));
 			$duration = (strtotime($timeEnd) - strtotime($timeStart))/60;
 			if ($duration < 0) $duration += 24*60;
-			
+			if ($row[2] == "?") $duration = 60; // stupid case...
 			
 			$insertArr = array('Event' =>
 				array(
@@ -163,7 +165,7 @@ class PermissionsController extends AppController {
 					'D' => 'Dormitory',
 					'P' => 'Parents',
 					'G' => 'Religious',
-					'O' => 'Student, Oraganization',
+					'O' => 'Student Oraganization',
 					'M' => 'minority',
 					'U' => 'UROP',
 					'L' => 'L',
@@ -178,109 +180,31 @@ class PermissionsController extends AppController {
 					$tagArr[] = $tagList[strtoupper(substr($insertArr['Event']['tags'], $j, 1))];
 				}
 				$insertArr['Event']['tags'] = implode(' ', $tagArr);
-				pr($insertArr);
+				//pr($insertArr);
 				$this->Event->create();
 				$this->Event->save($insertArr);
 				
 				$eventId = $this->Event->getLastInsertId();
+				if ($prevId+1 != $eventId) {
+					pr($insertArr);
+				}
+				$prevId = $eventId;
+				echo $eventId." ". $row[4] ."<br>";
 				$acoArr = array(
 						'model' => 'Event',
 						'parent_id' => 7,//important
 						'foreign_key' => $eventId
 					);
-	//			print_r($acoArr);
+				//print_r($acoArr);
 				$this->Acl->Aco->create();
 				$this->Acl->Aco->save($acoArr);
 				//
 		
 		}
+		echo $num;
 		
 		
 		
-		
-		
-		
-		/*
-		$content = 
-		<<<EOT
-
-EOT;
-	for ($i = 0; $i < 100; $i++) {
-		preg_match_all("@<tr>.*<td>(.*)</td>.*<td>(.*)</td>.*<td>(.*)</td>.*<td>(.*)</td>.*<td>(.*)</td>.*</tr>@sU", $content, $matches);
-		$events = array();
-		for ($i = 0; $i < count($matches[1]); $i++) {
-			$times = explode("-", $matches[1][$i]);
-			$timeStart = date("Y-m-d H:i:s", strtotime("11 April 2010 ".$times[0]));//important
-//			print_r($times);
-			if (empty($times[1]))
-				$duration = 60;
-			else {
-				$duration = (strtotime("11 April 2010 ".$times[1]) - strtotime("11 April 2010 ".$times[0]))/60;
-				if ($duration < 0)
-					$duration = (strtotime("12 April 2010 ".$times[1]) - strtotime("11 April 2010 ".$times[0]))/60;
-			}
-			
-			$insertArr = array('Event' =>
-				array(
-					'title' => $matches[3][$i],
-					'location' => $matches[4][$i],
-					'description' => $matches[5][$i],
-					'event_group_id' => 101,//important
-//					'time_start' => $timeStart,
-					'duration' => $duration,
-					'user_id' => 37,//important
-					'tags' => $matches[2][$i],
-					'status' => 'confirmed'
-				),
-				'Other' =>
-				array(
-					'date_start' => date('Y-m-d', strtotime($timeStart)),
-					'time_start' => date('H:i:s', strtotime($timeStart)),
-					'date_end' => date('Y-m-d', strtotime($timeStart)+$duration*60),
-					'time_end' => date('H:i:s', strtotime($timeStart)+$duration*60)
-				)
-			);
-			$tagList = array(
-				'A' => 'Academic',
-				'R' => 'Arts',
-				'S' => 'Athletic',
-				'T' => 'Tour',
-				'C' => 'Class',
-				'F' => 'fraternity, sorority, living',
-				'*' => 'featured',
-				'D' => 'Dormitory',
-				'P' => 'Parents',
-				'G' => 'Religious',
-				'O' => 'Student, Oraganization',
-				'M' => 'minority',
-				'U' => 'UROP'
-			
-			);
-			$tagArr = array();
-			for ($j = 0; $j < strlen($insertArr['Event']['tags']); $j++) {
-				$tagArr[] = $tagList[substr($insertArr['Event']['tags'], $j, 1)];
-			}
-			$insertArr['Event']['tags'] = implode(' ', $tagArr);
-//			pr($insertArr);
-			$this->Event->create();
-			$this->Event->save($insertArr);
-			
-			$eventId = $this->Event->getLastInsertId();
-			$acoArr = array(
-					'model' => 'Event',
-					'parent_id' => 101,//important
-					'foreign_key' => $eventId
-				);
-//			print_r($acoArr);
-			$this->Acl->Aco->create();
-			$this->Acl->Aco->save($acoArr);
-		}
-	}//*/
-//		print_r($events);
-//		print_r($matches);
-//		echo date("Y-m-d H:i:s", strtotime("8 April 2010 11:00pm"));
-//		echo "<br>";
-//		echo (strtotime("8 April 2010 11:00pm") - strtotime("8 April 2010 10:00pm"))/60;
 	}
 
 }
