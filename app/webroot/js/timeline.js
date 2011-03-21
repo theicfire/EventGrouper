@@ -150,10 +150,10 @@ function refreshEvents(isCalendar, keepPage) {
 	if (!keepPage) {
 		$('#p').val(1);
 	}
-	if (isCalendar) {
+	/*if (isCalendar) {
 		getEvents('01/01/1970', '', '0', $("#viewType").val(), 1);
 	}
-	else
+	else*/
 		getEvents($("#datestart").val(), $("#searchBox").val(), $("#time_start").val(), $("#viewType").val(), $("#p").val());
 	$(window).scrollTop(0);
 	setHashFromPage();
@@ -311,9 +311,10 @@ function viewSchedule() {
 	$("#gotoschedule").addClass('active');
 	$("#gotoall").removeClass('active');
 	refreshEvents(true);
-	$("#timelineOnly").hide();
-	$("#favoritesOnly").show();
-	
+	//$("#timelineOnly").hide();
+	//$("#favoritesOnly").show();
+	$("#timelineOnly").show();
+	$("#favoritesOnly").hide();
 	$("#conference_info").hide();
 	return true;
 }

@@ -56,7 +56,7 @@
 									<div style="display:none" id="latitude"><?=$event['Event']['latitude']?></div>
 									<div style="display:none" id="longitude"><?=$event['Event']['longitude']?></div>
 									
-									<h3 class="event_title" style="display: inline"><?php echo $html->link($event['Event']['title'], array('controller' => 'events', 'action' => 'view', $event['Event']['id']), array('class' => "group_".$event['EventGroup']['id'])); ?></h3> 
+									<h3 class="event_title" style="display: inline"><?php echo $event['Event']['title']; ?></h3> 
 									&nbsp; 
 									<span class="event_time">
 										<?php
