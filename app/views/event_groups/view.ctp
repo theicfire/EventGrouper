@@ -39,7 +39,7 @@ foreach ($eventGroups as $eventGroup) {
 	
 	<div id="main_tabs"> 
 	
-	<div id="uh_left"><?php echo $html->link("EventSatellite", "/", array('class'=>'uh_logo'))?></div>
+	<div id="uh_left"><?php echo $html->link("CPW Events", "/", array('class'=>'uh_logo'))?></div>
 	<div id="uh_right">
 	
 	<?php
@@ -275,10 +275,10 @@ foreach ($eventGroups as $eventGroup) {
 					
 					<select name="date_start" id="datestart" class="input_text putInHash">
 						
-						<option value="04/07/2010">Thursday, Apr 7, 2011</option>
-						<option value="04/08/2010">Friday, Apr 8, 2011</option>
-						<option value="04/09/2010">Saturday, Apr 9, 2011</option>
-						<option value="04/10/2010">Sunday, Apr 10, 2011</option>
+						<option value="04/07/2011">Thursday, Apr 7, 2011</option>
+						<option value="04/08/2011">Friday, Apr 8, 2011</option>
+						<option value="04/09/2011">Saturday, Apr 9, 2011</option>
+						<option value="04/10/2011">Sunday, Apr 10, 2011</option>
 					
 					</select>
 					

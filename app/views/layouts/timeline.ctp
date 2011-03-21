@@ -21,9 +21,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php __('MIT CPW | '); ?>
-		<?php echo $title_for_layout; ?>
+	<title>CPW Events
+		<?php //__('CPW Events'); ?>
+		<?php // echo $title_for_layout; ?>
 	</title>
 	    <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/>
 <!--    todo make local-->

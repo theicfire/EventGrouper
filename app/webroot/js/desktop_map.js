@@ -100,6 +100,7 @@ function open_window_by_i( number ) //open the window associated with that 'i'
 		map_data[j].infowindow.close();
 	}
 	i.open(map, m);
+	
 }
 
 function bindInfoWindow(marker, map, infoWindow, html) //binds opening the infowindow to clicking on the marker
