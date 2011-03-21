@@ -31,7 +31,7 @@ class EventGroupsController extends AppController {
 			$this->Session->setFlash(__('Invalid EventGroup.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->MyAcl->runcheck('EventGroup',$id,'read');
+		//$this->MyAcl->runcheck('EventGroup',$id,'read');
 		
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('Event'),
@@ -51,6 +51,7 @@ class EventGroupsController extends AppController {
 		$this -> layout = 'timeline';
 	}
 	function view_admin() {
+		
 		$pathUrl = explode("/",$this->params['url']['url']);
 		unset($pathUrl[0]);
 		unset($pathUrl[1]);
@@ -63,7 +64,7 @@ class EventGroupsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 //		$this->MyAcl->runcheck('EventGroup',$id,'create');
-		
+		$this->MyAcl->runcheck('EventGroup',$id,'read');
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('Event'),
 			'hasAndBelongsToMany' => array('User')	
