@@ -116,7 +116,7 @@ class PermissionsController extends AppController {
 		
 		
 		
-		$content = file_get_contents('http://localhost/eventgrouper/eventlist3.csv');
+		$content = file_get_contents('http://localhost/eventgrouper/eventlist4.csv');
 		$data = str_getcsv($content, "\n");
 		array_shift($data); // delete first element which is just field names
 		$num = 0;
