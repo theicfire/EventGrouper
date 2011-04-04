@@ -351,15 +351,15 @@ class EventGroupsController extends AppController {
 		if (array_key_exists('search', $this->params['url'])) {//has been searched
 			if (!empty($this->params['url']['search'])){
 				$params= array(
-				sprintf('MATCH(`Event.description`, `Event.title`, `Event.tags`)
-				AGAINST("%s" IN BOOLEAN MODE)', $this->params['url']['search']));
+				sprintf('MATCH(`Event.description`, `Event.title`, `Event.location`, `Event.tags`)
+				AGAINST("%s" IN BOOLEAN MODE)', preg_replace('/[^ \-+a-z0-9]/', "", $this->params['url']['search']) ));
 			}
 			$timeStart = date("Y-m-d H:i:s", strtotime($this->params['url']['date_start']) + $this->params['url']['time_start']*3600);
 			$params[] = sprintf('time_start >= \'%s\'', $timeStart); 
 		}
 		$params['status'] = array('confirmed', 'hidden');
-		$groupPath = $this->EventGroup->getPath($id);
-		$treeList = $this->EventGroup->generateTreeList();
+		//$groupPath = $this->EventGroup->getPath($id);
+		//$treeList = $this->EventGroup->generateTreeList();
 		if (strpos($this->params['url']['viewType'], 'calendar') !== false) {
 			if ($this->Session->check('userid'))
 				$eventsUnderGroup = $this->EventGroup->getFavorites($this->Session->read('userid'));
@@ -384,7 +384,7 @@ class EventGroupsController extends AppController {
 			}
 			$eventsUnderGroup = $newArr;
 		}
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum',
+		$this->set(compact(/*'groupPath', */'eventsUnderGroup', 'eventGroups', 'aclNum',
 		'currenteventGroup', 'totalEventCount', 'curPage', 'eventsPerPage'));
 	}
 	
