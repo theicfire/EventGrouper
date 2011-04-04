@@ -158,7 +158,7 @@ This site does not work with Javascript disabled. Please enable Javascript.
     
 </div>
     <div class="sql_dump">
-		<?php //echo $this->element('sql_dump'); ?>
+		<?php echo $this->element('sql_dump'); ?>
 	</div>
 </body>
 </html>

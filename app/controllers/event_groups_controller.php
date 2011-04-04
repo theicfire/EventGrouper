@@ -4,7 +4,7 @@ class EventGroupsController extends AppController {
 	var $name = 'EventGroups';
 	var $uses = array('EventGroup', 'User', 'UserAlias');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
-	var $components = array('Acl', 'MyAcl', 'Facebook', 'Email');
+	var $components = array('Acl', 'MyAcl', 'Email');
 
 	function index() {
 		$this->Session->write('testses', 'stuffinhere');
@@ -43,8 +43,8 @@ class EventGroupsController extends AppController {
 		$eventGroups = $this->EventGroup->children($id);
 		//just doing this to get the earliest date
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
-		$groupPath = $this->EventGroup->getPath($id);
-		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'eventsUnderGroup'));
+		//$groupPath = $this->EventGroup->getPath($id);
+		$this->set(compact(/*'groupPath', */'eventGroups', 'currenteventGroup', 'eventsUnderGroup'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));	
 		
 		$this -> pageTitle = 'Schedule';
