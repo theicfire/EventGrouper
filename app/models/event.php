@@ -44,23 +44,7 @@ class Event extends AppModel {
 		)
 	);
 
-	var $hasAndBelongsToMany = array(
-		'User' => array(
-			'className' => 'User',
-			'joinTable' => 'events_users',
-			'foreignKey' => 'event_id',
-			'associationForeignKey' => 'user_id',
-			'unique' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
-		)
-	);
+
 	
 	function delete($id) {
 		$this->query("DELETE FROM events WHERE id=".$id);
