@@ -36,18 +36,18 @@ class MController extends AppController {
 			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
 		$this->set(compact('id', 'currenteventGroup'));		
 	}
-	function view($id) {
+	function view($id = 7) {
 		$this->sharedList($id);
 	}
-	function gencal($id) {
+	function gencal($id = 7) {
 		$this->layout = '';
 		$this->sharedList($id);
 	}
-	function map($id) {
+	function map($id = 7) {
 		$this->layout = '';
 		$this->sharedList($id, 'map');
 	}
-	function sharedList($id, $viewType = null) {
+	function sharedList($id, $eventsPerPage = 20, $viewType = null) {
 		
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'id' => $id)));
@@ -91,9 +91,18 @@ class MController extends AppController {
 			$eventsUnderGroup = $newArr;
 		}
 		
+		$p = 1;
+			if (isset($this->params['url']['p'])) {
+				$p = $this->params['url']['p'];
+			}
+			$curPage = $p;
+			$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), $params);
+			$totalEventCount = count($eventsUnderGroup); // super inefficient; this should be cached in a db table.
+			$eventsUnderGroup = array_slice($eventsUnderGroup, ($p-1)*$eventsPerPage, $eventsPerPage);
+		
 		$urlParams = $this->params['url'];
 		
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum', 'id', 'currenteventGroup', 'urlParams'));
+		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum', 'id', 'currenteventGroup', 'urlParams', 'totalEventCount', 'curPage', 'eventsPerPage'));
 	}
 	function login() {
 		if (!empty($_POST['email'])) {

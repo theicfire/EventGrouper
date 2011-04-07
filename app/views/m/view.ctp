@@ -27,6 +27,7 @@ echo " ".$html->link('Map', "/mob/map/".$id.$getstr, array('class' => 'nav_item'
 
 if( count( $eventsUnderGroup )>0 )
 {
+	echo $this->element('paginate');
 	foreach ($eventsUnderGroup as $event) {
 		echo "<div class='m_event_block'>";
 		printf('<a href="#" class="m_event_title">%s</a><div class="m_event_time">%s</div>at %s posted by %s<br/>', $event['Event']['title'], 
