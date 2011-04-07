@@ -141,8 +141,8 @@ This site does not work with Javascript disabled. Please enable Javascript.
 </div>
 </div>
 </div>
-    <div class="sql_dump" style="display: none;">
-		<?php //echo $this->element('sql_dump'); ?>
+    <div class="sql_dump">
+		<?php echo $this->element('sql_dump'); ?>
 	</div>
 </body>
 </html>

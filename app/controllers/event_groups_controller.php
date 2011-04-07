@@ -4,7 +4,7 @@ class EventGroupsController extends AppController {
 	var $name = 'EventGroups';
 	var $uses = array('EventGroup', 'User', 'UserAlias');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
-	var $components = array('Acl', 'MyAcl', 'Facebook', 'Email');
+	var $components = array('Acl', 'MyAcl', 'Email');
 
 	function index() {
 		$this->Session->write('testses', 'stuffinhere');
@@ -31,7 +31,7 @@ class EventGroupsController extends AppController {
 			$this->Session->setFlash(__('Invalid EventGroup.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->MyAcl->runcheck('EventGroup',$id,'read');
+		//$this->MyAcl->runcheck('EventGroup',$id,'read');
 		
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('Event'),
@@ -43,14 +43,15 @@ class EventGroupsController extends AppController {
 		$eventGroups = $this->EventGroup->children($id);
 		//just doing this to get the earliest date
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
-		$groupPath = $this->EventGroup->getPath($id);
-		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'eventsUnderGroup'));
+		//$groupPath = $this->EventGroup->getPath($id);
+		$this->set(compact(/*'groupPath', */'eventGroups', 'currenteventGroup', 'eventsUnderGroup'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));	
 		
 		$this -> pageTitle = 'Schedule';
 		$this -> layout = 'timeline';
 	}
 	function view_admin() {
+		
 		$pathUrl = explode("/",$this->params['url']['url']);
 		unset($pathUrl[0]);
 		unset($pathUrl[1]);
@@ -63,7 +64,7 @@ class EventGroupsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 //		$this->MyAcl->runcheck('EventGroup',$id,'create');
-		
+		$this->MyAcl->runcheck('EventGroup',$id,'read');
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('Event'),
 			'hasAndBelongsToMany' => array('User')	
@@ -350,15 +351,15 @@ class EventGroupsController extends AppController {
 		if (array_key_exists('search', $this->params['url'])) {//has been searched
 			if (!empty($this->params['url']['search'])){
 				$params= array(
-				sprintf('MATCH(`Event.description`, `Event.title`, `Event.tags`)
-				AGAINST("%s" IN BOOLEAN MODE)', $this->params['url']['search']));
+				sprintf('MATCH(`Event.description`, `Event.title`, `Event.location`, `Event.tags`)
+				AGAINST("%s" IN BOOLEAN MODE)', preg_replace('/[^ \-+a-z0-9]/', "", $this->params['url']['search']) ));
 			}
 			$timeStart = date("Y-m-d H:i:s", strtotime($this->params['url']['date_start']) + $this->params['url']['time_start']*3600);
 			$params[] = sprintf('time_start >= \'%s\'', $timeStart); 
 		}
 		$params['status'] = array('confirmed', 'hidden');
-		$groupPath = $this->EventGroup->getPath($id);
-		$treeList = $this->EventGroup->generateTreeList();
+		//$groupPath = $this->EventGroup->getPath($id);
+		//$treeList = $this->EventGroup->generateTreeList();
 		if (strpos($this->params['url']['viewType'], 'calendar') !== false) {
 			if ($this->Session->check('userid'))
 				$eventsUnderGroup = $this->EventGroup->getFavorites($this->Session->read('userid'));
@@ -383,7 +384,7 @@ class EventGroupsController extends AppController {
 			}
 			$eventsUnderGroup = $newArr;
 		}
-		$this->set(compact('groupPath', 'eventsUnderGroup', 'treeList', 'eventGroups', 'aclNum',
+		$this->set(compact(/*'groupPath', */'eventsUnderGroup', 'eventGroups', 'aclNum',
 		'currenteventGroup', 'totalEventCount', 'curPage', 'eventsPerPage'));
 	}
 	

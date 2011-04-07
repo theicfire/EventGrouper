@@ -18,7 +18,7 @@ class MyAclComponent extends Object {
     
     
 	function check($type, $id, $action = '*') {
-		if ($action = 'read') return true; // temporary fix; instead users should be inheriting read priveliges by extending guest
+		//if ($action = 'read') return true; // temporary fix; instead users should be inheriting read priveliges by extending guest
 		$permission = false;
 		App::import('Component', 'Session');
 		$session = new SessionComponent();

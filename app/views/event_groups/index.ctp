@@ -70,10 +70,10 @@
  <div class="spacer">&nbsp;</div>
  <div class="spacer">&nbsp;</div>
  <div class="spacer">&nbsp;</div>
-<p>Welcome to the new...</p>
+<p>Welcome to the new</p>
 <h1 class="fp_title">CPW event system</h1>
 
-<p><a href='cpw'>Click here to see the events!</a></p>
+<p><a style="font-size: 2em" href='<?=$html->url('/cpw') ?>'>Click here to see the events!</a></p>
 
 <div class="hr">&nbsp;</div>
 
@@ -105,6 +105,5 @@ site has been tested on Android and iPhone.  Just point your phone's
 browser to ---------.</p>
  -->
 
-<span class="footnote">CPW Scheduler by Chase Lambert and Sashko Stubailo, Class of 2014</span>
-
+<span class="footnote">CPW Scheduler; Ceres Lee, Raven Clayborn, Sabrina Pasterski, MIT Class of 2014. Developers: Chase Lambert, Sashko Stubailo, MIT Class of 2014.  Special thanks to Ed Barrett and 21W.785.</span>
 </div>

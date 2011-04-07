@@ -36,6 +36,14 @@ if (isset($curPage)) { ?>
 	if (! $lastPage) {
 		echo ' <a href="javascript:next_page()" id="nextpage"><label class="button_label">Next Page</label></a>';
 	}
+	/*
+	if( $numPages > 1){
+		?>
+		| go to page: 
+		<input type="text" id="goToPageBox" style="width: 20px"  />
+		<a href="javascript:go_to_typed_page(<?php echo $numPages; ?>);">go</a>
+		<?php
+	} */
 	
 	?>
 	
