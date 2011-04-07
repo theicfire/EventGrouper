@@ -82,9 +82,9 @@ class EventsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Event->read(null, $id);
 		}
-		$users = $this->Event->User->find('list');
+		//$users = $this->Event->User->find('list');
 		$eventGroups = $this->Event->EventGroup->find('list');
-		$users = $this->Event->User->find('list');
+		//$users = $this->Event->User->find('list');
 		$groupPath = $this->EventGroup->getPath($groupId);
 		
 		$this->set(compact('users','eventGroups', 'eventGroupId', 'groupPath', 'eventGroup'));
