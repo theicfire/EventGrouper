@@ -349,10 +349,22 @@ class EventGroupsController extends AppController {
 		$eventGroups = $this->EventGroup->children($id);
 		$params = array();
 		if (array_key_exists('search', $this->params['url'])) {//has been searched
+		
+			$like_query = "%" . preg_replace('/[^ \-\'+a-z0-9]/', "", $this->params['url']['search']) . "%";
+			
 			if (!empty($this->params['url']['search'])){
 				$params= array(
-				sprintf('MATCH(`Event.description`, `Event.title`, `Event.location`, `Event.tags`)
-				AGAINST("%s" IN BOOLEAN MODE)', preg_replace('/[^ \-+a-z0-9]/', "", $this->params['url']['search']) ));
+				/*sprintf('MATCH(`Event.description`, `Event.title`, `Event.location`, `Event.tags`)
+				AGAINST("%s" IN BOOLEAN MODE)', preg_replace('/[^ \-\'+a-z0-9]/', "", $this->params['url']['search']) )*/
+				
+				"OR" => array(
+					"Event.description LIKE" => $like_query,
+					"Event.title LIKE" => $like_query, 
+					"Event.location LIKE" => $like_query, 
+					"Event.tags LIKE" => $like_query
+					)
+				
+				);
 			}
 			$timeStart = date("Y-m-d H:i:s", strtotime($this->params['url']['date_start']) + $this->params['url']['time_start']*3600);
 			$params[] = sprintf('time_start >= \'%s\'', $timeStart); 

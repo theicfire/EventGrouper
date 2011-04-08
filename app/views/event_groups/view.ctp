@@ -222,7 +222,7 @@ id="gotoall">CPW Schedule</a></li> <?php //possibly add icons to the other tabs 
 					 <span class="long_text">events containing text </span>
 					<span class="compact_icons"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png" class="filter_icon" alt="Search:" title="Search" /></span>
 					<label class="form_label">Search</label>
-					<span class="r_form_tip" id="searcherr">Please search for at least 4 letters. <a href="javascript:searchErrHide()">close</a></span> <?php // needs to be styled better... ?>
+					<span class="r_form_tip" id="searcherr">Please search for at least 3 letters. <a href="javascript:searchErrHide()">close</a></span> <?php // needs to be styled better... ?>
 					<input type="text" name="search" id="searchBox" class="putInHash input_text" style="width: 100px;" /> 
 					
 

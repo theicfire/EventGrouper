@@ -160,7 +160,7 @@ function refreshEvents(isCalendar, keepPage) {
 }
 
 function validate() {
-	if ($('#searchBox').val().length > 0 && $('#searchBox').val().length < 4) {
+	if ($('#searchBox').val().length > 0 && $('#searchBox').val().length < 3) {
 		$('#text_tip_large').hide();
 		$('#searcherr').show();
 		return false;
