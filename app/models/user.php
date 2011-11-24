@@ -61,21 +61,6 @@ class User extends AppModel {
 			'finderQuery' => '',
 			'deleteQuery' => '',
 			'insertQuery' => ''
-		),
-		'EventsOnCalendar' => array(
-			'className' => 'Event',
-			'joinTable' => 'events_users',
-			'foreignKey' => 'user_id',
-			'associationForeignKey' => 'event_id',
-			'unique' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
 		)
 	);
 	

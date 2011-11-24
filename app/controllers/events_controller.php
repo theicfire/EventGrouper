@@ -106,18 +106,6 @@ class EventsController extends AppController {
 		}
 	}
 	
-//	function viewCalendar() {
-//		if ($this->Session->check('username')) {
-//			$userStuff = $this->User->find('first', array('conditions' => array('email' => $this->Session->read('username'))));
-//			$eventsOnCalendar = $userStuff['EventsOnCalendar'];
-//			//print_r($eventsOnCalendar);
-//			$this->set(compact('eventsOnCalendar'));
-//		} else {
-//			$this->redirect("/login");
-//		}
-//		//$this->render(false);
-//	}
-	
 	function addToCalendar($id = null) {
 		if ($id == null) {
 			echo "you don't have an event to add";

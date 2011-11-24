@@ -31,34 +31,6 @@ class UsersController extends AppController {
 		$this->set(compact('userEventGroups','sentEvents'));
 		$this->set('isAdmin', true);
 		
-//		$this->User->recursive = 0;
-//		$this->set('users', $this->paginate());
-//		$options['joins'] = array(
-//		    array('table' => 'events',
-//		        'alias' => 'EventsUserOwns',
-//		        'type' => 'LEFT',
-//		        'conditions' => array(
-//		            'User.id = EventsUserOwns.user_id',
-//		        )
-//		    ),
-//		    array('table' => 'events_users',
-//		        'alias' => 'EventsLinker',
-//		        'type' => 'LEFT',
-//		        'conditions' => array(
-//		            'User.id = EventsLinker.user_id',
-//		        )
-//		    ),
-//		    array('table' => 'events',
-//		        'alias' => 'EventsOnCalendar',
-//		        'type' => 'LEFT',
-//		        'conditions' => array(
-//		            'EventsLinker.event_id = EventsOnCalendar.id',
-//		        )
-//		    )
-//		);
-//		$options['fields'] = array('EventsUserOwns.*', 'User.*');
-//				
-//		$this->set('usertemp', $this->User->find('all', $options));
 	}
 
 //	function view($id = null) {
