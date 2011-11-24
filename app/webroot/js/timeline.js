@@ -403,8 +403,9 @@ $(document).ready( function(){
 	$( "#event-popup" ).dialog({
 		autoOpen: false,
 		modal: true,
-		width: 900,
-		minWidth: 900,
+        resizable: false,
+		//width: 900,
+		minWidth: 500,
 		position: [ 30, 100 ],
 		close: function(){
 			changeHash(setInHash('viewId',''));
@@ -429,6 +430,9 @@ function go_to_page( page_number )
 	$('#p').val( page_number );
 	refreshEvents(false, true);
 }
+
+
+//TODO: WTF ALERT
 function go_to_typed_page(numpages)
 {
 	value = parseInt($("#goToPageBox").val());
