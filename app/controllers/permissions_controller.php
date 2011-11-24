@@ -6,6 +6,8 @@ class PermissionsController extends AppController {
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
 	var $components = array('Acl', 'MyAcl', 'Email');
 
+	// everything - both viewing and adding
+	/*
 	function view($groupId) {
 		//check permissions
 		//from now on, assume userid is set
@@ -78,7 +80,7 @@ class PermissionsController extends AppController {
 		$this->set(compact('userPerms', 'groupId', 'groupPath', 'currentEventGroup'));
 		$this->set('isAdmin', true);
 	}
-
+*/
 	function delete($groupId, $aroId = null) {
 		$this->autoRender = false;
 		if (!$aroId) {
