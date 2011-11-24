@@ -53,13 +53,12 @@ class EventsController extends AppController {
 			}
 		}
 		
-		
-		$users = $this->Event->User->find('list');
-		$users = $this->Event->User->find('list');
+		//echo $this->Event;
+		//$users = $this->Event->User->find('list');
 		$this->data['Event']['location'] = $eventGroup['EventGroup']['location'];
 		$groupPath = $this->EventGroup->getPath($eventGroupId);
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($eventGroupId, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
-		$this->set(compact('eventGroup', 'users', 'eventGroupId', 'groupPath', 'eventsUnderGroup'));
+		$this->set(compact('eventGroup', 'eventGroupId', 'groupPath', 'eventsUnderGroup'));
 		$this->set('isAdmin', true);
 	}
 
