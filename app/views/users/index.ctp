@@ -152,12 +152,15 @@ foreach($userEventGroups as $group) {
 
 </div>
 
-<?php if(count($sentEvents)!=0){ ?>
 
 <div id="admin_notifications" class="info_box">
 
 
 <h1 class="info_box_heading"><img src="<?php echo $html->url('/'); ?>css/rinoa/info.png" class="rinoa_large_inline" /> Events Pending Review</h1>
+<?php if(count($sentEvents)==0){ ?>
+
+<div class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You have no pending events. </div>
+<?php } else {?>
 
 <table class="full_width">
 	<tr>
@@ -183,6 +186,9 @@ foreach($userEventGroups as $group) {
 	<?php }?>
 
 </table>
+
+<?php } ?>
+
 <!--
 
 <p class='form_explanation ui-state-highlight ui-corner-all'><span class='ui-icon ui-icon-info' style='float: left; margin-right: 5px;'></span> You have not created any events yet.  If you have permission to create an event in an existing Gathering, click an "Add events" button above.  If not, create your own Gathering and add events to it!</p>
@@ -190,5 +196,3 @@ foreach($userEventGroups as $group) {
 -->
 
 </div>
-
-<?php } ?>

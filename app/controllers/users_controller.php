@@ -27,19 +27,12 @@ class UsersController extends AppController {
 //			$userEventGroups[$key]['EventGroup']['eventgroupcount'] = count($this->EventGroup->getAllEventGroupsUnderThis($value['EventGroup']['id']))-1;
 			$userEventGroups[$key]['EventGroup']['groupPath'] = $this->EventGroup->getPath($value['EventGroup']['id']);
 		}
-		$sentEvents = $this->Event->find('all', array('conditions' => array('user_id' => $this->Session->read('userid'), array('NOT' => array('status' => array('hidden'))))));
+		$sentEvents = $this->Event->find('all', array('conditions' => array('user_id' => $this->Session->read('userid'), array('NOT' => array('status' => array('hidden', 'confirmed'))))));
 		$this->set(compact('userEventGroups','sentEvents'));
 		$this->set('isAdmin', true);
 		
 	}
 
-//	function view($id = null) {
-//		if (!$id) {
-//			$this->Session->setFlash(__('Invalid User.', true));
-//			$this->redirect(array('action'=>'index'));
-//		}
-//		$this->set('user', $this->User->read(null, $id));
-//	}
 
 	function add($unregisteredId = null, $hasAccount = null) {
 		if (empty($this->data) && $this->Session->check('userid')) {
