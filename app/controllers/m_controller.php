@@ -20,8 +20,6 @@ class MController extends AppController {
 			'conditions' => array("EventGroup.parent_id" => 0),
 			'fields' => array("EventGroup.*")
 		));
-		if ($this->Session->check('userid'))
-			$this->set('watchlist', $this->EventGroup->getWatchlist($this->Session->read('userid')));
 		$this->set('eventGroups', $eventGroups);
 		
 	}
@@ -32,8 +30,6 @@ class MController extends AppController {
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'path' => $url)));
 		$id = $currenteventGroup['EventGroup']['id'];
-		if ($this->Session->check('userid') && $currenteventGroup['EventGroup']['parent_id'] == 0)
-			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
 		$this->set(compact('id', 'currenteventGroup'));		
 	}
 	function view($id) {

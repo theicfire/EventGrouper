@@ -17,16 +17,17 @@ class MyAclComponent extends Object {
     }
     
     
-	function check($type, $id, $action = '*') {
-		if ($action = 'read') return true; // temporary fix; instead users should be inheriting read priveliges by extending guest
+    function check($type, $id, $action = '*') {
+		if ($action == 'editperms') $action = 'create'; // because create implies editperms
+		if ($action == 'read') return true; // temporary fix; instead users should be inheriting read priveliges by extending guest
 		$permission = false;
 		App::import('Component', 'Session');
 		$session = new SessionComponent();
-    	$userid = 5;//guest
-    	if ($session->check('userid'))
-  			$userid = $session->read('userid');
+		$userid = 5;//guest
+		if ($session->check('userid'))
+			$userid = $session->read('userid');
 		$permission = $this->checkUser($type, $id, $userid, $action);
-    	return $permission;
+		return $permission;
     }
     
 	function checkUser($type, $id, $userid, $action = '*') {

@@ -17,8 +17,6 @@ class EventGroupsController extends AppController {
 			'conditions' => array("EventGroup.parent_id" => 0),
 			'fields' => array("EventGroup.*")
 		));
-		if ($this->Session->check('userid'))
-			$this->set('watchlist', $this->EventGroup->getWatchlist($this->Session->read('userid')));
 		$this->set('eventGroups', $eventGroups);
 		
 	}
@@ -38,8 +36,6 @@ class EventGroupsController extends AppController {
 			'hasAndBelongsToMany' => array('User')	
 			)
 		); 
-		if ($this->Session->check('userid') && $currenteventGroup['EventGroup']['parent_id'] == 0)//todo see same code below
-			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
 		$eventGroups = $this->EventGroup->children($id);
 		//just doing this to get the earliest date
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
@@ -69,9 +65,7 @@ class EventGroupsController extends AppController {
 			array('hasMany' => array('Event'),
 			'hasAndBelongsToMany' => array('User')	
 			)
-		); 
-		if ($this->Session->check('userid') && $currenteventGroup['EventGroup']['parent_id'] == 0)//todo change this so that this will add top on children...
-			$this->User->addEventGroupToUser($this->Session->read('userid'), $id);//add to watchlist
+		);
 		$eventGroups = $this->EventGroup->children($id);
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
 		$treeList = $this->EventGroup->generateTreeList();
@@ -170,7 +164,7 @@ class EventGroupsController extends AppController {
 			$parentId = $this->data['EventGroup']['parent_id'];
 		}
 		$this->MyAcl->runcheck('EventGroup',$parentId,'create');
-		//todo add row in event_groups_users
+		
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'id' => $parentId)));
 		$groupPath = $this->EventGroup->getPath($parentId);

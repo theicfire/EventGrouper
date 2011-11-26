@@ -41,23 +41,6 @@ class EventGroup extends AppModel {
 		)
 	);
 
-	var $hasAndBelongsToMany = array(
-		'User' => array(
-			'className' => 'User',
-			'joinTable' => 'event_groups_users',
-			'foreignKey' => 'event_group_id',
-			'associationForeignKey' => 'user_id',
-			'unique' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
-		)
-	);
 	function getAllEventGroupsUnderThis($id) {
 		$children = $this->children($id);
 		$childrenArr = array();
@@ -125,7 +108,6 @@ class EventGroup extends AppModel {
 			$eventIds[] = $event['Event']['id'];
 		}
 		$this->query("DELETE FROM event_groups WHERE id IN (".implode(',',$childrenArr).")");
-		$this->query("DELETE FROM event_groups_users WHERE event_group_id IN (".implode(',',$childrenArr).")");
 		$this->query("DELETE FROM events WHERE event_group_id IN (".implode(',',$childrenArr).")");
 		if (!empty($eventIds)) {
 			$this->query("DELETE FROM events_users WHERE event_id IN (".implode(',',$eventIds).")");
@@ -182,10 +164,6 @@ class EventGroup extends AppModel {
     	return $aco;
     }
     
-    function getWatchlist($userId) {
-    	return $this->query(sprintf("SELECT * FROM event_groups LEFT JOIN event_groups_users ON (event_groups_users.event_group_id = event_groups.id)
-			 WHERE event_groups_users.user_id = %d ORDER BY time DESC", $userId));
-    }
 	function getFavorites($userId) {
 		$options = array();
 		$options['order'] = 'Event.time_start ASC';
