@@ -88,6 +88,8 @@ class UsersController extends AppController {
 					} else {
 						$this->Session->setFlash('The User could not be saved. Please, try again.');
 					}
+				} elseif ($emailData['User']['pass'] == 'unregistered') {
+					$this->set('error', 'email_preregistered');
 				} else {
 					$this->set('error', 'email_taken');
 				}

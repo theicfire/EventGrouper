@@ -54,6 +54,7 @@ function page_init()
 				echo $form->input('email', array( 'class'=>'textfield', 'label'=>'Email', 'id' => 'email' ));
 			}
 			if(isset($error) && $error == 'email_taken'){ echo '<label class="error">That email address has already been taken.</label>'; }
+			if(isset($error) && $error == 'email_preregistered'){ echo '<label class="error">Someone has already registered for you! Check your email and follow the instructions.</label>'; }
 			echo $form->input('pass', array('type'=>'password', 'class'=>'textfield', 'label'=>'Old Password', 'id' => 'password'));
 			echo $form->input('newpass', array('type'=>'password', 'class'=>'textfield', 'label'=>'New Password'));
 			echo $form->input('confirm password', array('type'=>'password', 'class'=>'textfield', 'label'=>'Confirm New Password'));
