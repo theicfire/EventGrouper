@@ -140,15 +140,19 @@ class EventGroup extends AppModel {
     function getAllPermissions($id, $userId) {
     	$parentArr = $this->getAllEventGroupsAboveThis($id);
     	$childrenArr = $this->getAllEventGroupsUnderThis($id);
-    	$aco = $this->query("select users.id, aros_acos.id, aros_acos.aro_id, email, aros_acos._create, aros_acos._read, aros_acos._update, aros_acos._delete, aros_acos._editperms from acos 
+    	/*
+    	$acoOld = $this->query("select users.id, aros_acos.id, aros_acos.aro_id, email, aros_acos._create, aros_acos._read, aros_acos._update, aros_acos._delete, aros_acos._editperms from acos 
     	LEFT JOIN (aros_acos, aros, users) ON (acos.id = aros_acos.aco_id AND aros_acos.aro_id = aros.id AND aros.foreign_key = users.id) 
     	WHERE acos.foreign_key IN(".implode(',',$childrenArr).") AND email != 'Guest' AND users.id != ".$userId." GROUP BY aros.foreign_key");
-    	
+    	*/
+    	$aco = $this->query("SELECT users.id, email from user_perms
+    	LEFT JOIN (users) ON (user_perms.user_id = users.id)
+    	WHERE user_perms.group_id IN(".implode(',',$childrenArr).") AND email != 'Guest' AND users.id != ".$userId." GROUP BY user_perms.user_id");
     	foreach($aco as &$user) {
-	    	$userEventGroups = $this->query("SELECT EventGroup.* FROM `aros` 
-			LEFT JOIN (aros_acos, acos, event_groups AS EventGroup) 
-			ON (aros.id = aros_acos.aro_id AND aros_acos.aco_id = acos.id AND acos.foreign_key = EventGroup.id) 
-			WHERE aros.foreign_key = ".$user['users']['id']." AND acos.foreign_key IN(".implode(',',$childrenArr).") AND acos.model = 'EventGroup';");
+	    	$userEventGroups = $this->query("SELECT EventGroup.* FROM user_perms 
+			LEFT JOIN (event_groups AS EventGroup) 
+			ON (user_perms.group_id = EventGroup.id) 
+			WHERE user_perms.user_id = ".$user['users']['id']." AND user_perms.group_id IN(".implode(',',$childrenArr).");");
 			$ids = array();
 			foreach ($userEventGroups as $single) {
 				$ids[] = $single['EventGroup']['id'];

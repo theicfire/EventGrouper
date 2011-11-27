@@ -2,7 +2,7 @@
 class LoginController extends AppController {
 
 	var $name = 'Login';
-	var $uses = array('User');//inherit User from appcontroller
+	var $uses = array('User', 'UserPerm');//inherit User from appcontroller
 	var $helpers = array('Html', 'Form', 'Javascript');
 
 	function checkLogin() {
@@ -12,6 +12,7 @@ class LoginController extends AppController {
 			if (!empty($_POST['pass']) && !empty($_POST['email']) && sha1($_POST['pass']) == $userData['User']['pass']) {
 				$this->Session->write('username', $_POST['email']);//todo is this secure?
 				$this->Session->write('userid', $userData['User']['id']);//todo is this secure?
+				$this->Session->write('userperms', $this->UserPerm->getAllUserPerms($userData['User']['id']));
 				echo "good";
 			} else {
 				$this->Session->write('username', null);

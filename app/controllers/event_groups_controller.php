@@ -2,12 +2,11 @@
 class EventGroupsController extends AppController {
 
 	var $name = 'EventGroups';
-	var $uses = array('EventGroup', 'User', 'UserAlias');
-	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
+	var $uses = array('EventGroup', 'User', 'UserAlias', 'UserPerm');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation');
 	var $components = array('Acl', 'MyAcl', 'Email');
 
 	function index() {
-		$this->Session->write('testses', 'stuffinhere');
 		$this->EventGroup->unbindModel(
 			array('hasMany' => array('Event'),
 			'hasAndBelongsToMany' => array('User')	
@@ -40,14 +39,14 @@ class EventGroupsController extends AppController {
 		//just doing this to get the earliest date
 		$eventsUnderGroup = $this->EventGroup->getAllEventsUnderThis($id, $this->Session->read('userid'), array('status' => array('confirmed', 'hidden')));
 		//$groupPath = $this->EventGroup->getPath($id);
-		$this->set(compact(/*'groupPath', */'eventGroups', 'currenteventGroup', 'eventsUnderGroup'));
+		$access = $this->MyAcl;
+		$this->set(compact(/*'groupPath', */'eventGroups', 'currenteventGroup', 'eventsUnderGroup', 'access'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));	
 		
 		$this -> pageTitle = 'Schedule';
 		$this -> layout = 'timeline';
 	}
 	function view_admin() {
-		
 		$pathUrl = explode("/",$this->params['url']['url']);
 		unset($pathUrl[0]);
 		unset($pathUrl[1]);
@@ -104,18 +103,15 @@ class EventGroupsController extends AppController {
 							$userRow = $this->User->findById($this->User->getLastInsertId());
 							$unregistered = true;
 							
-							$aroArr = array(
-								'model' => 'User',
-								'foreign_key' => $userRow['User']['id'],
-								'parent_id' => 1//This is the designated guest id in aros
-							);
-							$this->Acl->Aro->create();
-							$this->Acl->Aro->save($aroArr);
 						}
 					} 
 					
 					//add permissions
-					$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userRow['User']['id']), array('model' => 'EventGroup', 'foreign_key' => $groupId), 'create');
+					//$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userRow['User']['id']), array('model' => 'EventGroup', 'foreign_key' => $groupId), 'create');
+					
+					// add permissions
+					$this->UserPerm->addPerm($userRow['User']['id'], $groupId);
+					
 					if ($unregistered) {
 						$alertText = "This user has not registered yet. He/she will be sent an email to sign up.";
 						$emailText = sprintf("You have been granted permissions to %s. Go here to sign up: %s",
@@ -145,13 +141,14 @@ class EventGroupsController extends AppController {
 			}
 			$numRequests = count($this->EventGroup->getAllEventsUnderThis($groupId, null, array('status' => 'unconfirmed')));
 			$userPerms = $this->EventGroup->getAllPermissions($groupId, $this->Session->read('userid'));
+			
 			$this->set(compact('userPerms', 'groupId', 'groupPath', 'numRequests'));
 		}
 		//end permissions section
 		
 		
-		
-		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'treeList', 'eventsUnderGroup'));
+		$access = $this->MyAcl;
+		$this->set(compact('groupPath', 'eventGroups', 'currenteventGroup', 'treeList', 'eventsUnderGroup', 'access'));
 		$this->set('phpVars', array('currentEventGroupId'=> $id));	
 		$this->set('isAdmin', true);	
 	}
@@ -193,21 +190,13 @@ class EventGroupsController extends AppController {
 							$acoParentId = null;
 					}
 					
-					$acoArr = array(
-						'model' => 'EventGroup',
-						'parent_id' => $acoParentId,
-						'foreign_key' => $eventGroupId
-					);
-					$this->Acl->Aco->create();
-					$this->Acl->Aco->save($acoArr);
 					//and now add permissions to the users
 					//NOTE: we assume that the user is logged in to get to this page (and has a session)
 					//NOTE: we are giving the users who make the event groups full permissions
 					if ($acoParentId == null) {
 						$userid = $this->Session->read('userid');
-						$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userid), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId));
-						//add read priveleges for guests
-						$this->Acl->allow(array('model' => 'User', 'foreign_key' => 5), array('model' => 'EventGroup', 'foreign_key' => $eventGroupId), 'read');
+						// add permissions
+						$this->UserPerm->addPerm($userid, $eventGroupId);
 					}
 					if($acoParentId==null)
 					{
@@ -283,7 +272,7 @@ class EventGroupsController extends AppController {
 				$eventStuff = $this->EventGroup->findById($id);
 				$this->redirect("/event_groups/view_admin/".$eventStuff['EventGroup']['path']);
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The group could not be saved. Please try again.', true));
 			}
 		}
 		if (empty($this->data)) {
@@ -308,10 +297,7 @@ class EventGroupsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->EventGroup->delete($id)) {
-			//now delete the aco
-			$acosRow = $this->Acl->Aco->findByForeignKey($id);
-			$this->Acl->Aco->delete($acosRow['Aco']['id']);
-			$this->Acl->Aco->query("DELETE FROM aros_acos WHERE aco_id = ".$acosRow['Aco']['id']);
+			$this->UserPerm->deleteGroupPerms($id);
 			
 			
 			$this->Session->setFlash(__('Group successfully deleted.', true));

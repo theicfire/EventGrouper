@@ -3,7 +3,7 @@ class SearchController extends AppController {
 
 	var $name = 'Search';
 	var $uses = array('EventGroup', 'User', 'UserAlias');
-	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation');
 	var $components = array('Acl', 'MyAcl', 'Email');
 
 	function index() {

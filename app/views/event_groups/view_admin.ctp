@@ -137,7 +137,7 @@ if(isset($notification))
 								?>
 							</td>
 							<td class="actions">
-								<?php echo $html->link('Remove', array('controller' => 'permissions', 'action' => 'delete', $groupId, $userPerm['aros_acos']['aro_id']), array('class' => 'make_button'), "Are you sure you want to delete this?");?>
+								<?php echo $html->link('Remove', array('controller' => 'permissions', 'action' => 'delete', $groupId, $userPerm['users']['id']), array('class' => 'make_button'), "Are you sure you want to delete this?");?>
 							</td>
 					</tr>
 					<?php }?>      

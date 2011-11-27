@@ -49,13 +49,6 @@ class FacebookComponent extends Object {
 					if ($this->User->save($this->data)) {
 						//add aro
 						$userId = $this->User->getLastInsertId();
-						$aroArr = array(
-							'model' => 'User',
-							'foreign_key' => $userId,
-							'parent_id' => 1//This is the designated guest id in aros
-						);
-						$this->Acl->Aro->create();
-						$this->Acl->Aro->save($aroArr);
 						$this->Session->setFlash(__('You are now registered!', true));
 						$this->Session->write('userid', $userId);
 						$this->Session->write('username', $email);

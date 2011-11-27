@@ -2,8 +2,8 @@
 class PermissionsController extends AppController {
 
 	var $name = 'Permissions';
-	var $uses = array('EventGroup', 'User', 'UserAlias', 'Event');
-	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation', 'Access');
+	var $uses = array('EventGroup', 'User', 'UserAlias', 'Event', 'UserPerm');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation');
 	var $components = array('Acl', 'MyAcl', 'Email');
 
 	// everything - both viewing and adding
@@ -80,7 +80,7 @@ class PermissionsController extends AppController {
 		$this->set(compact('userPerms', 'groupId', 'groupPath', 'currentEventGroup'));
 		$this->set('isAdmin', true);
 	}
-*/
+
 	function delete($groupId, $aroId = null) {
 		$this->autoRender = false;
 		if (!$aroId) {
@@ -103,7 +103,16 @@ class PermissionsController extends AppController {
 		}
 		
 	}
-	
+*/
+	function delete($groupId, $userId) {
+		$this->autoRender = false;
+		$children = $this->EventGroup->getAllEventGroupsUnderThis($groupId);
+		$this->UserPerm->deletePerm($userId, $children);
+		$this->Session->setFlash(__('Permission deleted', true));
+		$newGroup = $this->EventGroup->findById($groupId);
+		$this->redirect("/event_groups/view_admin/".$newGroup['EventGroup']['path']);
+		
+	}	
 	function trash2() {
 		$events = $this->Event->find('all');
 		foreach ($events as $event) {

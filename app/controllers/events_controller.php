@@ -3,7 +3,7 @@ class EventsController extends AppController {
 
 	var $name = 'Events';
 	var $uses = array('Event', 'User', 'EventGroup');
-	var $helpers = array('Html', 'Form', 'Javascript', 'Access');
+	var $helpers = array('Html', 'Form', 'Javascript');
 	var $components = array('Acl', 'MyAcl');
 
 
@@ -31,7 +31,7 @@ class EventsController extends AppController {
 			}
 			$this->Session->setFlash($flashMessage);
 			if ($this->Event->save($this->data)) {
-				$acoParent = $this->Event->query("SELECT id FROM acos WHERE foreign_key = ".$eventGroupId." AND model = 'EventGroup'");
+				/*$acoParent = $this->Event->query("SELECT id FROM acos WHERE foreign_key = ".$eventGroupId." AND model = 'EventGroup'");
 				if (!empty($acoParent))
 					$acoParentId = $acoParent[0]['acos']['id'];
 				else
@@ -45,7 +45,7 @@ class EventsController extends AppController {
 				$this->Acl->Aco->create();
 				$this->Acl->Aco->save($acoArr);
 				//since this has a parent_id, permissions should already be set
-				
+				*/
 				$this->data = array();
 //				$this->redirect("/event_groups/view_admin/".$eventGroup['EventGroup']['path']);
 			} else {
@@ -81,12 +81,10 @@ class EventsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Event->read(null, $id);
 		}
-		$users = $this->Event->User->find('list');
 		$eventGroups = $this->Event->EventGroup->find('list');
-		$users = $this->Event->User->find('list');
 		$groupPath = $this->EventGroup->getPath($groupId);
 		
-		$this->set(compact('users','eventGroups', 'eventGroupId', 'groupPath', 'eventGroup'));
+		$this->set(compact('eventGroups', 'eventGroupId', 'groupPath', 'eventGroup'));
 		$this->set('isAdmin', true);
 	}
 
