@@ -4,106 +4,9 @@ class PermissionsController extends AppController {
 	var $name = 'Permissions';
 	var $uses = array('EventGroup', 'User', 'UserAlias', 'Event', 'UserPerm');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation');
-	var $components = array('Acl', 'MyAcl', 'Email');
+	var $components = array('MyAcl', 'Email');
 
-	// everything - both viewing and adding
-	/*
-	function view($groupId) {
-		//check permissions
-		//from now on, assume userid is set
-		$this->MyAcl->runcheck('EventGroup',$groupId,'editperms');
-		$currentGroup = $this->EventGroup->findById($groupId);
-		$hasAlias = false;
-		$unregistered = false;
-		if (!empty($this->data)) {//adding a user
-			$userRow = $this->User->findByEmail($this->data['email']);
-			if (!empty($userRow) && $this->MyAcl->checkUser('EventGroup',$groupId,$userRow['User']['id'], 'create'))
-				$this->Session->setFlash("This user already has permissions to this group");
-			else {
-				if (empty($userRow)) {
-					$aliasRow = $this->UserAlias->findByAlias($this->data['email']);
-					if (!empty($aliasRow)) {
-						$userRow['User'] = $aliasRow['User'];
-						$hasAlias = true;
-					} else {
-						echo "in here";
-						//add this user to the database and email the user about it
-						$this->User->create();
-						$userData = array('email' => $this->data['email'], 'pass' => 'unregistered');
-						$this->User->set($userData);
-						$this->User->save();
-						$userRow = $this->User->findById($this->User->getLastInsertId());
-						$unregistered = true;
-						
-						$aroArr = array(
-							'model' => 'User',
-							'foreign_key' => $userRow['User']['id'],
-							'parent_id' => 1//This is the designated guest id in aros
-						);
-						$this->Acl->Aro->create();
-						$this->Acl->Aro->save($aroArr);
-					}
-				} 
-				
-				//add permissions
-				$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userRow['User']['id']), array('model' => 'EventGroup', 'foreign_key' => $groupId), 'create');
-				if ($unregistered) {
-					$alertText = "This user has not registered yet. He/she will be sent an email to sign up.";
-					$emailText = sprintf("You have been granted permissions to %s. Go here to sign up: %s",
-					FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path'],
-					FULL_BASE_URL.$this->webroot."users/add/".$userRow['User']['id']);
-				}
-				elseif ($hasAlias) {
-					$alertText = $userRow['User']['email']."(".$this->data['email'].") added";
-					$emailText = sprintf("You have been granted permissions to %s.",
-					FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path']);
-				}
-				else {
-					$alertText = $userRow['User']['email']." added";
-					$emailText = sprintf("You have been granted permissions to %s.",
-					FULL_BASE_URL.$this->webroot.$currentGroup['EventGroup']['path']);
-				}
-				$this->Session->setFlash($alertText);
-				
-				echo $emailText;
-				$this->Email->from    = 'RushRabbit <noreply@rushrabbit.com>';
-				$this->Email->to      = sprintf('%s <%s>', $userRow['User']['email'], $userRow['User']['email']);
-				$this->Email->subject = 'You\'ve been granted permissions on RushRabbit';
-				$this->Email->send($emailText);
-			}
-						
-			
-		
-		}
-		$userPerms = $this->EventGroup->getAllPermissions($groupId, $this->Session->read('userid'));
-		$currentEventGroup = $this->EventGroup->findById($groupId);
-		$this->set(compact('userPerms', 'groupId', 'groupPath', 'currentEventGroup'));
-		$this->set('isAdmin', true);
-	}
 
-	function delete($groupId, $aroId = null) {
-		$this->autoRender = false;
-		if (!$aroId) {
-			$this->Session->setFlash(__('Invalid id for Permissions', true));
-			$this->redirect(array('action'=>'index'));
-		} else {
-			$children = $this->EventGroup->getAllEventGroupsUnderThis($groupId);
-			$query = "SELECT aros_acos.id FROM aros_acos LEFT JOIN (acos, event_groups) ON (aros_acos.aco_id = acos.id AND acos.foreign_key = event_groups.id) 
-			WHERE acos.model = 'EventGroup' AND aros_acos.aro_id = ".$aroId." AND event_groups.id IN (".implode(",",$children).")";
-			$idsToDelete = $this->Acl->Aco->query($query);
-			foreach ($idsToDelete as $id) {
-				$this->Acl->Aco->query("DELETE FROM aros_acos WHERE id = ".$id['aros_acos']['id']);
-			}
-			
-			
-			$this->Session->setFlash(__('Permission deleted', true));
-			
-			$newGroup = $this->EventGroup->findById($groupId);
-			$this->redirect("/event_groups/view_admin/".$newGroup['EventGroup']['path']);
-		}
-		
-	}
-*/
 	function delete($groupId, $userId) {
 		$this->autoRender = false;
 		$children = $this->EventGroup->getAllEventGroupsUnderThis($groupId);
@@ -201,16 +104,6 @@ class PermissionsController extends AppController {
 				}
 				$prevId = $eventId;
 				echo $eventId." ". $row[4] ."<br>";
-				$acoArr = array(
-						'model' => 'Event',
-						'parent_id' => 7,//important
-						'foreign_key' => $eventId
-					);
-				//print_r($acoArr);
-				$this->Acl->Aco->create();
-				$this->Acl->Aco->save($acoArr);
-				//
-		
 		}
 		echo $num;
 		

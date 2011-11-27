@@ -4,7 +4,7 @@ class EventGroupsController extends AppController {
 	var $name = 'EventGroups';
 	var $uses = array('EventGroup', 'User', 'UserAlias', 'UserPerm');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation');
-	var $components = array('Acl', 'MyAcl', 'Email');
+	var $components = array('MyAcl', 'Email');
 
 	function index() {
 		$this->EventGroup->unbindModel(
@@ -107,9 +107,6 @@ class EventGroupsController extends AppController {
 					} 
 					
 					//add permissions
-					//$this->Acl->allow(array('model' => 'User', 'foreign_key' => $userRow['User']['id']), array('model' => 'EventGroup', 'foreign_key' => $groupId), 'create');
-					
-					// add permissions
 					$this->UserPerm->addPerm($userRow['User']['id'], $groupId);
 					
 					if ($unregistered) {

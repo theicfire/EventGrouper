@@ -1,6 +1,6 @@
 <?php
 class FacebookComponent extends Object {
-	var $components = array('Session', 'Acl');
+	var $components = array('Session');
 		
 
 	//called before Controller::beforeFilter()

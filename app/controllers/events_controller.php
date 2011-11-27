@@ -4,7 +4,7 @@ class EventsController extends AppController {
 	var $name = 'Events';
 	var $uses = array('Event', 'User', 'EventGroup');
 	var $helpers = array('Html', 'Form', 'Javascript');
-	var $components = array('Acl', 'MyAcl');
+	var $components = array('MyAcl');
 
 
 	function view($id = null) {
@@ -31,22 +31,9 @@ class EventsController extends AppController {
 			}
 			$this->Session->setFlash($flashMessage);
 			if ($this->Event->save($this->data)) {
-				/*$acoParent = $this->Event->query("SELECT id FROM acos WHERE foreign_key = ".$eventGroupId." AND model = 'EventGroup'");
-				if (!empty($acoParent))
-					$acoParentId = $acoParent[0]['acos']['id'];
-				else
-					echo "Not supposed to happen";
-				$eventId = $this->Event->getLastInsertId();
-				$acoArr = array(
-					'model' => 'Event',
-					'parent_id' => $acoParentId,
-					'foreign_key' => $eventId
-				);
-				$this->Acl->Aco->create();
-				$this->Acl->Aco->save($acoArr);
-				//since this has a parent_id, permissions should already be set
-				*/
+			
 				$this->data = array();
+				// todo uncomment?
 //				$this->redirect("/event_groups/view_admin/".$eventGroup['EventGroup']['path']);
 			} else {
 				$this->Session->setFlash(__('The Event could not be saved. Please, try again.', true));

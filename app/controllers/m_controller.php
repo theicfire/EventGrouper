@@ -4,7 +4,7 @@ class MController extends AppController {
 	var $name = 'M';
 	var $uses = array('EventGroup', 'User');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation');
-	var $components = array('Acl', 'MyAcl');
+	var $components = array('MyAcl');
 
 	function beforeFilter() {
 		$this->layout = 'mobile';

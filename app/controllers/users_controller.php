@@ -4,18 +4,12 @@ class UsersController extends AppController {
 	var $name = 'Users';
 	var $uses = array('User', 'UserAlias', 'EventGroup', 'Event');
 	var $helpers = array('Html', 'Form', 'Javascript');
-	var $components = array('Acl', 'Email', 'MyAcl');
+	var $components = array('Email', 'MyAcl');
 	function index() {
 		if (!$this->Session->check('userid')) {
 			$this->Session->setFlash('Log in first');
 			$this->redirect('/');
 		}
-		/*
-		$userEventGroupsOld = $this->User->query("SELECT EventGroup.* FROM `aros` 
-		LEFT JOIN (aros_acos, acos, event_groups AS EventGroup) 
-		ON (aros.id = aros_acos.aro_id AND aros_acos.aco_id = acos.id AND acos.foreign_key = EventGroup.id) 
-		WHERE aros.foreign_key = ".$this->Session->read('userid')." AND acos.model = 'EventGroup';");
-		*/
 		$userEventGroups = $this->User->query("SELECT EventGroup.* FROM user_perms
 		LEFT JOIN(event_groups AS EventGroup)
 		ON (user_perms.group_id = EventGroup.id)
@@ -71,16 +65,6 @@ class UsersController extends AppController {
 					//todo it's bad to assume that the user/pass is correct (because js checks it)
 					$realUser = $this->User->findByEmail($this->data['User']['email']);
 					$aliasUser = $this->User->findById($unregisteredId);
-					/*
-					$realAro = $this->Acl->Aro->findByForeignKey($realUser['User']['id']);
-					$aliasAro = $this->Acl->Aro->findByForeignKey($aliasUser['User']['id']);
-					$this->Acl->Aro->query("UPDATE aros_acos SET aro_id = ".$realAro['Aro']['id']." WHERE aro_id = ".$aliasAro['Aro']['id']);
-					$aliasData = array('UserAlias' => array('alias' => $aliasUser['User']['email'],
-					'user_id' => $realUser['User']['id']));
-					$this->UserAlias->save($aliasData);
-					$this->User->delete($unregisteredId);
-					$this->Acl->Aro->delete($aliasAro['Aro']['id']);
-					*/
 					$this->UserPerm->changeUserId($unregisteredId, $realUser['User']['id']);
 					
 					

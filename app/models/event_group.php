@@ -140,11 +140,7 @@ class EventGroup extends AppModel {
     function getAllPermissions($id, $userId) {
     	$parentArr = $this->getAllEventGroupsAboveThis($id);
     	$childrenArr = $this->getAllEventGroupsUnderThis($id);
-    	/*
-    	$acoOld = $this->query("select users.id, aros_acos.id, aros_acos.aro_id, email, aros_acos._create, aros_acos._read, aros_acos._update, aros_acos._delete, aros_acos._editperms from acos 
-    	LEFT JOIN (aros_acos, aros, users) ON (acos.id = aros_acos.aco_id AND aros_acos.aro_id = aros.id AND aros.foreign_key = users.id) 
-    	WHERE acos.foreign_key IN(".implode(',',$childrenArr).") AND email != 'Guest' AND users.id != ".$userId." GROUP BY aros.foreign_key");
-    	*/
+
     	$aco = $this->query("SELECT users.id, email from user_perms
     	LEFT JOIN (users) ON (user_perms.user_id = users.id)
     	WHERE user_perms.group_id IN(".implode(',',$childrenArr).") AND email != 'Guest' AND users.id != ".$userId." GROUP BY user_perms.user_id");

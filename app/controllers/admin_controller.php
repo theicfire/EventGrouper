@@ -4,7 +4,7 @@ class AdminController extends AppController {
 	var $name = 'Admin';
 	var $uses = array('EventGroup', 'Event', 'User');
 	var $helpers = array('Html', 'Form', 'Javascript', 'Navigation');
-	var $components = array('Acl', 'MyAcl');
+	var $components = array('MyAcl');
 
 	function requests($groupId) {
 		$this->MyAcl->runcheck('EventGroup',$groupId,'bigOwner');
