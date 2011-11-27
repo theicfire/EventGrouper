@@ -175,34 +175,18 @@ class EventGroupsController extends AppController {
 				
 				$this->EventGroup->create();
 				if ($this->EventGroup->save($this->data)) {
-					$eventGroupId = $this->EventGroup->getLastInsertId();
-					//now add an aco
-					if ($this->data['EventGroup']['parent_id'] == 0) {
-						$acoParentId = null;
-					} else {
-						$acoParent = $this->EventGroup->query("SELECT id FROM acos WHERE foreign_key = ".$this->data['EventGroup']['parent_id']." AND model = 'EventGroup'");
-						if (!empty($acoParent))
-							$acoParentId = $acoParent[0]['acos']['id'];
-						else
-							$acoParentId = null;
-					}
-					
 					//and now add permissions to the users
 					//NOTE: we assume that the user is logged in to get to this page (and has a session)
 					//NOTE: we are giving the users who make the event groups full permissions
-					if ($acoParentId == null) {
+					if ($this->data['EventGroup']['parent_id'] == 0) {
 						$userid = $this->Session->read('userid');
 						// add permissions
 						$this->UserPerm->addPerm($userid, $eventGroupId);
-					}
-					if($acoParentId==null)
-					{
 						$this->Session->setFlash('Great! You\'ve just created a Gathering. Now you can start adding events, permissions, and groups below.');
+					} else {
+						$this->Session->setFlash('Great! You\'ve just created a group.');
 					}
-					else
-					{
-						$this->Session->setFlash('Great! You\'ve just created a group. Now you can add events, permissions, and subgroups below.');
-					}
+					$eventGroupId = $this->EventGroup->getLastInsertId();
 					$newGroup = $this->EventGroup->findById($eventGroupId);
 					$this->redirect("/event_groups/view_admin/".$newGroup['EventGroup']['path']);
 				} else {
