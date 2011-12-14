@@ -7,26 +7,31 @@ class EventGroupsController extends AppController {
 	var $components = array('MyAcl', 'Email');
 
 	function index() {
-		$this->EventGroup->unbindModel(
-			array('hasMany' => array('Event'),
-			'hasAndBelongsToMany' => array('User')	
-			)
-		);
-		$eventGroups = $this->EventGroup->find('all',array(
-			'conditions' => array("EventGroup.parent_id" => 0),
-			'fields' => array("EventGroup.*")
-		));
-		$this->set('eventGroups', $eventGroups);
+		$this->redirect(array('controller' => 'event_groups', 'action'=>'view', 'cpw'));
+		
+		
+		// everything else doesn't matter
+//		$this->EventGroup->unbindModel(
+//			array('hasMany' => array('Event'),
+//			'hasAndBelongsToMany' => array('User')	
+//			)
+//		);
+//		$eventGroups = $this->EventGroup->find('all',array(
+//			'conditions' => array("EventGroup.parent_id" => 0),
+//			'fields' => array("EventGroup.*")
+//		));
+//		$this->set('eventGroups', $eventGroups);
 		
 	}
 
-	function view() {
+	function view($group = null) {
+		if (!$group) $group = $this->params['url']['url'];
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
-		'path' => $this->params['url']['url'])));
+		'path' => $group)));
 		$id = $currenteventGroup['EventGroup']['id'];
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid EventGroup.', true));
-			$this->redirect(array('action'=>'index'));
+			//$this->redirect(array('action'=>'index'));
 		}
 		//$this->MyAcl->runcheck('EventGroup',$id,'read');
 		
@@ -149,6 +154,7 @@ class EventGroupsController extends AppController {
 		$this->set('phpVars', array('currentEventGroupId'=> $id));	
 		$this->set('isAdmin', true);	
 	}
+
 	function view_permissions($groupId) {
 		
 	}
@@ -157,7 +163,7 @@ class EventGroupsController extends AppController {
 		if (!empty($this->data)) {
 			$parentId = $this->data['EventGroup']['parent_id'];
 		}
-		$this->MyAcl->runcheck('EventGroup',$parentId,'create');
+		$this->MyAcl->runcheck('EventGroup',$parentId,'bigOwner');
 		
 		$currenteventGroup = $this->EventGroup->find('first', array('conditions' => array(
 		'id' => $parentId)));
@@ -221,7 +227,7 @@ class EventGroupsController extends AppController {
 			$this->Session->setFlash(__('Invalid EventGroup', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->MyAcl->runcheck('EventGroup',$id,'update');
+		$this->MyAcl->runcheck('EventGroup',$id,'bigOwner');
 		$currenteventGroup = $this->EventGroup->findById($id);
 		if (!empty($this->data)) {
 			if (!$id)

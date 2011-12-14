@@ -14,6 +14,12 @@ class UsersController extends AppController {
 		LEFT JOIN(event_groups AS EventGroup)
 		ON (user_perms.group_id = EventGroup.id)
 		WHERE user_perms.user_id = ".$this->Session->read('userid'));
+		
+		foreach($userEventGroups as $group) {
+			if ($group['EventGroup']['parent_id'] == 0) {
+				$this->redirect("/event_groups/view_admin/cpw"); // very ugly hardcoding
+			} 
+		}
 		$ids = array();
 		foreach ($userEventGroups as $single) {
 			$ids[] = $single['EventGroup']['id'];

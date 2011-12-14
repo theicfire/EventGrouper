@@ -16,6 +16,7 @@ $canCreate = false;
 if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'create')) {
 	$canCreate = true;
 }
+$addSubgroups = $top_level && $access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'bigOwner');
 if(isset($notification))
 { ?>
 	
@@ -81,12 +82,12 @@ if(isset($notification))
 				<a href="<?php echo $html->url("/".$currenteventGroup['EventGroup']['path']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/zoom.png"
 				class="small_icon_inline_button" /> View in timeline</a>
-			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'update')) {?>
+			<?php if ($access->check('EventGroup',$currenteventGroup['EventGroup']['id'], 'bigOwner')) {?>
 				<a href="<?php echo $html->url("/event_groups/edit/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
 				class="small_icon_inline_button" /> Edit info</a>
 			<?php }?>
-			<?php if ($canCreate) {?> 
+			<?php if ($addSubgroups) {?> 
 				<a href="<?php echo $html->url("/event_groups/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
 				class="small_icon_inline_button" /> Add subgroups</a>
@@ -150,7 +151,7 @@ if(isset($notification))
 	<div class="form_section">
 		<h2>Subgroups 
 		</h2> 
-		<?php if ($canCreate) {?> 
+		<?php if ($addSubgroups) {?> 
 				<a href="<?php echo $html->url("/event_groups/add/".$currenteventGroup['EventGroup']['id']); ?>"
 				class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
 				class="small_icon_inline_button" /> Add subgroups</a>
@@ -179,7 +180,7 @@ if(isset($notification))
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'update')) {?>
 							<a href="<?php echo $html->url("/event_groups/edit/".$eventGroup['EventGroup']['id']); ?>">Edit info</a>
 						<?php }?><br />
-						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'create')) {?> 
+						<?php if ($addSubgroups) {?> 
 							<a href="<?php echo $html->url("/event_groups/add/".$eventGroup['EventGroup']['id']); ?>">Add subgroups</a>
 						<?php }?>
 						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'create')) {?> 
@@ -200,7 +201,7 @@ if(isset($notification))
 							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
 							class="small_icon_inline_button" /> Edit info</a>
 						<?php }?>
-						<?php if ($access->check('EventGroup',$eventGroup['EventGroup']['id'], 'create')) {?> 
+						<?php if ($addSubgroups) {?> 
 							<a href="<?php echo $html->url("/event_groups/add/".$eventGroup['EventGroup']['id']); ?>"
 							class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
 							class="small_icon_inline_button" /> Add subgroups</a>

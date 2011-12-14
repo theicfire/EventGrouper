@@ -10,7 +10,7 @@ $(document).ready(function() {
 </script>
 
 
-
+<!-- 
 <div id="admin_groups" class="info_box">
 
 <h1 class="info_box_heading"><img src="<?php echo $html->url('/'); ?>css/rinoa/group.png"
@@ -88,7 +88,7 @@ foreach($userEventGroups as $group) {
 			class="small_icon_inline_button" /> Create a new Gathering</a>
 </div>
 
-
+ -->
 
 <div id="admin_groups" class="info_box">
 
@@ -115,7 +115,7 @@ foreach($userEventGroups as $group) {
 					class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/document_edit.png"
 					class="small_icon_inline_button" /> Edit info</a>
 				<?php }?>
-				<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'create')) {?> 
+				<?php if ($access->check('EventGroup',$group['EventGroup']['id'], 'bigOwner')) {?> 
 					<a href="<?php echo $html->url("/event_groups/add/".$group['EventGroup']['id']); ?>"
 					class="make_button"><img src="<?php echo $html->url('/'); ?>css/rinoa/user_add.png"
 					class="small_icon_inline_button" /> Add subgroups</a>
